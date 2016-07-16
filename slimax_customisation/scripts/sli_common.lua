@@ -2589,6 +2589,14 @@ end
 		else
 			sliPanel = "Find"
 		end
+		
+	elseif swValue == 193 then
+		-- Mike custom: LAPS COMPLETED SCRIPT INCLUDING CURRENT DECIMAL PLACE LAP
+		local lapsCompleted = getLapsCompleteIncludingCurrent()
+		
+		if getLapsCompleteIncludingCurrent ~= nil then
+			sliPanel = string.format("L%2.2f",  round(getLapsCompleteIncludingCurrent, 2))
+		end
 	
 	elseif swValue == 194 then
 		-- Mike custom: fuel laps remaining based on starting fuel vs total laps
