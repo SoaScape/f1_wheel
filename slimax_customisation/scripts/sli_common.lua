@@ -1,8 +1,24 @@
+-- MIKE CUSTOM FUNCTIONS
+
 -- MIKES FUNCTION TO ROUND FUEL LAPS
 function round(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult
 end
+
+function getPercentageLapComplete()
+	-- percentage of current lap completed
+	local dist = GetContextInfo("lap_distance")		
+	local trcksz = GetContextInfo("track_size")
+	return dist / (trcksz / 100)
+end
+
+function getLapsCompleteIncludingCurrent()
+	local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
+	local percentLapComplete = getPercentageLapComplete() / 100
+	lapsCompleted = lapsCompleted + percentLapComplete -- Add on % current lap complete
+end
+--END MIKE CUSTOM FUNCTIONS
 
 -- SLIMax Mgr Lua Script v3.7.2
 -- Copyright (c)2012-2015 by Zappadoc - All Rights Reserved.
@@ -2856,18 +2872,4 @@ end
 	end
 
 	return 1
-end
-
--- MIKE CUSTOM FUNCTIONS
-function getPercentageLapComplete()
-	-- percentage of current lap completed
-	local dist = GetContextInfo("lap_distance")		
-	local trcksz = GetContextInfo("track_size")
-	return percentLapComplete = dist / (trcksz / 100)
-end
-
-function getLapsCompleteIncludingCurrent()
-	local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
-	local percentLapComplete = getPercentageLapComplete() / 100
-	lapsCompleted = lapsCompleted + percentLapComplete -- Add on % current lap complete
 end
