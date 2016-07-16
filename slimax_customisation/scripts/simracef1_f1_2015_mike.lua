@@ -17,15 +17,15 @@ upButton = 26
 downButton = 27
 buttonReleaseValue = 0
 overtakeButton = 10
-overtakePressValue = 2
+resetFuelButton = 3
 
 keystrokeDelay = 200
 selectDelay = 170
 multiSelectDelay = 300
 overtakeAdditionalDelay = 600
 
-defaultMultiFunction = "DFLT"
-multiFunction = defaultMultiFunction
+resetMultiFunction = "RSET"
+multiFunction = resetMultiFunction
 
 upDnModeButtonMap = {}
 upDnModeSelected = false
@@ -142,7 +142,7 @@ currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 overtakeEngaged = false
 fuelAtStart = -1
 
-function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)	
+function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	if deviceType == simrF1DeviceType then	
 		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitch then
@@ -211,8 +211,8 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 			elseif value == 11 then
 				rightDisplay = options
 			elseif value == 12 then
-				rightDisplay = defaultMultiFunction
-				multiFunction = defaultMultiFunction
+				rightDisplay = resetMultiFunction
+				multiFunction = resetMultiFunction
 			end
 			
 			if upDnModeSelected then
@@ -223,7 +223,7 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 			SLISleep(multiSelectDelay)
 			return 1
 		
-		elseif ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and multiFunction ~= defaultMultiFunction then
+		elseif ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and multiFunction ~= resetMultiFunction then
 			if overtakeEngaged then
 				overtakeEngaged = false				
 				confirmSelection("OVTK", " END", deviceType, fuelModeButtonMap[currentFuelMode[0]])
@@ -232,7 +232,7 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 				confirmSelection("OVER", "TAKE", deviceType, fuelModeButtonMap[maxFuelMode])
 				SLISleep(overtakeAdditionalDelay)
 			end		
-		elseif ctrlType == pushbutton and value == buttonReleaseValue and multiFunction ~= defaultMultiFunction then
+		elseif ctrlType == pushbutton and value == buttonReleaseValue and multiFunction ~= resetMultiFunction then
 			-- MULTIFUNCTION UP/DOWN
 			if upDnModeSelected then
 				if ctrlPos == upButton then
@@ -281,8 +281,13 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 				confirmSelection(multiFunction, multiFunctionConfirmValue, deviceType, buttonMap, confirmFunctionKeys)				
 				return 1
 			end
-		elseif multiFunction == defaultMultiFunction and ctrlPos == confirmButton and value == buttonReleaseValue then
-			setDefaultModes()
+
+		elseif multiFunction == resetMultiFunction and value == buttonReleaseValue then
+			if ctrlPos == confirmButton then
+				setDefaultModes()
+			elseif ctrlPos == resetFuelButton then
+				resetFuel()
+			end
 		
 		elseif ctrlType == switch and ctrlPos == settingSwitchId and upDnModeSelected then
 			upDnValue = value - 1
@@ -328,6 +333,13 @@ function setDefaultModes()
 	currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 	overtakeEngaged = false
 	fuelAtStart = -1
+end
+
+function resetFuel()
+	local startFuel = GetCarInfo("fuel_total")
+	if startFuel ~= nil and startFuel > 0 then
+		fuelAtStart = startFuel
+	end
 end
 
 function tablelength(T)
