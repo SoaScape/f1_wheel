@@ -2610,8 +2610,8 @@ end
 		-- Mike custom: LAPS COMPLETED SCRIPT INCLUDING CURRENT DECIMAL PLACE LAP
 		local lapsCompleted = getLapsCompleteIncludingCurrent()
 		
-		if getLapsCompleteIncludingCurrent ~= nil then
-			sliPanel = string.format("L%2.2f",  round(getLapsCompleteIncludingCurrent, 2))
+		if lapsCompleted ~= nil then
+			sliPanel = string.format("L%2.2f",  round(lapsCompleted, 2))
 		end
 	
 	elseif swValue == 194 then
