@@ -1216,6 +1216,14 @@ end
 	-- get current simulation name
 	local sim = GetContextInfo("simulation")
 
+	-- Mike Custom: Store Fuel At Start (to preserve after flashback)
+	if fuelAtStart == -1 then
+		local startFuel = GetCarInfo("fuel_total")
+		if startFuel ~= nil and startFuel > 0 then
+			fuelAtStart = startFuel
+		end
+	end
+	
 	-- check postion and compute left panel string
 	if swValue == 1 then
 		-- speed only
@@ -2581,12 +2589,36 @@ end
 		else
 			sliPanel = "Find"
 		end
+	
+	elseif swValue == 194 then
+		-- Mike custom: fuel laps remaining based on starting fuel vs total laps
+		-- Discounts 2.6 litres as car stutters when down to that level
+		local minFuel = 10
+		
+		local fuelRemaining = GetCarInfo("fuel")
+		local totalLaps = GetContextInfo("laps_count")
+
+		local remainingLapsInTank = 0
+		if fuelRemaining > 0 and fuelAtStart > 0 then
+			local fuelPerLap = fuelAtStart / totalLaps	
+			if fuelPerLap > 0 then				
+				remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
+			end
+		end		
+
+		if remainingLapsInTank > 0 then
+			sliPanel = string.format("L%2.2f",  round(remainingLapsInTank, 2))
+			isSlowUpdate = true
+		elseif remainingLapsInTank == 0 then
+			if(fuelRemaining <= 0) then
+				sliPanel = "OUT "
+			else
+				sliPanel = "WAIT"
+			end
+		end
 		
 	elseif swValue == 195 then
-		-- Mike custom: total fuel in tank (doesn't reset with flashback in F1)		
-		if fuelAtStart == -1 then
-			fuelAtStart = GetCarInfo("fuel_total")
-		end
+		-- Mike custom: total fuel in tank (doesn't reset with flashback in F1)				
 		if fuelAtStart ~= nil then 
 			local ft = GetFuel(fuelAtStart, unit)
 			if devName == "SLI-PRO" then
@@ -2607,7 +2639,7 @@ end
 				end
 			end
 		end
-	
+
 	elseif swValue == 196 then
 		-- Mike custom: real time diff vs next
 		diffTimeFlag = true
@@ -2626,11 +2658,6 @@ end
 		local minFuel = 10
 		
 		local fuelRemaining = GetCarInfo("fuel")
-		
-		if fuelAtStart == -1 then
-			fuelAtStart = GetCarInfo("fuel_total")
-		end
-		
 		local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1
 		
 		-- percentage of current lap completed
@@ -2645,7 +2672,6 @@ end
 			local fuelPerLap = fuelUsed / lapsCompleted	
 			if fuelPerLap > 0 then				
 				remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
-				print("LComp: " .. lapsCompleted .. ", StrFuel: " .. fuelAtStart .. ", RemFuel: " .. fuelRemaining .. ", UsdFuel: " .. fuelUsed .. ", LapsInTank: " .. remainingLapsInTank .. "\n")
 			end
 		end		
 
