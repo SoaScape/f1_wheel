@@ -8,4 +8,3 @@ echo.
 echo Done.
 echo.
 echo.
-pause
