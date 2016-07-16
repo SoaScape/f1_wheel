@@ -336,10 +336,7 @@ function setDefaultModes()
 end
 
 function resetFuel()
-	local startFuel = GetCarInfo("fuel_total")
-	if startFuel ~= nil and startFuel > 0 then
-		fuelAtStart = startFuel
-	end
+	fuelAtStart = -1
 end
 
 function tablelength(T)
