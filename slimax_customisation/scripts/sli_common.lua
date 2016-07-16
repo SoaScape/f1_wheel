@@ -16,7 +16,7 @@ end
 function getLapsCompleteIncludingCurrent()
 	local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
 	local percentLapComplete = getPercentageLapComplete() / 100
-	lapsCompleted = lapsCompleted + percentLapComplete -- Add on % current lap complete
+	return lapsCompleted + percentLapComplete -- Add on % current lap complete
 end
 --END MIKE CUSTOM FUNCTIONS
 
