@@ -2616,9 +2616,6 @@ end
 	
 	elseif swValue == 194 then
 		-- Mike custom: fuel laps remaining based on starting fuel vs total laps
-		-- Discounts 2.6 litres as car stutters when down to that level
-		local minFuel = 10
-		
 		local fuelRemaining = GetCarInfo("fuel")
 		local totalLaps = GetContextInfo("laps_count")
 
@@ -2626,7 +2623,7 @@ end
 		if fuelRemaining > 0 and fuelAtStart > 0 then
 			local fuelPerLap = fuelAtStart / totalLaps	
 			if fuelPerLap > 0 then				
-				remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
+				remainingLapsInTank = fuelRemaining / fuelPerLap
 			end
 		end		
 
