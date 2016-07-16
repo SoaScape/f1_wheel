@@ -2618,7 +2618,7 @@ end
 		end
 		
 	elseif swValue == 195 then
-		-- Mike custom: total fuel in tank (doesn't reset with flashback in F1)				
+		-- Mike custom: total fuel in tank at start(doesn't reset with flashback in F1)				
 		if fuelAtStart ~= nil then 
 			local ft = GetFuel(fuelAtStart, unit)
 			if devName == "SLI-PRO" then
@@ -2657,14 +2657,8 @@ end
 		-- Discounts 2.6 litres as car stutters when down to that level
 		local minFuel = 10
 		
-		local fuelRemaining = GetCarInfo("fuel")
-		local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1
-		
-		-- percentage of current lap completed
-		local dist = GetContextInfo("lap_distance")		
-		local trcksz = GetContextInfo("track_size")
-		local percentLapComplete = (dist / (trcksz / 100)) / 100
-		lapsCompleted = lapsCompleted + percentLapComplete -- Add on % current lap complete
+		local fuelRemaining = GetCarInfo("fuel")						
+		local lapsCompleted = getLapsCompleteIncludingCurrent()
 
 		local remainingLapsInTank = 0
 		if fuelRemaining > 0 and fuelAtStart > 0 and lapsCompleted >= 1 then
@@ -2691,11 +2685,8 @@ end
 		local lapsCompleted = GetContextInfo("laps")
 		local totalLaps = GetContextInfo("laps_count")
 		local lapsRemaining = totalLaps - lapsCompleted
-		
-		-- percentage of current lap completed
-		local dist = GetContextInfo("lap_distance")		
-		local trcksz = GetContextInfo("track_size")
-		local percentLapComplete = dist / (trcksz / 100)
+
+		local percentLapComplete = getPercentageLapComplete()
 		local percentLapRemaining = (100 - percentLapComplete) / 100
 		
 		lapsRemaining = lapsRemaining + percentLapRemaining
@@ -2857,4 +2848,17 @@ end
 	end
 
 	return 1
+	
+	function getPercentageLapComplete()
+		-- percentage of current lap completed
+		local dist = GetContextInfo("lap_distance")		
+		local trcksz = GetContextInfo("track_size")
+		return percentLapComplete = dist / (trcksz / 100)
+	end
+	
+	function getLapsCompleteIncludingCurrent()
+		local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
+		local percentLapComplete = getPercentageLapComplete() / 100
+		lapsCompleted = lapsCompleted + percentLapComplete -- Add on % current lap complete
+	end
 end
