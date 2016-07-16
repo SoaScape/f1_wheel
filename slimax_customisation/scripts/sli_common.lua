@@ -2856,17 +2856,18 @@ end
 	end
 
 	return 1
-	
-	function getPercentageLapComplete()
-		-- percentage of current lap completed
-		local dist = GetContextInfo("lap_distance")		
-		local trcksz = GetContextInfo("track_size")
-		return percentLapComplete = dist / (trcksz / 100)
-	end
-	
-	function getLapsCompleteIncludingCurrent()
-		local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
-		local percentLapComplete = getPercentageLapComplete() / 100
-		lapsCompleted = lapsCompleted + percentLapComplete -- Add on % current lap complete
-	end
+end
+
+-- MIKE CUSTOM FUNCTIONS
+function getPercentageLapComplete()
+	-- percentage of current lap completed
+	local dist = GetContextInfo("lap_distance")		
+	local trcksz = GetContextInfo("track_size")
+	return percentLapComplete = dist / (trcksz / 100)
+end
+
+function getLapsCompleteIncludingCurrent()
+	local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
+	local percentLapComplete = getPercentageLapComplete() / 100
+	lapsCompleted = lapsCompleted + percentLapComplete -- Add on % current lap complete
 end
