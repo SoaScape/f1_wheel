@@ -2607,7 +2607,7 @@ end
 		end		
 
 		if remainingLapsInTank > 0 then
-			sliPanel = string.format("L%2.2f",  round(remainingLapsInTank, 2))
+			sliPanel = string.format("F%2.2f",  round(remainingLapsInTank, 2))
 			isSlowUpdate = true
 		elseif remainingLapsInTank == 0 then
 			if(fuelRemaining <= 0) then
@@ -2676,7 +2676,7 @@ end
 		end		
 
 		if remainingLapsInTank > 0 then
-			sliPanel = string.format("L%2.2f",  round(remainingLapsInTank, 2))
+			sliPanel = string.format("F%2.2f",  round(remainingLapsInTank, 2))
 			isSlowUpdate = true
 		elseif remainingLapsInTank == 0 then
 			if(fuelRemaining <= 0) then
