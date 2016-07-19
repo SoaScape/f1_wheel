@@ -2659,7 +2659,7 @@ end
 		local fuelRemaining = GetCarInfo("fuel")
 		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
 		local remainingLaps = getLapsRemaining()
-		local target = fuelRemaining - remainingLaps
+		local target = remainingLapsInTank - remainingLaps
 		
 		if firstLapCompleted() and remainingLapsInTank ~= 0 then
 			sliPanel = string.format("T%2.2f",  round(target, 2))
