@@ -15,6 +15,8 @@ multiFunctionSwitch = 3
 confirmButton = 14
 upButton = 26
 downButton = 27
+upEncoder = 22
+downEncoder = 21
 buttonReleaseValue = 0
 overtakeButton = 10
 resetFuelButton = 3
@@ -235,7 +237,7 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 		elseif ctrlType == pushbutton and value == buttonReleaseValue and multiFunction ~= resetMultiFunction then
 			-- MULTIFUNCTION UP/DOWN
 			if upDnModeSelected then
-				if ctrlPos == upButton then
+				if ctrlPos == upButton or ctrlPos == upEncoder then
 					if currentUpDnMode[0] < maxUpDnMode then
 						currentUpDnMode[0] = currentUpDnMode[0] + 1
 						if upDnConfirmRequied then
@@ -253,7 +255,7 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 						end
 					end
 					return 1
-				elseif ctrlPos == downButton then
+				elseif ctrlPos == downButton or ctrlPos == downEncoder then
 					if currentUpDnMode[0] > minUpDnMode then
 						currentUpDnMode[0] = currentUpDnMode[0] - 1
 						if upDnConfirmRequied then
