@@ -18,6 +18,46 @@ function getLapsCompleteIncludingCurrent()
 	local percentLapComplete = getPercentageLapComplete() / 100
 	return lapsCompleted + percentLapComplete -- Add on % current lap complete
 end
+
+function firstLapCompleted()
+	-- Returns true once the first lap has been completed.
+	local lapsCompleted = GetContextInfo("laps") - 1
+	if lapsComplete > 0 then
+		return true
+	else
+		return false
+	end		
+end
+
+function getLapsRemaining()
+	-- Returns remaining laps including current (decimal format)
+	local lapsCompleted = GetContextInfo("laps")
+	local totalLaps = GetContextInfo("laps_count")
+	local lapsRemaining = totalLaps - lapsCompleted
+
+	local percentLapComplete = getPercentageLapComplete()
+	local percentLapRemaining = (100 - percentLapComplete) / 100
+	
+	lapsRemaining = lapsRemaining + percentLapRemaining
+	return lapsRemaining
+end
+
+function getRemainingLapsInTank(fuelRemaining)
+	-- Mike custom: fuel laps remaining.
+	-- Discounts 2.6 litres as car stutters when down to that level
+	local minFuel = 10						
+	local lapsCompleted = getLapsCompleteIncludingCurrent()
+
+	local remainingLapsInTank = 0
+	if fuelRemaining > 0 and fuelAtStart > 0 and lapsCompleted >= 1 then
+		local fuelUsed = fuelAtStart - fuelRemaining
+		local fuelPerLap = fuelUsed / lapsCompleted	
+		if fuelPerLap > 0 then				
+			remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
+		end
+	end
+	return remainingLapsInTank
+end
 --END MIKE CUSTOM FUNCTIONS
 
 -- SLIMax Mgr Lua Script v3.7.2
@@ -2637,7 +2677,7 @@ end
 				sliPanel = "WAIT"
 			end
 		end
-		
+
 	elseif swValue == 195 then
 		-- Mike custom: total fuel in tank at start(doesn't reset with flashback in F1)				
 		if fuelAtStart ~= nil then 
@@ -2674,21 +2714,9 @@ end
 		lpt = GetTimeInfo("diff_time_behind_leader")
 		
 	elseif swValue == 198 then
-		-- Mike custom: fuel laps remaining.
-		-- Discounts 2.6 litres as car stutters when down to that level
-		local minFuel = 10
-		
-		local fuelRemaining = GetCarInfo("fuel")						
-		local lapsCompleted = getLapsCompleteIncludingCurrent()
-
-		local remainingLapsInTank = 0
-		if fuelRemaining > 0 and fuelAtStart > 0 and lapsCompleted >= 1 then
-			local fuelUsed = fuelAtStart - fuelRemaining
-			local fuelPerLap = fuelUsed / lapsCompleted	
-			if fuelPerLap > 0 then				
-				remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
-			end
-		end		
+		-- Mike custom: fuel laps remaining.		
+		local fuelRemaining = GetCarInfo("fuel")
+		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
 
 		if remainingLapsInTank > 0 then
 			sliPanel = string.format("F%2.2f",  round(remainingLapsInTank, 2))
@@ -2703,14 +2731,7 @@ end
 
 	elseif swValue == 199 then
 		-- Mike custom: LAPS REMAINING SCRIPT, REPLACES TRACK SIZE OPTION (23)
-		local lapsCompleted = GetContextInfo("laps")
-		local totalLaps = GetContextInfo("laps_count")
-		local lapsRemaining = totalLaps - lapsCompleted
-
-		local percentLapComplete = getPercentageLapComplete()
-		local percentLapRemaining = (100 - percentLapComplete) / 100
-		
-		lapsRemaining = lapsRemaining + percentLapRemaining
+		lapsRemaining = getLapsRemaining()
 		
 		if lapsRemaining ~= nil then
 			sliPanel = string.format("L%2.2f",  round(lapsRemaining, 2))
