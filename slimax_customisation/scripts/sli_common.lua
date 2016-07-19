@@ -2661,8 +2661,17 @@ end
 		local remainingLaps = getLapsRemaining()
 		local target = remainingLapsInTank - remainingLaps
 		
+		local c = "+"
+		if(target < 0) then
+			c = "-"
+		end
+		
 		if firstLapCompleted() and remainingLapsInTank ~= 0 then
-			sliPanel = string.format("T%2.2f",  round(target, 2))
+			if(target >= 10 or target <= -10) then
+				sliPanel = string.format("%s%2.1f",  c, round(target, 1))
+			else
+				sliPanel = string.format("T%s%1.1f",  c, round(target, 1))
+			end
 			isSlowUpdate = true
 		else
 			if(fuelRemaining <= 0) then
