@@ -1,6 +1,7 @@
 -- MIKE CUSTOM FUNCTIONS
 
 -- MIKES FUNCTION TO ROUND FUEL LAPS
+minFuel = 10
 function round(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult
@@ -45,7 +46,6 @@ end
 function getRemainingLapsInTank(fuelRemaining)
 	-- Mike custom: fuel laps remaining.
 	-- Discounts 2.6 litres as car stutters when down to that level
-	local minFuel = 10						
 	local lapsCompleted = getLapsCompleteIncludingCurrent()
 
 	local remainingLapsInTank = 0
@@ -2674,7 +2674,7 @@ end
 			end
 			isSlowUpdate = true
 		else
-			if(fuelRemaining <= 0) then
+			if(fuelRemaining <= minFuel) then
 				sliPanel = "OUT "
 			else
 				sliPanel = "WAIT"
@@ -2725,7 +2725,7 @@ end
 			sliPanel = string.format("F%2.2f",  round(remainingLapsInTank, 2))
 			isSlowUpdate = true
 		elseif remainingLapsInTank == 0 then
-			if(fuelRemaining <= 0) then
+			if(fuelRemaining <= minFuel) then
 				sliPanel = "OUT "
 			else
 				sliPanel = "WAIT"
