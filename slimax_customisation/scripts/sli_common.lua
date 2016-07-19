@@ -2661,9 +2661,9 @@ end
 		local remainingLaps = getLapsRemaining()
 		local target = remainingLapsInTank - remainingLaps
 		
-		local c = "+"
-		if(target < 0) then
-			c = "-"
+		local c = ""
+		if(target >= 0) then
+			c = "+"
 		end
 		
 		if firstLapCompleted() and remainingLapsInTank ~= 0 then
