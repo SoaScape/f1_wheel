@@ -22,7 +22,7 @@ end
 function firstLapCompleted()
 	-- Returns true once the first lap has been completed.
 	local lapsCompleted = GetContextInfo("laps") - 1
-	if lapsComplete > 0 then
+	if lapsCompleted > 0 then
 		return true
 	else
 		return false
