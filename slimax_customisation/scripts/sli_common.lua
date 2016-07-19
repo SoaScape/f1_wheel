@@ -2684,7 +2684,7 @@ end
 	elseif swValue == 195 then
 		-- Mike custom: total fuel in tank at start(doesn't reset with flashback in F1)				
 		if fuelAtStart ~= nil then 
-			local ft = GetFuel(fuelAtStart, unit)
+			local ft = GetFuelKilogram(fuelAtStart)
 			if devName == "SLI-PRO" then
 				if ft >= 100 then
 					sliPanel = string.format(" F%3d  ", round(ft))
@@ -2733,7 +2733,7 @@ end
 		end
 
 	elseif swValue == 199 then
-		-- Mike custom: LAPS REMAINING SCRIPT, REPLACES TRACK SIZE OPTION (23)
+		-- Mike custom: Laps remaining including current (using decimal)
 		lapsRemaining = getLapsRemaining()
 		
 		if lapsRemaining ~= nil then
