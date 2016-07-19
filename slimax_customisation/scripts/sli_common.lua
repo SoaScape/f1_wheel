@@ -2659,7 +2659,7 @@ end
 		local fuelRemaining = GetCarInfo("fuel")
 		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
 		local remainingLaps = getLapsRemaining()
-		local target = round(remainingLapsInTank - remainingLaps)
+		local target = round(remainingLapsInTank - remainingLaps, 1)
 		
 		local c = ""
 		if(target >= 0) then
