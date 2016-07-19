@@ -2659,7 +2659,7 @@ end
 		local fuelRemaining = GetCarInfo("fuel")
 		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
 		local remainingLaps = getLapsRemaining()
-		local target = remainingLapsInTank - remainingLaps
+		local target = round(remainingLapsInTank - remainingLaps)
 		
 		local c = ""
 		if(target >= 0) then
@@ -2668,9 +2668,9 @@ end
 		
 		if firstLapCompleted() and remainingLapsInTank ~= 0 then
 			if(target >= 10 or target <= -10) then
-				sliPanel = string.format("%s%2.1f",  c, round(target, 1))
+				sliPanel = string.format("%s%2.1f",  c, target, 1)
 			else
-				sliPanel = string.format("T%s%1.1f",  c, round(target, 1))
+				sliPanel = string.format("T%s%1.1f",  c, target, 1)
 			end
 			isSlowUpdate = true
 		else
