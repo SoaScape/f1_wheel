@@ -289,6 +289,8 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 				setDefaultModes()
 			elseif ctrlPos == resetFuelButton then
 				resetFuel()
+			--elseif ctrlPos == upButton or ctrlPos == upEncoder then
+			--elseif ctrlPos == downButton or ctrlPos == downEncoder then
 			end
 		
 		elseif ctrlType == switch and ctrlPos == settingSwitchId and upDnModeSelected then
