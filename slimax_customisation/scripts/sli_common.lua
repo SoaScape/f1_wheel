@@ -2655,22 +2655,16 @@ end
 		end
 	
 	elseif swValue == 194 then
-		-- Mike custom: fuel laps remaining based on starting fuel vs total laps
+		-- Mike custom: fuel target.
 		local fuelRemaining = GetCarInfo("fuel")
-		local totalLaps = GetContextInfo("laps_count")
-
-		local remainingLapsInTank = 0
-		if fuelRemaining > 0 and fuelAtStart > 0 then
-			local fuelPerLap = fuelAtStart / totalLaps	
-			if fuelPerLap > 0 then				
-				remainingLapsInTank = fuelRemaining / fuelPerLap
-			end
-		end		
-
-		if remainingLapsInTank > 0 then
-			sliPanel = string.format("F%2.2f",  round(remainingLapsInTank, 2))
+		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
+		local remainingLaps = getLapsRemaining()
+		local target = fuelRemaining - remainingLaps
+		
+		if firstLapCompleted() remainingLapsInTank != 0 then
+			sliPanel = string.format("T%2.2f",  round(target, 2))
 			isSlowUpdate = true
-		elseif remainingLapsInTank == 0 then
+		else
 			if(fuelRemaining <= 0) then
 				sliPanel = "OUT "
 			else
