@@ -67,6 +67,20 @@ end
 
 
 function sliDigitsEvent(swFunction, side, devName)
+	-- Mike Custom: Store Fuel At Start (to preserve after flashback)
+	if awaitingStartFuel then
+		local startFuel = GetCarInfo("fuel_total")
+		local lapsCompleted = GetContextInfo("laps")
+		local dist = GetContextInfo("lap_distance")
+		if startFuel ~= nil and startFuel > 0 and startFuel ~= fuelAtStart 
+			and lapsCompleted ~= nil and lapsCompleted == 1 -- F1 2015 returns current lap for laps completed so check 1
+				and dist ~= nil and dist < 1 then
+			fuelAtStart = startFuel
+			awaitingStartFuel = false
+		end
+	end
+	-- End mike custom fuel at start
+	
 	swValue = swFunction + 1
 	if devName == "SLI-EMU" then devName = "SLI-PRO" end
 	if devName == "SRF1-EMU" then devName = "SIMRACEF1" end
@@ -208,8 +222,8 @@ function sliDigitsEvent(swFunction, side, devName)
 			end
 		end
 	end
-	 -- END ==================================================  
- 
+	 -- END ================================================== 
+
 	-- get speed in kph or mph (use "raw_speed" to get value in meter/sec)
 	local spdmt = GetCarInfo("raw_speed")
 	-- get current display unit metric or imperial
@@ -1272,14 +1286,6 @@ end
 	-- get current simulation name
 	local sim = GetContextInfo("simulation")
 
-	-- Mike Custom: Store Fuel At Start (to preserve after flashback)
-	if fuelAtStart == -1 then
-		local startFuel = GetCarInfo("fuel_total")
-		if startFuel ~= nil and startFuel > 0 then
-			fuelAtStart = startFuel
-		end
-	end
-	
 	-- check postion and compute left panel string
 	if swValue == 1 then
 		-- speed only

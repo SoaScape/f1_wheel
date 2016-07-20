@@ -19,7 +19,6 @@ upEncoder = 22
 downEncoder = 21
 buttonReleaseValue = 0
 overtakeButton = 10
-resetFuelButton = 3
 
 keystrokeDelay = 200
 selectDelay = 170
@@ -142,6 +141,7 @@ currentWingMode[0] = 1
 currentBiasMode[0] = 1
 currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 overtakeEngaged = false
+awaitingStartFuel = true
 fuelAtStart = -1
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
@@ -287,8 +287,6 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 		elseif multiFunction == resetMultiFunction and value == buttonReleaseValue then
 			if ctrlPos == confirmButton then
 				setDefaultModes()
-			elseif ctrlPos == resetFuelButton then
-				resetFuel()
 			--elseif ctrlPos == upButton or ctrlPos == upEncoder then
 			--elseif ctrlPos == downButton or ctrlPos == downEncoder then
 			end
@@ -336,11 +334,7 @@ function setDefaultModes()
 	currentBiasMode[0] = 1
 	currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 	overtakeEngaged = false
-	fuelAtStart = -1
-end
-
-function resetFuel()
-	fuelAtStart = -1
+	awaitingStartFuel = true
 end
 
 function tablelength(T)
