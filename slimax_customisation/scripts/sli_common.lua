@@ -67,7 +67,8 @@ end
 
 
 function sliDigitsEvent(swFunction, side, devName)
-	-- Mike Custom: Store Fuel At Start (to preserve after flashback)
+	-- Mike Custom	
+	-- Store Fuel At Start (to preserve after flashback)
 	if awaitingStartFuel then
 		local startFuel = GetCarInfo("fuel_total")
 		local lapsCompleted = GetContextInfo("laps")
@@ -79,7 +80,13 @@ function sliDigitsEvent(swFunction, side, devName)
 			awaitingStartFuel = false
 		end
 	end
-	-- End mike custom fuel at start
+	if customDisplayActive then
+		if getTicks() > customDisplayTicksTimeout then
+			customDisplayActive = false
+		end
+		return 1
+	end
+	-- End mike custom
 	
 	swValue = swFunction + 1
 	if devName == "SLI-EMU" then devName = "SLI-PRO" end

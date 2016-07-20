@@ -3,6 +3,9 @@ require "scripts/one_switch_to_rule_them_all"
 function custom_init_Event(scriptfile)	
 end
 
+customDisplayActive = false
+customDisplayTicksTimeout = 0
+
 oneSWActivated = true
 displaySwitchId = 2
 settingSwitchId = 1
@@ -21,9 +24,9 @@ buttonReleaseValue = 0
 overtakeButton = 10
 
 keystrokeDelay = 200
-selectDelay = 170
-multiSelectDelay = 300
-overtakeAdditionalDelay = 600
+selectDelay = 500
+confirmDelay = 1000
+multiSelectDelay = 500
 
 resetMultiFunction = "RSET"
 multiFunction = resetMultiFunction
@@ -218,11 +221,10 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 			end
 			
 			if upDnModeSelected then
-				display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType)
+				display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, multiSelectDelay)
 			else
-				display(leftDisplay, rightDisplay, deviceType)
+				display(leftDisplay, rightDisplay, deviceType, multiSelectDelay)
 			end
-			SLISleep(multiSelectDelay)
 			return 1
 		
 		elseif ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and multiFunction ~= resetMultiFunction then
@@ -232,7 +234,6 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 			else
 				overtakeEngaged = true
 				confirmSelection("OVER", "TAKE", deviceType, fuelModeButtonMap[maxFuelMode])
-				SLISleep(overtakeAdditionalDelay)
 			end		
 		elseif ctrlType == pushbutton and value == buttonReleaseValue and multiFunction ~= resetMultiFunction then
 			-- MULTIFUNCTION UP/DOWN
@@ -241,15 +242,13 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 					if currentUpDnMode[0] < maxUpDnMode then
 						currentUpDnMode[0] = currentUpDnMode[0] + 1
 						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType)
-							SLISleep(selectDelay)
+							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
 						else
 							confirmSelection(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, upDnModeButtonMap[currentUpDnMode[0]])
 						end
 					else
 						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType)
-							SLISleep(selectDelay)							
+							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
 						else
 							confirmSelection(multiFunction, "MAX ", deviceType, upDnModeButtonMap[currentUpDnMode[0]])
 						end
@@ -259,15 +258,13 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 					if currentUpDnMode[0] > minUpDnMode then
 						currentUpDnMode[0] = currentUpDnMode[0] - 1
 						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType)
-							SLISleep(selectDelay)
+							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
 						else
 							confirmSelection(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, upDnModeButtonMap[currentUpDnMode[0]])
 						end
 					else
 						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType)
-							SLISleep(selectDelay)
+							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
 						else
 							confirmSelection(multiFunction, "MIN ", deviceType, upDnModeButtonMap[currentUpDnMode[0]])							
 						end
@@ -295,8 +292,7 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 			upDnValue = value - 1
 			if upDnValue >= minUpDnMode and upDnValue <= maxUpDnMode then
 				currentUpDnMode[0] = upDnValue
-				display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType)
-				SLISleep(selectDelay)
+				display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
 			end
 			return 1
 
@@ -311,7 +307,7 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 end
 
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
-	display(leftDisp, rightDisplay, deviceType)
+	display(leftDisp, rightDisplay, deviceType, confirmDelay)
 	for i=0,tablelength(buttonMap)-1 do
 		-- params: key, delay, modifier
 		SetKeystroke(buttonMap[i], keystrokeDelay, "")					
@@ -320,11 +316,13 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 	SetDigitsAllowed(true)
 end
 
-function display(leftStr, rightStr, deviceType)
+function display(leftStr, rightStr, deviceType, timeout)
 	if leftStr ~= nul and rightStr ~= nil then			
 		local dev = GetDeviceType(deviceType)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
+		customDisplayTicksTimeout = getTicks() + timeout
+		customDisplayActive = true
 	end
 end
 
