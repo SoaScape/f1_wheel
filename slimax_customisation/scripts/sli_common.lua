@@ -1,11 +1,10 @@
 -- MIKE CUSTOM FUNCTIONS
-
--- MIKES FUNCTION TO ROUND FUEL LAPS
 fuelAtStart = -1
 minFuel = 10
 lowFuelLed = GetLedIndex("low_fuel_warning")
 lowFuelLedState = 0
 
+-- MIKES FUNCTION TO ROUND
 function round(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult
@@ -76,6 +75,7 @@ function getFuelTarget()
 		end		
 		
 		if newFuelLedState ~= lowFuelLedState then
+			lowFuelLedState = newFuelLedState
 			SetPatternLed(lowFuelLed, lowFuelLedState)
 		end
 		
