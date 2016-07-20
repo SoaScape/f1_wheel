@@ -1,6 +1,7 @@
 -- MIKE CUSTOM FUNCTIONS
 
 -- MIKES FUNCTION TO ROUND FUEL LAPS
+fuelAtStart = -1
 minFuel = 10
 function round(num, idp)
   local mult = 10^(idp or 0)
@@ -69,17 +70,17 @@ end
 function sliDigitsEvent(swFunction, side, devName)
 	-- Mike Custom	
 	-- Store Fuel At Start (to preserve after flashback)
-	if awaitingStartFuel then
-		local startFuel = GetCarInfo("fuel_total")
-		local lapsCompleted = GetContextInfo("laps")
-		local dist = GetContextInfo("lap_distance")
-		if startFuel ~= nil and startFuel > 0 and startFuel ~= fuelAtStart 
-			and lapsCompleted ~= nil and lapsCompleted == 1 -- F1 2015 returns current lap for laps completed so check 1
-				and dist ~= nil and dist < 1 then
-			fuelAtStart = startFuel
-			awaitingStartFuel = false
-		end
+	local startFuel = GetCarInfo("fuel_total")
+	local lapsCompleted = GetContextInfo("laps")
+	local dist = GetContextInfo("lap_distance")
+	local speed = GetCarInfo("speed")
+	if startFuel ~= nil and startFuel > 0 and startFuel ~= fuelAtStart 
+		and lapsCompleted ~= nil and lapsCompleted == 1 -- F1 2015 returns current lap for laps completed so check 1
+			and dist ~= nil and dist < 1 
+				and speed ~= nil and speed < 1 then
+		fuelAtStart = startFuel
 	end
+
 	if customDisplayActive then
 		if getTicks() > customDisplayTicksTimeout then
 			customDisplayActive = false

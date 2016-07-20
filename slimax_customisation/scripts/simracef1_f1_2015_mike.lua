@@ -144,8 +144,6 @@ currentWingMode[0] = 1
 currentBiasMode[0] = 1
 currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 overtakeEngaged = false
-awaitingStartFuel = true
-fuelAtStart = -1
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	if deviceType == simrF1DeviceType then	
@@ -332,7 +330,6 @@ function setDefaultModes()
 	currentBiasMode[0] = 1
 	currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 	overtakeEngaged = false
-	awaitingStartFuel = true
 end
 
 function tablelength(T)
