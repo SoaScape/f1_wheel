@@ -79,6 +79,7 @@ function sliDigitsEvent(swFunction, side, devName)
 			and dist ~= nil and dist < 1 
 				and speed ~= nil and speed < 1 then
 		fuelAtStart = startFuel
+		display("RACE", "STRT", simrF1DeviceType, 500)
 	end
 
 	if customDisplayActive then
