@@ -75,7 +75,7 @@ function getFuelTarget()
 			newFuelLedState = 1
 		end		
 		
-		if newFuelLedState != lowFuelLedState then
+		if newFuelLedState ~= lowFuelLedState then
 			SetPatternLed(lowFuelLed, lowFuelLedState)
 		end
 		
