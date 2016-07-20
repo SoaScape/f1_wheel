@@ -3,6 +3,9 @@
 -- MIKES FUNCTION TO ROUND FUEL LAPS
 fuelAtStart = -1
 minFuel = 10
+lowFuelLed = GetLedIndex("low_fuel_warning")
+lowFuelLedState = 0
+
 function round(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult
@@ -24,7 +27,7 @@ end
 function firstLapCompleted()
 	-- Returns true once the first lap has been completed.
 	local lapsCompleted = GetContextInfo("laps") - 1
-	if lapsCompleted > 0 then
+	if lapsCompleted ~= nil and lapsCompleted > 0 then
 		return true
 	else
 		return false
@@ -57,7 +60,29 @@ function getRemainingLapsInTank(fuelRemaining)
 			remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
 		end
 	end
-	return remainingLapsInTank
+	return remainingLapsInTank	
+end
+
+function getFuelTarget()
+	local fuelRemaining = GetCarInfo("fuel")
+	if firstLapCompleted() and fuelAtStart > 0 and fuelRemaining > 0 then
+		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
+		local remainingLaps = getLapsRemaining()
+		local target = round(remainingLapsInTank - remainingLaps, 1)
+		
+		local newFuelLedState = 0		
+		if target < 0 then
+			newFuelLedState = 1
+		end		
+		
+		if newFuelLedState != lowFuelLedState then
+			SetPatternLed(lowFuelLed, lowFuelLedState)
+		end
+		
+		return target
+	else
+		return 0
+	end
 end
 --END MIKE CUSTOM FUNCTIONS
 
@@ -68,7 +93,9 @@ end
 
 
 function sliDigitsEvent(swFunction, side, devName)
-	-- Mike Custom	
+	-- Mike Custom
+	-- Calculate fuel target
+	getFuelTarget()
 	-- Store Fuel At Start (to preserve after flashback)
 	local startFuel = GetCarInfo("fuel_total")
 	local lapsCompleted = GetContextInfo("laps")
@@ -2671,10 +2698,7 @@ end
 	
 	elseif swValue == 194 then
 		-- Mike custom: fuel target.
-		local fuelRemaining = GetCarInfo("fuel")
-		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
-		local remainingLaps = getLapsRemaining()
-		local target = round(remainingLapsInTank - remainingLaps, 1)
+		local target = getFuelTarget()
 		
 		local c = ""
 		if(target >= 0) then
