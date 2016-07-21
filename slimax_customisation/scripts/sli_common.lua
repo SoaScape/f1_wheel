@@ -72,15 +72,20 @@ function getFuelTarget()
 		local newFuelLedState = 0		
 		if target < 0 then
 			newFuelLedState = 1
-		end		
-		
+		end
+
 		if newFuelLedState ~= lowFuelLedState then
 			lowFuelLedState = newFuelLedState
 			SetPatternLed(lowFuelLed, lowFuelLedState)
 		end
-		
+
 		return target
 	else
+		newFuelLedState = 0
+		if newFuelLedState ~= lowFuelLedState then
+			lowFuelLedState = newFuelLedState
+			SetPatternLed(lowFuelLed, lowFuelLedState)
+		end
 		return 0
 	end
 end
