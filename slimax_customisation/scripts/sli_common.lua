@@ -115,7 +115,8 @@ function sliDigitsEvent(swFunction, side, devName)
 	end
 
 	if customDisplayActive then
-		if getTicks() > customDisplayTicksTimeout then
+		local ticks = GetAppInfo("ticks")
+		if ticks ~= nil and ticks > customDisplayTicksTimeout then		
 			customDisplayActive = false
 		end
 		return 1
@@ -2704,7 +2705,7 @@ end
 	elseif swValue == 194 then
 		-- Mike custom: fuel target.
 		local target = getFuelTarget()
-		
+		local fuelRemaining = GetCarInfo("fuel")
 		local c = ""
 		if(target >= 0) then
 			c = "+"

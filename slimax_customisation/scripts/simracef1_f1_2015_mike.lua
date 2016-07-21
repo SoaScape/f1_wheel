@@ -319,8 +319,11 @@ function display(leftStr, rightStr, deviceType, timeout)
 		local dev = GetDeviceType(deviceType)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
-		customDisplayTicksTimeout = getTicks() + timeout
-		customDisplayActive = true
+		local ticks = GetAppInfo("ticks")
+		if ticks ~= nil then
+			customDisplayTicksTimeout = ticks + timeout
+			customDisplayActive = true
+		end
 	end
 end
 
