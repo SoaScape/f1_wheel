@@ -115,6 +115,20 @@ function getTks()
 	end
 	return ticks
 end
+
+function checkForStartFuel()
+	-- Store Fuel At Start (to preserve after flashback)
+	local startFuel = GetCarInfo("fuel_total")
+	local lapsCompleted = GetContextInfo("laps")	
+	local speed = GetCarInfo("speed")
+	
+	if startFuel ~= nil and startFuel > 0 and startFuel ~= fuelAtStart 
+		and lapsCompleted ~= nil and lapsCompleted == 1
+			and speed ~= nil and speed < 1 then
+		fuelAtStart = startFuel
+		display("RACE", "STRT", simrF1DeviceType, 500)
+	end
+end
 --END MIKE CUSTOM FUNCTIONS
 
 -- SLIMax Mgr Lua Script v3.7.2
@@ -125,20 +139,10 @@ end
 
 function sliDigitsEvent(swFunction, side, devName)
 	-- Mike Custom
+	checkForStartFuel()
+	
 	-- Calculate fuel target
 	getFuelTarget()
-	-- Store Fuel At Start (to preserve after flashback)
-	local startFuel = GetCarInfo("fuel_total")
-	local lapsCompleted = GetContextInfo("laps")
-	local dist = GetContextInfo("lap_distance")
-	local speed = GetCarInfo("speed")
-
-	if startFuel ~= nil and startFuel > 0 and startFuel ~= fuelAtStart 
-		and lapsCompleted ~= nil and lapsCompleted == 1 -- F1 2015 returns current lap for laps completed so check 1
-			and dist ~= nil and dist > 0 and dist < 5 then
-		fuelAtStart = startFuel
-		display("RACE", "STRT", simrF1DeviceType, 500)
-	end
 
 	if customDisplayActive then
 		local ticks = getTks()
