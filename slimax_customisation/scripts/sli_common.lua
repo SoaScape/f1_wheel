@@ -1,7 +1,7 @@
 -- MIKE CUSTOM FUNCTIONS
 require "scripts/simracef1_f1_2015_mike"
 fuelAtStart = -1
-minFuel = 10
+minFuel = 8
 lowFuelLed = GetLedIndex("low_fuel_warning")
 lowFuelLedState = 0
 
