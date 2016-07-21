@@ -24,7 +24,7 @@ buttonReleaseValue = 0
 overtakeButton = 10
 
 keystrokeDelay = 200
-selectDelay = 500
+selectDelay = 600
 confirmDelay = 1000
 multiSelectDelay = 500
 
@@ -305,13 +305,13 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 end
 
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
-	display(leftDisp, rightDisplay, deviceType, confirmDelay)
+	display(leftDisp, rightDisplay, deviceType, 0)
 	for i=0,tablelength(buttonMap)-1 do
 		-- params: key, delay, modifier
 		SetKeystroke(buttonMap[i], keystrokeDelay, "")					
 		SLISleep(keystrokeDelay)
 	end
-	SetDigitsAllowed(true)
+	setDisplayTimeout(confirmDelay)
 end
 
 function display(leftStr, rightStr, deviceType, timeout)
@@ -319,11 +319,15 @@ function display(leftStr, rightStr, deviceType, timeout)
 		local dev = GetDeviceType(deviceType)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
-		local ticks = GetAppInfo("ticks")
-		if ticks ~= nil then
-			customDisplayTicksTimeout = ticks + timeout
-			customDisplayActive = true
-		end
+		setDisplayTimeout(timeout)
+	end
+end
+
+function setDisplayTimeout(timeout)
+	local ticks = GetAppInfo("ticks")
+	if ticks ~= nil then
+		customDisplayTicksTimeout = ticks + timeout
+		customDisplayActive = true
 	end
 end
 
