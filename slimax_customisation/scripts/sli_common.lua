@@ -1,4 +1,5 @@
 -- MIKE CUSTOM FUNCTIONS
+require "scripts/simracef1_f1_2015_mike"
 fuelAtStart = -1
 minFuel = 10
 lowFuelLed = GetLedIndex("low_fuel_warning")
@@ -106,10 +107,10 @@ function sliDigitsEvent(swFunction, side, devName)
 	local lapsCompleted = GetContextInfo("laps")
 	local dist = GetContextInfo("lap_distance")
 	local speed = GetCarInfo("speed")
+
 	if startFuel ~= nil and startFuel > 0 and startFuel ~= fuelAtStart 
 		and lapsCompleted ~= nil and lapsCompleted == 1 -- F1 2015 returns current lap for laps completed so check 1
-			and dist ~= nil and dist < 1 
-				and speed ~= nil and speed < 1 then
+			and dist ~= nil and dist > 0 and dist < 5 then
 		fuelAtStart = startFuel
 		display("RACE", "STRT", simrF1DeviceType, 500)
 	end
