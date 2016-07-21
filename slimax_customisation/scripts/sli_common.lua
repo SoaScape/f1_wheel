@@ -2,8 +2,12 @@
 require "scripts/simracef1_f1_2015_mike"
 fuelAtStart = -1
 minFuel = 8
-lowFuelLed = GetLedIndex("low_fuel_warning")
-lowFuelLedState = 0
+--lowFuelLed = GetLedIndex("low_fuel_warning")
+lowFuelLed = 64
+lowFuelBlinkDelay = 500
+lowFuelNextBlink = 0
+lowFuelState = 0
+lowFuelLedState = 1
 
 -- MIKES FUNCTION TO ROUND
 function round(num, idp)
@@ -70,25 +74,46 @@ function getFuelTarget()
 		local remainingLaps = getLapsRemaining()
 		local target = round(remainingLapsInTank - remainingLaps, 1)
 		
-		local newFuelLedState = 0		
+		local newFuelState = 0		
 		if target < 0 then
-			newFuelLedState = 1
+			newFuelState = 1
 		end
 
-		if newFuelLedState ~= lowFuelLedState then
-			lowFuelLedState = newFuelLedState
+		if newFuelState ~= lowFuelState then
+			lowFuelState = newFuelState
+			SetPatternLed(lowFuelLed, lowFuelState)
+			lowFuelLedState = lowFuelState
+			lowFuelNextBlink = getTks() + lowFuelBlinkDelay
+			print("lowFuelState: " .. lowFuelState)
+		end
+		
+		if lowFuelState == 1 and getTks() > lowFuelNextBlink then
+			if lowFuelLedState == 0 then
+				lowFuelLedState = 1
+			else
+				lowFuelLedState = 0
+			end
 			SetPatternLed(lowFuelLed, lowFuelLedState)
+			lowFuelNextBlink = getTks() + lowFuelBlinkDelay
 		end
 
 		return target
 	else
-		newFuelLedState = 0
-		if newFuelLedState ~= lowFuelLedState then
-			lowFuelLedState = newFuelLedState
-			SetPatternLed(lowFuelLed, lowFuelLedState)
+		newFuelState = 0
+		if newFuelState ~= lowFuelState then
+			lowFuelState = newFuelState
+			SetPatternLed(lowFuelLed, lowFuelState)
 		end
 		return 0
 	end
+end
+
+function getTks()
+	local ticks = GetAppInfo("ticks")
+	if ticks == nil then
+		ticks = 0
+	end
+	return ticks
 end
 --END MIKE CUSTOM FUNCTIONS
 
@@ -116,8 +141,8 @@ function sliDigitsEvent(swFunction, side, devName)
 	end
 
 	if customDisplayActive then
-		local ticks = GetAppInfo("ticks")
-		if ticks ~= nil and ticks > customDisplayTicksTimeout then		
+		local ticks = getTks()
+		if ticks > customDisplayTicksTimeout then		
 			customDisplayActive = false
 		end
 		return 1
