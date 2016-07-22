@@ -23,8 +23,8 @@ function updateLed(ledInfo, pattern)
 		else
 			ledInfo["state"] = ledOn
 		end
-		SetPatternLed(pattern, ledInfo["state"])
 	end
+	SetPatternLed(pattern, ledInfo["state"])
 end
 
 function activateLedBlink(pattern, delay)
