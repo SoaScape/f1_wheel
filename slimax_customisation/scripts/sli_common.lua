@@ -117,16 +117,17 @@ end
 
 function checkForStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
-	local startFuel = GetCarInfo("fuel_total")
-	local lapsCompleted = GetContextInfo("laps")	
+	local startFuel = GetCarInfo("fuel_total")	
 	local speed = GetCarInfo("speed")
 	
-	if startFuel ~= nil and startFuel > 0 and startFuel ~= fuelAtStart 
-		and lapsCompleted ~= nil and lapsCompleted == 1
-			and speed ~= nil and speed < 1 then
-		fuelAtStart = startFuel
-		display("RACE", "STRT", simrF1DeviceType, 500)
-	end
+	if resetStartFuel and speed > 0 and startFuel ~= nil and startFuel > 0 then	
+		local lapsCompleted = GetContextInfo("laps")	
+		if lapsCompleted ~= nil and lapsCompleted == 1 then -- Make sure we don't reset after a flashback
+			fuelAtStart = startFuel
+			display("TANK", fuelAtStart, simrF1DeviceType, 500)
+		end		
+		resetStartFuel = false
+	end if
 end
 --END MIKE CUSTOM FUNCTIONS
 
