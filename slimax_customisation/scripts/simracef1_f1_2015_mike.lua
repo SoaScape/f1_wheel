@@ -23,6 +23,7 @@ upEncoder = 22
 downEncoder = 21
 buttonReleaseValue = 0
 overtakeButton = 10
+startFuelLockButton = 3
 
 keystrokeDelay = 200
 selectDelay = 600
@@ -147,6 +148,7 @@ currentBiasMode[0] = 1
 currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 overtakeEngaged = false
 resetStartFuel = true
+startFuelLocked = false
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	if deviceType == simrF1DeviceType then	
@@ -291,6 +293,15 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 			elseif ctrlPos == downButton or ctrlPos == downEncoder then
 				fuelAtStart = fuelAtStart - fuelIncrement
 				display("TANK", fuelAtStart, simrF1DeviceType, 500)
+			elseif ctrlPos == startFuelLockButton then
+				startFuelLocked = not(startFuelLocked)
+				local right
+				if startFuelLocked then
+					right = "LOCK"
+				else
+					right = "UNLK"
+				end
+				display("TANK", right, simrF1DeviceType, 500)
 			end
 		
 		elseif ctrlType == switch and ctrlPos == settingSwitchId and upDnModeSelected then

@@ -1,5 +1,6 @@
 -- MIKE CUSTOM FUNCTIONS
 fuelAtStart = -1
+startFuelLocked = false
 minFuel = 8
 --lowFuelLed = GetLedIndex("low_fuel_warning")
 lowFuelLed = 64
@@ -120,7 +121,8 @@ function checkForStartFuel()
 	local startFuel = GetCarInfo("fuel_total")	
 	local speed = GetCarInfo("speed")
 	
-	if resetStartFuel and speed > 0 and startFuel ~= nil and startFuel > 0 then	
+	if not(startFuelLocked) and 
+		resetStartFuel and speed > 0 and startFuel ~= nil and startFuel > 0 then	
 		local lapsCompleted = GetContextInfo("laps")	
 		if lapsCompleted ~= nil and lapsCompleted == 1 then -- Make sure we don't reset after a flashback
 			fuelAtStart = startFuel
