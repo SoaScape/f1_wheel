@@ -144,8 +144,7 @@ function sliDigitsEvent(swFunction, side, devName)
 	local fuelTarget = getFuelTarget()
 
 	if customDisplayActive then
-		local ticks = getTks()
-		if ticks > customDisplayTicksTimeout then		
+		if getTks() > customDisplayTicksTimeout then		
 			customDisplayActive = false
 		end
 		return 1
