@@ -145,7 +145,7 @@ currentBiasMode[0] = 1
 currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 overtakeEngaged = false
 
-function f1_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
+function f1ControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	if deviceType == simrF1DeviceType then	
 		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitch then
