@@ -1,7 +1,6 @@
 require "scripts/mike_multifunction_f1_2015"
 require "scripts/mike_custom_displays"
 
-
 function custom_init_Event(scriptfile)	
 end
 
