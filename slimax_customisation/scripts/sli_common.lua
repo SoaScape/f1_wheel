@@ -1,14 +1,11 @@
+require "scripts/mike_led_blink"
+
 -- MIKE CUSTOM FUNCTIONS
 fuelAtStart = -1
 resetStartFuel = true
 startFuelLocked = false
 minFuel = 8
---lowFuelLed = GetLedIndex("low_fuel_warning")
-lowFuelLed = 64
-lowFuelBlinkDelay = 500
-lowFuelNextBlink = 0
-lowFuelState = 0
-lowFuelLedState = 1
+lowFuelLedPattern = 64
 
 -- MIKES FUNCTION TO ROUND
 function round(num, idp)
@@ -74,34 +71,14 @@ function getFuelTarget()
 		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
 		local remainingLaps = getLapsRemaining()
 		local target = round(remainingLapsInTank - remainingLaps, 1)
-		
-		local newFuelState = 0		
-		if target < 0 then
-			newFuelState = 1
-		end
 
-		if newFuelState ~= lowFuelState then
-			lowFuelState = newFuelState
-			SetPatternLed(lowFuelLed, lowFuelState)
-			lowFuelLedState = lowFuelState
-			lowFuelNextBlink = getTks() + lowFuelBlinkDelay
-			print("lowFuelState: " .. lowFuelState)
-		end
-		
-		if lowFuelState == 1 and getTks() > lowFuelNextBlink then
-			if lowFuelLedState == 0 then
-				lowFuelLedState = 1
-			else
-				lowFuelLedState = 0
-			end
-			SetPatternLed(lowFuelLed, lowFuelLedState)
-			lowFuelNextBlink = getTks() + lowFuelBlinkDelay
+		if target < 0 then
+			activateLedBlink(lowFuelLedPattern)
 		end
 
 		return target
 	else
-		lowFuelState = 0
-		SetPatternLed(lowFuelLed, lowFuelState)		
+		deactivateLedBlink(lowFuelLedPattern)
 		return nil
 	end
 end
@@ -140,6 +117,8 @@ function sliDigitsEvent(swFunction, side, devName)
 	
 	-- Calculate fuel target
 	local fuelTarget = getFuelTarget()
+	
+	updateBlinkingLeds()
 
 	if customDisplayActive then
 		if getTks() > customDisplayTicksTimeout then		
