@@ -1,5 +1,7 @@
 require "scripts/mike_utils"
 
+-- This file houses non-changed code from original SliMaxManager scripts/mike_utils
+-- ================================================================================
 function commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side)
 	local hr = 0
 	local mn = 0
