@@ -1,5 +1,7 @@
 require "scripts/one_switch_to_rule_them_all"
 require "scripts/sli_common"
+require "scripts/mike_custom_displays"
+require "scripts/mike_led_blink"
 
 function custom_init_Event(scriptfile)	
 end
@@ -357,4 +359,29 @@ function tablelength(T)
   local count = 0
   for _ in pairs(T) do count = count + 1 end
   return count
+end
+
+function custom_left_Display_Event(swValue)
+	return generalDisplayEventProcessing()
+end
+
+function custom_right_Display_Event(swValue)
+	return generalDisplayEventProcessing()
+end
+
+function generalDisplayEventProcessing()
+	checkForStartFuel()
+	
+	-- Calculate fuel target
+	local fuelTarget = getFuelTarget()	
+	updateBlinkingLeds()
+
+	if customDisplayActive then
+		if getTks() > customDisplayTicksTimeout then		
+			customDisplayActive = false
+		end
+		return 1
+	end
+	
+	return 2
 end

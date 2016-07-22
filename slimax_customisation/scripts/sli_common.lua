@@ -1,4 +1,3 @@
-require "scripts/mike_led_blink"
 require "scripts/mike_custom_displays"
 
 -- SLIMax Mgr Lua Script v3.7.2
@@ -7,21 +6,6 @@ require "scripts/mike_custom_displays"
 -- last change by Zappadoc - 2015-11-12
 
 function sliDigitsEvent(swFunction, side, devName)
-	-- Mike Custom
-	checkForStartFuel()
-	
-	-- Calculate fuel target
-	local fuelTarget = getFuelTarget()	
-	updateBlinkingLeds()
-
-	if customDisplayActive then
-		if getTks() > customDisplayTicksTimeout then		
-			customDisplayActive = false
-		end
-		return 1
-	end
-	-- End mike custom
-	
 	swValue = swFunction + 1
 	if devName == "SLI-EMU" then devName = "SLI-PRO" end
 	if devName == "SRF1-EMU" then devName = "SIMRACEF1" end
