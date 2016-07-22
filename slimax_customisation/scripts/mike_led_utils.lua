@@ -16,7 +16,7 @@ function updateBlinkingLeds()
 end
 
 function updateLed(ledInfo, pattern) 
-	if getTks() >= ledInfo["nextChange"] then
+	if ledInfo["delay"] > 0 and getTks() >= ledInfo["nextChange"] then
 		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
 		if ledInfo["state"] == ledOn then
 			ledInfo["state"] = ledOff
@@ -29,7 +29,7 @@ end
 
 function activateLedBlink(pattern, delay)
 	if activeLeds[pattern] == nil then
-		if delay == nil or delay <= 0 then
+		if delay == nil then
 			delay = defaultBlinkDelay
 		end
 		activeLeds[pattern] = {}
@@ -40,7 +40,15 @@ function activateLedBlink(pattern, delay)
 	end
 end
 
-function deactivateLedBlink(pattern, delay)
+function activateLed(pattern)
+	activateLedBlink(pattern, 0)
+end
+
+function deactivateLed(pattern)
+	deactivateLedBlink(pattern)
+end
+
+function deactivateLedBlink(pattern)
 	activeLeds[pattern] = nil
 	SetPatternLed(pattern, ledOff)
 end
