@@ -44,7 +44,7 @@ end
 -- ================================
 -- SIM RACE DELUXE SUPPORT
 
-function custom_left_Display_Event(swPosition)
+function oneSwitchLeftDisplayEvent(swPosition)
 	-- type your custom script related to left digits panel here
 	
 	-- init global var if needed
@@ -55,7 +55,7 @@ function custom_left_Display_Event(swPosition)
 	return 2
 end
 
-function custom_right_Display_Event(swPosition)
+function oneSwitchRightDisplayEvent(swPosition)
 	-- type your custom script related to right SLI-PRO digits panel here
 	-- init global var if needed
 	if mOneSW_Backup == nil then

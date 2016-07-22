@@ -8,10 +8,12 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 	return f1ControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 end
 
-function custom_left_Display_Event(swValue)
+function custom_left_Display_Event(swPosition)
+	oneSwitchLeftDisplayEvent(swPosition)
 	return customDisplayEventProcessing(swValue, 0)
 end
 
-function custom_right_Display_Event(swValue)
+function custom_right_Display_Event(swPosition)
+	oneSwitchRightDisplayEvent(swPosition)
 	return customDisplayEventProcessing(swValue, 1)
 end

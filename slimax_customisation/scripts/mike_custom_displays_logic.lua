@@ -85,6 +85,8 @@ function getFuelTarget()
 
 		if target < 0 then
 			activateLedBlink(lowFuelLedPattern)
+		else
+			deactivateLedBlink(lowFuelLedPattern)
 		end
 
 		return target
@@ -94,21 +96,15 @@ function getFuelTarget()
 	end
 end
 
-function getTks()
-	local ticks = GetAppInfo("ticks")
-	if ticks == nil then
-		ticks = 0
-	end
-	return ticks
-end
-
 function checkForStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
 	local startFuel = GetCarInfo("fuel_total")
+	local speed = GetCarInfo("speed")
 
 	if resetStartFuel and not(startFuelLocked) and
 		mSessionEnter == 1 and not(m_is_sim_idle) and
-			startFuel ~= nil and startFuel > 0 then
+			startFuel ~= nil and startFuel > 0 and 
+				speed ~= nil and speed > 0 then
 		fuelAtStart = startFuel
 		display("TANK", fuelAtStart, simrF1DeviceType, 500)		
 		resetStartFuel = false

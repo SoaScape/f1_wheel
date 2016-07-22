@@ -1,3 +1,5 @@
+require "scripts/mike_utils"
+
 activeLeds = {}
 defaultBlinkDelay = 500
 ledOn = 1
@@ -25,12 +27,11 @@ function updateLed(ledInfo, pattern)
 	end
 end
 
-function activateLedBlink(pattern)
-	activateLedBlink(pattern, defaultBlinkDelay)
-end
-
 function activateLedBlink(pattern, delay)
 	if activeLeds[pattern] == nil then
+		if delay == nil or delay <= 0 then
+			delay = defaultBlinkDelay
+		end
 		activeLeds[pattern] = {}
 		activeLeds[pattern]["delay"] = delay
 		activeLeds[pattern]["state"] = ledOn
@@ -42,12 +43,4 @@ end
 function deactivateLedBlink(pattern, delay)
 	activeLeds[pattern] = nil
 	SetPatternLed(pattern, ledOff)
-end
-
-function getTks()
-	local ticks = GetAppInfo("ticks")
-	if ticks == nil then
-		ticks = 0
-	end
-	return ticks
 end
