@@ -118,7 +118,7 @@ function customDisplayEventProcessing(swValue, side)
 		customFunction = false
 	end
 	
-	if customFunction then
+	if customFunction and mSessionEnter == 1 and not(m_is_sim_idle) then
 		commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side)
 		return 1
 	else

@@ -7,13 +7,14 @@ resetStartFuel = true
 startFuelLocked = false
 minFuel = 8
 lowFuelLedPattern = 64
+startFuelStoredLedPattern = 248
 
 function performRegularCustomDisplayProcessing()
 	checkForStartFuel()
 	
 	-- Calculate fuel target
 	fuelTarget = getFuelTarget()	
-	updateBlinkingLeds()
+	updateLeds()
 
 	if customDisplayActive then
 		if getTks() > customDisplayTicksTimeout then		
@@ -84,29 +85,28 @@ function getFuelTarget()
 		local target = round(remainingLapsInTank - remainingLaps, 1)
 
 		if target < 0 then
-			activateLedBlink(lowFuelLedPattern)
+			activateBlinkingLed(lowFuelLedPattern)
 		else
-			deactivateLedBlink(lowFuelLedPattern)
+			deactivateBlinkingLed(lowFuelLedPattern)
 		end
 
 		return target
 	else
-		deactivateLedBlink(lowFuelLedPattern)
+		deactivateBlinkingLed(lowFuelLedPattern)
 		return nil
 	end
 end
 
 function checkForStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
-	local startFuel = GetCarInfo("fuel_total")
-	local speed = GetCarInfo("speed")
+	local startFuel = GetCarInfo("fuel_total")	
 
 	if resetStartFuel and not(startFuelLocked) and
 		mSessionEnter == 1 and not(m_is_sim_idle) and
-			startFuel ~= nil and startFuel > 0 and 
-				speed ~= nil and speed > 0 then
+			startFuel ~= nil and startFuel > 0 then
 		fuelAtStart = startFuel
 		display("TANK", fuelAtStart, simrF1DeviceType, 500)		
+		activatePermanentLed(startFuelStoredLedPattern, 500)
 		resetStartFuel = false
 	end
 end

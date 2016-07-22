@@ -1,22 +1,34 @@
 require "scripts/mike_utils"
 
-activeLeds = {}
+activeBlinkingLeds = {}
+activePermanentLeds = {}
 defaultBlinkDelay = 500
 ledOn = 1
 ledOff = 0
 
-function updateBlinkingLeds()	
-	for key, value in pairs(activeLeds) do
+function updateLeds()
+	updateBlinkingLeds()
+	updateActivePermanentLeds()
+end
+
+function updateBlinkingLeds()
+	for key, value in pairs(activeBlinkingLeds) do
 		if mSessionEnter == 1 and not(m_is_sim_idle) then
-			updateLed(activeLeds[key], key)
+			updateBlinkingLed(activeBlinkingLeds[key], key)
 		else
 			SetPatternLed(key, ledOff)
 		end
 	end	
 end
 
-function updateLed(ledInfo, pattern) 
-	if ledInfo["delay"] > 0 and getTks() >= ledInfo["nextChange"] then
+function updateActivePermanentLeds()
+	for key, value in pairs(activePermanentLeds) do
+		updatePermLed(key, value)
+	end	
+end
+
+function updateBlinkingLed(ledInfo, pattern) 
+	if getTks() >= ledInfo["nextChange"] then
 		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
 		if ledInfo["state"] == ledOn then
 			ledInfo["state"] = ledOff
@@ -27,28 +39,43 @@ function updateLed(ledInfo, pattern)
 	SetPatternLed(pattern, ledInfo["state"])
 end
 
-function activateLedBlink(pattern, delay)
-	if activeLeds[pattern] == nil then
+function updatePermLed(pattern, timeout)
+	if timeout == 0 or getTks() <= timeout then
+		SetPatternLed(pattern, ledOn)
+	else
+		deactivatePermanentLed(pattern)
+	end
+end
+
+function activateBlinkingLed(pattern, delay)
+	if activeBlinkingLeds[pattern] == nil then
 		if delay == nil then
 			delay = defaultBlinkDelay
 		end
-		activeLeds[pattern] = {}
-		activeLeds[pattern]["delay"] = delay
-		activeLeds[pattern]["state"] = ledOn
-		activeLeds[pattern]["nextChange"] = getTks() + delay
+		activeBlinkingLeds[pattern] = {}
+		activeBlinkingLeds[pattern]["delay"] = delay
+		activeBlinkingLeds[pattern]["state"] = ledOn
+		activeBlinkingLeds[pattern]["nextChange"] = getTks() + delay
 		SetPatternLed(pattern, ledOn)
 	end
 end
 
-function activateLed(pattern)
-	activateLedBlink(pattern, 0)
+function activatePermanentLed(pattern, delay)
+	if activePermanentLeds[pattern] == nil then
+		if delay == nil then
+			delay = 0
+		end
+		activePermanentLeds[pattern] = getTks() + delay
+		SetPatternLed(pattern, ledOn)
+	end
 end
 
-function deactivateLed(pattern)
-	deactivateLedBlink(pattern)
+function deactivatePermanentLed(pattern)
+	activePermanentLeds[pattern] = nil
+	SetPatternLed(pattern, ledOff)
 end
 
-function deactivateLedBlink(pattern)
-	activeLeds[pattern] = nil
+function deactivateBlinkingLed(pattern)
+	activeBlinkingLeds[pattern] = nil
 	SetPatternLed(pattern, ledOff)
 end
