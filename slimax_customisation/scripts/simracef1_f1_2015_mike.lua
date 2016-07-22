@@ -31,6 +31,7 @@ multiSelectDelay = 500
 
 resetMultiFunction = "RSET"
 multiFunction = resetMultiFunction
+fuelIncrement = 10
 
 upDnModeButtonMap = {}
 upDnModeSelected = false
@@ -145,6 +146,7 @@ currentWingMode[0] = 1
 currentBiasMode[0] = 1
 currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 overtakeEngaged = false
+resetStartFuel = true
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	if deviceType == simrF1DeviceType then	
@@ -283,8 +285,12 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 		elseif multiFunction == resetMultiFunction and value == buttonReleaseValue then
 			if ctrlPos == confirmButton then
 				setDefaultModes()
-			--elseif ctrlPos == upButton or ctrlPos == upEncoder then
-			--elseif ctrlPos == downButton or ctrlPos == downEncoder then
+			elseif ctrlPos == upButton or ctrlPos == upEncoder then
+				fuelAtStart = fuelAtStart + fuelIncrement
+				display("TANK", fuelAtStart, simrF1DeviceType, 500)
+			elseif ctrlPos == downButton or ctrlPos == downEncoder then
+				fuelAtStart = fuelAtStart - fuelIncrement
+				display("TANK", fuelAtStart, simrF1DeviceType, 500)
 			end
 		
 		elseif ctrlType == switch and ctrlPos == settingSwitchId and upDnModeSelected then
@@ -335,6 +341,7 @@ function setDefaultModes()
 	currentBiasMode[0] = 1
 	currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
 	overtakeEngaged = false
+	resetStartFuel = true
 end
 
 function tablelength(T)
