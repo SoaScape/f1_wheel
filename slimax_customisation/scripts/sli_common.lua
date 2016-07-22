@@ -118,8 +118,9 @@ function checkForStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
 	local startFuel = GetCarInfo("fuel_total")
 
-	if resetStartFuel and not(startFuelLocked)
-			and not(m_is_sim_idle) and startFuel ~= nil and startFuel > 0 then
+	if resetStartFuel and not(startFuelLocked) and
+		mSessionEnter == 1 and not(m_is_sim_idle) and
+			startFuel ~= nil and startFuel > 0 then
 		fuelAtStart = startFuel
 		display("TANK", fuelAtStart, simrF1DeviceType, 500)		
 		resetStartFuel = false
