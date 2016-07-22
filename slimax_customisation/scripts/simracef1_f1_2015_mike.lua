@@ -1,4 +1,5 @@
 require "scripts/one_switch_to_rule_them_all"
+require "scripts/sli_common"
 
 function custom_init_Event(scriptfile)	
 end
@@ -323,12 +324,9 @@ function display(leftStr, rightStr, deviceType, timeout)
 	end
 end
 
-function setDisplayTimeout(timeout)
-	local ticks = GetAppInfo("ticks")
-	if ticks ~= nil then
-		customDisplayTicksTimeout = ticks + timeout
-		customDisplayActive = true
-	end
+function setDisplayTimeout(timeout)		
+	customDisplayTicksTimeout = getTks() + timeout
+	customDisplayActive = true	
 end
 
 function setDefaultModes()
