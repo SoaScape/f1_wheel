@@ -1,105 +1,126 @@
-require "scripts/mike_led_blink"
+require "scripts/mike_common"
+require "scripts/mike_custom_displays_logic"
 
--- MIKE CUSTOM FUNCTIONS
-fuelAtStart = -1
-resetStartFuel = true
-startFuelLocked = false
-minFuel = 8
-lowFuelLedPattern = 64
-
--- MIKES FUNCTION TO ROUND
-function round(num, idp)
-  local mult = 10^(idp or 0)
-  return math.floor(num * mult + 0.5) / mult
-end
-
-function getPercentageLapComplete()
-	-- percentage of current lap completed
-	local dist = GetContextInfo("lap_distance")		
-	local trcksz = GetContextInfo("track_size")
-	return dist / (trcksz / 100)
-end
-
-function getLapsCompleteIncludingCurrent()
-	local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
-	local percentLapComplete = getPercentageLapComplete() / 100
-	return lapsCompleted + percentLapComplete -- Add on % current lap complete
-end
-
-function firstLapCompleted()
-	-- Returns true once the first lap has been completed.
-	local lapsCompleted = GetContextInfo("laps") - 1
-	if lapsCompleted ~= nil and lapsCompleted > 0 then
-		return true
-	else
-		return false
-	end		
-end
-
-function getLapsRemaining()
-	-- Returns remaining laps including current (decimal format)
-	local lapsCompleted = GetContextInfo("laps")
-	local totalLaps = GetContextInfo("laps_count")
-	local lapsRemaining = totalLaps - lapsCompleted
-
-	local percentLapComplete = getPercentageLapComplete()
-	local percentLapRemaining = (100 - percentLapComplete) / 100
+function customDisplayEventProcessing(swValue, side)
+	if performRegularCustomDisplayProcessing() then
+		return 1
+	end
 	
-	lapsRemaining = lapsRemaining + percentLapRemaining
-	return lapsRemaining
-end
-
-function getRemainingLapsInTank(fuelRemaining)
-	-- Mike custom: fuel laps remaining.
-	-- Discounts 2.6 litres as car stutters when down to that level
-	local lapsCompleted = getLapsCompleteIncludingCurrent()
-
-	local remainingLapsInTank = 0
-	if fuelRemaining > 0 and fuelAtStart > 0 and lapsCompleted >= 1 then
-		local fuelUsed = fuelAtStart - fuelRemaining
-		local fuelPerLap = fuelUsed / lapsCompleted	
-		if fuelPerLap > 0 then				
-			remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
+	local sliPanel = ""
+	local customFunction = false
+	local diffTimeFlag = false
+	local lpt = nil
+	if swValue == 193 then
+		-- Mike custom: LAPS COMPLETED SCRIPT INCLUDING CURRENT DECIMAL PLACE LAP
+		customFunction = true
+		local lapsCompleted = getLapsCompleteIncludingCurrent()
+		
+		if lapsCompleted ~= nil then
+			sliPanel = string.format("L%2.2f",  round(lapsCompleted, 2))
 		end
-	end
-	return remainingLapsInTank	
-end
+	
+	elseif swValue == 194 then		
+		-- Mike custom: fuel target.
+		customFunction = true
+		if fuelTarget ~= nil then
+			local fuelRemaining = GetCarInfo("fuel")
+			local c = ""
+			if(fuelTarget >= 0) then
+				c = "+"
+			end
+		
+			if firstLapCompleted() and remainingLapsInTank ~= 0 then
+				if(fuelTarget >= 10 or fuelTarget <= -10) then
+					sliPanel = string.format("%s%2.1f",  c, fuelTarget, 1)
+				else
+					sliPanel = string.format("T%s%1.1f",  c, fuelTarget, 1)
+				end
+				isSlowUpdate = true
+			else
+				if(fuelRemaining <= minFuel) then
+					sliPanel = "OUT "
+				else
+					sliPanel = "NREF"
+				end
+			end
+		else
+			sliPanel = "NREF"
+		end
 
-function getFuelTarget()
-	local fuelRemaining = GetCarInfo("fuel")
-	if firstLapCompleted() and fuelAtStart > 0 and fuelRemaining > 0 then
+	elseif swValue == 195 then
+		-- Mike custom: total fuel in tank at start(doesn't reset with flashback in F1)
+		customFunction = true		
+		if fuelAtStart ~= nil then 
+			local ft = GetFuelKilogram(fuelAtStart)
+			if devName == "SLI-PRO" then
+				if ft >= 100 then
+					sliPanel = string.format(" F%3d  ", round(ft))
+				elseif ft >= 10 then
+					sliPanel = string.format(" F%2d   ", round(ft))
+				else
+					sliPanel = string.format(" F%1.1f  ", ft)
+				end
+			else
+				if ft >= 100 then
+					sliPanel = string.format("F%3d", round(ft))
+				elseif ft >= 10 then
+					sliPanel = string.format(" F%2d", round(ft))
+				else
+					sliPanel = string.format(" F%1.1f", ft)
+				end
+			end
+		else
+			sliPanel = "NREF"
+		end
+
+	elseif swValue == 196 then
+		-- Mike custom: real time diff vs next
+		customFunction = true
+		diffTimeFlag = true
+		timeFlag = true
+		lpt = GetTimeInfo("diff_time_behind_next")
+	
+	elseif swValue == 197 then
+		-- Mike custom: real time diff vs leader
+		customFunction = true
+		diffTimeFlag = true
+		timeFlag = true
+		lpt = GetTimeInfo("diff_time_behind_leader")
+		
+	elseif swValue == 198 then
+		-- Mike custom: fuel laps remaining.
+		customFunction = true
+		local fuelRemaining = GetCarInfo("fuel")
 		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
-		local remainingLaps = getLapsRemaining()
-		local target = round(remainingLapsInTank - remainingLaps, 1)
 
-		if target < 0 then
-			activateLedBlink(lowFuelLedPattern)
+		if remainingLapsInTank > 0 then
+			sliPanel = string.format("F%2.2f",  round(remainingLapsInTank, 2))
+			isSlowUpdate = true
+		elseif remainingLapsInTank == 0 then
+			if(fuelRemaining <= minFuel) then
+				sliPanel = "OUT "
+			else
+				sliPanel = "NREF"
+			end
 		end
 
-		return target
+	elseif swValue == 199 then
+		-- Mike custom: Laps remaining including current (using decimal)
+		customFunction = true
+		lapsRemaining = getLapsRemaining()
+		
+		if lapsRemaining ~= nil then
+			sliPanel = string.format("L%2.2f",  round(lapsRemaining, 2))
+		end
+	
 	else
-		deactivateLedBlink(lowFuelLedPattern)
-		return nil
+		customFunction = false
 	end
-end
-
-function getTks()
-	local ticks = GetAppInfo("ticks")
-	if ticks == nil then
-		ticks = 0
-	end
-	return ticks
-end
-
-function checkForStartFuel()
-	-- Store Fuel At Start (to preserve after flashback)
-	local startFuel = GetCarInfo("fuel_total")
-
-	if resetStartFuel and not(startFuelLocked) and
-		mSessionEnter == 1 and not(m_is_sim_idle) and
-			startFuel ~= nil and startFuel > 0 then
-		fuelAtStart = startFuel
-		display("TANK", fuelAtStart, simrF1DeviceType, 500)		
-		resetStartFuel = false
-	end
+	
+	if customFunction then
+		commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side)
+		return 1
+	else
+		return 2
+	end	
 end
