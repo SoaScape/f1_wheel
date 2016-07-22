@@ -99,12 +99,9 @@ function getFuelTarget()
 
 		return target
 	else
-		newFuelState = 0
-		if newFuelState ~= lowFuelState then
-			lowFuelState = newFuelState
-			SetPatternLed(lowFuelLed, lowFuelState)
-		end
-		return 0
+		lowFuelState = 0
+		SetPatternLed(lowFuelLed, lowFuelState)		
+		return nil
 	end
 end
 
@@ -144,7 +141,7 @@ function sliDigitsEvent(swFunction, side, devName)
 	checkForStartFuel()
 	
 	-- Calculate fuel target
-	getFuelTarget()
+	local fuelTarget = getFuelTarget()
 
 	if customDisplayActive then
 		local ticks = getTks()
@@ -2735,27 +2732,30 @@ end
 		end
 	
 	elseif swValue == 194 then
-		-- Mike custom: fuel target.
-		local target = getFuelTarget()
-		local fuelRemaining = GetCarInfo("fuel")
-		local c = ""
-		if(target >= 0) then
-			c = "+"
-		end
+		-- Mike custom: fuel target.		
+		if fuelTarget ~= nil then
+			local fuelRemaining = GetCarInfo("fuel")
+			local c = ""
+			if(fuelTarget >= 0) then
+				c = "+"
+			end
 		
-		if firstLapCompleted() and remainingLapsInTank ~= 0 then
-			if(target >= 10 or target <= -10) then
-				sliPanel = string.format("%s%2.1f",  c, target, 1)
+			if firstLapCompleted() and remainingLapsInTank ~= 0 then
+				if(fuelTarget >= 10 or fuelTarget <= -10) then
+					sliPanel = string.format("%s%2.1f",  c, fuelTarget, 1)
+				else
+					sliPanel = string.format("T%s%1.1f",  c, fuelTarget, 1)
+				end
+				isSlowUpdate = true
 			else
-				sliPanel = string.format("T%s%1.1f",  c, target, 1)
+				if(fuelRemaining <= minFuel) then
+					sliPanel = "OUT "
+				else
+					sliPanel = "NREF"
+				end
 			end
-			isSlowUpdate = true
 		else
-			if(fuelRemaining <= minFuel) then
-				sliPanel = "OUT "
-			else
-				sliPanel = "WAIT"
-			end
+			sliPanel = "NREF"
 		end
 
 	elseif swValue == 195 then
@@ -2779,6 +2779,8 @@ end
 					sliPanel = string.format(" F%1.1f", ft)
 				end
 			end
+		else
+			sliPanel = "NREF"
 		end
 
 	elseif swValue == 196 then
@@ -2805,7 +2807,7 @@ end
 			if(fuelRemaining <= minFuel) then
 				sliPanel = "OUT "
 			else
-				sliPanel = "WAIT"
+				sliPanel = "NREF"
 			end
 		end
 
