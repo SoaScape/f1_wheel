@@ -7,6 +7,7 @@ keystrokeDelay = 200
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"
+multifunctionMap[1]["enabled"] = true
 multifunctionMap[1]["upDnSelectable"] = true
 multifunctionMap[1]["upDnConfirmRequired"] = true
 multifunctionMap[1]["defaultUpDnMode"] = 1
@@ -33,6 +34,7 @@ multifunctionMap[1]["buttonMap"][2][2] = "NUMPAD8"
 
 multifunctionMap[2] = {}
 multifunctionMap[2]["name"] = "TYRE"
+multifunctionMap[2]["enabled"] = true
 multifunctionMap[2]["upDnSelectable"] = true
 multifunctionMap[2]["upDnConfirmRequired"] = true
 multifunctionMap[2]["defaultUpDnMode"] = 1
@@ -64,6 +66,7 @@ multifunctionMap[2]["buttonMap"][0][2] = "NUMPAD4"
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "WING"
+multifunctionMap[3]["enabled"] = true
 multifunctionMap[3]["upDnSelectable"] = true
 multifunctionMap[3]["upDnConfirmRequired"] = true
 multifunctionMap[3]["defaultUpDnMode"] = 1
@@ -90,6 +93,7 @@ multifunctionMap[3]["buttonMap"][2][2] = "NUMPAD8"
 
 multifunctionMap[4] = {}
 multifunctionMap[4]["name"] = "BIAS"
+multifunctionMap[4]["enabled"] = true
 multifunctionMap[4]["upDnSelectable"] = true
 multifunctionMap[4]["upDnConfirmRequired"] = true
 multifunctionMap[4]["defaultUpDnMode"] = 1
@@ -114,8 +118,24 @@ multifunctionMap[4]["buttonMap"][2][0] = "NUMPAD2"
 multifunctionMap[4]["buttonMap"][2][1] = "NUMPAD2"
 multifunctionMap[4]["buttonMap"][2][2] = "NUMPAD8"
 
+multifunctionMap[5] = {}
+multifunctionMap[5]["name"] = "DX"
+multifunctionMap[6] = {}
+multifunctionMap[6]["name"] = "L"
+multifunctionMap[7] = {}
+multifunctionMap[7]["name"] = "D"
+multifunctionMap[8] = {}
+multifunctionMap[8]["name"] = "WET"
+multifunctionMap[9] = {}
+multifunctionMap[9]["name"] = "INT"
+multifunctionMap[10] = {}
+multifunctionMap[10]["name"] = "PRI"
+multifunctionMap[11] = {}
+multifunctionMap[11]["name"] = "OPT"
+
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = "RSET"
+multifunctionMap[12]["enabled"] = true
 
 -- Used by the overtake button
 fuelMultiFunctionMapIndex = 1
@@ -144,9 +164,10 @@ end
 function dispEvent(side, swPosition)
 	performRegularCustomDisplayProcessing()
 	
-	local oneSwVal = oneSwitchDisplayEvent(side, swPosition)	
+	local oneSwVal = oneSwitchDisplayEvent(side, swPosition)
+	local custDisplayVal = 2
 	if not(customDisplayIsActive()) then		
-		local custDisplayVal = customDisplayEventProcessing(swValue, side)
+		custDisplayVal = customDisplayEventProcessing(swValue, side)
 	end
 
 	if oneSwVal < custDisplayVal then

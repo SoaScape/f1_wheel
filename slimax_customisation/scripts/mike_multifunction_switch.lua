@@ -31,18 +31,18 @@ customDisplayActive = false
 
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	if deviceType == myDevice then	
-		print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
+		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then			
 			currentMultifunction = multifunctionMap[value]
 			
-			if currentMultifunction["upDnSelectable"] then
+			if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
 				display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
 			else
 				display("MULT", currentMultifunction["name"], deviceType, multiSelectDelay)
 			end
 			return 1
 		
-		elseif currentMultifunction ~= nil then
+		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
 			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				if overtakeEngaged then
