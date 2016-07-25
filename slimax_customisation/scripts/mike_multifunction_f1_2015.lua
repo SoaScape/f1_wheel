@@ -282,10 +282,10 @@ function f1ControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, target
 		elseif multiFunction == resetMultiFunction and value == buttonReleaseValue then
 			if ctrlPos == confirmButton then
 				setDefaultModes()
-			elseif ctrlPos == upButton or ctrlPos == upEncoder then
+			elseif startFuelLocked and ctrlPos == upButton or ctrlPos == upEncoder then
 				fuelAtStart = fuelAtStart + fuelIncrement
 				display("TANK", fuelAtStart, simrF1DeviceType, 500)
-			elseif ctrlPos == downButton or ctrlPos == downEncoder then
+			elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder then
 				fuelAtStart = fuelAtStart - fuelIncrement
 				display("TANK", fuelAtStart, simrF1DeviceType, 500)
 			elseif ctrlPos == startFuelLockButton then
