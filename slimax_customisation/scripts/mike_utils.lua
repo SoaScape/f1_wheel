@@ -1,14 +1,15 @@
-function getTks()
-	local ticks = GetAppInfo("ticks")
-	if ticks == nil then
-		ticks = 0
-	end
-	return ticks
-end
+customDisplayActive = false
+customDisplayTicksTimeout = 0
 
-function round(num, idp)
-  local mult = 10^(idp or 0)
-  return math.floor(num * mult + 0.5) / mult
+function customDisplayActive()
+	if customDisplayActive ~= nil and customDisplayActive then
+		if getTks() > customDisplayTicksTimeout then		
+			customDisplayActive = false
+		else
+			return true
+		end		
+	end
+	return false
 end
 
 function display(leftStr, rightStr, deviceType, timeout)
@@ -23,6 +24,19 @@ end
 function setDisplayTimeout(timeout)		
 	customDisplayTicksTimeout = getTks() + timeout
 	customDisplayActive = true	
+end
+
+function getTks()
+	local ticks = GetAppInfo("ticks")
+	if ticks == nil then
+		ticks = 0
+	end
+	return ticks
+end
+
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
 end
 
 function tablelength(T)

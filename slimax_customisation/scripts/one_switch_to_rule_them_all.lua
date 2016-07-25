@@ -1,48 +1,11 @@
--- Custom Scripts Template SLIMax Manager Scripts v3.4.1
--- Copyright ©2012-2014 by Zappadoc - All Rights Reserved.
--- last change by Zappadoc - 2016-04
+oneSWActivated = true
 
--- NOTES:
--- COMBO SETUP to display custom information on left and right digits panels of your device using ONE switch only
--- SWITCH 1 is used and assigned to left display panel using SLIMax Mgr Advanced Options
--- Nothing is assigned to right display panel, this script takes the position of the S1 switch and manages the 
--- info displayed on right panel.
-
-
--- ================================
--- CONSTANTS
-
-
--- ================================
--- additional lua extension module dll
-
-
--- ================================
--- additional scripts file
-
-
--- ================================
--- custom globals
-
-
--- ================================
--- custom functions
-
-
--- ================================
--- init event
-
-function custom_init_Event(scriptfile)
-	-- type your custom script initialization here
+function oneSwitchEvent(deviceType, ctrlType, ctrlPos, value)
+	if ctrlType == 0 and ctrlPos == 2 and oneSWActivated then			
+		mOneSW_Backup  = value
+		return 1				
+	end
 end
-
--- ================================
--- global custom events
--- ================================
--- custom events
-
--- ================================
--- SIM RACE DELUXE SUPPORT
 
 function oneSwitchLeftDisplayEvent(swPosition)
 	-- type your custom script related to left digits panel here

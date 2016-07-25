@@ -2,6 +2,7 @@ require "scripts/mike_multifunction_switch"
 require "scripts/mike_custom_displays"
 
 multifunctionMap = {}
+keystrokeDelay = 200
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"
@@ -118,15 +119,27 @@ function custom_init_Event(scriptfile)
 end
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
-	return multiControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
+	local mult = multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
+	local oneSw = oneSwitchEvent(deviceType, ctrlType, ctrlPos, value)
+	if mult < oneSw then
+		return mult
+	else
+		return oneSw
+	end
 end
 
 function custom_left_Display_Event(swPosition)
 	oneSwitchLeftDisplayEvent(swPosition)
-	return customDisplayEventProcessing(swValue, 0)
+	performRegularCustomDisplayProcessing()
+	if not(customDisplayActive()) then		
+		return customDisplayEventProcessing(swValue, 0)
+	end	
 end
 
 function custom_right_Display_Event(swPosition)
-	oneSwitchRightDisplayEvent(swPosition)
-	return customDisplayEventProcessing(swValue, 1)
+	oneSwitchLeftDisplayEvent(swPosition)
+	performRegularCustomDisplayProcessing()
+	if not(customDisplayActive()) then		
+		return customDisplayEventProcessing(swValue, 0)
+	end	
 end

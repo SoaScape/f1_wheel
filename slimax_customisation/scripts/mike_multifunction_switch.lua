@@ -3,42 +3,36 @@ require "scripts/one_switch_to_rule_them_all"
 
 --------------------------------------------------
 -- Set These Values To The Buttons You Want To Use
+multiFunctionSwitchId = 3
+
 confirmButton = 14
 upButton = 26
 downButton = 27
 upEncoder = 22
 downEncoder = 21
+setValueSwitchId = 1
+
 overtakeButton = 10
 startFuelLockButton = 3
+myDevice = 3
 --------------------------------------------------
-keystrokeDelay = 200
 selectDelay = 600
 confirmDelay = 1000
 multiSelectDelay = 500
-
-customDisplayActive = false
+encoderIncrement = 10
 customDisplayTicksTimeout = 0
-
-oneSWActivated = true
-displaySwitchId = 2
-settingSwitchId = 1
-
-simrF1DeviceType = 3
 switch = 0
 pushbutton = 1
-multiFunctionSwitch = 3
 buttonReleaseValue = 0
-
 resetMultiFunctionName = "RSET"
-encoderIncrement = 10
-
 currentMultifunction = nil
 overtakeEngaged = false
+customDisplayActive = false
 
-function multiControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
-	if deviceType == simrF1DeviceType then	
+function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
+	if deviceType == myDevice then	
 		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
-		if ctrlType == switch and ctrlPos == multiFunctionSwitch then			
+		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then			
 			currentMultifunction = multifunctionMap[value]
 			
 			if currentMultifunction["upDnSelectable"] then
@@ -104,7 +98,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, tar
 					return 1
 				end
 			
-			elseif currentMultifunction["name"] ~= resetMultiFunctionName and ctrlType == switch and ctrlPos == settingSwitchId and currentMultifunction["upDnSelectable"] then
+			elseif currentMultifunction["name"] ~= resetMultiFunctionName and ctrlType == switch and ctrlPos == setValueSwitchId and currentMultifunction["upDnSelectable"] then
 				upDnValue = value - 1
 				if upDnValue >= currentMultifunction["min"] and upDnValue <= currentMultifunction["max"] then
 					currentMultifunction["currentUpDnMode"] = upDnValue
@@ -122,14 +116,14 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, tar
 					end
 					fuelAtStart = fuelAtStart + inc
 					
-					display("TANK", fuelAtStart, simrF1DeviceType, 500)
+					display("TANK", fuelAtStart, myDevice, 500)
 				elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder then
 					local inc = 1
 					if ctrlPos == downEncoder then
 						inc = encoderIncrement
 					end
 					fuelAtStart = fuelAtStart - inc
-					display("TANK", fuelAtStart, simrF1DeviceType, 500)
+					display("TANK", fuelAtStart, myDevice, 500)
 				elseif ctrlPos == startFuelLockButton then
 					startFuelLocked = not(startFuelLocked)
 					local right
@@ -138,13 +132,8 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, tar
 					else
 						right = "UNLK"
 					end
-					display("TANK", right, simrF1DeviceType, 500)
+					display("TANK", right, myDevice, 500)
 				end
-
-			-- Control both displays with one switch
-			elseif ctrlType == switch and ctrlPos == displaySwitchId and oneSWActivated then			
-				mOneSW_Backup  = value
-				return 1				
 			end
 		end
 	end

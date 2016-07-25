@@ -10,19 +10,10 @@ lowFuelLedPattern = 64
 startFuelStoredLedPattern = 248
 
 function performRegularCustomDisplayProcessing()
-	checkForStartFuel()
-	
+	checkForStartFuel()	
 	-- Calculate fuel target
 	fuelTarget = getFuelTarget()	
-	updateLeds()
-
-	if customDisplayActive then
-		if getTks() > customDisplayTicksTimeout then		
-			customDisplayActive = false
-		end
-		return true
-	end
-	return false
+	updateLeds()	
 end
 
 function getPercentageLapComplete()

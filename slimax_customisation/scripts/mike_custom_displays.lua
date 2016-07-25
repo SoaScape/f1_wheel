@@ -125,3 +125,7 @@ function customDisplayEventProcessing(swValue, side)
 		return 2
 	end	
 end
+
+function performRegularDisplayProcessing()
+	performRegularCustomDisplayProcessing()
+end
