@@ -117,7 +117,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					fuelAtStart = fuelAtStart + inc
 					
 					display("TANK", fuelAtStart, myDevice, 500)
-				elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder fuelAtStart ~= nil then
+				elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil then
 					local inc = 1
 					if ctrlPos == downEncoder then
 						inc = encoderIncrement
