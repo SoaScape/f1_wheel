@@ -1,15 +1,11 @@
 customDisplayActive = false
 customDisplayTicksTimeout = 0
 
-function customDisplayActive()
-	if customDisplayActive ~= nil and customDisplayActive then
-		if getTks() > customDisplayTicksTimeout then		
-			customDisplayActive = false
-		else
-			return true
-		end		
+function customDisplayIsActive()
+	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
+		customDisplayActive = false
 	end
-	return false
+	return customDisplayActive
 end
 
 function display(leftStr, rightStr, deviceType, timeout)

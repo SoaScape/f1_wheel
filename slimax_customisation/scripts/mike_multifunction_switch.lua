@@ -117,6 +117,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					fuelAtStart = fuelAtStart + inc
 					
 					display("TANK", fuelAtStart, myDevice, 500)
+					return 1
 				elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil then
 					local inc = 1
 					if ctrlPos == downEncoder then
@@ -124,6 +125,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					end
 					fuelAtStart = fuelAtStart - inc
 					display("TANK", fuelAtStart, myDevice, 500)
+					return 1
 				elseif ctrlPos == startFuelLockButton then
 					startFuelLocked = not(startFuelLocked)
 					local right
@@ -133,6 +135,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						right = "UNLK"
 					end
 					display("TANK", right, myDevice, 500)
+					return 1
 				end
 			end
 		end

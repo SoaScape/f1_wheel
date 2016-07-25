@@ -9,7 +9,7 @@ minFuel = 8
 lowFuelLedPattern = 64
 startFuelStoredLedPattern = 248
 
-function performRegularCustomDisplayProcessing()
+function performRegularCustomDisplayProcessingImpl()
 	checkForStartFuel()	
 	-- Calculate fuel target
 	fuelTarget = getFuelTarget()	

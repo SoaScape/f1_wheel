@@ -1,5 +1,6 @@
 require "scripts/mike_multifunction_switch"
 require "scripts/mike_custom_displays"
+require "scripts/mike_utils"
 
 multifunctionMap = {}
 keystrokeDelay = 200
@@ -135,7 +136,7 @@ end
 function custom_left_Display_Event(swPosition)
 	oneSwitchLeftDisplayEvent(swPosition)
 	performRegularCustomDisplayProcessing()
-	if not(customDisplayActive()) then		
+	if not(customDisplayIsActive()) then		
 		return customDisplayEventProcessing(swValue, 0)
 	end	
 end
@@ -143,7 +144,7 @@ end
 function custom_right_Display_Event(swPosition)
 	oneSwitchLeftDisplayEvent(swPosition)
 	performRegularCustomDisplayProcessing()
-	if not(customDisplayActive()) then		
+	if not(customDisplayIsActive()) then		
 		return customDisplayEventProcessing(swValue, 0)
 	end	
 end

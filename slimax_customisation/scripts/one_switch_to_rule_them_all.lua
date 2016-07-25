@@ -3,7 +3,9 @@ oneSWActivated = true
 function oneSwitchEvent(deviceType, ctrlType, ctrlPos, value)
 	if ctrlType == 0 and ctrlPos == 2 and oneSWActivated then			
 		mOneSW_Backup  = value
-		return 1				
+		return 1
+	else
+		return 2
 	end
 end
 
