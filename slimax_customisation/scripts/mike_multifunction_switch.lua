@@ -1,6 +1,21 @@
 require "scripts/mike_utils"
 require "scripts/one_switch_to_rule_them_all"
 
+--------------------------------------------------
+-- Set These Values To The Buttons You Want To Use
+confirmButton = 14
+upButton = 26
+downButton = 27
+upEncoder = 22
+downEncoder = 21
+overtakeButton = 10
+startFuelLockButton = 3
+--------------------------------------------------
+keystrokeDelay = 200
+selectDelay = 600
+confirmDelay = 1000
+multiSelectDelay = 500
+
 customDisplayActive = false
 customDisplayTicksTimeout = 0
 
@@ -12,314 +27,125 @@ simrF1DeviceType = 3
 switch = 0
 pushbutton = 1
 multiFunctionSwitch = 3
-
-confirmButton = 14
-upButton = 26
-downButton = 27
-upEncoder = 22
-downEncoder = 21
 buttonReleaseValue = 0
-overtakeButton = 10
-startFuelLockButton = 3
 
-keystrokeDelay = 200
-selectDelay = 600
-confirmDelay = 1000
-multiSelectDelay = 500
-
-resetMultiFunction = "RSET"
-multiFunction = resetMultiFunction
+resetMultiFunctionName = "RSET"
 encoderIncrement = 10
 
-upDnModeButtonMap = {}
-upDnModeSelected = false
-upDnConfirmRequied = false
-upDnModes = {}
-minUpDnMode = 0
-maxUpDnMode = 2
-currentUpDnMode = {} -- use array / table for this to pass by ref (so we don't lose mode when changing multifunctions)
-
-currentFuelMode = {}
-minFuelMode = 0
-maxFuelMode = 2
-fuelModes = {}
-fuelModes[0] = "LEAN"
-fuelModes[1] = "NORM"
-fuelModes[2] = "RICH"
-fuelModeButtonMap = {}
-fuelModeButtonMap[0] = {}
-fuelModeButtonMap[1] = {}
-fuelModeButtonMap[2] = {}
-fuelModeButtonMap[0][0] = "NUMPAD8"
-fuelModeButtonMap[0][1] = "NUMPAD8"
-fuelModeButtonMap[0][2] = "NUMPAD2"
-fuelModeButtonMap[1][0] = "NUMPAD8"
-fuelModeButtonMap[1][1] = "NUMPAD8"
-fuelModeButtonMap[1][2] = "NUMPAD6"
-fuelModeButtonMap[2][0] = "NUMPAD8"
-fuelModeButtonMap[2][1] = "NUMPAD8"
-fuelModeButtonMap[2][2] = "NUMPAD8"
-
-currentWingMode = {}
-minWingMode = 0
-maxWingMode = 2
-wingModes = {}
-wingModes[0] = "DOWN"
-wingModes[1] = "MIDL"
-wingModes[2] = " UP "
-wingModeButtonMap = {}
-wingModeButtonMap[0] = {}
-wingModeButtonMap[1] = {}
-wingModeButtonMap[2] = {}
-wingModeButtonMap[0][0] = "NUMPAD4"
-wingModeButtonMap[0][1] = "NUMPAD4"
-wingModeButtonMap[0][2] = "NUMPAD2"
-wingModeButtonMap[1][0] = "NUMPAD4"
-wingModeButtonMap[1][1] = "NUMPAD4"
-wingModeButtonMap[1][2] = "NUMPAD6"
-wingModeButtonMap[2][0] = "NUMPAD4"
-wingModeButtonMap[2][1] = "NUMPAD4"
-wingModeButtonMap[2][2] = "NUMPAD8"
-
-currentBiasMode = {}
-minBiasMode = 0
-maxBiasMode = 2
-biasModes = {}
-biasModes[0] = "BACK"
-biasModes[1] = "MIDL"
-biasModes[2] = "FORW"
-biasModeButtonMap = {}
-biasModeButtonMap[0] = {}
-biasModeButtonMap[1] = {}
-biasModeButtonMap[2] = {}
-biasModeButtonMap[0][0] = "NUMPAD2"
-biasModeButtonMap[0][1] = "NUMPAD2"
-biasModeButtonMap[0][2] = "NUMPAD2"
-biasModeButtonMap[1][0] = "NUMPAD2"
-biasModeButtonMap[1][1] = "NUMPAD2"
-biasModeButtonMap[1][2] = "NUMPAD6"
-biasModeButtonMap[2][0] = "NUMPAD2"
-biasModeButtonMap[2][1] = "NUMPAD2"
-biasModeButtonMap[2][2] = "NUMPAD8"
-
-wets = "WETS"
-inters = "INTR"
-primes = "PRIM"
-options = "OPTN"
-ultras = "ULTR"
-wetTyreMode = 0
-interTyreMode = 1
-primeTyreMode = 2
-optionTyreMode = 3
-
-currentTyreMode = {}
-minTyreMode = 0
-maxTyreMode = 3
-tyreModes = {}
-tyreModes[wetTyreMode] = wets
-tyreModes[interTyreMode] = inters
-tyreModes[primeTyreMode] = primes
-tyreModes[optionTyreMode] = options
-
-tyreTypeButtonMap = {}
-tyreTypeButtonMap[wetTyreMode] = {}
-tyreTypeButtonMap[interTyreMode] = {}
-tyreTypeButtonMap[primeTyreMode] = {}
-tyreTypeButtonMap[optionTyreMode] = {}
-tyreTypeButtonMap[optionTyreMode][0] = "NUMPAD6"
-tyreTypeButtonMap[optionTyreMode][1] = "NUMPAD6"
-tyreTypeButtonMap[optionTyreMode][2] = "NUMPAD8"
-tyreTypeButtonMap[primeTyreMode][0] = "NUMPAD6"
-tyreTypeButtonMap[primeTyreMode][1] = "NUMPAD6"
-tyreTypeButtonMap[primeTyreMode][2] = "NUMPAD6"
-tyreTypeButtonMap[interTyreMode][0] = "NUMPAD6"
-tyreTypeButtonMap[interTyreMode][1] = "NUMPAD6"
-tyreTypeButtonMap[interTyreMode][2] = "NUMPAD2"
-tyreTypeButtonMap[wetTyreMode][0] = "NUMPAD6"
-tyreTypeButtonMap[wetTyreMode][1] = "NUMPAD6"
-tyreTypeButtonMap[wetTyreMode][2] = "NUMPAD4"
-
-currentFuelMode[0] = 1
-currentWingMode[0] = 1
-currentBiasMode[0] = 1
-currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
+currentMultifunction = nil
 overtakeEngaged = false
 
-function f1ControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
+function multiControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	if deviceType == simrF1DeviceType then	
 		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
-		if ctrlType == switch and ctrlPos == multiFunctionSwitch then
-			confirmFunctionKeys = {}
-			upFunctionKeys = {}
-			downFunctionKeys = {}			
-			multiFunction = nil
-			multiFunctionConfirmValue = nil			
-			leftDisplay = "MULT"
-			rightDisplay = nul			
-			upDnModeSelected = false
-			upDnConfirmRequied = false
+		if ctrlType == switch and ctrlPos == multiFunctionSwitch then			
+			currentMultifunction = multifunctionMap[value]
 			
-			if value == 1 then
-				upDnModeSelected = true
-				upDnConfirmRequied = true
-				multiFunction = "FUEL"
-				rightDisplay = "FUEL"				
-				upDnModeButtonMap = fuelModeButtonMap
-				upDnModes = fuelModes
-				minUpDnMode = minFuelMode
-				maxUpDnMode = maxFuelMode
-				currentUpDnMode = currentFuelMode
-			elseif value == 2 then
-				upDnModeSelected = true
-				upDnConfirmRequied = true
-				multiFunction = "TYRE"
-				rightDisplay = "TYRE"				
-				upDnModeButtonMap = tyreTypeButtonMap
-				upDnModes = tyreModes
-				minUpDnMode = minTyreMode
-				maxUpDnMode = maxTyreMode
-				currentUpDnMode = currentTyreMode
-			elseif value == 3 then
-				upDnModeSelected = true
-				upDnConfirmRequied = true
-				multiFunction = "BIAS"
-				rightDisplay = "BIAS"				
-				upDnModeButtonMap = biasModeButtonMap
-				upDnModes = biasModes
-				minUpDnMode = minBiasMode
-				maxUpDnMode = maxBiasMode
-				currentUpDnMode = currentBiasMode
-			elseif value == 4 then
-				upDnModeSelected = true
-				upDnConfirmRequied = true
-				multiFunction = "WING"
-				rightDisplay = "WING"				
-				upDnModeButtonMap = wingModeButtonMap
-				upDnModes = wingModes
-				minUpDnMode = minWingMode
-				maxUpDnMode = maxWingMode
-				currentUpDnMode = currentWingMode
-			elseif value == 5 then
-				rightDisplay = " DX  "
-			elseif value == 6 then
-				rightDisplay = " L  "
-			elseif value == 7 then
-				rightDisplay = " D  "
-			elseif value == 8 then
-				rightDisplay = wets
-			elseif value == 9 then
-				rightDisplay = inters
-			elseif value == 10 then
-				rightDisplay = primes
-			elseif value == 11 then
-				rightDisplay = options
-			elseif value == 12 then
-				rightDisplay = resetMultiFunction
-				multiFunction = resetMultiFunction
-			end
-			
-			if upDnModeSelected then
-				display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, multiSelectDelay)
+			if currentMultifunction["upDnSelectable"] then
+				display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
 			else
-				display(leftDisplay, rightDisplay, deviceType, multiSelectDelay)
+				display("MULT", currentMultifunction["name"], deviceType, multiSelectDelay)
 			end
 			return 1
 		
-		elseif ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and multiFunction ~= resetMultiFunction then
-			if overtakeEngaged then
-				overtakeEngaged = false				
-				confirmSelection("OVTK", " END", deviceType, fuelModeButtonMap[currentFuelMode[0]])
-			else
-				overtakeEngaged = true
-				confirmSelection("OVER", "TAKE", deviceType, fuelModeButtonMap[maxFuelMode])
-			end		
-		elseif ctrlType == pushbutton and value == buttonReleaseValue and multiFunction ~= resetMultiFunction then
-			-- MULTIFUNCTION UP/DOWN
-			if upDnModeSelected then
-				if ctrlPos == upButton or ctrlPos == upEncoder then
-					if currentUpDnMode[0] < maxUpDnMode then
-						currentUpDnMode[0] = currentUpDnMode[0] + 1
-						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
-						else
-							confirmSelection(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, upDnModeButtonMap[currentUpDnMode[0]])
-						end
-					else
-						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
-						else
-							confirmSelection(multiFunction, "MAX ", deviceType, upDnModeButtonMap[currentUpDnMode[0]])
-						end
-					end
-					return 1
-				elseif ctrlPos == downButton or ctrlPos == downEncoder then
-					if currentUpDnMode[0] > minUpDnMode then
-						currentUpDnMode[0] = currentUpDnMode[0] - 1
-						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
-						else
-							confirmSelection(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, upDnModeButtonMap[currentUpDnMode[0]])
-						end
-					else
-						if upDnConfirmRequied then
-							display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
-						else
-							confirmSelection(multiFunction, "MIN ", deviceType, upDnModeButtonMap[currentUpDnMode[0]])							
-						end
-					end
-					return 1				
-				elseif ctrlPos == confirmButton then
-					confirmSelection("CONF", upDnModes[currentUpDnMode[0]], deviceType, upDnModeButtonMap[currentUpDnMode[0]])
-					return 1
-				end
-			
-			-- Multifunction Single Confirm (For non Up-Dn Modes)
-			elseif ctrlPos == confirmButton and multiFunctionConfirmValue ~= nil then		
-				confirmSelection(multiFunction, multiFunctionConfirmValue, deviceType, buttonMap, confirmFunctionKeys)				
-				return 1
-			end
-
-		elseif multiFunction == resetMultiFunction and value == buttonReleaseValue then
-			if ctrlPos == confirmButton then
-				setDefaultModes()
-			elseif startFuelLocked and ctrlPos == upButton or ctrlPos == upEncoder then
-				local inc = 1
-				if ctrlPos == upEncoder then
-					inc = encoderIncrement
-				end
-				fuelAtStart = fuelAtStart + inc
-				
-				display("TANK", fuelAtStart, simrF1DeviceType, 500)
-			elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder then
-				local inc = 1
-				if ctrlPos == downEncoder then
-					inc = encoderIncrement
-				end
-				fuelAtStart = fuelAtStart - inc
-				display("TANK", fuelAtStart, simrF1DeviceType, 500)
-			elseif ctrlPos == startFuelLockButton then
-				startFuelLocked = not(startFuelLocked)
-				local right
-				if startFuelLocked then
-					right = "LOCK"
+		elseif currentMultifunction ~= nil then
+			-- Overtake Button
+			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
+				if overtakeEngaged then
+					overtakeEngaged = false
+					confirmSelection("OVTK", " END", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["currentUpDnMode"]])
 				else
-					right = "UNLK"
+					overtakeEngaged = true
+					confirmSelection("OVER", "TAKE", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["max"]])
+				end					
+			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then			
+				-- Multifunction Up/Dn
+				if currentMultifunction["upDnSelectable"] then
+					if ctrlPos == upButton or ctrlPos == upEncoder then
+						if currentMultifunction["currentUpDnMode"] < currentMultifunction["max"] then
+							currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] + 1
+							if currentMultifunction["upDnConfirmRequired"] then
+								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
+							else
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+							end
+						else
+							if currentMultifunction["upDnConfirmRequired"] then
+								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
+							else
+								confirmSelection(currentMultifunction["name"], "MAX ", deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+							end
+						end
+						return 1
+					elseif ctrlPos == downButton or ctrlPos == downEncoder then
+						if currentMultifunction["currentUpDnMode"] > currentMultifunction["min"] then
+							currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] - 1
+							if currentMultifunction["upDnConfirmRequired"] then
+								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
+							else
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+							end
+						else
+							if currentMultifunction["upDnConfirmRequired"] then
+								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
+							else
+								confirmSelection(currentMultifunction["name"], "MIN ", deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+							end
+						end
+						return 1			
+					elseif ctrlPos == confirmButton then
+						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+						return 1
+					end
+				
+				-- Multifunction Single Confirm (For non Up-Dn Modes)
+				elseif ctrlPos == confirmButton then		
+					confirmSelection(currentMultifunction["name"], "CONF", deviceType, currentMultifunction["buttonMap"][0], confirmFunctionKeys)				
+					return 1
 				end
-				display("TANK", right, simrF1DeviceType, 500)
-			end
-		
-		elseif ctrlType == switch and ctrlPos == settingSwitchId and upDnModeSelected then
-			upDnValue = value - 1
-			if upDnValue >= minUpDnMode and upDnValue <= maxUpDnMode then
-				currentUpDnMode[0] = upDnValue
-				display(multiFunction, upDnModes[currentUpDnMode[0]], deviceType, selectDelay)
-			end
-			return 1
+			
+			elseif currentMultifunction["name"] ~= resetMultiFunctionName and ctrlType == switch and ctrlPos == settingSwitchId and currentMultifunction["upDnSelectable"] then
+				upDnValue = value - 1
+				if upDnValue >= currentMultifunction["min"] and upDnValue <= currentMultifunction["max"] then
+					currentMultifunction["currentUpDnMode"] = upDnValue
+					display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
+				end
+				return 1
 
-		-- Control both displays with one switch
-		elseif ctrlType == switch and ctrlPos == displaySwitchId and oneSWActivated then			
-			mOneSW_Backup  = value
-			return 1				
+			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
+				if ctrlPos == confirmButton then
+					setDefaultModes()
+				elseif startFuelLocked and ctrlPos == upButton or ctrlPos == upEncoder then
+					local inc = 1
+					if ctrlPos == upEncoder then
+						inc = encoderIncrement
+					end
+					fuelAtStart = fuelAtStart + inc
+					
+					display("TANK", fuelAtStart, simrF1DeviceType, 500)
+				elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder then
+					local inc = 1
+					if ctrlPos == downEncoder then
+						inc = encoderIncrement
+					end
+					fuelAtStart = fuelAtStart - inc
+					display("TANK", fuelAtStart, simrF1DeviceType, 500)
+				elseif ctrlPos == startFuelLockButton then
+					startFuelLocked = not(startFuelLocked)
+					local right
+					if startFuelLocked then
+						right = "LOCK"
+					else
+						right = "UNLK"
+					end
+					display("TANK", right, simrF1DeviceType, 500)
+				end
+
+			-- Control both displays with one switch
+			elseif ctrlType == switch and ctrlPos == displaySwitchId and oneSWActivated then			
+				mOneSW_Backup  = value
+				return 1				
+			end
 		end
 	end
 	
