@@ -151,11 +151,10 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 	setDisplayTimeout(confirmDelay)
 end
 
-function setDefaultModes()
-	currentFuelMode[0] = 1
-	currentWingMode[0] = 1
-	currentBiasMode[0] = 1
-	currentTyreMode[0] = primeTyreMode -- default to primes ready for selection
+function setDefaultModes()	
+	for key, value in pairs(multifunctionMap) do
+		value["currentUpDnMode"] = value["defaultUpDnMode"]
+	end	
 	overtakeEngaged = false
 	resetStartFuel = true
 end
