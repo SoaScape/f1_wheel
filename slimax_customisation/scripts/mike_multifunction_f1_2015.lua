@@ -29,7 +29,7 @@ multiSelectDelay = 500
 
 resetMultiFunction = "RSET"
 multiFunction = resetMultiFunction
-fuelIncrement = 10
+encoderIncrement = 10
 
 upDnModeButtonMap = {}
 upDnModeSelected = false
@@ -283,10 +283,19 @@ function f1ControlsEvent(deviceType, ctrlType, ctrlPos, value, funcIndex, target
 			if ctrlPos == confirmButton then
 				setDefaultModes()
 			elseif startFuelLocked and ctrlPos == upButton or ctrlPos == upEncoder then
-				fuelAtStart = fuelAtStart + fuelIncrement
+				local inc = 1
+				if ctrlPos == upEncoder then
+					inc = encoderIncrement
+				end
+				fuelAtStart = fuelAtStart + inc
+				
 				display("TANK", fuelAtStart, simrF1DeviceType, 500)
 			elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder then
-				fuelAtStart = fuelAtStart - fuelIncrement
+				local inc = 1
+				if ctrlPos == downEncoder then
+					inc = encoderIncrement
+				end
+				fuelAtStart = fuelAtStart - inc
 				display("TANK", fuelAtStart, simrF1DeviceType, 500)
 			elseif ctrlPos == startFuelLockButton then
 				startFuelLocked = not(startFuelLocked)
