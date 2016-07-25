@@ -134,17 +134,24 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 end
 
 function custom_left_Display_Event(swPosition)
-	oneSwitchLeftDisplayEvent(swPosition)
-	performRegularCustomDisplayProcessing()
-	if not(customDisplayIsActive()) then		
-		return customDisplayEventProcessing(swValue, 0)
-	end	
+	return dispEvent(0, swPosition)
 end
 
 function custom_right_Display_Event(swPosition)
-	oneSwitchLeftDisplayEvent(swPosition)
+	return dispEvent(1, swPosition)
+end
+
+function dispEvent(side, swPosition)
 	performRegularCustomDisplayProcessing()
+	
+	local oneSwVal = oneSwitchDisplayEvent(side, swPosition)	
 	if not(customDisplayIsActive()) then		
-		return customDisplayEventProcessing(swValue, 0)
-	end	
+		local custDisplayVal = customDisplayEventProcessing(swValue, side)
+	end
+
+	if oneSwVal < custDisplayVal then
+		return oneSwVal
+	else
+		return custDisplayVal
+	end
 end

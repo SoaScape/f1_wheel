@@ -31,7 +31,7 @@ customDisplayActive = false
 
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	if deviceType == myDevice then	
-		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
+		print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then			
 			currentMultifunction = multifunctionMap[value]
 			

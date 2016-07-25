@@ -9,6 +9,14 @@ function oneSwitchEvent(deviceType, ctrlType, ctrlPos, value)
 	end
 end
 
+function oneSwitchDisplayEvent(side, swPosition)
+	if side == 0 then
+		return oneSwitchLeftDisplayEvent(swPosition)
+	else
+		return oneSwitchRightDisplayEvent(swPosition)
+	end
+end
+
 function oneSwitchLeftDisplayEvent(swPosition)
 	-- type your custom script related to left digits panel here
 	
