@@ -3,9 +3,7 @@ require "scripts/mike_custom_displays_logic"
 require "scripts/mike_utils"
 
 function customDisplayEventProcessing(swValue, side)
-	if performRegularCustomDisplayProcessing() then
-		return 1
-	end
+	performRegularCustomDisplayProcessing()
 	
 	local sliPanel = ""
 	local customFunction = false
@@ -118,14 +116,10 @@ function customDisplayEventProcessing(swValue, side)
 		customFunction = false
 	end
 	
-	if customFunction and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if customFunction and not(m_is_sim_idle) then
 		commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side)
 		return 1
 	else
 		return 2
 	end	
-end
-
-function performRegularCustomDisplayProcessing()
-	performRegularCustomDisplayProcessingImpl()
 end

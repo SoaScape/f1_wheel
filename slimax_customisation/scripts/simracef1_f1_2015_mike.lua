@@ -145,7 +145,7 @@ end
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	local mult = multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
-	local oneSw = oneSwitchEvent(deviceType, ctrlType, ctrlPos, value)
+	local oneSw = oneSwitchEvent(ctrlType, ctrlPos, value)
 	if mult < oneSw then
 		return mult
 	else
@@ -162,17 +162,11 @@ function custom_right_Display_Event(swPosition)
 end
 
 function dispEvent(side, swPosition)
-	performRegularCustomDisplayProcessing()
+	oneSwitchDisplayEvent(side, swPosition)
 	
-	local oneSwVal = oneSwitchDisplayEvent(side, swPosition)
-	local custDisplayVal = 2
 	if not(customDisplayIsActive()) then		
-		custDisplayVal = customDisplayEventProcessing(swValue, side)
-	end
-
-	if oneSwVal < custDisplayVal then
-		return oneSwVal
+		return customDisplayEventProcessing(swValue, side)
 	else
-		return custDisplayVal
+		return 1
 	end
 end

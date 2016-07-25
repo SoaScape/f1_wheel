@@ -1,12 +1,11 @@
 oneSWActivated = true
 
-function oneSwitchEvent(deviceType, ctrlType, ctrlPos, value)
+function oneSwitchEvent(ctrlType, ctrlPos, value)
 	if ctrlType == 0 and ctrlPos == 2 and oneSWActivated then			
 		mOneSW_Backup  = value
 		return 1
-	else
-		return 2
 	end
+	return 2
 end
 
 function oneSwitchDisplayEvent(side, swPosition)
@@ -44,8 +43,7 @@ function oneSwitchRightDisplayEvent(swPosition)
 		if pos == nil or pos < 0 then pos = 0 end
 		swValue = GetDisplayFunctionIndex("right", pos )
 		swValue = swValue + 1
-		if swValue == nil or swValue < 0 then swValue = 0 end
-	
+		if swValue == nil or swValue < 0 then swValue = 0 end	
 	else
 		if mOneSW_Backup == 1 then
 			swValue = 9
