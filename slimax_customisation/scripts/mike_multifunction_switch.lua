@@ -18,7 +18,10 @@ startFuelLockButton = 3
 selectDelay = 600
 confirmDelay = 1000
 multiSelectDelay = 500
-encoderIncrement = 10
+kiloDivider = 0.750
+encoderIncrement
+fuelEncoderIncrement = (10 / (kiloDivider * 10)) * encoderIncrement
+fuelButtonIncrement = (10 / (kiloDivider * 10))
 customDisplayTicksTimeout = 0
 switch = 0
 pushbutton = 1
@@ -109,18 +112,18 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				if ctrlPos == confirmButton then
 					setDefaultModes()
 				elseif startFuelLocked and (ctrlPos == upButton or ctrlPos == upEncoder and fuelAtStart ~= nil) then
-					local inc = 1
+					local inc = fuelButtonIncrement
 					if ctrlPos == upEncoder then
-						inc = encoderIncrement
+						inc = fuelEncoderIncrement
 					end
 					fuelAtStart = fuelAtStart + inc
 					
 					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)
 					return 1
 				elseif startFuelLocked and (ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil) then
-					local inc = 1
+					local inc = fuelButtonIncrement
 					if ctrlPos == downEncoder then
-						inc = encoderIncrement
+						inc = fuelEncoderIncrement
 					end
 					fuelAtStart = fuelAtStart - inc
 					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)
