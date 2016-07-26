@@ -14,7 +14,6 @@ setValueSwitchId = 1
 
 overtakeButton = 10
 startFuelLockButton = 3
-myDevice = 3
 --------------------------------------------------
 selectDelay = 600
 confirmDelay = 1000
@@ -116,7 +115,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					end
 					fuelAtStart = fuelAtStart + inc
 					
-					display("TANK", fuelAtStart, myDevice, 500)
+					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)
 					return 1
 				elseif startFuelLocked and (ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil) then
 					local inc = 1
@@ -124,7 +123,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						inc = encoderIncrement
 					end
 					fuelAtStart = fuelAtStart - inc
-					display("TANK", fuelAtStart, myDevice, 500)
+					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)
 					return 1
 				elseif ctrlPos == startFuelLockButton then
 					startFuelLocked = not(startFuelLocked)

@@ -96,7 +96,7 @@ function checkForStartFuel()
 		mSessionEnter == 1 and not(m_is_sim_idle) and
 			startFuel ~= nil and startFuel > 0 then
 		fuelAtStart = startFuel
-		display("TANK", fuelAtStart, simrF1DeviceType, 500)		
+		display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)		
 		activatePermanentLed(startFuelStoredLedPattern, 500)
 		resetStartFuel = false
 	end
