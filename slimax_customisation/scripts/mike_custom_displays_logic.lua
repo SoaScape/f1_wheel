@@ -12,8 +12,7 @@ startFuelStoredLedPattern = 248
 function performRegularCustomDisplayProcessing()
 	checkForStartFuel()	
 	-- Calculate fuel target
-	fuelTarget = getFuelTarget()	
-	updateLeds()	
+	fuelTarget = getFuelTarget()
 end
 
 function getPercentageLapComplete()
