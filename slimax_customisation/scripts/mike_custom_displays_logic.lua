@@ -5,7 +5,7 @@ require "scripts/mike_utils"
 fuelAtStart = -1
 resetStartFuel = true
 startFuelLocked = false
-minFuel = 8
+minFuel = 10
 lowFuelLedPattern = 64
 startFuelStoredLedPattern = 248
 
