@@ -2,7 +2,7 @@ require "scripts/mike_led_utils"
 require "scripts/mike_utils"
 
 -- MIKE CUSTOM FUNCTIONS
-fuelAtStart = -1
+fuelAtStart = 0
 resetStartFuel = true
 startFuelLocked = false
 minFuel = 10

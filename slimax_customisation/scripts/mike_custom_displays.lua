@@ -49,7 +49,7 @@ function customDisplayEventProcessing(swValue, side)
 	elseif swValue == 195 then
 		-- Mike custom: total fuel in tank at start(doesn't reset with flashback in F1)
 		customFunction = true		
-		if fuelAtStart ~= nil then 
+		if fuelAtStart ~= nil and fuelAtStart > 0 then 
 			local ft = GetFuelKilogram(fuelAtStart)
 			if devName == "SLI-PRO" then
 				if ft >= 100 then
