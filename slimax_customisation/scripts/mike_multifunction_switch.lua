@@ -19,7 +19,7 @@ selectDelay = 600
 confirmDelay = 1000
 multiSelectDelay = 500
 kiloDivider = 0.750
-encoderIncrement
+encoderIncrement = 10
 fuelEncoderIncrement = (10 / (kiloDivider * 10)) * encoderIncrement
 fuelButtonIncrement = (10 / (kiloDivider * 10))
 customDisplayTicksTimeout = 0
