@@ -109,7 +109,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
 				if ctrlPos == confirmButton then
 					setDefaultModes()
-				elseif startFuelLocked and ctrlPos == upButton or ctrlPos == upEncoder and fuelAtStart ~= nil then
+				elseif startFuelLocked and (ctrlPos == upButton or ctrlPos == upEncoder and fuelAtStart ~= nil) then
 					local inc = 1
 					if ctrlPos == upEncoder then
 						inc = encoderIncrement
@@ -118,7 +118,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					
 					display("TANK", fuelAtStart, myDevice, 500)
 					return 1
-				elseif startFuelLocked and ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil then
+				elseif startFuelLocked and (ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil) then
 					local inc = 1
 					if ctrlPos == downEncoder then
 						inc = encoderIncrement
