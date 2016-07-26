@@ -1,3 +1,4 @@
+myDevice = 3 -- 3 = SIMR-F1
 customDisplayActive = false
 customDisplayTicksTimeout = 0
 
