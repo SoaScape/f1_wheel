@@ -1,4 +1,7 @@
 myDevice = 3 -- 3 = SIMR-F1
+switch = 0
+pushbutton = 1
+buttonReleaseValue = 0
 customDisplayActive = false
 customDisplayTicksTimeout = 0
 

@@ -1,8 +1,9 @@
+oneSwCtrlPos = 2
 oneSWActivated = true
 mOneSW_Backup = 0
 
 function oneSwitchControlEvent(ctrlType, ctrlPos, value)
-	if ctrlType == 0 and ctrlPos == 2 and oneSWActivated then			
+	if ctrlType == switch and ctrlPos == oneSwCtrlPos and oneSWActivated then			
 		mOneSW_Backup = value
 		return 1
 	end
