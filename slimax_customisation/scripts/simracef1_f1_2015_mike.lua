@@ -137,6 +137,7 @@ multifunctionMap[12]["enabled"] = true
 
 -- Used by the overtake button
 fuelMultiFunctionMapIndex = 1
+overtakeButtonEnabled = true
 
 function custom_init_Event(scriptfile)	
 end

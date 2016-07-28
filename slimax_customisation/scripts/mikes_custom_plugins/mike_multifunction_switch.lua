@@ -43,13 +43,15 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
 			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
-				if overtakeEngaged then
-					overtakeEngaged = false
-					confirmSelection("OVTK", " END", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["currentUpDnMode"]])
-				else
-					overtakeEngaged = true
-					confirmSelection("OVER", "TAKE", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["max"]])
-				end					
+				if overtakeButtonEnabled then
+					if overtakeEngaged then
+						overtakeEngaged = false
+						confirmSelection("OVTK", " END", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["currentUpDnMode"]])
+					else
+						overtakeEngaged = true
+						confirmSelection("OVER", "TAKE", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["max"]])
+					end
+				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then			
 				-- Multifunction Up/Dn
 				if currentMultifunction["upDnSelectable"] then
