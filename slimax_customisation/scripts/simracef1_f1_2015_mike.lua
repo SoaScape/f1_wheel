@@ -1,4 +1,4 @@
-require "scripts/mike_all_custom_plugins"
+require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
 multifunctionMap = {}
 keystrokeDelay = 200

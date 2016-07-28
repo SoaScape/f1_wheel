@@ -1,4 +1,4 @@
-require "scripts/mike_utils"
+require "scripts/mikes_custom_plugins/mike_utils"
 
 -- This file houses non-changed code from original SliMaxManager scripts
 -- =====================================================================

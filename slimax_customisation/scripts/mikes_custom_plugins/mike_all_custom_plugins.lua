@@ -1,6 +1,7 @@
-require "scripts/mike_multifunction_switch"
-require "scripts/mike_custom_displays"
-require "scripts/mike_utils"
+require "scripts/mikes_custom_plugins/mike_multifunction_switch"
+require "scripts/mikes_custom_plugins/mike_custom_displays"
+require "scripts/mikes_custom_plugins/mike_utils"
+require "scripts/mikes_custom_plugins/mike_one_switch"
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	local mult = multiControlsEvent(deviceType, ctrlType, ctrlPos, value)

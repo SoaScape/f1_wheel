@@ -1,6 +1,6 @@
-require "scripts/mike_common"
-require "scripts/mike_custom_displays_logic"
-require "scripts/mike_utils"
+require "scripts/mikes_custom_plugins/mike_common"
+require "scripts/mikes_custom_plugins/mike_custom_displays_logic"
+require "scripts/mikes_custom_plugins/mike_utils"
 
 function customDisplayEventProcessing(swValue, side)
 	performRegularCustomDisplayProcessing()

@@ -1,5 +1,4 @@
-require "scripts/mike_utils"
-require "scripts/one_switch_to_rule_them_all"
+require "scripts/mikes_custom_plugins/mike_utils"
 
 --------------------------------------------------
 -- Set These Values To The Buttons You Want To Use
