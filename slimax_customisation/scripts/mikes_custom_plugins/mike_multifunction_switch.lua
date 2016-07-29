@@ -94,7 +94,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
 				elseif ctrlPos == confirmButton then		
-					confirmSelection(currentMultifunction["name"], "CONF", deviceType, currentMultifunction["buttonMap"][0], confirmFunctionKeys)				
+					confirmSelection(currentMultifunction["name"], "CONF", deviceType, currentMultifunction["confirmButtonMap"])				
 					return 1
 				end
 			
