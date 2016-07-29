@@ -6,7 +6,6 @@ customDisplayActive = false
 customDisplayTicksTimeout = 0
 
 function customDisplayIsActive()
-	updateLeds()
 	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
 		customDisplayActive = false
 	end

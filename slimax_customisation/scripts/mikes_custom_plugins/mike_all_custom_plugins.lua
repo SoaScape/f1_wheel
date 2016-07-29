@@ -23,6 +23,7 @@ function custom_right_Display_Event(swPosition)
 end
 
 function dispEvent(side, swPosition)
+	updateLeds()
 	if not(customDisplayIsActive()) then		
 		return customDisplayEventProcessing(swValue, side)
 	else
