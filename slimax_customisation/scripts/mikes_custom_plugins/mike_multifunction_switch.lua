@@ -170,6 +170,7 @@ function setDefaultModes()
 		else
 			value["currentUpDnMode"] = nil
 		end
+		value["currentPosition"] = nil
 	end	
 	overtakeEngaged = false
 	resetStartFuel = true

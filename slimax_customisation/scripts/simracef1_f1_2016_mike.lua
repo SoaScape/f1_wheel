@@ -14,7 +14,8 @@ multifunctionMap[1]["name"] = "FUEL"
 multifunctionMap[1]["enabled"] = true
 multifunctionMap[1]["upDnSelectable"] = true
 multifunctionMap[1]["upDnConfirmRequired"] = true
-multifunctionMap[1]["currentUpDnMode"] = nil
+multifunctionMap[1]["defaultUpDnMode"] = 1
+multifunctionMap[1]["currentUpDnMode"] = multifunctionMap[1]["defaultUpDnMode"]
 multifunctionMap[1]["min"] = 0
 multifunctionMap[1]["max"] = 2
 multifunctionMap[1]["modes"] = {}
@@ -41,7 +42,8 @@ multifunctionMap[2]["name"] = "TYRE"
 multifunctionMap[2]["enabled"] = true
 multifunctionMap[2]["upDnSelectable"] = true
 multifunctionMap[2]["upDnConfirmRequired"] = true
-multifunctionMap[2]["currentUpDnMode"] = nil
+multifunctionMap[2]["defaultUpDnMode"] = 2
+multifunctionMap[2]["currentUpDnMode"] = multifunctionMap[2]["defaultUpDnMode"]
 multifunctionMap[2]["min"] = 0
 multifunctionMap[2]["max"] = 3
 multifunctionMap[2]["modes"] = {}
@@ -72,7 +74,8 @@ multifunctionMap[3]["name"] = "WING"
 multifunctionMap[3]["enabled"] = true
 multifunctionMap[3]["upDnSelectable"] = true
 multifunctionMap[3]["upDnConfirmRequired"] = true
-multifunctionMap[3]["currentUpDnMode"] = nil
+multifunctionMap[3]["defaultUpDnMode"] = 1
+multifunctionMap[3]["currentUpDnMode"] = multifunctionMap[3]["defaultUpDnMode"]
 multifunctionMap[3]["min"] = 0
 multifunctionMap[3]["max"] = 2
 multifunctionMap[3]["modes"] = {}
@@ -98,7 +101,8 @@ multifunctionMap[4]["name"] = "BIAS"
 multifunctionMap[4]["enabled"] = true
 multifunctionMap[4]["upDnSelectable"] = true
 multifunctionMap[4]["upDnConfirmRequired"] = true
-multifunctionMap[4]["currentUpDnMode"] = nil
+multifunctionMap[4]["defaultUpDnMode"] = 1
+multifunctionMap[4]["currentUpDnMode"] = multifunctionMap[4]["defaultUpDnMode"]
 multifunctionMap[4]["min"] = 0
 multifunctionMap[4]["max"] = 2
 multifunctionMap[4]["modes"] = {}
@@ -120,7 +124,19 @@ multifunctionMap[4]["buttonMap"][2][1] = quickMenuDn
 multifunctionMap[4]["buttonMap"][2][2] = quickMenuUp
 
 multifunctionMap[5] = {}
-multifunctionMap[5]["name"] = "DX"
+multifunctionMap[5]["name"] = "DIFF"
+multifunctionMap[5]["enabled"] = true
+multifunctionMap[5]["upDnSelectable"] = true
+multifunctionMap[5]["upDnConfirmRequired"] = true
+multifunctionMap[5]["defaultUpDnMode"] = 5
+multifunctionMap[5]["currentUpDnMode"] = multifunctionMap[5]["defaultUpDnMode"]
+multifunctionMap[5]["currentPosition"] = nil
+multifunctionMap[5]["min"] = 1
+multifunctionMap[5]["max"] = 10
+multifunctionMap[5]["percentageButtonMap"] = {}
+multifunctionMap[5]["percentageButtonMap"][0] = quickMenuToggleButton
+multifunctionMap[5]["percentageButtonMap"][1] = quickMenuDn
+
 multifunctionMap[6] = {}
 multifunctionMap[6]["name"] = "L"
 multifunctionMap[7] = {}
@@ -141,6 +157,45 @@ multifunctionMap[12]["enabled"] = true
 -- Used by the overtake button
 fuelMultiFunctionMapIndex = 1
 overtakeButtonEnabled = true
+
+function getButtonMap(currentMultifunction)
+	if currentMultifunction[percentageButtonMap] ~= nil then
+		next = 0
+		buttonMap = {}
+		
+		-- Open the quick menu and goto the chosen multifunction
+		for key, value in pairs(currentMultifunction["percentageButtonMap"]) do			
+			buttonMap[next] = value
+			next = next + 1
+		end
+		
+		if currentMultifunction["currentPosition"] == nil then
+			-- All the way to the bottom
+			for i = currentMultifunction["min"], currentMultifunction["max"] do
+				buttonMap[next] = quickMenuLeft
+				next = next + 1
+			end
+			-- Now to the currently selected mode
+			currentMultifunction["currentPosition"] = currentMultifunction["min"]
+		end
+		
+		-- Now to the currently selected mode
+		local key = quickMenuRight		
+		if currentMultifunction["currentPosition"] < currentMultifunction["currentUpDnMode"] then
+			key = quickMenuLeft
+		end
+		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"] do
+			buttonMap[next] = quickMenuRight
+			next = next + 1
+		end
+		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
+
+	elseif currentMultifunction["confirmButtonMap"] ~= nil then
+		return currentMultifunction["confirmButtonMap"]		
+	else
+		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
+	end
+end
 
 function custom_init_Event(scriptfile)	
 end
