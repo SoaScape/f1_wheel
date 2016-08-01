@@ -54,10 +54,10 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						overtakeEngaged = true
 						multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
-						fuelModeBak = currentMultifunction[currentUpDnMode]
-						currentMultifunction[currentUpDnMode] = currentMultifunction["max"]
+						fuelModeBak = currentMultifunction["currentUpDnMode"]
+						currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
 						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
-						currentMultifunction[currentUpDnMode] = fuelModeBak
+						currentMultifunction["currentUpDnMode"] = fuelModeBak
 						currentMultifunction = multiFunctionBak
 					end
 				end
