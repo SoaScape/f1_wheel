@@ -8,6 +8,8 @@ quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
+trackableDecrementButton = quickMenuLeft
+trackableIncrementButton = quickMenuRight
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"
@@ -23,19 +25,8 @@ multifunctionMap[1]["modes"][0] = "LEAN"
 multifunctionMap[1]["modes"][1] = "NORM"
 multifunctionMap[1]["modes"][2] = "RICH"
 --multifunctionMap[1]["confirmButtonMap"] = {}
-multifunctionMap[1]["buttonMap"] = {}
-multifunctionMap[1]["buttonMap"][0] = {}
-multifunctionMap[1]["buttonMap"][1] = {}
-multifunctionMap[1]["buttonMap"][2] = {}
-multifunctionMap[1]["buttonMap"][0][0] = quickMenuToggleButton
-multifunctionMap[1]["buttonMap"][0][1] = quickMenuUp
-multifunctionMap[1]["buttonMap"][0][2] = quickMenuDn
-multifunctionMap[1]["buttonMap"][1][0] = quickMenuToggleButton
-multifunctionMap[1]["buttonMap"][1][1] = quickMenuUp
-multifunctionMap[1]["buttonMap"][1][2] = quickMenuRight
-multifunctionMap[1]["buttonMap"][2][0] = quickMenuToggleButton
-multifunctionMap[1]["buttonMap"][2][1] = quickMenuUp
-multifunctionMap[1]["buttonMap"][2][2] = quickMenuUp
+multifunctionMap[1]["trackableButtonMap"] = {}
+multifunctionMap[1]["trackableButtonMap"][0] = quickMenuToggleButton
 
 multifunctionMap[2] = {}
 multifunctionMap[2]["name"] = "TYRE"
@@ -45,29 +36,16 @@ multifunctionMap[2]["upDnConfirmRequired"] = true
 multifunctionMap[2]["defaultUpDnMode"] = 2
 multifunctionMap[2]["currentUpDnMode"] = multifunctionMap[2]["defaultUpDnMode"]
 multifunctionMap[2]["min"] = 0
-multifunctionMap[2]["max"] = 3
+multifunctionMap[2]["max"] = 4
 multifunctionMap[2]["modes"] = {}
 multifunctionMap[2]["modes"][0] = "WETS"
 multifunctionMap[2]["modes"][1] = "INTR"
 multifunctionMap[2]["modes"][2] = "PRME"
 multifunctionMap[2]["modes"][3] = "OPTN"
-multifunctionMap[2]["buttonMap"] = {}
-multifunctionMap[2]["buttonMap"][0] = {}
-multifunctionMap[2]["buttonMap"][1] = {}
-multifunctionMap[2]["buttonMap"][2] = {}
-multifunctionMap[2]["buttonMap"][3] = {}
-multifunctionMap[2]["buttonMap"][0][0] = quickMenuToggleButton
-multifunctionMap[2]["buttonMap"][0][1] = quickMenuRight
-multifunctionMap[2]["buttonMap"][0][2] = quickMenuLeft
-multifunctionMap[2]["buttonMap"][1][0] = quickMenuToggleButton
-multifunctionMap[2]["buttonMap"][1][1] = quickMenuRight
-multifunctionMap[2]["buttonMap"][1][2] = quickMenuDn
-multifunctionMap[2]["buttonMap"][2][0] = quickMenuToggleButton
-multifunctionMap[2]["buttonMap"][2][1] = quickMenuRight
-multifunctionMap[2]["buttonMap"][2][2] = quickMenuRight
-multifunctionMap[2]["buttonMap"][3][0] = quickMenuToggleButton
-multifunctionMap[2]["buttonMap"][3][1] = quickMenuRight
-multifunctionMap[2]["buttonMap"][3][2] = quickMenuUp
+multifunctionMap[2]["modes"][4] = "SOPT"
+multifunctionMap[5]["trackableButtonMap"] = {}
+multifunctionMap[5]["trackableButtonMap"][0] = quickMenuToggleButton
+multifunctionMap[5]["trackableButtonMap"][1] = quickMenuDn
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "WING"
@@ -82,19 +60,9 @@ multifunctionMap[3]["modes"] = {}
 multifunctionMap[3]["modes"][0] = "DOWN"
 multifunctionMap[3]["modes"][1] = "MIDL"
 multifunctionMap[3]["modes"][2] = "UP"
-multifunctionMap[3]["buttonMap"] = {}
-multifunctionMap[3]["buttonMap"][0] = {}
-multifunctionMap[3]["buttonMap"][1] = {}
-multifunctionMap[3]["buttonMap"][2] = {}
-multifunctionMap[3]["buttonMap"][0][0] = quickMenuToggleButton
-multifunctionMap[3]["buttonMap"][0][1] = quickMenuLeft
-multifunctionMap[3]["buttonMap"][0][2] = quickMenuDn
-multifunctionMap[3]["buttonMap"][1][0] = quickMenuToggleButton
-multifunctionMap[3]["buttonMap"][1][1] = quickMenuLeft
-multifunctionMap[3]["buttonMap"][1][2] = quickMenuRight
-multifunctionMap[3]["buttonMap"][2][0] = quickMenuToggleButton
-multifunctionMap[3]["buttonMap"][2][1] = quickMenuLeft
-multifunctionMap[3]["buttonMap"][2][2] = quickMenuUp
+multifunctionMap[5]["trackableButtonMap"] = {}
+multifunctionMap[5]["trackableButtonMap"][0] = quickMenuToggleButton
+multifunctionMap[5]["trackableButtonMap"][1] = quickMenuDn
 
 multifunctionMap[4] = {}
 multifunctionMap[4]["name"] = "BIAS"
@@ -109,19 +77,9 @@ multifunctionMap[4]["modes"] = {}
 multifunctionMap[4]["modes"][0] = "BACK"
 multifunctionMap[4]["modes"][1] = "MIDL"
 multifunctionMap[4]["modes"][2] = "FORW"
-multifunctionMap[4]["buttonMap"] = {}
-multifunctionMap[4]["buttonMap"][0] = {}
-multifunctionMap[4]["buttonMap"][1] = {}
-multifunctionMap[4]["buttonMap"][2] = {}
-multifunctionMap[4]["buttonMap"][0][0] = quickMenuToggleButton
-multifunctionMap[4]["buttonMap"][0][1] = quickMenuDn
-multifunctionMap[4]["buttonMap"][0][2] = quickMenuDn
-multifunctionMap[4]["buttonMap"][1][0] = quickMenuToggleButton
-multifunctionMap[4]["buttonMap"][1][1] = quickMenuDn
-multifunctionMap[4]["buttonMap"][1][2] = quickMenuRight
-multifunctionMap[4]["buttonMap"][2][0] = quickMenuToggleButton
-multifunctionMap[4]["buttonMap"][2][1] = quickMenuDn
-multifunctionMap[4]["buttonMap"][2][2] = quickMenuUp
+multifunctionMap[5]["trackableButtonMap"] = {}
+multifunctionMap[5]["trackableButtonMap"][0] = quickMenuToggleButton
+multifunctionMap[5]["trackableButtonMap"][1] = quickMenuDn
 
 multifunctionMap[5] = {}
 multifunctionMap[5]["name"] = "DIFF"
@@ -131,11 +89,23 @@ multifunctionMap[5]["upDnConfirmRequired"] = true
 multifunctionMap[5]["defaultUpDnMode"] = 5
 multifunctionMap[5]["currentUpDnMode"] = multifunctionMap[5]["defaultUpDnMode"]
 multifunctionMap[5]["currentPosition"] = nil
-multifunctionMap[5]["min"] = 1
+multifunctionMap[5]["min"] = 0
 multifunctionMap[5]["max"] = 10
-multifunctionMap[5]["percentageButtonMap"] = {}
-multifunctionMap[5]["percentageButtonMap"][0] = quickMenuToggleButton
-multifunctionMap[5]["percentageButtonMap"][1] = quickMenuDn
+multifunctionMap[5]["modes"] = {}
+multifunctionMap[5]["modes"][0] = " 0%"
+multifunctionMap[5]["modes"][1] = "10%"
+multifunctionMap[5]["modes"][2] = "20%"
+multifunctionMap[5]["modes"][3] = "30%"
+multifunctionMap[5]["modes"][4] = "40%"
+multifunctionMap[5]["modes"][5] = "50%"
+multifunctionMap[5]["modes"][6] = "60%"
+multifunctionMap[5]["modes"][7] = "70%"
+multifunctionMap[5]["modes"][8] = "80%"
+multifunctionMap[5]["modes"][9] = "90%"
+multifunctionMap[5]["modes"][10] = "100%"
+multifunctionMap[5]["trackableButtonMap"] = {}
+multifunctionMap[5]["trackableButtonMap"][0] = quickMenuToggleButton
+multifunctionMap[5]["trackableButtonMap"][1] = quickMenuDn
 
 multifunctionMap[6] = {}
 multifunctionMap[6]["name"] = "L"
@@ -157,45 +127,6 @@ multifunctionMap[12]["enabled"] = true
 -- Used by the overtake button
 fuelMultiFunctionMapIndex = 1
 overtakeButtonEnabled = true
-
-function getButtonMap(currentMultifunction)
-	if currentMultifunction[percentageButtonMap] ~= nil then
-		next = 0
-		buttonMap = {}
-		
-		-- Open the quick menu and goto the chosen multifunction
-		for key, value in pairs(currentMultifunction["percentageButtonMap"]) do			
-			buttonMap[next] = value
-			next = next + 1
-		end
-		
-		if currentMultifunction["currentPosition"] == nil then
-			-- All the way to the bottom
-			for i = currentMultifunction["min"], currentMultifunction["max"] do
-				buttonMap[next] = quickMenuLeft
-				next = next + 1
-			end
-			-- Now to the currently selected mode
-			currentMultifunction["currentPosition"] = currentMultifunction["min"]
-		end
-		
-		-- Now to the currently selected mode
-		local key = quickMenuRight		
-		if currentMultifunction["currentPosition"] < currentMultifunction["currentUpDnMode"] then
-			key = quickMenuLeft
-		end
-		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"] do
-			buttonMap[next] = quickMenuRight
-			next = next + 1
-		end
-		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
-
-	elseif currentMultifunction["confirmButtonMap"] ~= nil then
-		return currentMultifunction["confirmButtonMap"]		
-	else
-		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
-	end
-end
 
 function custom_init_Event(scriptfile)	
 end

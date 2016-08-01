@@ -153,6 +153,49 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	return 2
 end
 
+function getButtonMap(currentMultifunction)
+	if currentMultifunction[trackableButtonMap] ~= nil then
+		-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
+		-- selected, therefore the button maps will need to change on the fly.
+		next = 0
+		buttonMap = {}
+		
+		-- Open the quick menu and goto the chosen multifunction
+		for key, value in pairs(currentMultifunction["trackableButtonMap"]) do			
+			buttonMap[next] = value
+			next = next + 1
+		end
+		
+		if currentMultifunction["currentPosition"] == nil then
+			-- All the way to the bottom
+			for i = currentMultifunction["min"], currentMultifunction["max"] do
+				buttonMap[next] = trackableDecrementButton
+				next = next + 1
+			end
+			-- Now to the currently selected mode
+			currentMultifunction["currentPosition"] = currentMultifunction["min"]
+		end
+		
+		-- Now to the currently selected mode
+		local key = trackableIncrementButton		
+		if currentMultifunction["currentPosition"] < currentMultifunction["currentUpDnMode"] then
+			key = trackableDecrementButton
+		end
+		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"] do
+			buttonMap[next] = trackableIncrementButton
+			next = next + 1
+		end
+		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
+
+	elseif currentMultifunction["confirmButtonMap"] ~= nil then
+		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
+		return currentMultifunction["confirmButtonMap"]		
+	else
+		-- F1 2015 quick-menu doesn't keep track of what's selected so button maps are always static
+		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
+	end
+end
+
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
 	display(leftDisp, rightDisplay, deviceType, 0)
 	for i=0,tablelength(buttonMap)-1 do
