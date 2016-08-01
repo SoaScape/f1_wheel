@@ -3,7 +3,7 @@ require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 multifunctionMap = {}
 keystrokeDelay = 200
 
-quickMenuToggleButton = "NUMPAD8"
+quickMenuToggleButton = "NUMPAD8" -- also button 13 on simr-f1
 quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
