@@ -156,7 +156,11 @@ end
 
 function setDefaultModes()	
 	for key, value in pairs(multifunctionMap) do
-		value["currentUpDnMode"] = value["defaultUpDnMode"]
+		if value["defaultUpDnMode"] ~= nil then
+			value["currentUpDnMode"] = value["defaultUpDnMode"]
+		else
+			value["currentUpDnMode"] = nil
+		end
 	end	
 	overtakeEngaged = false
 	resetStartFuel = true
