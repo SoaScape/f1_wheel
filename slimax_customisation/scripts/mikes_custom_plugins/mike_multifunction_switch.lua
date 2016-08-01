@@ -167,22 +167,23 @@ function getButtonMap(currentMultifunction)
 		end
 		
 		if currentMultifunction["currentPosition"] == nil then
-			-- All the way to the bottom
+			-- We don't know what's currently selected. Therefore move the selector
+			-- all the way to the bottom so we know the 'min' mode is selected
 			for i = currentMultifunction["min"], currentMultifunction["max"] do
 				buttonMap[next] = trackableDecrementButton
 				next = next + 1
 			end
-			-- Now to the currently selected mode
+			-- Now we know the currently selected mode so store it
 			currentMultifunction["currentPosition"] = currentMultifunction["min"]
 		end
 		
-		-- Now to the currently selected mode
-		local key = trackableIncrementButton		
-		if currentMultifunction["currentPosition"] < currentMultifunction["currentUpDnMode"] then
+		-- Now increment or decrement to reach the requested mode (currentUpDnMode)
+		local key = trackableIncrementButton
+		if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
 			key = trackableDecrementButton
 		end
 		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"] do
-			buttonMap[next] = trackableIncrementButton
+			buttonMap[next] = key
 			next = next + 1
 		end
 		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
