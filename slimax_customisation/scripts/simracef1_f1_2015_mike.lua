@@ -146,5 +146,9 @@ multifunctionMap[12]["enabled"] = true
 fuelMultiFunctionMapIndex = 1
 overtakeButtonEnabled = true
 
+function getButtonMap(currentMultifunction)
+	return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
+end
+
 function custom_init_Event(scriptfile)	
 end

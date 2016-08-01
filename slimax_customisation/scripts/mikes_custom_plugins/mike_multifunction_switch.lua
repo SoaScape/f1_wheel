@@ -46,10 +46,19 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				if overtakeButtonEnabled then
 					if overtakeEngaged then
 						overtakeEngaged = false
-						confirmSelection("OVTK", " END", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["currentUpDnMode"]])
+						multiFunctionBak = currentMultifunction
+						currentMultifunction = multifunctionMap[fuelMultiFunctionMapIndex]
+						confirmSelection("OVTK", " END", deviceType, getButtonMap(currentMultifunction))
+						currentMultifunction = multiFunctionBak
 					else
 						overtakeEngaged = true
-						confirmSelection("OVER", "TAKE", deviceType, multifunctionMap[fuelMultiFunctionMapIndex]["buttonMap"][multifunctionMap[1]["max"]])
+						multiFunctionBak = currentMultifunction
+						currentMultifunction = multifunctionMap[fuelMultiFunctionMapIndex]
+						fuelModeBak = currentMultifunction[currentUpDnMode]
+						currentMultifunction[currentUpDnMode] = currentMultifunction["max"]
+						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
+						currentMultifunction[currentUpDnMode] = fuelModeBak
+						currentMultifunction = multiFunctionBak
 					end
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then			
@@ -61,13 +70,13 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 							end
 						else
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], "MAX ", deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+								confirmSelection(currentMultifunction["name"], "MAX ", deviceType, getButtonMap(currentMultifunction))
 							end
 						end
 						return 1
@@ -77,24 +86,24 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 							end
 						else
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], "MIN ", deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+								confirmSelection(currentMultifunction["name"], "MIN ", deviceType, getButtonMap(currentMultifunction))
 							end
 						end
 						return 1			
 					elseif ctrlPos == confirmButton then
-						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]])
+						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 						return 1
 					end
 				
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
 				elseif ctrlPos == confirmButton then		
-					confirmSelection(currentMultifunction["name"], "CONF", deviceType, currentMultifunction["confirmButtonMap"])				
+					confirmSelection(currentMultifunction["name"], "CONF", deviceType, getButtonMap(currentMultifunction))				
 					return 1
 				end
 			
