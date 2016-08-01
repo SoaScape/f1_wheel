@@ -178,12 +178,14 @@ function getButtonMap(currentMultifunction)
 		end
 		
 		-- Now increment or decrement to reach the requested mode (currentUpDnMode)
-		local key = trackableIncrementButton
+		local keyPress = trackableIncrementButton
+		local step = 1
 		if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
-			key = trackableDecrementButton
+			keyPress = trackableDecrementButton
+			step = -1
 		end
-		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"] do
-			buttonMap[next] = key
+		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"], step do
+			buttonMap[next] = keyPress
 			next = next + 1
 		end
 		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
