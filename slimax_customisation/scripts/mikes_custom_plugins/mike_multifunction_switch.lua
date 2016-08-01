@@ -154,7 +154,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 end
 
 function getButtonMap(currentMultifunction)
-	if currentMultifunction[trackableButtonMap] ~= nil then
+	if currentMultifunction["trackableButtonMap"] ~= nil then
 		-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
 		-- selected, therefore the button maps will need to change on the fly.
 		next = 0
