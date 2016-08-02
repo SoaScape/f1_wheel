@@ -1,4 +1,5 @@
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
+require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 
 keystrokeDelay = 200
 
@@ -239,19 +240,4 @@ function getButtonMap(currentMultifunction)
 		-- F1 2015 quick-menu doesn't keep track of what's selected so button maps are always static
 		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
 	end
-end
-
-function getOpenMenuButtons(chosenMenu)
-	local buttons = {}
-	local currentMenu = buttonTrackerMap[quickMenuToggleButton] % (numMenus + 1)
-	if currentMenu ~= chosenMenu then
-		local closeMenuClicks = 0
-		if chosenMenu < currentMenu then
-			closeMenuClicks = (numMenus + 1) - currentMenu
-		end
-		for i = currentMenu, (chosenMenu - 1 + closeMenuClicks) do
-			buttons[i] = quickMenuToggleKey
-		end
-	end	
-	return buttons
 end
