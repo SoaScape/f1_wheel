@@ -194,7 +194,7 @@ function setDefaultModes()
 	
 	if buttonTrackerMap ~= nil then
 		for key, value in pairs(buttonTrackerMap) do
-			value = 0
+			buttonTrackerMap[key] = 0
 		end
 	end
 	
