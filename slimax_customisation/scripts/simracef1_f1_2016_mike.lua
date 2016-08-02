@@ -229,7 +229,7 @@ function getButtonMap(currentMultifunction)
 		end
 		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
 		return buttonMap
-	elseif currentMultifunction["name"] = "MENU" then
+	elseif currentMultifunction["name"] == "MENU" then
 		next = 0
 		buttonMap = {}
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"] + 1)

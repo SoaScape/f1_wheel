@@ -140,9 +140,25 @@ multifunctionMap[10]["name"] = "PRI"
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = "OPT"
 
+multifunctionMap[11] = {}
+multifunctionMap[11]["name"] = "RSET"
+multifunctionMap[11]["enabled"] = true
+
 multifunctionMap[12] = {}
-multifunctionMap[12]["name"] = "RSET"
+multifunctionMap[12]["name"] = "MENU"
 multifunctionMap[12]["enabled"] = true
+multifunctionMap[12]["upDnSelectable"] = true
+multifunctionMap[12]["upDnConfirmRequired"] = false
+multifunctionMap[12]["defaultUpDnMode"] = 0
+multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[1]["defaultUpDnMode"]
+multifunctionMap[12]["min"] = 0
+multifunctionMap[12]["max"] = 4
+multifunctionMap[12]["modes"] = {}
+multifunctionMap[12]["modes"][0] = "NONE"
+multifunctionMap[12]["modes"][1] = "SETT"
+multifunctionMap[12]["modes"][2] = "WEAR"
+multifunctionMap[12]["modes"][3] = "TEMP"
+multifunctionMap[12]["modes"][4] = "INFO"
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[1]
@@ -154,7 +170,11 @@ end
 function getButtonMap(currentMultifunction)
 	if currentMultifunction["confirmButtonMap"] ~= nil then
 		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
-		return currentMultifunction["confirmButtonMap"]		
+		return currentMultifunction["confirmButtonMap"]
+	elseif currentMultifunction["name"] == "MENU" then
+		next = 0
+		buttonMap = {}
+		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"] + 1)
 	else
 		-- F1 2015 quick-menu doesn't keep track of what's selected so button maps are always static
 		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
