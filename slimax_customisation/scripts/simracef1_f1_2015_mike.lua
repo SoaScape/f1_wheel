@@ -160,6 +160,7 @@ multifunctionMap[12]["defaultUpDnMode"] = 0
 multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[1]["defaultUpDnMode"]
 multifunctionMap[12]["min"] = 0
 multifunctionMap[12]["max"] = 3
+multifunctionMap[12]["wrap"] = true
 multifunctionMap[12]["modes"] = {}
 multifunctionMap[12]["modes"][0] = "NONE"
 multifunctionMap[12]["modes"][1] = "WEAR"
