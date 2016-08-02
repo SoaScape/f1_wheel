@@ -4,7 +4,8 @@ require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 keystrokeDelay = 200
 
 quickMenuToggleButton = 13
-quickMenuToggleKey = "NUMPAD8"
+quickMenuToggleKey = "M"
+
 quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"

@@ -9,6 +9,7 @@ function getOpenMenuButtons(chosenMenu)
 		end
 		for i = currentMenu, (chosenMenu - 1 + closeMenuClicks) do
 			buttons[i] = quickMenuToggleKey
+			buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
 		end
 	end	
 	return buttons

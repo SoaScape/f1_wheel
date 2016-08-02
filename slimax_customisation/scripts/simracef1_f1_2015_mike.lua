@@ -3,13 +3,20 @@ require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 
 keystrokeDelay = 200
 
-quickMenuToggleButton = "NUMPAD8"
+quickMenuToggleButton = 13
+quickMenuToggleKey = "M"
+
 quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
-
+quickMenuToggleKey = "M"
 multifunctionMap = {}
+
+numMenus = 3
+
+buttonTrackerMap = {}
+buttonTrackerMap[quickMenuToggleButton] = 0
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"
@@ -29,13 +36,13 @@ multifunctionMap[1]["buttonMap"] = {}
 multifunctionMap[1]["buttonMap"][0] = {}
 multifunctionMap[1]["buttonMap"][1] = {}
 multifunctionMap[1]["buttonMap"][2] = {}
-multifunctionMap[1]["buttonMap"][0][0] = quickMenuToggleButton
+multifunctionMap[1]["buttonMap"][0][0] = quickMenuUp
 multifunctionMap[1]["buttonMap"][0][1] = quickMenuUp
 multifunctionMap[1]["buttonMap"][0][2] = quickMenuDn
-multifunctionMap[1]["buttonMap"][1][0] = quickMenuToggleButton
+multifunctionMap[1]["buttonMap"][1][0] = quickMenuUp
 multifunctionMap[1]["buttonMap"][1][1] = quickMenuUp
 multifunctionMap[1]["buttonMap"][1][2] = quickMenuRight
-multifunctionMap[1]["buttonMap"][2][0] = quickMenuToggleButton
+multifunctionMap[1]["buttonMap"][2][0] = quickMenuUp
 multifunctionMap[1]["buttonMap"][2][1] = quickMenuUp
 multifunctionMap[1]["buttonMap"][2][2] = quickMenuUp
 
@@ -58,16 +65,16 @@ multifunctionMap[2]["buttonMap"][0] = {}
 multifunctionMap[2]["buttonMap"][1] = {}
 multifunctionMap[2]["buttonMap"][2] = {}
 multifunctionMap[2]["buttonMap"][3] = {}
-multifunctionMap[2]["buttonMap"][0][0] = quickMenuToggleButton
+multifunctionMap[2]["buttonMap"][0][0] = quickMenuUp
 multifunctionMap[2]["buttonMap"][0][1] = quickMenuRight
 multifunctionMap[2]["buttonMap"][0][2] = quickMenuLeft
-multifunctionMap[2]["buttonMap"][1][0] = quickMenuToggleButton
+multifunctionMap[2]["buttonMap"][1][0] = quickMenuUp
 multifunctionMap[2]["buttonMap"][1][1] = quickMenuRight
 multifunctionMap[2]["buttonMap"][1][2] = quickMenuDn
-multifunctionMap[2]["buttonMap"][2][0] = quickMenuToggleButton
+multifunctionMap[2]["buttonMap"][2][0] = quickMenuUp
 multifunctionMap[2]["buttonMap"][2][1] = quickMenuRight
 multifunctionMap[2]["buttonMap"][2][2] = quickMenuRight
-multifunctionMap[2]["buttonMap"][3][0] = quickMenuToggleButton
+multifunctionMap[2]["buttonMap"][3][0] = quickMenuUp
 multifunctionMap[2]["buttonMap"][3][1] = quickMenuRight
 multifunctionMap[2]["buttonMap"][3][2] = quickMenuUp
 
@@ -88,13 +95,13 @@ multifunctionMap[3]["buttonMap"] = {}
 multifunctionMap[3]["buttonMap"][0] = {}
 multifunctionMap[3]["buttonMap"][1] = {}
 multifunctionMap[3]["buttonMap"][2] = {}
-multifunctionMap[3]["buttonMap"][0][0] = quickMenuToggleButton
+multifunctionMap[3]["buttonMap"][0][0] = quickMenuUp
 multifunctionMap[3]["buttonMap"][0][1] = quickMenuLeft
 multifunctionMap[3]["buttonMap"][0][2] = quickMenuDn
-multifunctionMap[3]["buttonMap"][1][0] = quickMenuToggleButton
+multifunctionMap[3]["buttonMap"][1][0] = quickMenuUp
 multifunctionMap[3]["buttonMap"][1][1] = quickMenuLeft
 multifunctionMap[3]["buttonMap"][1][2] = quickMenuRight
-multifunctionMap[3]["buttonMap"][2][0] = quickMenuToggleButton
+multifunctionMap[3]["buttonMap"][2][0] = quickMenuUp
 multifunctionMap[3]["buttonMap"][2][1] = quickMenuLeft
 multifunctionMap[3]["buttonMap"][2][2] = quickMenuUp
 
@@ -115,13 +122,13 @@ multifunctionMap[4]["buttonMap"] = {}
 multifunctionMap[4]["buttonMap"][0] = {}
 multifunctionMap[4]["buttonMap"][1] = {}
 multifunctionMap[4]["buttonMap"][2] = {}
-multifunctionMap[4]["buttonMap"][0][0] = quickMenuToggleButton
+multifunctionMap[4]["buttonMap"][0][0] = quickMenuUp
 multifunctionMap[4]["buttonMap"][0][1] = quickMenuDn
 multifunctionMap[4]["buttonMap"][0][2] = quickMenuDn
-multifunctionMap[4]["buttonMap"][1][0] = quickMenuToggleButton
+multifunctionMap[4]["buttonMap"][1][0] = quickMenuUp
 multifunctionMap[4]["buttonMap"][1][1] = quickMenuDn
 multifunctionMap[4]["buttonMap"][1][2] = quickMenuRight
-multifunctionMap[4]["buttonMap"][2][0] = quickMenuToggleButton
+multifunctionMap[4]["buttonMap"][2][0] = quickMenuUp
 multifunctionMap[4]["buttonMap"][2][1] = quickMenuDn
 multifunctionMap[4]["buttonMap"][2][2] = quickMenuUp
 
@@ -152,13 +159,12 @@ multifunctionMap[12]["upDnConfirmRequired"] = false
 multifunctionMap[12]["defaultUpDnMode"] = 0
 multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[1]["defaultUpDnMode"]
 multifunctionMap[12]["min"] = 0
-multifunctionMap[12]["max"] = 4
+multifunctionMap[12]["max"] = 3
 multifunctionMap[12]["modes"] = {}
 multifunctionMap[12]["modes"][0] = "NONE"
-multifunctionMap[12]["modes"][1] = "SETT"
-multifunctionMap[12]["modes"][2] = "WEAR"
-multifunctionMap[12]["modes"][3] = "TEMP"
-multifunctionMap[12]["modes"][4] = "INFO"
+multifunctionMap[12]["modes"][1] = "WEAR"
+multifunctionMap[12]["modes"][2] = "TEMP"
+multifunctionMap[12]["modes"][3] = "INFO"
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[1]
