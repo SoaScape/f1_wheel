@@ -11,8 +11,14 @@ quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
 quickMenuToggleKey = "M"
+prevCameraKey = "X"
+nextCameraKey = "C"
 
 numMenus = 3
+
+customKeystrokeDelays = {}
+customKeystrokeDelays[prevCameraKey] = 50
+customKeystrokeDelays[nextCameraKey] = 50
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
@@ -143,14 +149,28 @@ multifunctionMap[8] = {}
 multifunctionMap[8]["name"] = "WET"
 multifunctionMap[9] = {}
 multifunctionMap[9]["name"] = "INT"
+
 multifunctionMap[10] = {}
-multifunctionMap[10]["name"] = "PRI"
-multifunctionMap[11] = {}
-multifunctionMap[11]["name"] = "OPT"
+multifunctionMap[10]["name"] = "RSET"
+multifunctionMap[10]["enabled"] = true
 
 multifunctionMap[11] = {}
-multifunctionMap[11]["name"] = "RSET"
+multifunctionMap[11]["name"] = "VIEW"
 multifunctionMap[11]["enabled"] = true
+multifunctionMap[11]["upDnSelectable"] = true
+multifunctionMap[11]["upDnConfirmRequired"] = false
+multifunctionMap[11]["defaultUpDnMode"] = 0
+multifunctionMap[11]["currentUpDnMode"] = multifunctionMap[11]["defaultUpDnMode"]
+multifunctionMap[11]["min"] = 0
+multifunctionMap[11]["max"] = 1
+multifunctionMap[11]["modes"] = {}
+multifunctionMap[11]["modes"][0] = "PREV"
+multifunctionMap[11]["modes"][1] = "NEXT"
+multifunctionMap[11]["buttonMap"] = {}
+multifunctionMap[11]["buttonMap"][0] = {}
+multifunctionMap[11]["buttonMap"][1] = {}
+multifunctionMap[11]["buttonMap"][0][0] = prevCameraKey
+multifunctionMap[11]["buttonMap"][1][0] = nextCameraKey
 
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = "MENU"
