@@ -157,15 +157,15 @@ multifunctionMap[12]["enabled"] = true
 multifunctionMap[12]["upDnSelectable"] = true
 multifunctionMap[12]["upDnConfirmRequired"] = false
 multifunctionMap[12]["defaultUpDnMode"] = 0
-multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[1]["defaultUpDnMode"]
+multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[12]["defaultUpDnMode"]
 multifunctionMap[12]["min"] = 0
 multifunctionMap[12]["max"] = 3
 multifunctionMap[12]["wrap"] = true
 multifunctionMap[12]["modes"] = {}
 multifunctionMap[12]["modes"][0] = "NONE"
-multifunctionMap[12]["modes"][1] = "WEAR"
-multifunctionMap[12]["modes"][2] = "TEMP"
-multifunctionMap[12]["modes"][3] = "INFO"
+multifunctionMap[12]["modes"][1] = "INFO"
+multifunctionMap[12]["modes"][2] = "WEAR"
+multifunctionMap[12]["modes"][3] = "TEMP"
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[1]
@@ -181,7 +181,7 @@ function getButtonMap(currentMultifunction)
 	elseif currentMultifunction["name"] == "MENU" then
 		next = 0
 		buttonMap = {}
-		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"] + 1)
+		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
 	else
 		-- F1 2015 quick-menu doesn't keep track of what's selected so button maps are always static
 		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]

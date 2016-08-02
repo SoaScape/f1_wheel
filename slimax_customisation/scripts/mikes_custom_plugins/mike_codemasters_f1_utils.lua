@@ -6,11 +6,16 @@ function getOpenMenuButtons(chosenMenu)
 		local closeMenuClicks = 0
 		if chosenMenu < currentMenu then
 			closeMenuClicks = (numMenus + 1) - currentMenu
-		end
-		for i = currentMenu, (chosenMenu - 1 + closeMenuClicks) do
-			buttons[i] = quickMenuToggleKey
-			buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
-		end
+			for i = 1, closeMenuClicks + chosenMenu do
+				buttons[i] = quickMenuToggleKey
+				buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
+			end
+		else
+			for i = currentMenu, (chosenMenu - 1 + closeMenuClicks) do
+				buttons[i] = quickMenuToggleKey
+				buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
+			end
+		end		
 	end	
 	return buttons
 end

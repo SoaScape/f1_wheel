@@ -176,7 +176,7 @@ multifunctionMap[12]["enabled"] = true
 multifunctionMap[12]["upDnSelectable"] = true
 multifunctionMap[12]["upDnConfirmRequired"] = false
 multifunctionMap[12]["defaultUpDnMode"] = 0
-multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[1]["defaultUpDnMode"]
+multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[12]["defaultUpDnMode"]
 multifunctionMap[12]["min"] = 0
 multifunctionMap[12]["max"] = 4
 multifunctionMap[12]["wrap"] = true
@@ -234,7 +234,7 @@ function getButtonMap(currentMultifunction)
 	elseif currentMultifunction["name"] == "MENU" then
 		next = 0
 		buttonMap = {}
-		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"] + 1)
+		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
 	elseif currentMultifunction["confirmButtonMap"] ~= nil then
 		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
 		return currentMultifunction["confirmButtonMap"]		
