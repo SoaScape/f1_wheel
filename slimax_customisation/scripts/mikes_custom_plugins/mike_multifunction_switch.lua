@@ -34,12 +34,14 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then			
 			currentMultifunction = multifunctionMap[value]
 			
-			if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
-				display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
-			else
-				display("MULT", currentMultifunction["name"], deviceType, multiSelectDelay)
+			if currentMultifunction ~= nil then
+				if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
+					display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
+				else
+					display("MULT", currentMultifunction["name"], deviceType, multiSelectDelay)
+				end
+				return 1
 			end
-			return 1
 		
 		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
