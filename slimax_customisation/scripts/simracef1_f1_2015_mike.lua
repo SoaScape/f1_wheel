@@ -1,6 +1,5 @@
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
-multifunctionMap = {}
 keystrokeDelay = 200
 
 quickMenuToggleButton = "NUMPAD8"
@@ -8,6 +7,8 @@ quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
+
+multifunctionMap = {}
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"

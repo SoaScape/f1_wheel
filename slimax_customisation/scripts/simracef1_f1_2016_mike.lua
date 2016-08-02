@@ -1,6 +1,5 @@
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
-multifunctionMap = {}
 keystrokeDelay = 200
 
 quickMenuToggleButton = "NUMPAD8" -- also button 13 on simr-f1
@@ -13,6 +12,8 @@ trackableIncrementButton = quickMenuRight
 customKeystrokeDelays = {}
 customKeystrokeDelays[trackableDecrementButton] = 50
 customKeystrokeDelays[trackableIncrementButton] = 50
+
+multifunctionMap = {}
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"
