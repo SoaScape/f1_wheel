@@ -10,15 +10,15 @@ quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
-quickMenuToggleKey = "M"
 prevCameraKey = "X"
 nextCameraKey = "C"
 
 numMenus = 3
 
 customKeystrokeDelays = {}
-customKeystrokeDelays[prevCameraKey] = 50
-customKeystrokeDelays[nextCameraKey] = 50
+customKeystrokeDelays[prevCameraKey] = 20
+customKeystrokeDelays[nextCameraKey] = 20
+customKeystrokeDelays[quickMenuToggleKey] = 20
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0

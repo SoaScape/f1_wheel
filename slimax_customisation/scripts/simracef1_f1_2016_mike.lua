@@ -14,14 +14,12 @@ trackableDecrementKey = quickMenuLeft
 trackableIncrementKey = quickMenuRight
 prevCameraKey = "X"
 nextCameraKey = "C"
-customKeystrokeDelays = {}
-customKeystrokeDelays[prevCameraKey] = 50
-customKeystrokeDelays[nextCameraKey] = 50
-customKeystrokeDelays[trackableDecrementKey] = 50
-customKeystrokeDelays[trackableIncrementKey] = 50
-
 numMenus = 4
-
+customKeystrokeDelays = {}
+customKeystrokeDelays[prevCameraKey] = 20
+customKeystrokeDelays[nextCameraKey] = 20
+customKeystrokeDelays[trackableDecrementKey] = 20
+customKeystrokeDelays[trackableIncrementKey] = 20
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
 
