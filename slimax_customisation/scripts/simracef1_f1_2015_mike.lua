@@ -11,12 +11,13 @@ quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
 quickMenuToggleKey = "M"
-multifunctionMap = {}
 
 numMenus = 3
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
+
+multifunctionMap = {}
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"

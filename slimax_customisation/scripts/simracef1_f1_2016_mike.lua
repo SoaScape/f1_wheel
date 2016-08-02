@@ -10,8 +10,8 @@ quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
-trackableDecrementButton = quickMenuLeft
-trackableIncrementButton = quickMenuRight
+trackableDecrementKey = quickMenuLeft
+trackableIncrementKey = quickMenuRight
 customKeystrokeDelays = {}
 customKeystrokeDelays[trackableDecrementButton] = 50
 customKeystrokeDelays[trackableIncrementButton] = 50
@@ -211,7 +211,7 @@ function getButtonMap(currentMultifunction)
 			-- We don't know what's currently selected. Therefore move the selector
 			-- all the way to the bottom so we know the 'min' mode is selected
 			for i = currentMultifunction["min"], currentMultifunction["max"] do
-				buttonMap[next] = trackableDecrementButton
+				buttonMap[next] = trackableDecrementKey
 				next = next + 1
 			end
 			-- Now we know the currently selected mode so store it
@@ -219,10 +219,10 @@ function getButtonMap(currentMultifunction)
 		end
 		
 		-- Now increment or decrement to reach the requested mode (currentUpDnMode)
-		local keyPress = trackableIncrementButton
+		local keyPress = trackableIncrementKey
 		local step = 1
 		if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
-			keyPress = trackableDecrementButton
+			keyPress = trackableDecrementKey
 			step = -1
 		end
 		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"], step do
