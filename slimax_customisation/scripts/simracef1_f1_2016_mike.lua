@@ -10,6 +10,9 @@ quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
 trackableDecrementButton = quickMenuLeft
 trackableIncrementButton = quickMenuRight
+customKeystrokeDelays = {}
+customKeystrokeDelays[trackableDecrementButton] = 50
+customKeystrokeDelays[trackableIncrementButton] = 50
 
 multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"

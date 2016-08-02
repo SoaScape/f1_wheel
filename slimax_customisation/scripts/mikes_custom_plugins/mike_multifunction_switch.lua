@@ -202,9 +202,13 @@ end
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
 	display(leftDisp, rightDisplay, deviceType, 0)
 	for i=0,tablelength(buttonMap)-1 do
+		local delay = keystrokeDelay
+		if customKeystrokeDelays[buttonMap[i]] ~= nil then
+			delay = customKeystrokeDelays[buttonMap[i]]
+		end
 		-- params: key, delay, modifier
-		SetKeystroke(buttonMap[i], keystrokeDelay, "")					
-		SLISleep(keystrokeDelay)
+		SetKeystroke(buttonMap[i], delay, "")
+		SLISleep(delay)
 	end
 	setDisplayTimeout(confirmDelay)
 end
