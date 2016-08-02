@@ -77,7 +77,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], "MAX ", deviceType, getButtonMap(currentMultifunction))
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 							end
 						end
 						return 1
@@ -93,7 +93,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], "MIN ", deviceType, getButtonMap(currentMultifunction))
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 							end
 						end
 						return 1			
