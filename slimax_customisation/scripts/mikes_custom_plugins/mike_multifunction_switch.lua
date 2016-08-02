@@ -32,9 +32,9 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 		trackButtons(ctrlType, ctrlPos, value)
 		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then			
-			currentMultifunction = multifunctionMap[value]
+			if multifunctionMap[value] ~= nil then
+				currentMultifunction = multifunctionMap[value]			
 			
-			if currentMultifunction ~= nil then
 				if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
 					display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
 				else
