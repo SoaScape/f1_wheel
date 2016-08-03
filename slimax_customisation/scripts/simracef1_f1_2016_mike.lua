@@ -1,7 +1,7 @@
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 
-keystrokeDelay = 200
+keystrokeDelay = 20
 
 quickMenuToggleButton = 13
 quickMenuToggleKey = "M"
@@ -16,10 +16,10 @@ prevCameraKey = "X"
 nextCameraKey = "C"
 numMenus = 4
 customKeystrokeDelays = {}
-customKeystrokeDelays[prevCameraKey] = 20
-customKeystrokeDelays[nextCameraKey] = 20
-customKeystrokeDelays[trackableDecrementKey] = 20
-customKeystrokeDelays[trackableIncrementKey] = 20
+customKeystrokeDelays[prevCameraKey] = 5
+customKeystrokeDelays[nextCameraKey] = 5
+customKeystrokeDelays[trackableDecrementKey] = 5
+customKeystrokeDelays[trackableIncrementKey] = 5
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
 

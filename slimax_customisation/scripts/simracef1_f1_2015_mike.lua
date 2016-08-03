@@ -16,9 +16,9 @@ nextCameraKey = "C"
 numMenus = 3
 
 customKeystrokeDelays = {}
-customKeystrokeDelays[prevCameraKey] = 20
-customKeystrokeDelays[nextCameraKey] = 20
-customKeystrokeDelays[quickMenuToggleKey] = 20
+customKeystrokeDelays[prevCameraKey] = 5
+customKeystrokeDelays[nextCameraKey] = 5
+customKeystrokeDelays[quickMenuToggleKey] = 5
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
