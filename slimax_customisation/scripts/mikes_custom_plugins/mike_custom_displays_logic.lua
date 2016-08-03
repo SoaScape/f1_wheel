@@ -8,6 +8,7 @@ startFuelLocked = false
 minFuel = 10
 lowFuelLedPattern = 64
 startFuelStoredLedPattern = 248
+fuelResetDisplayTimeout = 1000
 
 function performRegularCustomDisplayProcessing()
 	checkForStartFuel()	
@@ -95,8 +96,8 @@ function checkForStartFuel()
 		mSessionEnter == 1 and not(m_is_sim_idle) and
 			startFuel ~= nil and startFuel > 0 then
 		fuelAtStart = startFuel
-		display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)		
-		activatePermanentLed(startFuelStoredLedPattern, 500)
+		display("TANK", GetFuelKilogram(fuelAtStart), myDevice, fuelResetDisplayTimeout)		
+		activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout)
 		resetStartFuel = false
 	end
 end

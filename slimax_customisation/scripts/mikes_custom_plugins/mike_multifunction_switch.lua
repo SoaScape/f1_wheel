@@ -136,7 +136,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					end
 					fuelAtStart = fuelAtStart + inc
 					
-					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)
+					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, confirmDelay)
 					return 1
 				elseif startFuelLocked and (ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil) then
 					local inc = fuelButtonIncrement
@@ -144,7 +144,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						inc = fuelEncoderIncrement
 					end
 					fuelAtStart = fuelAtStart - inc
-					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, 500)
+					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, confirmDelay)
 					return 1
 				elseif ctrlPos == startFuelLockButton then
 					startFuelLocked = not(startFuelLocked)
@@ -154,7 +154,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					else
 						right = "UNLK"
 					end
-					display("TANK", right, myDevice, 500)
+					display("TANK", right, myDevice, confirmDelay)
 					return 1
 				end
 			end
