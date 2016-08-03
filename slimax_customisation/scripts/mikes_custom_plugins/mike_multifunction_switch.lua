@@ -7,8 +7,8 @@ multiFunctionSwitchId = 3
 confirmButton = 14
 upButton = 26
 downButton = 27
-upEncoder = 22
-downEncoder = 21
+upEncoder = 23
+downEncoder = 24
 setValueSwitchId = 1
 
 overtakeButton = 10
