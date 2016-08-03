@@ -1,25 +1,15 @@
-require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
+require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
 keystrokeDelay = 20
 
-quickMenuToggleButton = 13
-quickMenuToggleKey = "M"
-
-quickMenuUp = "NUMPAD8"
-quickMenuDn = "NUMPAD2"
-quickMenuLeft = "NUMPAD4"
-quickMenuRight = "NUMPAD6"
-prevCameraKey = "X"
-nextCameraKey = "C"
 numMenus = 4
+
 customKeystrokeDelays = {}
 customKeystrokeDelays[prevCameraKey] = 5
 customKeystrokeDelays[nextCameraKey] = 5
 customKeystrokeDelays[quickMenuLeft] = 5
 customKeystrokeDelays[quickMenuRight] = 5
-buttonTrackerMap = {}
-buttonTrackerMap[quickMenuToggleButton] = 0
 
 multifunctionMap = {}
 

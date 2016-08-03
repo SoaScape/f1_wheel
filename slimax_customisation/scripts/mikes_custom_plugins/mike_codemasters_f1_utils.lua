@@ -1,3 +1,15 @@
+quickMenuToggleButton = 13
+quickMenuToggleKey = "M"
+quickMenuUp = "NUMPAD8"
+quickMenuDn = "NUMPAD2"
+quickMenuLeft = "NUMPAD4"
+quickMenuRight = "NUMPAD6"
+prevCameraKey = "X"
+nextCameraKey = "C"
+
+buttonTrackerMap = {}
+buttonTrackerMap[quickMenuToggleButton] = 0
+
 function getOpenMenuButtons(chosenMenu)
 	local buttons = {}
 	local currentMenu = buttonTrackerMap[quickMenuToggleButton] % (numMenus + 1)
