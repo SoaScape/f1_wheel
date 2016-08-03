@@ -1,4 +1,3 @@
-
 function getOpenMenuButtons(chosenMenu)
 	local buttons = {}
 	local currentMenu = buttonTrackerMap[quickMenuToggleButton] % (numMenus + 1)
@@ -16,6 +15,14 @@ function getOpenMenuButtons(chosenMenu)
 				buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
 			end
 		end		
+	end	
+	return buttons
+end
+
+function getSelectRowButtons(chosenRow)
+	local buttons = {}	
+	for i = 0, chosenRow - 1 do
+		buttons[i] = quickMenuDn
 	end	
 	return buttons
 end

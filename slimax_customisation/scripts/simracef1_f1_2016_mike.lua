@@ -10,16 +10,14 @@ quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
-trackableDecrementKey = quickMenuLeft
-trackableIncrementKey = quickMenuRight
 prevCameraKey = "X"
 nextCameraKey = "C"
 numMenus = 4
 customKeystrokeDelays = {}
 customKeystrokeDelays[prevCameraKey] = 5
 customKeystrokeDelays[nextCameraKey] = 5
-customKeystrokeDelays[trackableDecrementKey] = 5
-customKeystrokeDelays[trackableIncrementKey] = 5
+customKeystrokeDelays[quickMenuLeft] = 5
+customKeystrokeDelays[quickMenuRight] = 5
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
 
@@ -29,6 +27,7 @@ multifunctionMap[1] = {}
 multifunctionMap[1]["name"] = "FUEL"
 multifunctionMap[1]["enabled"] = true
 multifunctionMap[1]["menu"] = 1
+multifunctionMap[1]["row"] = 1
 multifunctionMap[1]["upDnSelectable"] = true
 multifunctionMap[1]["upDnConfirmRequired"] = true
 multifunctionMap[1]["defaultUpDnMode"] = 1
@@ -40,13 +39,12 @@ multifunctionMap[1]["modes"][0] = "LEAN"
 multifunctionMap[1]["modes"][1] = "NORM"
 multifunctionMap[1]["modes"][2] = "RICH"
 --multifunctionMap[1]["confirmButtonMap"] = {}
-multifunctionMap[1]["trackableButtonMap"] = {}
-multifunctionMap[1]["trackableButtonMap"][0] = quickMenuToggleKey
 
 multifunctionMap[2] = {}
 multifunctionMap[2]["name"] = "TYRE"
 multifunctionMap[2]["enabled"] = true
 multifunctionMap[2]["menu"] = 1
+multifunctionMap[1]["row"] = 5
 multifunctionMap[2]["upDnSelectable"] = true
 multifunctionMap[2]["upDnConfirmRequired"] = true
 multifunctionMap[2]["defaultUpDnMode"] = 2
@@ -59,17 +57,12 @@ multifunctionMap[2]["modes"][1] = "OPTN"
 multifunctionMap[2]["modes"][2] = "PRME"
 multifunctionMap[2]["modes"][3] = "INTR"
 multifunctionMap[2]["modes"][4] = "WETS"
-multifunctionMap[2]["trackableButtonMap"] = {}
-multifunctionMap[2]["trackableButtonMap"][0] = quickMenuToggleKey
-multifunctionMap[2]["trackableButtonMap"][1] = quickMenuDn
-multifunctionMap[2]["trackableButtonMap"][2] = quickMenuDn
-multifunctionMap[2]["trackableButtonMap"][3] = quickMenuDn
-multifunctionMap[2]["trackableButtonMap"][4] = quickMenuDn
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "AERO"
 multifunctionMap[3]["enabled"] = true
 multifunctionMap[3]["menu"] = 1
+multifunctionMap[1]["row"] = 4
 multifunctionMap[3]["upDnSelectable"] = true
 multifunctionMap[3]["upDnConfirmRequired"] = true
 multifunctionMap[3]["defaultUpDnMode"] = 4
@@ -87,16 +80,12 @@ multifunctionMap[3]["modes"][6] = "7"
 multifunctionMap[3]["modes"][7] = "8"
 multifunctionMap[3]["modes"][8] = "9"
 multifunctionMap[3]["modes"][9] = "10"
-multifunctionMap[3]["trackableButtonMap"] = {}
-multifunctionMap[3]["trackableButtonMap"][0] = quickMenuToggleKey
-multifunctionMap[3]["trackableButtonMap"][1] = quickMenuDn
-multifunctionMap[3]["trackableButtonMap"][2] = quickMenuDn
-multifunctionMap[3]["trackableButtonMap"][3] = quickMenuDn
 
 multifunctionMap[4] = {}
 multifunctionMap[4]["name"] = "BIAS"
 multifunctionMap[4]["enabled"] = true
 multifunctionMap[4]["menu"] = 1
+multifunctionMap[1]["row"] = 2
 multifunctionMap[4]["upDnSelectable"] = true
 multifunctionMap[4]["upDnConfirmRequired"] = true
 multifunctionMap[4]["defaultUpDnMode"] = 10
@@ -125,14 +114,12 @@ multifunctionMap[4]["modes"][17] = "64%"
 multifunctionMap[4]["modes"][18] = "66%"
 multifunctionMap[4]["modes"][19] = "68%"
 multifunctionMap[4]["modes"][20] = "70%"
-multifunctionMap[4]["trackableButtonMap"] = {}
-multifunctionMap[4]["trackableButtonMap"][0] = quickMenuToggleKey
-multifunctionMap[4]["trackableButtonMap"][1] = quickMenuDn
 
 multifunctionMap[5] = {}
 multifunctionMap[5]["name"] = "DIFF"
 multifunctionMap[5]["enabled"] = true
 multifunctionMap[5]["menu"] = 1
+multifunctionMap[1]["row"] = 3
 multifunctionMap[5]["upDnSelectable"] = true
 multifunctionMap[5]["upDnConfirmRequired"] = true
 multifunctionMap[5]["defaultUpDnMode"] = 5
@@ -152,10 +139,6 @@ multifunctionMap[5]["modes"][7] = "85%"
 multifunctionMap[5]["modes"][8] = "90%"
 multifunctionMap[5]["modes"][9] = "95%"
 multifunctionMap[5]["modes"][10] = "100%"
-multifunctionMap[5]["trackableButtonMap"] = {}
-multifunctionMap[5]["trackableButtonMap"][0] = quickMenuToggleKey
-multifunctionMap[5]["trackableButtonMap"][1] = quickMenuDn
-multifunctionMap[5]["trackableButtonMap"][2] = quickMenuDn
 
 multifunctionMap[6] = {}
 multifunctionMap[6]["name"] = "L"
@@ -213,7 +196,7 @@ function custom_init_Event(scriptfile)
 end
 
 function getButtonMap(currentMultifunction)
-	if currentMultifunction["trackableButtonMap"] ~= nil then
+	if currentMultifunction["menu"] ~= nil then
 		-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
 		-- selected, therefore the button maps will need to change on the fly.
 		next = 0
@@ -224,12 +207,18 @@ function getButtonMap(currentMultifunction)
 			buttonMap[next] = value
 			next = next + 1
 		end
+		
+		selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
+		for key, value in pairs(customButtons) do			
+			buttonMap[next] = value
+			next = next + 1
+		end
 
 		if currentMultifunction["currentPosition"] == nil then
 			-- We don't know what's currently selected. Therefore move the selector
 			-- all the way to the bottom so we know the 'min' mode is selected
 			for i = currentMultifunction["min"], currentMultifunction["max"] do
-				buttonMap[next] = trackableDecrementKey
+				buttonMap[next] = quickMenuLeft
 				next = next + 1
 			end
 			-- Now we know the currently selected mode so store it
@@ -237,10 +226,12 @@ function getButtonMap(currentMultifunction)
 		end
 		
 		-- Now increment or decrement to reach the requested mode (currentUpDnMode)
-		local keyPress = trackableIncrementKey
+		local keyPress = quickMenuRight
 		local step = 1
+		local loopStartIndex = currentMultifunction["currentPosition"] - 1
 		if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
-			keyPress = trackableDecrementKey
+			keyPress = quickMenuLeft
+			loopStartIndex = currentMultifunction["currentPosition"] + 1
 			step = -1
 		end
 		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"], step do
