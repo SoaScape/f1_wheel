@@ -6,9 +6,9 @@ keystrokeDelay = 200
 numMenus = 3
 
 customKeystrokeDelays = {}
-customKeystrokeDelays[prevCameraKey] = 5
-customKeystrokeDelays[nextCameraKey] = 5
-customKeystrokeDelays[quickMenuToggleKey] = 5
+customKeystrokeDelays[prevCameraKey] = 10
+customKeystrokeDelays[nextCameraKey] = 10
+customKeystrokeDelays[quickMenuToggleKey] = 10
 
 multifunctionMap = {}
 
