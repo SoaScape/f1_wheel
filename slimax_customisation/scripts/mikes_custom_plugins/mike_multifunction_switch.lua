@@ -165,17 +165,19 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 end
 
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
-	display(leftDisp, rightDisplay, deviceType, 0)
-	for i=0,tablelength(buttonMap)-1 do
-		local delay = keystrokeDelay
-		if customKeystrokeDelays[buttonMap[i]] ~= nil then
-			delay = customKeystrokeDelays[buttonMap[i]]
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
+		display(leftDisp, rightDisplay, deviceType, 0)
+		for i=0,tablelength(buttonMap)-1 do
+			local delay = keystrokeDelay
+			if customKeystrokeDelays[buttonMap[i]] ~= nil then
+				delay = customKeystrokeDelays[buttonMap[i]]
+			end
+			-- params: key, delay, modifier
+			SetKeystroke(buttonMap[i], delay, "")
+			SLISleep(delay)
 		end
-		-- params: key, delay, modifier
-		SetKeystroke(buttonMap[i], delay, "")
-		SLISleep(delay)
+		setDisplayTimeout(confirmDelay)
 	end
-	setDisplayTimeout(confirmDelay)
 end
 
 function trackButtons(ctrlType, ctrlPos, value)
