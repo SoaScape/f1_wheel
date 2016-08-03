@@ -1,13 +1,11 @@
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
-keystrokeDelay = 20
+keystrokeDelay = 15
 
 numMenus = 4
 
 customKeystrokeDelays = {}
-customKeystrokeDelays[prevCameraKey] = 10
-customKeystrokeDelays[nextCameraKey] = 10
 customKeystrokeDelays[quickMenuLeft] = 10
 customKeystrokeDelays[quickMenuRight] = 10
 
