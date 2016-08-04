@@ -107,7 +107,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						if currentMultifunction["name"] == "OSP" then
 							local ospf = GetContextInfo("osp_factor")
 							local inc = 1
-							if ctrlPos == upEncoder then
+							if ctrlPos == downEncoder then
 								inc = encoderIncrement
 							end
 							ospf = ospf - inc
