@@ -36,7 +36,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				currentMultifunction = multifunctionMap[value]			
 			
 				if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
-					display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
+					if currentMultifunction["name"] ~= "OSP" then
+						display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
+					else
+						display("OSP ", string.format(" %03d  ", GetContextInfo("osp_factor")), myDevice, multiSelectDelay)
+					end
 				else
 					display("MULT", currentMultifunction["name"], deviceType, multiSelectDelay)
 				end
