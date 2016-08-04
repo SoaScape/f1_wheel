@@ -190,7 +190,7 @@ function getButtonMap(currentMultifunction)
 	if currentMultifunction["confirmButtonMap"] ~= nil then
 		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
 		return currentMultifunction["confirmButtonMap"]
-	elseif currentMultifunction["name"] == "MENU" then
+	elseif currentMultifunction["name"] == "INFO" then
 		next = 0
 		buttonMap = {}
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
