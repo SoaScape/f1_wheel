@@ -37,3 +37,41 @@ function getSelectRowButtons(chosenRow)
 	end	
 	return buttons
 end
+
+customFunctionNamesTable = {}
+customFunctionNamesTable[1] = {}
+customFunctionNamesTable[1][0] = "POS"
+customFunctionNamesTable[1][1] = "LAPR"
+customFunctionNamesTable[2] = {}
+customFunctionNamesTable[2][0] = "LAPC"
+customFunctionNamesTable[2][1] = "LAPS"
+customFunctionNamesTable[3] = {}
+customFunctionNamesTable[3][0] = "SPED"
+customFunctionNamesTable[3][1] = "PREV"
+customFunctionNamesTable[4] = {}
+customFunctionNamesTable[4][0] = "CURR"
+customFunctionNamesTable[4][1] = "BEST"
+customFunctionNamesTable[5] = {}
+customFunctionNamesTable[5][0] = "DELT"
+customFunctionNamesTable[5][1] = "TIME"
+customFunctionNamesTable[6] = {}
+customFunctionNamesTable[6][0] = "SECT"
+customFunctionNamesTable[6][1] = "TIME"
+customFunctionNamesTable[7] = {}
+customFunctionNamesTable[7][0] = "TIME"
+customFunctionNamesTable[7][1] = "REMN"
+customFunctionNamesTable[8] = {}
+customFunctionNamesTable[8][0] = "ACCL"
+customFunctionNamesTable[8][1] = "BRKE"
+customFunctionNamesTable[9] = {}
+customFunctionNamesTable[9][0] = "WATR"
+customFunctionNamesTable[9][1] = " OIL"
+customFunctionNamesTable[10] = {}
+customFunctionNamesTable[10][0] = "FUEL"
+customFunctionNamesTable[10][1] = "TANK"
+customFunctionNamesTable[11] = {}
+customFunctionNamesTable[11][0] = "LAPF"
+customFunctionNamesTable[11][1] = "LAPR"
+customFunctionNamesTable[12] = {}
+customFunctionNamesTable[12][0] = "TARG"
+customFunctionNamesTable[12][1] = "LAPR"

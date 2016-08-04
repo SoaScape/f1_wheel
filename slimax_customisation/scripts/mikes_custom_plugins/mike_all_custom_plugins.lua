@@ -14,6 +14,10 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 end
 
 function custom_left_Display_Event(swPosition)
+	if customFunctionNamesTable ~= nil and (prevFunction == nil or prevFunction ~= swPosition) then
+		prevFunction = swPosition
+		function display(customFunctionNamesTable[swPosition][0], customFunctionNamesTable[swPosition][1], myDevice, mDisplay_Info_Delay)
+	end
 	return dispEvent(0, swPosition)
 end
 
