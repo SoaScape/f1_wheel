@@ -68,7 +68,19 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				-- Multifunction Up/Dn
 				if currentMultifunction["upDnSelectable"] then
 					if ctrlPos == upButton or ctrlPos == upEncoder then
-						if currentMultifunction["currentUpDnMode"] < currentMultifunction["max"] then
+						if currentMultifunction["name"] == "OSP" then
+							local ospf = GetContextInfo("osp_factor")
+							local inc = 1
+							if ctrlPos == upEncoder then
+								inc = encoderIncrement
+							end
+							ospf = ospf + inc
+							if ospf > 999 then
+								ospf = 999
+							end
+							SetOSPFactor(ospf)
+							display("OSP ", string.format(" %03d  ", ospf), myDevice, confirmDelay)
+						elseif currentMultifunction["currentUpDnMode"] < currentMultifunction["max"] then
 							currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] + 1
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
@@ -88,7 +100,19 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						end
 						return 1
 					elseif ctrlPos == downButton or ctrlPos == downEncoder then
-						if currentMultifunction["currentUpDnMode"] > currentMultifunction["min"] then
+						if currentMultifunction["name"] == "OSP" then
+							local ospf = GetContextInfo("osp_factor")
+							local inc = 1
+							if ctrlPos == upEncoder then
+								inc = encoderIncrement
+							end
+							ospf = ospf - inc
+							if ospf < 0 then
+								ospf = 0
+							end
+							SetOSPFactor(ospf)
+							display("OSP ", string.format(" %03d  ", ospf), myDevice, confirmDelay)
+						elseif currentMultifunction["currentUpDnMode"] > currentMultifunction["min"] then
 							currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] - 1
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)

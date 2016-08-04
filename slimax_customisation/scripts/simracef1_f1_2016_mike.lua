@@ -134,6 +134,9 @@ multifunctionMap[6]["modes"][4] = "WETS"
 
 multifunctionMap[7] = {}
 multifunctionMap[7]["name"] = "OSP"
+multifunctionMap[7]["enabled"] = true
+multifunctionMap[7]["upDnSelectable"] = true
+
 multifunctionMap[8] = {}
 multifunctionMap[8]["name"] = "PIT"
 multifunctionMap[9] = {}
