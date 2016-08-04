@@ -16,7 +16,7 @@ multifunctionMap[1]["name"] = "RSET"
 multifunctionMap[1]["enabled"] = true
 
 multifunctionMap[2] = {}
-multifunctionMap[2]["name"] = "MIX "
+multifunctionMap[2]["name"] = "MIX"
 multifunctionMap[2]["enabled"] = true
 multifunctionMap[2]["menu"] = 1
 multifunctionMap[2]["row"] = 1
@@ -133,16 +133,16 @@ multifunctionMap[6]["modes"][3] = "INTR"
 multifunctionMap[6]["modes"][4] = "WETS"
 
 multifunctionMap[7] = {}
-multifunctionMap[7]["name"] = " OSP"
+multifunctionMap[7]["name"] = "OSP"
 multifunctionMap[8] = {}
-multifunctionMap[8]["name"] = " PIT"
+multifunctionMap[8]["name"] = "PIT"
 multifunctionMap[9] = {}
-multifunctionMap[9]["name"] = " SPR"
+multifunctionMap[9]["name"] = "SPR"
 multifunctionMap[10] = {}
-multifunctionMap[10]["name"] = " OFF"
+multifunctionMap[10]["name"] = "OFF"
 
 multifunctionMap[11] = {}
-multifunctionMap[11]["name"] = " CAM"
+multifunctionMap[11]["name"] = "CAM"
 multifunctionMap[11]["enabled"] = true
 multifunctionMap[11]["upDnSelectable"] = true
 multifunctionMap[11]["upDnConfirmRequired"] = false
