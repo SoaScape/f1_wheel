@@ -180,7 +180,7 @@ multifunctionMap[12]["modes"][2] = "WEAR"
 multifunctionMap[12]["modes"][3] = "TEMP"
 
 -- Used by the overtake button
-fuelMultiFunction = multifunctionMap[1]
+fuelMultiFunction = multifunctionMap[2]
 overtakeButtonEnabled = true
 
 function custom_init_Event(scriptfile)	
