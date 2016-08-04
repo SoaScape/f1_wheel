@@ -50,7 +50,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
 			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
-				if overtakeButtonEnabled then
+				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
 					if overtakeEngaged then
 						overtakeEngaged = false
 						multiFunctionBak = currentMultifunction
