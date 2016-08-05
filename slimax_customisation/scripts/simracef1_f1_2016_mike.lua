@@ -190,11 +190,13 @@ function getButtonMap(currentMultifunction)
 		-- selected, therefore the button maps will need to change on the fly.
 		index = 0
 		buttonMap = {}	
-
+		numQuickMenuChanges = 0
+		
 		openMenuButtons = getOpenMenuButtons(currentMultifunction["menu"])
 		for key, value in pairs(customButtons) do			
 			buttonMap[index] = value
 			index = index + 1
+			numQuickMenuChanges = numQuickMenuChanges + 1
 		end
 		
 		selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
@@ -228,6 +230,13 @@ function getButtonMap(currentMultifunction)
 			index = index + 1
 		end
 		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
+		
+		-- Finally, we want to return the quick menu to the previously selected one, if any.
+		for i = 0, (numMenus - numQuickMenuChanges) do
+			buttonMap[index] = quickMenuToggleKey
+			index = index + 1
+		end
+		
 		return buttonMap
 	elseif currentMultifunction["name"] == "INFO" then
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
