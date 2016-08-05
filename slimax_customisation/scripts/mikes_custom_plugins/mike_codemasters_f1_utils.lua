@@ -12,7 +12,7 @@ buttonTrackerMap[quickMenuToggleButton] = 0
 
 function getOpenMenuButtons(chosenMenu)
 	local buttons = {}
-	local currentMenu = buttonTrackerMap[quickMenuToggleButton] % (numMenus + 1)
+	local currentMenu = getCurrentMenu()
 	if currentMenu ~= chosenMenu then
 		if chosenMenu < currentMenu then
 			local closeMenuClicks = (numMenus + 1) - currentMenu
@@ -28,6 +28,10 @@ function getOpenMenuButtons(chosenMenu)
 		end		
 	end	
 	return buttons
+end
+
+function getCurrentMenu()
+	return buttonTrackerMap[quickMenuToggleButton] % (numMenus + 1)
 end
 
 function getSelectRowButtons(chosenRow)
