@@ -54,23 +54,24 @@ function updateBlinkingLed(ledInfo, pattern)
 	SetPatternLed(pattern, ledInfo["state"])
 end
 
-function updateAlternateBlinkingLed(ledInfo) 
+function updateAlternateBlinkingLed(ledInfo)
+	local numPatterns = tablelength(ledInfo["patterns"]) - 1
 	if getTks() >= ledInfo["nextChange"] then
 		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
 		
-		if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"])-1 then
+		if ledInfo["currentPatternIndex"] < numPatterns then
 			ledInfo["currentPatternIndex"] = ledInfo["currentPatternIndex"] + 1
 		else
 			ledInfo["currentPatternIndex"] = 0
 		end
 	end
 	
-	for key, value in pairs(ledInfo["patterns"]) do
+	for i = 0, numPatterns do
 		local ledState = ledOff
-		if key == ledInfo["currentPatternIndex"] then
+		if i == ledInfo["currentPatternIndex"] then
 			ledState = ledOn
 		end
-		SetPatternLed(value, ledState)
+		SetPatternLed(ledInfo["patterns"][i], ledState)
 	end
 end
 
