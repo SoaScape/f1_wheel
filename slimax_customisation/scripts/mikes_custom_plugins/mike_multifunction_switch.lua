@@ -57,6 +57,10 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						currentMultifunction = fuelMultiFunction
 						confirmSelection("OVTK", " END", deviceType, getButtonMap(currentMultifunction))
 						currentMultifunction = multiFunctionBak
+						
+						if ospBak ~= nil then
+							SetOSPFactor(ospBak)
+						end
 					else
 						overtakeEngaged = true
 						multiFunctionBak = currentMultifunction
@@ -66,6 +70,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
 						currentMultifunction["currentUpDnMode"] = fuelModeBak
 						currentMultifunction = multiFunctionBak
+						
+						if overtakeOspOverdrive then
+							ospBak = GetContextInfo("osp_factor")
+							SetOSPFactor(GetContextInfo("osp_overdrive"))
+						end
 					end
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then			

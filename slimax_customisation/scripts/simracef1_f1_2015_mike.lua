@@ -181,6 +181,7 @@ multifunctionMap[12]["modes"][3] = "TEMP"
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
 overtakeButtonEnabled = true
+overtakeOspOverdrive = true
 
 function custom_init_Event(scriptfile)	
 end
