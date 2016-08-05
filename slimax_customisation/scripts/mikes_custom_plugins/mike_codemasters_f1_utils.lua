@@ -10,6 +10,62 @@ nextCameraKey = "C"
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
 
+function getTrackableQuickMenuSettingButtons(currentMultifunction)
+	-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
+	-- selected, therefore the button maps will need to change on the fly.
+	local index = 0
+	local buttonMap = {}	
+	local numQuickMenuChanges = 0
+	
+	local openMenuButtons = getOpenMenuButtons(currentMultifunction["menu"])
+	for key, value in pairs(openMenuButtons) do			
+		buttonMap[index] = value
+		index = index + 1
+		numQuickMenuChanges = numQuickMenuChanges + 1
+	end
+	
+	local selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
+	for key, value in pairs(customButtons) do			
+		buttonMap[index] = value
+		index = index + 1
+	end
+
+	if currentMultifunction["currentPosition"] == nil then
+		-- We don't know what's currently selected. Therefore move the selector
+		-- all the way to the bottom so we know the 'min' mode is selected
+		for i = currentMultifunction["min"], currentMultifunction["max"] do
+			buttonMap[index] = quickMenuLeft
+			index = index + 1
+		end
+		-- Now we know the currently selected mode so store it
+		currentMultifunction["currentPosition"] = currentMultifunction["min"]
+	end
+	
+	-- Now increment or decrement to reach the requested mode (currentUpDnMode)
+	local keyPress = quickMenuRight
+	local step = 1
+	local loopStartIndex = currentMultifunction["currentPosition"] - 1
+	if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
+		keyPress = quickMenuLeft
+		loopStartIndex = currentMultifunction["currentPosition"] + 1
+		step = -1
+	end
+	for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"], step do
+		buttonMap[index] = keyPress
+		index = index + 1
+	end
+	currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
+	
+	-- Finally, we want to return the quick menu to the previously selected one, if any.
+	for i = 0, (numMenus - numQuickMenuChanges) do
+		buttonMap[index] = quickMenuToggleKey
+		buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
+		index = index + 1
+	end
+	
+	return buttonMap
+end
+
 function getOpenMenuButtons(chosenMenu)
 	local buttons = {}
 	local currentMenu = getCurrentMenu()

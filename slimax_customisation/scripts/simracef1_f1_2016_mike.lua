@@ -4,8 +4,8 @@ require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 numMenus = 4
 
 customKeystrokeDelays = {}
-customKeystrokeDelays[quickMenuLeft] = 10
-customKeystrokeDelays[quickMenuRight] = 10
+customKeystrokeDelays[quickMenuLeft] = 5
+customKeystrokeDelays[quickMenuRight] = 5
 
 multifunctionMap = {}
 
@@ -186,58 +186,7 @@ end
 
 function getButtonMap(currentMultifunction)
 	if currentMultifunction["menu"] ~= nil then
-		-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
-		-- selected, therefore the button maps will need to change on the fly.
-		index = 0
-		buttonMap = {}	
-		numQuickMenuChanges = 0
-		
-		openMenuButtons = getOpenMenuButtons(currentMultifunction["menu"])
-		for key, value in pairs(customButtons) do			
-			buttonMap[index] = value
-			index = index + 1
-			numQuickMenuChanges = numQuickMenuChanges + 1
-		end
-		
-		selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
-		for key, value in pairs(customButtons) do			
-			buttonMap[index] = value
-			index = index + 1
-		end
-
-		if currentMultifunction["currentPosition"] == nil then
-			-- We don't know what's currently selected. Therefore move the selector
-			-- all the way to the bottom so we know the 'min' mode is selected
-			for i = currentMultifunction["min"], currentMultifunction["max"] do
-				buttonMap[index] = quickMenuLeft
-				index = index + 1
-			end
-			-- Now we know the currently selected mode so store it
-			currentMultifunction["currentPosition"] = currentMultifunction["min"]
-		end
-		
-		-- Now increment or decrement to reach the requested mode (currentUpDnMode)
-		local keyPress = quickMenuRight
-		local step = 1
-		local loopStartIndex = currentMultifunction["currentPosition"] - 1
-		if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
-			keyPress = quickMenuLeft
-			loopStartIndex = currentMultifunction["currentPosition"] + 1
-			step = -1
-		end
-		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"], step do
-			buttonMap[index] = keyPress
-			index = index + 1
-		end
-		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
-		
-		-- Finally, we want to return the quick menu to the previously selected one, if any.
-		for i = 0, (numMenus - numQuickMenuChanges) do
-			buttonMap[index] = quickMenuToggleKey
-			index = index + 1
-		end
-		
-		return buttonMap
+		return getTrackableQuickMenuSettingButtons(currentMultifunction)
 	elseif currentMultifunction["name"] == "INFO" then
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
 	elseif currentMultifunction["confirmButtonMap"] ~= nil then
