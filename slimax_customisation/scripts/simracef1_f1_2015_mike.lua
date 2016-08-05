@@ -190,8 +190,6 @@ function getButtonMap(currentMultifunction)
 		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
 		return currentMultifunction["confirmButtonMap"]
 	elseif currentMultifunction["name"] == "INFO" then
-		next = 0
-		buttonMap = {}
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
 	else
 		-- F1 2015 quick-menu doesn't keep track of what's selected so button maps are always static
