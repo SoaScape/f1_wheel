@@ -58,7 +58,7 @@ function updateAlternateBlinkingLed(ledInfo)
 	if getTks() >= ledInfo["nextChange"] then
 		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
 		
-		if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"]-1) then
+		if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"])-1 then
 			ledInfo["currentPatternIndex"] = ledInfo["currentPatternIndex"] + 1
 		else
 			ledInfo["currentPatternIndex"] = 0
