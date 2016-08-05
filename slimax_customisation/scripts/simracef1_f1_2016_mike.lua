@@ -188,27 +188,27 @@ function getButtonMap(currentMultifunction)
 	if currentMultifunction["menu"] ~= nil then
 		-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
 		-- selected, therefore the button maps will need to change on the fly.
-		next = 0
+		index = 0
 		buttonMap = {}	
 
 		openMenuButtons = getOpenMenuButtons(currentMultifunction["menu"])
 		for key, value in pairs(customButtons) do			
-			buttonMap[next] = value
-			next = next + 1
+			buttonMap[index] = value
+			index = index + 1
 		end
 		
 		selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
 		for key, value in pairs(customButtons) do			
-			buttonMap[next] = value
-			next = next + 1
+			buttonMap[index] = value
+			index = index + 1
 		end
 
 		if currentMultifunction["currentPosition"] == nil then
 			-- We don't know what's currently selected. Therefore move the selector
 			-- all the way to the bottom so we know the 'min' mode is selected
 			for i = currentMultifunction["min"], currentMultifunction["max"] do
-				buttonMap[next] = quickMenuLeft
-				next = next + 1
+				buttonMap[index] = quickMenuLeft
+				index = index + 1
 			end
 			-- Now we know the currently selected mode so store it
 			currentMultifunction["currentPosition"] = currentMultifunction["min"]
@@ -224,8 +224,8 @@ function getButtonMap(currentMultifunction)
 			step = -1
 		end
 		for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"], step do
-			buttonMap[next] = keyPress
-			next = next + 1
+			buttonMap[index] = keyPress
+			index = index + 1
 		end
 		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
 		return buttonMap
