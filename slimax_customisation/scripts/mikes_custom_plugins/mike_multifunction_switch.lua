@@ -13,8 +13,8 @@ setValueSwitchId = 1
 overtakeButton = 10
 startFuelLockButton = 3
 overtakeLedPatterns = {}
-overtakeLedPatterns[0] = 64
-overtakeLedPatterns[1] = 128
+overtakeLedPatterns[0] = 128
+overtakeLedPatterns[1] = 64
 --------------------------------------------------
 selectDelay = 600
 confirmDelay = 1000
@@ -67,11 +67,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						end
 					else
 						overtakeEngaged = true
+						activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil)
 						multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
 						fuelModeBak = currentMultifunction["currentUpDnMode"]
 						currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
-						activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil)
 						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
 						currentMultifunction["currentUpDnMode"] = fuelModeBak
 						currentMultifunction = multiFunctionBak
