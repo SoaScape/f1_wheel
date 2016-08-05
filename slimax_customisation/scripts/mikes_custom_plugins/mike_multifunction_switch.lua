@@ -12,6 +12,7 @@ downEncoder = 24
 setValueSwitchId = 1
 overtakeButton = 10
 startFuelLockButton = 3
+overtakeLedPattern = 192
 --------------------------------------------------
 selectDelay = 600
 confirmDelay = 1000
@@ -56,6 +57,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
 						confirmSelection("OVTK", " END", deviceType, getButtonMap(currentMultifunction))
+						deactivatePermanentLed(overtakeLedPattern)
 						currentMultifunction = multiFunctionBak
 						
 						if ospBak ~= nil then
@@ -68,6 +70,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						fuelModeBak = currentMultifunction["currentUpDnMode"]
 						currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
 						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
+						activatePermanentLed(overtakeLedPattern, 0)
 						currentMultifunction["currentUpDnMode"] = fuelModeBak
 						currentMultifunction = multiFunctionBak
 						
