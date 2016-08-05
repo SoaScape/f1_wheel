@@ -25,7 +25,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	end
 	
 	local selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
-	for key, value in pairs(customButtons) do			
+	for key, value in pairs(selectRowButtons) do			
 		buttonMap[index] = value
 		index = index + 1
 	end
