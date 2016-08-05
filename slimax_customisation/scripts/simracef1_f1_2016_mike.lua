@@ -1,8 +1,6 @@
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
-keystrokeDelay = 15
-
 numMenus = 4
 
 customKeystrokeDelays = {}

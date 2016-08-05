@@ -10,13 +10,13 @@ downButton = 27
 upEncoder = 23
 downEncoder = 24
 setValueSwitchId = 1
-
 overtakeButton = 10
 startFuelLockButton = 3
 --------------------------------------------------
 selectDelay = 600
 confirmDelay = 1000
 multiSelectDelay = 500
+keystrokeDelay = 15
 kiloDivider = 0.750
 encoderIncrement = 10
 fuelEncoderIncrement = (10 / (kiloDivider * 10)) * encoderIncrement
