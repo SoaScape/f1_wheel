@@ -58,8 +58,8 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						overtakeEngaged = false
 						multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
-						confirmSelection("OVTK", " END", deviceType, getButtonMap(currentMultifunction))
 						deactivateAlternateBlinkingLeds("overtake")
+						confirmSelection("OVTK", " END", deviceType, getButtonMap(currentMultifunction))
 						currentMultifunction = multiFunctionBak
 						
 						if ospBak ~= nil then
@@ -71,8 +71,8 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						currentMultifunction = fuelMultiFunction
 						fuelModeBak = currentMultifunction["currentUpDnMode"]
 						currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
-						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
 						activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil)
+						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
 						currentMultifunction["currentUpDnMode"] = fuelModeBak
 						currentMultifunction = multiFunctionBak
 						

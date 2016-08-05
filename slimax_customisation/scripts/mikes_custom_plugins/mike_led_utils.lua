@@ -54,24 +54,23 @@ function updateBlinkingLed(ledInfo, pattern)
 	SetPatternLed(pattern, ledInfo["state"])
 end
 
-function updateAlternateBlinkingLed(ledInfo)
-	local numPatterns = tablelength(ledInfo["patterns"]) - 1
+function updateAlternateBlinkingLed(ledInfo) 
 	if getTks() >= ledInfo["nextChange"] then
 		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
 		
-		if ledInfo["currentPatternIndex"] < numPatterns then
+		if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"])-1 then
 			ledInfo["currentPatternIndex"] = ledInfo["currentPatternIndex"] + 1
 		else
 			ledInfo["currentPatternIndex"] = 0
 		end
 	end
 	
-	for i = 0, numPatterns do
+	for key, value in pairs(ledInfo["patterns"]) do
 		local ledState = ledOff
-		if i == ledInfo["currentPatternIndex"] then
+		if key == ledInfo["currentPatternIndex"] then
 			ledState = ledOn
 		end
-		SetPatternLed(ledInfo["patterns"][i], ledState)
+		SetPatternLed(value, ledState)
 	end
 end
 
@@ -120,18 +119,24 @@ function activatePermanentLed(pattern, delay)
 end
 
 function deactivatePermanentLed(pattern)
-	activePermanentLeds[pattern] = nil
-	SetPatternLed(pattern, ledOff)
+	if activePermanentLeds[pattern] ~= nil then
+		activePermanentLeds[pattern] = nil
+		SetPatternLed(pattern, ledOff)
+	end
 end
 
 function deactivateBlinkingLed(pattern)
-	activeBlinkingLeds[pattern] = nil
-	SetPatternLed(pattern, ledOff)
+	if activeBlinkingLeds[pattern] ~= nil then
+		activeBlinkingLeds[pattern] = nil
+		SetPatternLed(pattern, ledOff)
+	end
 end
 
 function deactivateAlternateBlinkingLeds(id)
-	for key, value in pairs(activeAlternateBlinkingLeds[id]["patterns"]) do
-		SetPatternLed(value, ledOff)
+	if activeAlternateBlinkingLeds[id] ~= nil then
+		for key, value in pairs(activeAlternateBlinkingLeds[id]["patterns"]) do
+			SetPatternLed(value, ledOff)
+		end
+		activeAlternateBlinkingLeds[id] = nil
 	end
-	activeAlternateBlinkingLeds[id] = nil
 end
