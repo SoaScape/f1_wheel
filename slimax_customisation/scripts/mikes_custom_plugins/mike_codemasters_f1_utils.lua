@@ -17,6 +17,8 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	local buttonMap = {}	
 	local numQuickMenuChanges = 0
 	
+	-- Open the quick menu to the required menu page, taking into account what page
+	-- (if any) is currently being shown
 	local openMenuButtons = getOpenMenuButtons(currentMultifunction["menu"])
 	for key, value in pairs(openMenuButtons) do			
 		buttonMap[index] = value
@@ -24,6 +26,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		numQuickMenuChanges = numQuickMenuChanges + 1
 	end
 	
+	-- Scroll down to the required row.
 	local selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
 	for key, value in pairs(selectRowButtons) do			
 		buttonMap[index] = value
@@ -50,10 +53,12 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		loopStartIndex = currentMultifunction["currentPosition"] + 1
 		step = -1
 	end
-	for i = currentMultifunction["currentPosition"], currentMultifunction["currentUpDnMode"], step do
+	for i = loopStartIndex, currentMultifunction["currentUpDnMode"], step do
 		buttonMap[index] = keyPress
 		index = index + 1
 	end
+	
+	-- Update the current position to match what we have selected.
 	currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
 	
 	-- Finally, we want to return the quick menu to the previously selected one, if any.
