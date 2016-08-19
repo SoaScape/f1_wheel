@@ -149,7 +149,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							end
 						end
 						return 1			
-					elseif ctrlPos == confirmButton then
+					elseif ctrlPos == confirmButton and currentMultifunction["name"] ~= "OSP" then
 						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 						return 1
 					end
