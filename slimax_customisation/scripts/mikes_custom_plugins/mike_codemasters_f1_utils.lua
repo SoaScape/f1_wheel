@@ -38,7 +38,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	if currentMultifunction["currentPosition"] == nil then
 		-- We don't know what's currently selected. Therefore move the selector
 		-- all the way to the bottom so we know the 'min' mode is selected
-		for i = currentMultifunction["min"], currentMultifunction["max"] do
+		for i = currentMultifunction["min"], currentMultifunction["max"] - 1 do
 			buttonMap[index] = quickMenuLeft
 			index = index + 1
 		end
@@ -49,10 +49,10 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	-- Now increment or decrement to reach the requested mode (currentUpDnMode)
 	local keyPress = quickMenuRight
 	local step = 1
-	local loopStartIndex = currentMultifunction["currentPosition"] - 1
+	local loopStartIndex = currentMultifunction["currentPosition"] + 1
 	if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
 		keyPress = quickMenuLeft
-		loopStartIndex = currentMultifunction["currentPosition"] + 1
+		loopStartIndex = currentMultifunction["currentPosition"] - 1
 		step = -1
 	end
 	for i = loopStartIndex, currentMultifunction["currentUpDnMode"], step do
