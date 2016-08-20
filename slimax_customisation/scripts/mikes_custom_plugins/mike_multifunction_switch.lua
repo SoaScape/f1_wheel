@@ -20,6 +20,7 @@ selectDelay = 600
 confirmDelay = 1000
 multiSelectDelay = 500
 keystrokeDelay = 15
+keyHoldDelay = 10
 kiloDivider = 0.750
 encoderIncrement = 10
 fuelEncoderIncrement = (10 / (kiloDivider * 10)) * encoderIncrement
@@ -215,7 +216,7 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 				delay = customKeystrokeDelays[buttonMap[i]]
 			end
 			-- params: key, delay, modifier
-			SetKeystroke(buttonMap[i], delay, "")
+			SetKeystroke(buttonMap[i], keyHoldDelay, "")
 			SLISleep(delay)
 		end
 		setDisplayTimeout(confirmDelay)
