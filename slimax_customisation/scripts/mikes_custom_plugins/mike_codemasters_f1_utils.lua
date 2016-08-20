@@ -62,10 +62,12 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
 	
 	-- Finally, we want to return the quick menu to the previously selected one, if any.
-	for i = 0, (numMenus - numQuickMenuChanges) do
-		buttonMap[index] = quickMenuToggleKey
-		buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
-		index = index + 1
+	if numQuickMenuChanges > 0 then
+		for i = 0, (numMenus - numQuickMenuChanges) do
+			buttonMap[index] = quickMenuToggleKey
+			buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
+			index = index + 1
+		end
 	end
 	
 	return buttonMap
