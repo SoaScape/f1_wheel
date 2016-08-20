@@ -4,8 +4,8 @@ require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 numMenus = 4
 
 customKeystrokeDelays = {}
-customKeystrokeDelays[quickMenuLeft] = 5
-customKeystrokeDelays[quickMenuRight] = 5
+--customKeystrokeDelays[quickMenuLeft] = 5
+--customKeystrokeDelays[quickMenuRight] = 5
 
 multifunctionMap = {}
 
@@ -112,6 +112,7 @@ multifunctionMap[6]["upDnSelectable"] = true
 multifunctionMap[6]["upDnConfirmRequired"] = true
 multifunctionMap[6]["defaultUpDnMode"] = 2
 multifunctionMap[6]["currentUpDnMode"] = multifunctionMap[6]["defaultUpDnMode"]
+multifunctionMap[6]["currentPosition"] = multifunctionMap[6]["defaultUpDnMode"]
 multifunctionMap[6]["min"] = 0
 multifunctionMap[6]["max"] = 4
 multifunctionMap[6]["modes"] = {}
