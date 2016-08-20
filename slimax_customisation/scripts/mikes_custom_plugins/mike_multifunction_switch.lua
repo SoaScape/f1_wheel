@@ -26,6 +26,7 @@ encoderIncrement = 10
 fuelEncoderIncrement = (10 / (kiloDivider * 10)) * encoderIncrement
 fuelButtonIncrement = (10 / (kiloDivider * 10))
 customDisplayTicksTimeout = 0
+confirmTimeout = 0
 resetMultiFunctionName = "RSET"
 currentMultifunction = nil
 overtakeEngaged = false
@@ -208,7 +209,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 end
 
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
-	if mSessionEnter == 1 and not(m_is_sim_idle) then
+	if mSessionEnter == 1 and not(m_is_sim_idle) and getTks() > confirmTimeout then
 		display(leftDisp, rightDisplay, deviceType, 0)
 		for i=0,tablelength(buttonMap)-1 do
 			local delay = keystrokeDelay
@@ -223,6 +224,10 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 		end
 		delayMap = nil
 		setDisplayTimeout(confirmDelay)
+		
+		if currentMultifunction["confirmDelay"] ~= nil then
+			confirmTimeout = getTks() + currentMultifunction["confirmDelay"]
+		end
 	end
 end
 
