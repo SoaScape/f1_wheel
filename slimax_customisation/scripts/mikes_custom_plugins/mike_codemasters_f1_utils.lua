@@ -100,7 +100,7 @@ function getOpenMenuButtons(chosenMenu)
 		
 		if currentMenu == 0 then
 			delayMap = {}
-			delayMap[0] = 200
+			delayMap[0] = 500
 		end
 	end	
 	return buttons
