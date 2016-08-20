@@ -16,6 +16,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	local index = 0
 	local buttonMap = {}	
 	local numQuickMenuChanges = 0
+	local numRowChanges = 0
 	
 	-- Open the quick menu to the required menu page, taking into account what page
 	-- (if any) is currently being shown
@@ -31,6 +32,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	for key, value in pairs(selectRowButtons) do			
 		buttonMap[index] = value
 		index = index + 1
+		numRowChanges = numRowChanges + 1
 	end
 
 	if currentMultifunction["currentPosition"] == nil then
@@ -66,6 +68,12 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		for i = 0, (numMenus - numQuickMenuChanges) do
 			buttonMap[index] = quickMenuToggleKey
 			buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
+			index = index + 1
+		end
+	elseif numRowChanges > 0 then
+		-- We were already on the correct menu, so return the row to the top
+		for i = 0, (numRowChanges - 1) do
+			buttonMap[index] = quickMenuUp
 			index = index + 1
 		end
 	end
