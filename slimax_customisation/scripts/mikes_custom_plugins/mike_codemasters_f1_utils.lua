@@ -88,7 +88,12 @@ function getOpenMenuButtons(chosenMenu)
 				buttons[i] = quickMenuToggleKey
 				buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
 			end
-		end		
+		end
+		
+		if currentMenu == 0 then
+			delayMap = {}
+			delayMap[0] = 200
+		end
 	end	
 	return buttons
 end
