@@ -6,8 +6,8 @@ numMenus = 4
 confirmDelay = 1000
 
 customKeystrokeDelays = {}
---customKeystrokeDelays[quickMenuLeft] = 5
---customKeystrokeDelays[quickMenuRight] = 5
+customKeystrokeDelays[quickMenuLeft] = 30
+customKeystrokeDelays[quickMenuRight] = 30
 
 multifunctionMap = {}
 

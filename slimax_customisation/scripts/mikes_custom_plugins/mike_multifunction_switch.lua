@@ -19,8 +19,8 @@ overtakeLedPatterns[1] = 64
 selectDelay = 600
 confirmDelay = 1000
 multiSelectDelay = 500
-keystrokeDelay = 20
-keyHoldDelay = 10
+keystrokeDelay = 500
+keyHoldDelay = 20
 kiloDivider = 0.750
 encoderIncrement = 10
 fuelEncoderIncrement = (10 / (kiloDivider * 10)) * encoderIncrement
@@ -211,6 +211,7 @@ end
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
 	if mSessionEnter == 1 and not(m_is_sim_idle) and getTks() > confirmTimeout then
 		display(leftDisp, rightDisplay, deviceType, 0)
+--print("===Keypresses Start===")
 		for i=0,tablelength(buttonMap)-1 do
 			local delay = keystrokeDelay
 			if delayMap ~= nil and delayMap[i] ~= nil then
@@ -218,13 +219,14 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 			elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
 				delay = customKeystrokeDelays[buttonMap[i]]
 			end
+--print("Key: " .. buttonMap[i] .. ", Delay: " .. delay)			
 			-- params: key, delay, modifier
 			SetKeystroke(buttonMap[i], keyHoldDelay, "")
 			SLISleep(delay)
 		end
 		delayMap = nil
 		setDisplayTimeout(confirmDelay)
-		
+--print("===Keypresses End===")
 		if currentMultifunction["confirmDelay"] ~= nil then
 			confirmTimeout = getTks() + currentMultifunction["confirmDelay"]
 		end

@@ -7,6 +7,8 @@ quickMenuRight = "NUMPAD6"
 prevCameraKey = "X"
 nextCameraKey = "C"
 
+extraDelay = 500
+
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
 
@@ -17,6 +19,8 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	local buttonMap = {}	
 	local numQuickMenuChanges = 0
 	local numRowChanges = 0
+	
+	delayMap = {}
 	
 	-- Open the quick menu to the required menu page, taking into account what page
 	-- (if any) is currently being shown
@@ -59,7 +63,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		buttonMap[index] = keyPress
 		index = index + 1
 	end
-	
+	delayMap[index-1] = extraDelay
 	-- Update the current position to match what we have selected.
 	currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
 	
@@ -100,7 +104,7 @@ function getOpenMenuButtons(chosenMenu)
 		
 		if currentMenu == 0 then
 			delayMap = {}
-			delayMap[0] = 500
+			delayMap[0] = extraDelay
 		end
 	end	
 	return buttons
