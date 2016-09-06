@@ -17,24 +17,24 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
 	-- selected, therefore the button maps will need to change on the fly.
 	local index = 0
-	local buttonMap = {}	
+	local buttonMap = {}
 	local numQuickMenuChanges = 0
 	local numRowChanges = 0
-	
+
 	delayMap = {}
-	
+
 	-- Open the quick menu to the required menu page, taking into account what page
 	-- (if any) is currently being shown
 	local openMenuButtons = getOpenMenuButtons(currentMultifunction["menu"])
-	for key, value in pairs(openMenuButtons) do			
+	for key, value in pairs(openMenuButtons) do
 		buttonMap[index] = value
 		index = index + 1
 		numQuickMenuChanges = numQuickMenuChanges + 1
 	end
-	
+
 	-- Scroll down to the required row.
 	local selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
-	for key, value in pairs(selectRowButtons) do			
+	for key, value in pairs(selectRowButtons) do
 		buttonMap[index] = value
 		index = index + 1
 		numRowChanges = numRowChanges + 1
@@ -50,7 +50,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		-- Now we know the currently selected mode so store it
 		currentMultifunction["currentPosition"] = currentMultifunction["min"]
 	end
-	
+
 	-- Now increment or decrement to reach the requested mode (currentUpDnMode)
 	local keyPress = quickMenuRight
 	local step = 1
@@ -67,7 +67,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	delayMap[index-1] = extraDelay
 	-- Update the current position to match what we have selected.
 	currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
-	
+
 	-- Finally, we want to return the quick menu to the previously selected one, if any.
 	if numQuickMenuChanges > 0 then
 		for i = 0, (numMenus - numQuickMenuChanges) do
@@ -82,7 +82,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 			index = index + 1
 		end
 	end
-	
+
 	return buttonMap
 end
 
@@ -102,12 +102,12 @@ function getOpenMenuButtons(chosenMenu)
 				buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
 			end
 		end
-		
+
 		if currentMenu == 0 then
 			delayMap = {}
 			delayMap[0] = extraDelay
 		end
-	end	
+	end
 	return buttons
 end
 
@@ -116,10 +116,10 @@ function getCurrentMenu()
 end
 
 function getSelectRowButtons(chosenRow)
-	local buttons = {}	
+	local buttons = {}
 	for i = 0, chosenRow - 1 do
 		buttons[i] = quickMenuDn
-	end	
+	end
 	return buttons
 end
 

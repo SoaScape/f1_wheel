@@ -33,13 +33,13 @@ overtakeEngaged = false
 customDisplayActive = false
 
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
-	if deviceType == myDevice then	
+	if deviceType == myDevice then
 		trackButtons(ctrlType, ctrlPos, value)
 		--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. "\n")
-		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then			
+		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then
 			if multifunctionMap[value] ~= nil then
-				currentMultifunction = multifunctionMap[value]			
-			
+				currentMultifunction = multifunctionMap[value]
+
 				if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
 					if currentMultifunction["name"] ~= "OSP" then
 						display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, multiSelectDelay)
@@ -51,7 +51,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				end
 				return 1
 			end
-		
+
 		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
 			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
@@ -63,7 +63,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						deactivateAlternateBlinkingLeds("overtake")
 						confirmSelection("OVTK", " END", deviceType, getButtonMap(currentMultifunction))
 						currentMultifunction = multiFunctionBak
-						
+
 						if ospBak ~= nil then
 							SetOSPFactor(ospBak)
 						end
@@ -77,14 +77,14 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
 						currentMultifunction["currentUpDnMode"] = fuelModeBak
 						currentMultifunction = multiFunctionBak
-						
+
 						if overtakeOspOverdrive then
 							ospBak = GetContextInfo("osp_factor")
 							SetOSPFactor(GetContextInfo("osp_overdrive"))
 						end
 					end
 				end
-			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then			
+			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
 				if currentMultifunction["upDnSelectable"] then
 					if ctrlPos == upButton or ctrlPos == upEncoder then
@@ -111,7 +111,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["wrap"] then
 								currentMultifunction["currentUpDnMode"] = currentMultifunction["min"]
 							end
-							
+
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
@@ -143,25 +143,25 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["wrap"] then
 								currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
 							end
-							
+
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
 								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 							end
 						end
-						return 1			
+						return 1
 					elseif ctrlPos == confirmButton and currentMultifunction["name"] ~= "OSP" then
 						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
 						return 1
 					end
-				
+
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
-				elseif ctrlPos == confirmButton then		
-					confirmSelection(currentMultifunction["name"], "CONF", deviceType, getButtonMap(currentMultifunction))				
+				elseif ctrlPos == confirmButton then
+					confirmSelection(currentMultifunction["name"], "CONF", deviceType, getButtonMap(currentMultifunction))
 					return 1
 				end
-			
+
 			elseif currentMultifunction["name"] ~= resetMultiFunctionName and ctrlType == switch and ctrlPos == setValueSwitchId and currentMultifunction["upDnSelectable"] then
 				upDnValue = value - 1
 				if upDnValue >= currentMultifunction["min"] and upDnValue <= currentMultifunction["max"] then
@@ -179,7 +179,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						inc = fuelEncoderIncrement
 					end
 					fuelAtStart = fuelAtStart + inc
-					
+
 					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, confirmDelay)
 					return 1
 				elseif startFuelLocked and (ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil) then
@@ -204,11 +204,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			end
 		end
 	end
-	
+
 	return 2
 end
 
-function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)	
+function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 	if mSessionEnter == 1 and not(m_is_sim_idle) and getTks() > confirmTimeout then
 		display(leftDisp, rightDisplay, deviceType, 0)
 --print("===Keypresses Start===")
@@ -219,7 +219,7 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 			elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
 				delay = customKeystrokeDelays[buttonMap[i]]
 			end
---print("Key: " .. buttonMap[i] .. ", Delay: " .. delay)			
+--print("Key: " .. buttonMap[i] .. ", Delay: " .. delay)
 			-- params: key, delay, modifier
 			SetKeystroke(buttonMap[i], keyHoldDelay, "")
 			SLISleep(delay)
@@ -239,7 +239,7 @@ function trackButtons(ctrlType, ctrlPos, value)
 	end
 end
 
-function setDefaultModes()	
+function setDefaultModes()
 	for key, value in pairs(multifunctionMap) do
 		if value["defaultUpDnMode"] ~= nil then
 			value["currentUpDnMode"] = value["defaultUpDnMode"]
@@ -248,13 +248,13 @@ function setDefaultModes()
 		end
 		value["currentPosition"] = nil
 	end
-	
+
 	if buttonTrackerMap ~= nil then
 		for key, value in pairs(buttonTrackerMap) do
 			buttonTrackerMap[key] = 0
 		end
 	end
-	
+
 	overtakeEngaged = false
 	resetStartFuel = true
 end

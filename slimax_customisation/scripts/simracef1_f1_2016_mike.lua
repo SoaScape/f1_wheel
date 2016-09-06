@@ -180,7 +180,7 @@ fuelMultiFunction = multifunctionMap[2]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = true
 
-function custom_init_Event(scriptfile)	
+function custom_init_Event(scriptfile)
 end
 
 function getButtonMap(currentMultifunction)
@@ -190,7 +190,7 @@ function getButtonMap(currentMultifunction)
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
 	elseif currentMultifunction["confirmButtonMap"] ~= nil then
 		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
-		return currentMultifunction["confirmButtonMap"]		
+		return currentMultifunction["confirmButtonMap"]
 	else
 		-- F1 2015 quick-menu doesn't keep track of what's selected so button maps are always static
 		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
