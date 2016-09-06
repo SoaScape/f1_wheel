@@ -4,6 +4,7 @@ quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
+radioKey = "R"
 prevCameraKey = "X"
 nextCameraKey = "C"
 
