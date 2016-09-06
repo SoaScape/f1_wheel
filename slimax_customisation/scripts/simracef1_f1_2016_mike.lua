@@ -1,6 +1,8 @@
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
+minFuel = 1
+
 numMenus = 4
 
 confirmDelay = 1000

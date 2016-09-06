@@ -5,7 +5,6 @@ require "scripts/mikes_custom_plugins/mike_utils"
 fuelAtStart = 0
 resetStartFuel = true
 startFuelLocked = false
-minFuel = 10
 lowFuelLedPattern = 64
 startFuelStoredLedPattern = 248
 fuelResetDisplayTimeout = 1000
