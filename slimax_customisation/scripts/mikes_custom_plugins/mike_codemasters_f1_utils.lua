@@ -8,7 +8,8 @@ radioKey = "T"
 prevCameraKey = "X"
 nextCameraKey = "C"
 
-extraDelay = 500
+extraDelay = 300
+openMenuDelay = 400
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
@@ -29,15 +30,16 @@ function getVoiceMenuButtons(currentMultifunction)
 		index = index + 1
 	end
 	
-	for i = 1, currentMultifunction["voiceMenuRows"][currentMultifunction["currentUpDnMode"]] - 1 do
-		buttonMap[index] = quickMenuDn
-		delayMap[index] = 30
-		index = index + 1
+	if currentMultifunction["voiceMenuRows"][currentMultifunction["currentUpDnMode"]] > 1 then
+		for i = 1, currentMultifunction["voiceMenuRows"][currentMultifunction["currentUpDnMode"]] - 1 do
+			buttonMap[index] = quickMenuDn
+			index = index + 1
+		end
+	else
+		delayMap[index - 1] = 100
 	end
 
 	buttonMap[index] = quickMenuRight
-	delayMap[index] = 30
-
 	return buttonMap
 end
 
@@ -133,7 +135,7 @@ function getOpenMenuButtons(chosenMenu)
 
 		if currentMenu == 0 then
 			delayMap = {}
-			delayMap[0] = extraDelay
+			delayMap[0] = openMenuDelay
 		end
 	else
 		for i = 0, chosenMenu - 1 do
@@ -141,7 +143,7 @@ function getOpenMenuButtons(chosenMenu)
 			buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
 		end
 		delayMap = {}
-		delayMap[0] = extraDelay
+		delayMap[0] = openMenuDelay
 	end
 	return buttons
 end
