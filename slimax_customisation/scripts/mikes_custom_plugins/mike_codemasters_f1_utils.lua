@@ -25,15 +25,18 @@ function getVoiceMenuButtons(currentMultifunction)
 
 	for i = 1, currentMultifunction["voiceMenuPage"] - 1 do
 		buttonMap[index] = quickMenuToggleKey
+		delayMap[index] = 30
 		index = index + 1
 	end
 	
 	for i = 1, currentMultifunction["voiceMenuRows"][currentMultifunction["currentUpDnMode"]] - 1 do
 		buttonMap[index] = quickMenuDn
+		delayMap[index] = 30
 		index = index + 1
 	end
 
 	buttonMap[index] = quickMenuRight
+	delayMap[index] = 30
 
 	return buttonMap
 end
@@ -65,7 +68,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		numRowChanges = numRowChanges + 1
 	end
 
-	if currentMultifunction["currentPosition"] == nil then
+	if trackSelections == false or currentMultifunction["currentPosition"] == nil then
 		-- We don't know what's currently selected. Therefore move the selector
 		-- all the way to the bottom so we know the 'min' mode is selected
 		for i = currentMultifunction["min"], currentMultifunction["max"] - 1 do
@@ -89,7 +92,6 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		buttonMap[index] = keyPress
 		index = index + 1
 	end
-	delayMap[index-1] = extraDelay
 	-- Update the current position to match what we have selected.
 	currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
 
@@ -98,9 +100,10 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		for i = 0, (numMenus - numQuickMenuChanges) do
 			buttonMap[index] = quickMenuToggleKey
 			buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
+			delayMap[index] = extraDelay
 			index = index + 1
 		end
-	elseif numRowChanges > 0 then
+	elseif numRowChanges > 0 and trackSelections then
 		-- We were already on the correct menu, so return the row to the top
 		for i = 0, (numRowChanges - 1) do
 			buttonMap[index] = quickMenuUp
@@ -112,9 +115,9 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 end
 
 function getOpenMenuButtons(chosenMenu)
-	local buttons = {}
-	local currentMenu = getCurrentMenu()
-	if currentMenu ~= chosenMenu then
+	local buttons = {}	
+	if trackMenus and currentMenu ~= chosenMenu then
+		local currentMenu = getCurrentMenu()
 		if chosenMenu < currentMenu then
 			local closeMenuClicks = (numMenus + 1) - currentMenu
 			for i = 0, closeMenuClicks + chosenMenu - 1 do
@@ -132,6 +135,13 @@ function getOpenMenuButtons(chosenMenu)
 			delayMap = {}
 			delayMap[0] = extraDelay
 		end
+	else
+		for i = 0, chosenMenu - 1 do
+			buttons[i] = quickMenuToggleKey
+			buttonTrackerMap[quickMenuToggleButton] = buttonTrackerMap[quickMenuToggleButton] + 1
+		end
+		delayMap = {}
+		delayMap[0] = extraDelay
 	end
 	return buttons
 end

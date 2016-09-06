@@ -5,9 +5,14 @@ numMenus = 4
 
 confirmDelay = 1000
 
+trackMenus = false
+trackSelections = false
+
 customKeystrokeDelays = {}
-customKeystrokeDelays[quickMenuLeft] = 30
-customKeystrokeDelays[quickMenuRight] = 30
+customKeystrokeDelays[quickMenuLeft] = 20
+customKeystrokeDelays[quickMenuRight] = 20
+customKeystrokeDelays[quickMenuUp] = 20
+customKeystrokeDelays[quickMenuDn] = 20
 
 multifunctionMap = {}
 
