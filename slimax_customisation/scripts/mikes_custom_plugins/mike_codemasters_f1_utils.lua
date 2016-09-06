@@ -4,7 +4,7 @@ quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
-radioKey = "R"
+radioKey = "T"
 prevCameraKey = "X"
 nextCameraKey = "C"
 
@@ -12,6 +12,31 @@ extraDelay = 500
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
+
+function getVoiceMenuButtons(currentMultifunction)
+	local index = 0
+	local buttonMap = {}
+
+	delayMap = {}
+	delayMap[0] = extraDelay
+	
+	buttonMap[index] = radioKey
+	index = index + 1
+
+	for i = 1, currentMultifunction["voiceMenuPage"] - 1 do
+		buttonMap[index] = quickMenuToggleKey
+		index = index + 1
+	end
+	
+	for i = 1, currentMultifunction["voiceMenuRows"][currentMultifunction["currentUpDnMode"]] - 1 do
+		buttonMap[index] = quickMenuDn
+		index = index + 1
+	end
+
+	buttonMap[index] = quickMenuRight
+
+	return buttonMap
+end
 
 function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently

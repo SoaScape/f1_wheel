@@ -117,7 +117,6 @@ multifunctionMap[6]["upDnSelectable"] = true
 multifunctionMap[6]["upDnConfirmRequired"] = true
 multifunctionMap[6]["defaultUpDnMode"] = 2
 multifunctionMap[6]["currentUpDnMode"] = multifunctionMap[6]["defaultUpDnMode"]
-multifunctionMap[6]["currentPosition"] = multifunctionMap[6]["defaultUpDnMode"]
 multifunctionMap[6]["confirmDelay"] = confirmDelay
 multifunctionMap[6]["min"] = 0
 multifunctionMap[6]["max"] = 4
@@ -127,6 +126,13 @@ multifunctionMap[6]["modes"][1] = "OPTN"
 multifunctionMap[6]["modes"][2] = "PRME"
 multifunctionMap[6]["modes"][3] = "INTR"
 multifunctionMap[6]["modes"][4] = "WETS"
+multifunctionMap[6]["voiceMenuPage"] = 2
+multifunctionMap[6]["voiceMenuRows"] = {}
+multifunctionMap[6]["voiceMenuRows"][2] = 1
+multifunctionMap[6]["voiceMenuRows"][1] = 2
+multifunctionMap[6]["voiceMenuRows"][0] = 3
+multifunctionMap[6]["voiceMenuRows"][3] = 4
+multifunctionMap[6]["voiceMenuRows"][4] = 5
 
 multifunctionMap[7] = {}
 multifunctionMap[7]["name"] = "OSP"
@@ -184,7 +190,9 @@ function custom_init_Event(scriptfile)
 end
 
 function getButtonMap(currentMultifunction)
-	if currentMultifunction["menu"] ~= nil then
+	if currentMultifunction["voiceMenuPage"] ~= nil then
+		return getVoiceMenuButtons(currentMultifunction)
+	elseif currentMultifunction["menu"] ~= nil then
 		return getTrackableQuickMenuSettingButtons(currentMultifunction)
 	elseif currentMultifunction["name"] == "INFO" then
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
