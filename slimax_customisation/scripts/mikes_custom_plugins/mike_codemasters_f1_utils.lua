@@ -67,16 +67,14 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 		numRowChanges = numRowChanges + 1
 	end
 
-	if trackSelections == false or currentMultifunction["currentPosition"] == nil then
-		-- We don't know what's currently selected. Therefore move the selector
-		-- all the way to the bottom so we know the 'min' mode is selected
-		for i = currentMultifunction["min"], currentMultifunction["max"] - 1 do
-			buttonMap[index] = quickMenuLeft
-			index = index + 1
-		end
-		-- Now we know the currently selected mode so store it
-		currentMultifunction["currentPosition"] = currentMultifunction["min"]
+	-- We don't know what's currently selected. Therefore move the selector
+	-- all the way to the bottom so we know the 'min' mode is selected
+	for i = currentMultifunction["min"], currentMultifunction["max"] - 1 do
+		buttonMap[index] = quickMenuLeft
+		index = index + 1
 	end
+	-- Now we know the currently selected mode so store it
+	currentMultifunction["currentPosition"] = currentMultifunction["min"]
 
 	-- Now increment or decrement to reach the requested mode (currentUpDnMode)
 	local keyPress = quickMenuRight

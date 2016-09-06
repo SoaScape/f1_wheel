@@ -5,9 +5,6 @@ numMenus = 4
 
 confirmDelay = 1000
 
-trackMenus = false
-trackSelections = false
-
 customKeystrokeDelays = {}
 customKeystrokeDelays[quickMenuLeft] = 20
 customKeystrokeDelays[quickMenuRight] = 20
