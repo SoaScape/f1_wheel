@@ -214,14 +214,19 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 --print("===Keypresses Start===")
 		for i=0,tablelength(buttonMap)-1 do
 			local delay = keystrokeDelay
+			local holdDelay = keyHoldDelay
 			if delayMap ~= nil and delayMap[i] ~= nil then
 				delay = delayMap[i]
 			elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
 				delay = customKeystrokeDelays[buttonMap[i]]
 			end
+			
+			if keyHoldMap ~= nil and keyHoldMap[i] ~= nil then
+				holdDelay = keyHoldMap[i]
+			end
 --print("Key: " .. buttonMap[i] .. ", Delay: " .. delay)
 			-- params: key, delay, modifier
-			SetKeystroke(buttonMap[i], keyHoldDelay, "")
+			SetKeystroke(buttonMap[i], holdDelay, "")
 			SLISleep(delay)
 		end
 		delayMap = nil
