@@ -170,20 +170,6 @@ multifunctionMap[11]["buttonMap"][1][0] = nextCameraKey
 
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = "INFO"
-multifunctionMap[12]["enabled"] = true
-multifunctionMap[12]["upDnSelectable"] = true
-multifunctionMap[12]["upDnConfirmRequired"] = false
-multifunctionMap[12]["defaultUpDnMode"] = 0
-multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[12]["defaultUpDnMode"]
-multifunctionMap[12]["min"] = 0
-multifunctionMap[12]["max"] = 4
-multifunctionMap[12]["wrap"] = true
-multifunctionMap[12]["modes"] = {}
-multifunctionMap[12]["modes"][0] = "NONE"
-multifunctionMap[12]["modes"][1] = "SETT"
-multifunctionMap[12]["modes"][2] = "WEAR"
-multifunctionMap[12]["modes"][3] = "TEMP"
-multifunctionMap[12]["modes"][4] = "INFO"
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
