@@ -1,5 +1,5 @@
 @echo off
-SET script_location="c:\Program Files (x86)\SLIMax Manager Pro\scripts"
+SET script_location="c:\Program Files\SLIMax Manager Pro\scripts"
 SET cfg_location="M:\Documents\My Documents\SLIMax Manager Pro\cfg"
 
 echo Copying into %script_location%.
