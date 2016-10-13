@@ -13,7 +13,7 @@ function customDisplayIsActive()
 end
 
 function display(leftStr, rightStr, deviceType, timeout)
-	if leftStr ~= nul and rightStr ~= nil then			
+	if leftStr ~= nul and rightStr ~= nil then
 		local dev = GetDeviceType(deviceType)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)

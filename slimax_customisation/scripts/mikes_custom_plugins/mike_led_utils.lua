@@ -9,9 +9,11 @@ ledOn = 1
 ledOff = 0
 
 function updateLeds()
-	updateBlinkingLeds()
-	updateActivePermanentLeds()
-	updateAlternateBlinkingLeds()
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
+		updateBlinkingLeds()
+		updateActivePermanentLeds()
+		updateAlternateBlinkingLeds()
+	end
 end
 
 function updateBlinkingLeds()
