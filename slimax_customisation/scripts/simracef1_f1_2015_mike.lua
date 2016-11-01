@@ -30,7 +30,6 @@ multifunctionMap[2]["modes"] = {}
 multifunctionMap[2]["modes"][0] = "LEAN"
 multifunctionMap[2]["modes"][1] = "NORM"
 multifunctionMap[2]["modes"][2] = "RICH"
---multifunctionMap[2]["confirmButtonMap"] = {}
 multifunctionMap[2]["buttonMap"] = {}
 multifunctionMap[2]["buttonMap"][0] = {}
 multifunctionMap[2]["buttonMap"][1] = {}

@@ -4,7 +4,6 @@ require "scripts/mikes_custom_plugins/mike_utils"
 -- MIKE CUSTOM FUNCTIONS
 fuelAtStart = 0
 resetStartFuel = true
-startFuelLocked = false
 lowFuelLedPattern = 64
 startFuelStoredLedPattern = 248
 fuelResetDisplayTimeout = 1000
@@ -91,7 +90,7 @@ function checkForStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
 	local startFuel = GetCarInfo("fuel_total")	
 
-	if resetStartFuel and not(startFuelLocked) and
+	if resetStartFuel and
 		mSessionEnter == 1 and not(m_is_sim_idle) and
 			startFuel ~= nil and startFuel > 0 then
 		fuelAtStart = startFuel

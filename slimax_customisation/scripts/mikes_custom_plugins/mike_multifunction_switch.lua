@@ -54,7 +54,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 
 		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
-			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
+			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["enabled"] then
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
 					if overtakeEngaged then
 						overtakeEngaged = false
@@ -173,33 +173,6 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
 				if ctrlPos == confirmButton then
 					setDefaultModes()
-				elseif startFuelLocked and (ctrlPos == upButton or ctrlPos == upEncoder and fuelAtStart ~= nil) then
-					local inc = fuelButtonIncrement
-					if ctrlPos == upEncoder then
-						inc = fuelEncoderIncrement
-					end
-					fuelAtStart = fuelAtStart + inc
-
-					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, confirmDelay)
-					return 1
-				elseif startFuelLocked and (ctrlPos == downButton or ctrlPos == downEncoder and fuelAtStart ~= nil) then
-					local inc = fuelButtonIncrement
-					if ctrlPos == downEncoder then
-						inc = fuelEncoderIncrement
-					end
-					fuelAtStart = fuelAtStart - inc
-					display("TANK", GetFuelKilogram(fuelAtStart), myDevice, confirmDelay)
-					return 1
-				elseif ctrlPos == startFuelLockButton then
-					startFuelLocked = not(startFuelLocked)
-					local right
-					if startFuelLocked then
-						right = "LOCK"
-					else
-						right = "UNLK"
-					end
-					display("TANK", right, myDevice, confirmDelay)
-					return 1
 				end
 			end
 		end
@@ -251,7 +224,6 @@ function setDefaultModes()
 		else
 			value["currentUpDnMode"] = nil
 		end
-		value["currentPosition"] = nil
 	end
 
 	if buttonTrackerMap ~= nil then

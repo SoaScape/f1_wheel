@@ -35,7 +35,6 @@ multifunctionMap[2]["modes"] = {}
 multifunctionMap[2]["modes"][0] = "LEAN"
 multifunctionMap[2]["modes"][1] = "NORM"
 multifunctionMap[2]["modes"][2] = "RICH"
---multifunctionMap[2]["confirmButtonMap"] = {}
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "DIFF"
@@ -149,32 +148,15 @@ multifunctionMap[9] = {}
 multifunctionMap[9]["name"] = "SPR"
 multifunctionMap[10] = {}
 multifunctionMap[10]["name"] = "OFF"
-
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = "CAM"
-multifunctionMap[11]["enabled"] = true
-multifunctionMap[11]["upDnSelectable"] = true
-multifunctionMap[11]["upDnConfirmRequired"] = false
-multifunctionMap[11]["defaultUpDnMode"] = 0
-multifunctionMap[11]["currentUpDnMode"] = multifunctionMap[11]["defaultUpDnMode"]
-multifunctionMap[11]["min"] = 0
-multifunctionMap[11]["max"] = 1
-multifunctionMap[11]["modes"] = {}
-multifunctionMap[11]["modes"][0] = "PREV"
-multifunctionMap[11]["modes"][1] = "NEXT"
-multifunctionMap[11]["buttonMap"] = {}
-multifunctionMap[11]["buttonMap"][0] = {}
-multifunctionMap[11]["buttonMap"][1] = {}
-multifunctionMap[11]["buttonMap"][0][0] = prevCameraKey
-multifunctionMap[11]["buttonMap"][1][0] = nextCameraKey
-
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = "INFO"
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
 overtakeButtonEnabled = true
-overtakeOspOverdrive = true
+overtakeOspOverdrive = false
 
 function custom_init_Event(scriptfile)
 end
