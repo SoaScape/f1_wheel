@@ -10,7 +10,9 @@ downButton = 27
 upEncoder = 23
 downEncoder = 24
 setValueSwitchId = 1
+
 overtakeButton = 10
+overtakeOverrideButton = 3
 overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 128
 overtakeLedPatterns[1] = 64
@@ -54,33 +56,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			-- Overtake Button
 			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue and currentMultifunction["enabled"] then
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
-					if overtakeEngaged then
-						overtakeEngaged = false
-						multiFunctionBak = currentMultifunction
-						currentMultifunction = fuelMultiFunction
-						deactivateAlternateBlinkingLeds("overtake")
-						confirmSelection("OVTK", " END", deviceType, getButtonMap(currentMultifunction))
-						currentMultifunction = multiFunctionBak
-
-						if ospBak ~= nil then
-							SetOSPFactor(ospBak)
-						end
-					else
-						overtakeEngaged = true
-						activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil)
-						multiFunctionBak = currentMultifunction
-						currentMultifunction = fuelMultiFunction
-						fuelModeBak = currentMultifunction["currentUpDnMode"]
-						currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
-						confirmSelection("OVER", "TAKE", deviceType, getButtonMap(currentMultifunction))
-						currentMultifunction["currentUpDnMode"] = fuelModeBak
-						currentMultifunction = multiFunctionBak
-
-						if overtakeOspOverdrive then
-							ospBak = GetContextInfo("osp_factor")
-							SetOSPFactor(GetContextInfo("osp_overdrive"))
-						end
-					end
+					toggleOvertakeMode(true)
+				end
+			elseif ctrlType == pushbutton and ctrlPos == overtakeOverrideButton and value == buttonReleaseValue and currentMultifunction["enabled"] then
+				if overtakeButtonEnabled  and mSessionEnter ~= 1 and m_is_sim_idle then
+					toggleOvertakeMode(false) -- Flip the overtake mode but don't action the button presses
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
@@ -205,6 +185,44 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 --print("===Keypresses End===")
 		if currentMultifunction["confirmDelay"] ~= nil then
 			confirmTimeout = getTks() + currentMultifunction["confirmDelay"]
+		end
+	end
+end
+
+function toggleOvertakeMode(sendButtons)
+	if overtakeEngaged then
+		overtakeEngaged = false
+
+		if sendButtons then
+			multiFunctionBak = currentMultifunction
+			currentMultifunction = fuelMultiFunction			
+			confirmSelection("OVTK", " END", myDevice, getButtonMap(currentMultifunction))			
+			currentMultifunction = multiFunctionBak
+		end
+
+		deactivateAlternateBlinkingLeds("overtake")
+
+		if ospBak ~= nil then
+			SetOSPFactor(ospBak)
+		end
+	else
+		overtakeEngaged = true		
+
+		if sendButtons then
+			multiFunctionBak = currentMultifunction
+			currentMultifunction = fuelMultiFunction
+			fuelModeBak = currentMultifunction["currentUpDnMode"]
+			currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
+			confirmSelection("OVER", "TAKE", myDevice, getButtonMap(currentMultifunction))
+			currentMultifunction["currentUpDnMode"] = fuelModeBak
+			currentMultifunction = multiFunctionBak
+		end
+
+		activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil)
+
+		if overtakeOspOverdrive then
+			ospBak = GetContextInfo("osp_factor")
+			SetOSPFactor(GetContextInfo("osp_overdrive"))
 		end
 	end
 end
