@@ -12,7 +12,7 @@ downEncoder = 24
 setValueSwitchId = 1
 
 overtakeButton = 10
-overtakeOverrideButton = 3
+overtakeOverrideButton = 8
 overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 128
 overtakeLedPatterns[1] = 64
