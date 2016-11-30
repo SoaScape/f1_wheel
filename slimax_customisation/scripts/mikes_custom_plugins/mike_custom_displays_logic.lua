@@ -3,13 +3,11 @@ require "scripts/mikes_custom_plugins/mike_utils"
 
 -- MIKE CUSTOM FUNCTIONS
 fuelAtStart = 0
-resetStartFuel = true
 lowFuelLedPattern = 64
 startFuelStoredLedPattern = 248
 fuelResetDisplayTimeout = 1000
 
 function performRegularCustomDisplayProcessing()
-	checkForStartFuel()	
 	-- Calculate fuel target
 	fuelTarget = getFuelTarget()
 end
@@ -86,16 +84,9 @@ function getFuelTarget()
 	end
 end
 
-function checkForStartFuel()
+function storeStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
-	local startFuel = GetCarInfo("fuel_total")	
-
-	if resetStartFuel and
-		mSessionEnter == 1 and not(m_is_sim_idle) and
-			startFuel ~= nil and startFuel > 0 then
-		fuelAtStart = startFuel
-		display("TANK", GetFuelKilogram(fuelAtStart), myDevice, fuelResetDisplayTimeout)		
-		activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout)
-		resetStartFuel = false
-	end
+	local startFuel = GetCarInfo("fuel_total")
+	fuelAtStart = startFuel
+	activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout, false)
 end

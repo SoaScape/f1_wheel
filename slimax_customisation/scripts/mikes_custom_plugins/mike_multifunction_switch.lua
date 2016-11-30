@@ -257,5 +257,4 @@ function setDefaultModes()
 	end
 
 	overtakeEngaged = false
-	resetStartFuel = true
 end
