@@ -2,7 +2,7 @@ require "scripts/mikes_custom_plugins/mike_multifunction_switch"
 require "scripts/mikes_custom_plugins/mike_custom_displays"
 require "scripts/mikes_custom_plugins/mike_utils"
 require "scripts/mikes_custom_plugins/mike_one_switch"
-require "scripts/mikes_custom_plugins/race_start_mode"
+require "scripts/mikes_custom_plugins/mike_race_start_mode"
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
 	local mult = multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
