@@ -48,7 +48,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						right = string.format(" %03d  ", GetContextInfo("osp_factor"))
 					end
 				end
-				if multifunctionMap["enabled"] or multifunctionMap["display"] then
+				if currentMultifunction["enabled"] or currentMultifunction["display"] then
 					display(left, right, deviceType, multiSelectDelay)
 				end
 				return 1
@@ -206,8 +206,10 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 			confirmSelection("OVTK", " END", myDevice, getButtonMap(currentMultifunction), showDisplay)			
 			currentMultifunction = multiFunctionBak
 		end
-
-		deactivateAlternateBlinkingLeds("overtake")
+		
+		if showDisplay then
+			deactivateAlternateBlinkingLeds("overtake")
+		end
 
 		if ospBak ~= nil then
 			SetOSPFactor(ospBak)
@@ -224,8 +226,10 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 			currentMultifunction["currentUpDnMode"] = fuelModeBak
 			currentMultifunction = multiFunctionBak
 		end
-
-		activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false)
+		
+		if showDisplay then
+			activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false)
+		end
 
 		if overtakeOspOverdrive then
 			ospBak = GetContextInfo("osp_factor")

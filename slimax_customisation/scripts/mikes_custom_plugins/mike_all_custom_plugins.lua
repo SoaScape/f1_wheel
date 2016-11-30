@@ -23,10 +23,9 @@ function custom_right_Display_Event(swPosition)
 	return dispEvent(1, swPosition)
 end
 
-function dispEvent(side, swPosition)
-	updateLeds()
+function dispEvent(side, swPosition)	
 	raceStartRegularProcessing()
-	
+	updateLeds()
 	if not(customDisplayIsActive()) then		
 		return customDisplayEventProcessing(swValue, side)
 	else

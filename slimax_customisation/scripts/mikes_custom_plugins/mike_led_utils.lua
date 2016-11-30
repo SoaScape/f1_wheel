@@ -25,14 +25,8 @@ function updateBlinkingLeds()
 end
 
 function updateAlternateBlinkingLeds()
-	for key, value in pairs(activeAlternateBlinkingLeds) do
-		if mSessionEnter == 1 and not(m_is_sim_idle) then
-			updateAlternateBlinkingLed(value)
-		else
-			for key, value in pairs(value["patterns"]) do
-				SetPatternLed(value, ledOff)
-			end
-		end
+	for key, value in pairs(activeAlternateBlinkingLeds) do		
+		updateAlternateBlinkingLed(value)
 	end	
 end
 
@@ -42,21 +36,26 @@ function updateActivePermanentLeds()
 	end	
 end
 
-function updateBlinkingLed(ledInfo, pattern) 
-	if getTks() >= ledInfo["nextChange"] then
-		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
-		if ledInfo["state"] == ledOn then
-			ledInfo["state"] = ledOff
-		else
-			ledInfo["state"] = ledOn
+function updateBlinkingLed(ledInfo, pattern)
+	if ledInfo["duration"] > 0 and getTks() > ledInfo["duration"] then
+		deactivateBlinkingLed(pattern)
+	print("duration end")
+	else
+		if getTks() >= ledInfo["nextChange"] then
+			ledInfo["nextChange"] = getTks() + ledInfo["delay"]
+			if ledInfo["state"] == ledOn then
+				ledInfo["state"] = ledOff
+			else
+				ledInfo["state"] = ledOn
+			end
 		end
-	end
 
-	local state = ledOff
-	if not(not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle) then
-		state = ledInfo["state"]
+		local state = ledOff
+		if not(not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle) then
+			state = ledInfo["state"]
+		end
+		SetPatternLed(pattern, state)
 	end
-	SetPatternLed(pattern, state)
 end
 
 function updateAlternateBlinkingLed(ledInfo) 
@@ -89,13 +88,20 @@ function updatePermLed(pattern, ledInfo)
 	end
 end
 
-function activateBlinkingLed(pattern, delay, enabledWhenIdle)
+function activateBlinkingLed(pattern, delay, duration, enabledWhenIdle)
 	if activeBlinkingLeds[pattern] == nil then
 		if delay == nil then
 			delay = defaultBlinkDelay
 		end
 		activeBlinkingLeds[pattern] = {}
 		activeBlinkingLeds[pattern]["delay"] = delay
+		
+		local dur = 0
+		if duration > 0 then
+			dur = getTks() + duration
+		end		 
+		
+		activeBlinkingLeds[pattern]["duration"] = dur
 		activeBlinkingLeds[pattern]["state"] = ledOn
 		activeBlinkingLeds[pattern]["nextChange"] = getTks() + delay
 		activeBlinkingLeds[pattern]["enabledWhenIdle"] = enabledWhenIdle
@@ -119,11 +125,13 @@ end
 
 function activatePermanentLed(pattern, delay, enabledWhenIdle)
 	if activePermanentLeds[pattern] == nil then
-		if delay == nil then
-			delay = 0
+		local nextChange = 0
+		if delay > 0 then
+			nextChange = getTks() + delay
 		end
+		
 		activePermanentLeds[pattern] = {}
-		activePermanentLeds[pattern]["nextChange"] = getTks() + delay
+		activePermanentLeds[pattern]["nextChange"] = nextChange
 		activePermanentLeds[pattern]["enabledWhenIdle"] = enabledWhenIdle
 		SetPatternLed(pattern, ledOn)
 	end

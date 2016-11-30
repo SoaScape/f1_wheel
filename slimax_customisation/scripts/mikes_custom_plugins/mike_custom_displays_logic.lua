@@ -72,7 +72,7 @@ function getFuelTarget()
 		local target = round(remainingLapsInTank - remainingLaps, 1)
 
 		if target < 0 then
-			activateBlinkingLed(lowFuelLedPattern, false)
+			activateBlinkingLed(lowFuelLedPattern, 500, 0, false)
 		else
 			deactivateBlinkingLed(lowFuelLedPattern)
 		end
@@ -88,5 +88,5 @@ function storeStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
 	local startFuel = GetCarInfo("fuel_total")
 	fuelAtStart = startFuel
-	activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout, false)
+	--activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout, false)
 end

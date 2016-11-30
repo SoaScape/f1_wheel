@@ -6,8 +6,9 @@ lastMode = ""
 raceStartLedId = "racestart"
 raceStartLedPatterns = {}
 raceStartLedPatterns[0] = 80	-- 2, 4
-raceStartLedPatterns[1] = 130	-- 3, 5
-raceStartPermLedPattern = 8		-- 8
+raceStartLedPatterns[1] = 160	-- 3, 5
+raceStartPermLedPattern = 8		-- 1
+raceGoLedPattern = 56
 
 function raceStartModeSelected()	
 	if mSessionEnter ~= 1 and m_is_sim_idle then
@@ -18,32 +19,38 @@ function raceStartModeSelected()
 	else
 		left = startMultifunctionName
 		right = "UNAV"
+		currentMultifunction = nil
 	end
-	display(left, right, deviceType, multiSelectDelay)	
+	display(left, right, myDevice, 2000)	
 end
 
 function raceStartRegularProcessing()
-	local inStartMode = currentMultifunction["name"] == startMultifunctionName
-	
-	if inStartMode then
-		if currentMultifunction["name"] ~= lastMode then
-			raceStartModeSelected()
-		elseif not(raceStartModeActive) and mSessionEnter == 1 and not(m_is_sim_idle) then
-			raceStartModeActive = true
+	if currentMultifunction ~= nil then
+		local inStartMode = currentMultifunction["name"] == startMultifunctionName
+		local modeName = currentMultifunction["name"]
+		
+		if inStartMode then
+			if currentMultifunction["name"] ~= lastMode then
+				raceStartModeSelected()
+			elseif not(raceStartModeActive) and mSessionEnter == 1 and not(m_is_sim_idle) then
+				raceStartModeActive = true
+				deactivateAlternateBlinkingLeds(raceStartLedId)
+				deactivatePermanentLed(raceStartPermLedPattern)
+				storeStartFuel()
+				activateBlinkingLed(raceGoLedPattern, 50, 2000, false)
+				display(startMultifunctionName, " GO ", myDevice, 2000)
+				performRaceStart()				
+			end
+		else
+			if raceStartModeActive then
+				exitRaceStart()
+				raceStartModeActive = false
+				display(startMultifunctionName, " END", myDevice, 2000)
+			end
 			deactivateAlternateBlinkingLeds(raceStartLedId)
-			storeStartFuel()
-			performRaceStart()
-			display(startMultifunctionName, " GO ", myDevice, 2000)
+			deactivatePermanentLed(raceStartPermLedPattern)
 		end
-	else
-		if raceStartModeActive then
-			exitRaceStart()
-			raceStartModeActive = false
-			display(startMultifunctionName, " END", myDevice, 2000)
-		end
-		deactivateAlternateBlinkingLeds(raceStartLedId)
-		deactivatePermanentLed(raceStartPermLedPattern)
+		
+		lastMode = modeName
 	end
-	
-	lastMode = currentMultifunction["name"]
 end
