@@ -144,14 +144,19 @@ multifunctionMap[7]["upDnSelectable"] = true
 
 multifunctionMap[8] = {}
 multifunctionMap[8]["name"] = "PIT"
+multifunctionMap[8]["display"] = true
 multifunctionMap[9] = {}
 multifunctionMap[9]["name"] = "SPR"
+multifunctionMap[9]["display"] = true
 multifunctionMap[10] = {}
 multifunctionMap[10]["name"] = "OFF"
+multifunctionMap[10]["display"] = true
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = "CAM"
+multifunctionMap[11]["display"] = true
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = startMultifunctionName
+multifunctionMap[12]["display"] = false
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]

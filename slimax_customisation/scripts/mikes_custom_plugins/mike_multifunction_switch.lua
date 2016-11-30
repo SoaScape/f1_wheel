@@ -48,7 +48,9 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						right = string.format(" %03d  ", GetContextInfo("osp_factor"))
 					end
 				end
-				display(left, right, deviceType, multiSelectDelay)
+				if multifunctionMap["enabled"] or multifunctionMap["display"] then
+					display(left, right, deviceType, multiSelectDelay)
+				end
 				return 1
 			end
 

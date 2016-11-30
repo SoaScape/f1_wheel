@@ -46,6 +46,7 @@ multifunctionMap[2]["buttonMap"][2][2] = quickMenuUp
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "DIFF"
+multifunctionMap[3]["display"] = true
 
 multifunctionMap[4] = {}
 multifunctionMap[4]["name"] = "BIAS"
@@ -140,10 +141,13 @@ multifunctionMap[7]["upDnSelectable"] = true
 
 multifunctionMap[8] = {}
 multifunctionMap[8]["name"] = "PIT"
+multifunctionMap[8]["display"] = true
 multifunctionMap[9] = {}
 multifunctionMap[9]["name"] = startMultifunctionName
+multifunctionMap[9]["display"] = false
 multifunctionMap[10] = {}
 multifunctionMap[10]["name"] = "OFF"
+multifunctionMap[10]["display"] = true
 
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = "CAM"
