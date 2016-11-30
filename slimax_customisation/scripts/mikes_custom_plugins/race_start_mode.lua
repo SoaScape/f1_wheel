@@ -9,19 +9,17 @@ raceStartLedPatterns[0] = 80	-- 2, 4
 raceStartLedPatterns[1] = 130	-- 3, 5
 raceStartPermLedPattern = 8		-- 8
 
-function raceStartModeSelected()
-	if not(raceStartModeActive) then					
-		if mSessionEnter ~= 1 and m_is_sim_idle then
-			activateAlternateBlinkingLeds(raceStartLedId, raceStartLedPatterns, nil, true)
-			activatePermanentLed(raceStartPermLedPattern, 0, true)
-			left = startMultifunctionName
-			right = "WAIT"
-		else
-			left = " IN "
-			right = "PROG"
-		end
-		display(left, right, deviceType, multiSelectDelay)
+function raceStartModeSelected()	
+	if mSessionEnter ~= 1 and m_is_sim_idle then
+		activateAlternateBlinkingLeds(raceStartLedId, raceStartLedPatterns, nil, true)
+		activatePermanentLed(raceStartPermLedPattern, 0, true)
+		left = startMultifunctionName
+		right = "WAIT"
+	else
+		left = startMultifunctionName
+		right = "UNAV"
 	end
+	display(left, right, deviceType, multiSelectDelay)	
 end
 
 function raceStartRegularProcessing()
@@ -30,7 +28,7 @@ function raceStartRegularProcessing()
 	if inStartMode then
 		if currentMultifunction["name"] ~= lastMode then
 			raceStartModeSelected()
-		elseif not(raceStartModeActive) and mSessionEnter == 1 and not(m_is_sim_idle) then				
+		elseif not(raceStartModeActive) and mSessionEnter == 1 and not(m_is_sim_idle) then
 			raceStartModeActive = true
 			deactivateAlternateBlinkingLeds(raceStartLedId)
 			storeStartFuel()
