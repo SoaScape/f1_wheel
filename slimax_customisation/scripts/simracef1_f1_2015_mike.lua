@@ -141,7 +141,7 @@ multifunctionMap[7]["upDnSelectable"] = true
 multifunctionMap[8] = {}
 multifunctionMap[8]["name"] = "PIT"
 multifunctionMap[9] = {}
-multifunctionMap[9]["name"] = "SPR"
+multifunctionMap[9]["name"] = startMultifunctionName
 multifunctionMap[10] = {}
 multifunctionMap[10]["name"] = "OFF"
 
