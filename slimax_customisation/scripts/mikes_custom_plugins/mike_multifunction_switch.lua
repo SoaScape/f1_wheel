@@ -47,9 +47,6 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						left = "OSP "
 						right = string.format(" %03d  ", GetContextInfo("osp_factor"))
 					end
-				elseif currentMultifunction["name"] == startMultifunctionName then
-					raceStartModeSelected()					
-					return 1
 				end
 				display(left, right, deviceType, multiSelectDelay)
 				return 1
