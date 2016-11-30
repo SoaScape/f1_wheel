@@ -37,8 +37,8 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then
 			if multifunctionMap[value] ~= nil then
 				currentMultifunction = multifunctionMap[value]
-				left = "MULT"
-				right = currentMultifunction["name"]
+				local left = "MULT"
+				local right = currentMultifunction["name"]
 				if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
 					if currentMultifunction["name"] ~= "OSP" then
 						left = currentMultifunction["name"]
@@ -47,6 +47,9 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						left = "OSP "
 						right = string.format(" %03d  ", GetContextInfo("osp_factor"))
 					end
+				elseif currentMultifunction["name"] == startMultifunctionName then
+					raceStartModeSelected()					
+					return 1
 				end
 				display(left, right, deviceType, multiSelectDelay)
 				return 1
