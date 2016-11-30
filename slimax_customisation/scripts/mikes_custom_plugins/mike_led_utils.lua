@@ -80,7 +80,7 @@ function updateAlternateBlinkingLed(ledInfo)
 end
 
 function updatePermLed(pattern, ledInfo)
-	if not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle
+	if not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle then
 		SetPatternLed(pattern, ledOff)
 	elseif ledInfo["nextChange"] == 0 or getTks() <= ["nextChange"] then
 		SetPatternLed(pattern, ledOn)
