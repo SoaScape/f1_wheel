@@ -15,7 +15,7 @@ function raceStartModeSelected()
 			activateAlternateBlinkingLeds(raceStartLedId, raceStartLedPatterns, nil, true)
 			activatePermanentLed(raceStartPermLedPattern, 0, true)
 			left = startMultifunctionName
-			right = "MODE"
+			right = "WAIT"
 		else
 			left = " IN "
 			right = "PROG"
@@ -35,7 +35,7 @@ function raceStartRegularProcessing()
 			deactivateAlternateBlinkingLeds(raceStartLedId)
 			storeStartFuel()
 			performRaceStart()
-			display("RACE", startMultifunctionName, myDevice, 2000)
+			display(startMultifunctionName, " GO ", myDevice, 2000)
 		end
 	else
 		if raceStartModeActive then
