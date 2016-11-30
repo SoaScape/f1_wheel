@@ -74,7 +74,7 @@ function getFuelTarget()
 		local target = round(remainingLapsInTank - remainingLaps, 1)
 
 		if target < 0 then
-			activateBlinkingLed(lowFuelLedPattern)
+			activateBlinkingLed(lowFuelLedPattern, false)
 		else
 			deactivateBlinkingLed(lowFuelLedPattern)
 		end

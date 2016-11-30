@@ -219,7 +219,7 @@ function toggleOvertakeMode(sendButtons)
 			currentMultifunction = multiFunctionBak
 		end
 
-		activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil)
+		activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false)
 
 		if overtakeOspOverdrive then
 			ospBak = GetContextInfo("osp_factor")
