@@ -114,6 +114,15 @@ function getSelectRowButtons(chosenRow)
 	return buttons
 end
 
+function performRaceStart()
+	setDefaultModes()	
+	toggleOvertakeMode(true, false)	
+end
+
+function exitRaceStart()
+	toggleOvertakeMode(true, false)	
+end
+
 customFunctionNamesTable = {}
 customFunctionNamesTable[1] = {}
 customFunctionNamesTable[1][0] = "POS"

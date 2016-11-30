@@ -151,7 +151,7 @@ multifunctionMap[10]["name"] = "OFF"
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = "CAM"
 multifunctionMap[12] = {}
-multifunctionMap[12]["name"] = "INFO"
+multifunctionMap[12]["name"] = startMultifunctionName
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]

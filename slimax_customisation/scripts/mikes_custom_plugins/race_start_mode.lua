@@ -24,6 +24,7 @@ function raceStartRegularProcessing()
 	if(awaitingRaceStart and mSessionEnter == 1 and not(m_is_sim_idle)) then
 		awaitingRaceStart = false
 		raceStartModeActive = true
+		storeStartFuel()
 		performRaceStart()
 		display("RACE", startMultifunctionName, myDevice, 2000)
 	elseif(raceStartModeActive and currentMultifunction["name"] ~= startMultifunctionName and mSessionEnter == 1 and not(m_is_sim_idle)) then		
