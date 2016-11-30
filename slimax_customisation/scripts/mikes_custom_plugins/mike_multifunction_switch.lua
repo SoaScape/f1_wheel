@@ -60,11 +60,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue
 			  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName then
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
-					toggleOvertakeMode(true)
+					toggleOvertakeMode(true, true)
 				end
 			elseif ctrlType == pushbutton and ctrlPos == overtakeOverrideButton and value == buttonReleaseValue and currentMultifunction["enabled"] then
 				if overtakeButtonEnabled  and mSessionEnter ~= 1 and m_is_sim_idle then
-					toggleOvertakeMode(false) -- Flip the overtake mode but don't action the button presses
+					toggleOvertakeMode(false, true) -- Flip the overtake mode but don't action the button presses
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
@@ -87,7 +87,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction), true)
 							end
 						else
 							if currentMultifunction["wrap"] then
@@ -97,7 +97,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction), true)
 							end
 						end
 						return 1
@@ -119,7 +119,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction), true)
 							end
 						else
 							if currentMultifunction["wrap"] then
@@ -129,18 +129,18 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							if currentMultifunction["upDnConfirmRequired"] then
 								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, selectDelay)
 							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
+								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction), true)
 							end
 						end
 						return 1
 					elseif ctrlPos == confirmButton and currentMultifunction["name"] ~= "OSP" then
-						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction))
+						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], deviceType, getButtonMap(currentMultifunction), true)
 						return 1
 					end
 
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
 				elseif ctrlPos == confirmButton then
-					confirmSelection(currentMultifunction["name"], "CONF", deviceType, getButtonMap(currentMultifunction))
+					confirmSelection(currentMultifunction["name"], "CONF", deviceType, getButtonMap(currentMultifunction), true)
 					return 1
 				end
 
@@ -163,9 +163,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	return 2
 end
 
-function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
+function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDisplay)
 	if mSessionEnter == 1 and not(m_is_sim_idle) and getTks() > confirmTimeout then
-		display(leftDisp, rightDisplay, deviceType, 0)
+		if showDisplay then
+			display(leftDisp, rightDisplay, deviceType, 0)
+		end
 --print("===Keypresses Start===")
 		for i=0,tablelength(buttonMap)-1 do
 			local delay = keystrokeDelay
@@ -185,7 +187,9 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 			SLISleep(delay)
 		end
 		delayMap = nil
-		setDisplayTimeout(confirmDelay)
+		if showDisplay then
+			setDisplayTimeout(confirmDelay)
+		end
 --print("===Keypresses End===")
 		if currentMultifunction["confirmDelay"] ~= nil then
 			confirmTimeout = getTks() + currentMultifunction["confirmDelay"]
@@ -193,14 +197,14 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap)
 	end
 end
 
-function toggleOvertakeMode(sendButtons)
+function toggleOvertakeMode(sendButtons, showDisplay)
 	if overtakeEngaged then
 		overtakeEngaged = false
 
 		if sendButtons then
 			multiFunctionBak = currentMultifunction
 			currentMultifunction = fuelMultiFunction			
-			confirmSelection("OVTK", " END", myDevice, getButtonMap(currentMultifunction))			
+			confirmSelection("OVTK", " END", myDevice, getButtonMap(currentMultifunction), showDisplay)			
 			currentMultifunction = multiFunctionBak
 		end
 
@@ -217,7 +221,7 @@ function toggleOvertakeMode(sendButtons)
 			currentMultifunction = fuelMultiFunction
 			fuelModeBak = currentMultifunction["currentUpDnMode"]
 			currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
-			confirmSelection("OVER", "TAKE", myDevice, getButtonMap(currentMultifunction))
+			confirmSelection("OVER", "TAKE", myDevice, getButtonMap(currentMultifunction), showDisplay)
 			currentMultifunction["currentUpDnMode"] = fuelModeBak
 			currentMultifunction = multiFunctionBak
 		end
