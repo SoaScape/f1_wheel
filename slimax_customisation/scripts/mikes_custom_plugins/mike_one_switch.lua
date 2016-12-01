@@ -4,7 +4,7 @@ mOneSW_Backup = -1
 
 function oneSwitchControlEvent(ctrlType, ctrlPos, value)
 	if ctrlType == switch and ctrlPos == oneSwCtrlPos and oneSWActivated then	
-		if customFunctionNamesTable ~= nil and (mOneSW_Backup == nil or mOneSW_Backup ~= value) then
+		if customFunctionNamesTable ~= nil and customFunctionNamesTable[value] ~= nil and (mOneSW_Backup == nil or mOneSW_Backup ~= value) then
 			display(customFunctionNamesTable[value][0], customFunctionNamesTable[value][1], myDevice, mDisplay_Info_Delay)
 		end
 		mOneSW_Backup = value
