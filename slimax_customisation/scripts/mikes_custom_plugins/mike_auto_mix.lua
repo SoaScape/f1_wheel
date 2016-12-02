@@ -9,8 +9,6 @@ autoMixLearnFullThrottleStartTicks = 0
 autoMixLearnFullThrottleStartDistance = 0
 autoMixLearnFullThrottleActive = false
 
-lastAutoMixTicks = 0
-
 function resetAutoMixData()
 	autoMixLearnedData = {}
 	autoMixLearnFullThrottleActive = false
@@ -20,11 +18,10 @@ function autoMixRegularProcessing()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then		
 		learnTrack()		
 		if currentMultifunction ~= nil and currentMultifunction["name"] == autoMixMultifunctionName
-		  and lastAutoMixTicks + autoMixLearnFullThrottleTimeout < getTks() then
+		  then
 			local distance = GetContextInfo("lap_distance")
 			local autoMixEvent = autoMixLearnedData[round(distance, 1)]
 			if autoMixEvent ~= nil then
-				lastAutoMixTicks = getTks()
 				local fuelMode = autoMixEvent					
 				multiFunctionBak = currentMultifunction
 				currentMultifunction = fuelMultiFunction					
