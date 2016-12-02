@@ -38,7 +38,8 @@ function raceStartRegularProcessing()
 				deactivatePermanentLed(raceStartPermLedPattern)
 				storeStartFuel()
 				activateBlinkingLed(raceGoLedPattern, 50, 2000, false)
-				display(startMultifunctionName, " GO ", myDevice, 2000)
+				resetAutoMixData()
+				display(startMultifunctionName, " GO ", myDevice, 2000)				
 				performRaceStart()				
 			end
 		else

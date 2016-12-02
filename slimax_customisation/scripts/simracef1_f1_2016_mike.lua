@@ -153,7 +153,7 @@ multifunctionMap[10]["name"] = "OFF"
 multifunctionMap[10]["display"] = true
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = autoMixMultifunctionName
-multifunctionMap[11]["enabled"] = true
+multifunctionMap[11]["display"] = true
 
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = startMultifunctionName

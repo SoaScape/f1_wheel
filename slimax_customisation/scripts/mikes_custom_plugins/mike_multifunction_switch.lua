@@ -56,13 +56,6 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
 					toggleOvertakeMode(true, true)
 				end
-			-- Auto fuel mix mode
-			elseif currentMultifunction["name"] == "autoMixMultifunctionName" then
-				if ctrlType == pushbutton and value == buttonReleaseValue then
-					processAutoMixButtonEvent(ctrlPos)
-				elseif ctrlType == switch and ctrlPos == setValueSwitchId then
-					processAutoMixFuelModeChange(value - 1)
-				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
 				if currentMultifunction["upDnSelectable"] then
@@ -258,4 +251,5 @@ function setDefaultModes()
 	end
 
 	overtakeEngaged = false
+	resetAutoMixData()
 end

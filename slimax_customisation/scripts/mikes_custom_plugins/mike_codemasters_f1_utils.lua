@@ -123,13 +123,6 @@ function exitRaceStart()
 	toggleOvertakeMode(true, false)	
 end
 
-autoMixTable = {}
-autoMixTable[0] = {}
-autoMixTable[0]["track"] = "MLBN"
-autoMixTable[0]["mixEvents"] = {}
-autoMixTable[0]["mixEvents"][40] = 3
-autoMixTable[0]["mixEvents"][45] = 2
-
 customFunctionNamesTable = {}
 customFunctionNamesTable[1] = {}
 customFunctionNamesTable[1][0] = "POS"

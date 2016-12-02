@@ -1,3 +1,4 @@
+require "scripts/mikes_custom_plugins/mike_auto_mix"
 require "scripts/mikes_custom_plugins/mike_multifunction_switch"
 require "scripts/mikes_custom_plugins/mike_custom_displays"
 require "scripts/mikes_custom_plugins/mike_utils"
@@ -23,7 +24,8 @@ function custom_right_Display_Event(swPosition)
 	return dispEvent(1, swPosition)
 end
 
-function dispEvent(side, swPosition)	
+function dispEvent(side, swPosition)
+	autoMixRegularProcessing()
 	raceStartRegularProcessing()
 	updateLeds()
 	if not(customDisplayIsActive()) then		
