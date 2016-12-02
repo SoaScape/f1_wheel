@@ -152,8 +152,9 @@ multifunctionMap[10] = {}
 multifunctionMap[10]["name"] = "OFF"
 multifunctionMap[10]["display"] = true
 multifunctionMap[11] = {}
-multifunctionMap[11]["name"] = "CAM"
-multifunctionMap[11]["display"] = true
+multifunctionMap[11]["name"] = autoMixMultifunctionName
+multifunctionMap[11]["enabled"] = true
+
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = startMultifunctionName
 multifunctionMap[12]["display"] = false
@@ -162,6 +163,7 @@ multifunctionMap[12]["display"] = false
 fuelMultiFunction = multifunctionMap[2]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = false
+autoMixEnabled = true
 
 function custom_init_Event(scriptfile)
 end

@@ -4,15 +4,9 @@ require "scripts/mikes_custom_plugins/mike_utils"
 -- Set These Values To The Buttons You Want To Use
 multiFunctionSwitchId = 3
 
-confirmButton = 14
-upButton = 26
-downButton = 27
-upEncoder = 23
-downEncoder = 24
 setValueSwitchId = 1
 
 overtakeButton = 10
-overtakeOverrideButton = 8
 overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 128
 overtakeLedPatterns[1] = 64
@@ -57,13 +51,17 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
 			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue
-			  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName then
+			  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName
+			   and currentMultifunction["name"] ~= "autoMixMultifunctionName" then
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
 					toggleOvertakeMode(true, true)
 				end
-			elseif ctrlType == pushbutton and ctrlPos == overtakeOverrideButton and value == buttonReleaseValue and currentMultifunction["enabled"] then
-				if overtakeButtonEnabled  and mSessionEnter ~= 1 and m_is_sim_idle then
-					toggleOvertakeMode(false, true) -- Flip the overtake mode but don't action the button presses
+			-- Auto fuel mix mode
+			elseif currentMultifunction["name"] == "autoMixMultifunctionName" then
+				if ctrlType == pushbutton and value == buttonReleaseValue then
+					processAutoMixButtonEvent(ctrlPos)
+				elseif ctrlType == switch and ctrlPos == setValueSwitchId then
+					processAutoMixFuelModeChange(value - 1)
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
@@ -112,7 +110,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 								ospf = 0
 							end
 							SetOSPFactor(ospf)
-							display("OSP ", string.format(" %03d  ", ospf), myDevice, confirmDelay)
+							display("OSP ", string.format(" %03d  ", ospf), myDevice, confirmDelay)						
 						elseif currentMultifunction["currentUpDnMode"] > currentMultifunction["min"] then
 							currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] - 1
 							if currentMultifunction["upDnConfirmRequired"] then
