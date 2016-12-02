@@ -11,7 +11,7 @@ nextCameraKey = "C"
 
 extraDelay = 400
 openMenuDelay = 500
-closeMenuDelay = 700
+closeMenuDelay = 600
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0
