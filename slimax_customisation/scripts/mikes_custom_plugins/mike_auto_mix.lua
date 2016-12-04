@@ -14,8 +14,6 @@ autoMixLearnLowThrottleStartTicks = 0
 autoMixLearnLowThrottleStartDistance = 0
 autoMixLearnLowThrottleActive = false
 
-minTimeBetweenMixChange = confirmDelay + 50
-
 function resetAutoMixData()
 	autoMixLearnedData = {}
 	autoMixLearnFullThrottleActive = false
@@ -78,6 +76,7 @@ function autoMixRegularProcessing()
 end
 
 function learnTrack()
+	local minTimeBetweenMixChange = confirmDelay + 50
 	local throttle = GetCarInfo("throttle")
 	local yellow = GetContextInfo("yellow_flag")
 	if GetInPitsState() > 1 or yellow then
@@ -134,7 +133,7 @@ function learnTrack()
 				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)
 			end
 		end
-	elseif throttle < 1 and then
+	elseif throttle < 1 then
 		autoMixLearnLowThrottleStartTicks = getTks()
 		autoMixLearnLowThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
 		autoMixLearnLowThrottleActive = true
