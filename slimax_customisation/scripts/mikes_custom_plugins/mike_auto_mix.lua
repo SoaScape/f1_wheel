@@ -24,9 +24,14 @@ end
 
 function autoMixRegularProcessing()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then		
-		learnTrack()		
+		learnTrack()
+		local fuelTarget = getFuelTarget()
+		if fuelTarget == nil then
+			fuelTarget = 1
+		end
+		
 		if currentMultifunction ~= nil and currentMultifunction["name"] == autoMixMultifunctionName 
-		  and getFuelTarget() == nil or getFuelTarget() > 0 then
+		  and fuelTarget > 0 then
 			if autoMixActiveType == nil then -- Automix not currently set, check if we can set it
 				local distance = GetContextInfo("lap_distance")
 				activeAutoMixData = autoMixLearnedData[round(distance, 0)]				
