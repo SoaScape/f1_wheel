@@ -5,10 +5,17 @@ autoMixMultifunctionName = "AUTO"
 local learnedData = {}
 
 local timeouts =  {}
-timeouts["minTimeBetweenMixChange"] = 2100
-timeouts["learnFullThrottleTimeout"] = 4000
-timeouts["learnLowThrottleTimeout"] = 2000
-local selectedTimeout = timeouts["minTimeBetweenMixChange"]
+timeouts["INTV"] = 2100 -- minTimeBetweenMixChange
+timeouts["LOW "] = 2000 -- learnLowThrottleTimeout
+timeouts["FULL"] = 4000 -- learnFullThrottleTimeout
+
+timeoutIds = {}
+timeoutIds[0] = "INTV"
+timeoutIds[1] = "LOW "
+timeoutIds[2] = "FULL"
+
+local selectedTimeout = 0
+local encoderIncrement = 500
 
 local learnFullThrottleStartTicks = 0
 local learnFullThrottleStartDistance = 0
@@ -34,7 +41,27 @@ end
 
 function processAutoMixButtonEvent(button)
 	if button == confirmButton then
-		toggleAutoMixSelected()	
+		toggleAutoMixSelected()
+	elseif button == upButton then
+		if selectedTimeout < tablelength(timeoutIds) - 1 then
+			selectedTimeout = 0
+		else
+			selectedTimeout = selectedTimeout + 1
+		end
+	elseif button == downButton then
+		if selectedTimeout == 0 then
+			selectedTimeout = tablelength(timeoutIds) - 1
+		else
+			selectedTimeout = selectedTimeout - 1
+		end	
+	elseif button == upEncoder then
+		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + encoderIncrement
+		display(timeoutIds[selectedTimeout], encoderIncrement, myDevice, 500)
+	elseif button == downEncoder then
+		if timeouts[timeoutIds[selectedTimeout]] >= encoderIncrement then
+			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - encoderIncrement
+		end
+		display(timeoutIds[selectedTimeout], encoderIncrement, myDevice, 500)
 	end
 end
 
