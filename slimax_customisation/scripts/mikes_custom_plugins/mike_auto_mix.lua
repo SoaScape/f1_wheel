@@ -40,14 +40,16 @@ function resetAutoMixData()
 end
 
 local function toggleAutoMixSelected()
-	autoMixSelected = not(autoMixSelected)
-	local right = "ACTV"
-	activatePermanentLed(autoMixLedPattern, 0, false)
-	if not(autoMixSelected) then
-		right = " OFF"
-		deactivatePermanentLed(autoMixLedPattern)
+	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+		autoMixSelected = not(autoMixSelected)
+		local right = "ACTV"
+		activatePermanentLed(autoMixLedPattern, 0, false)
+		if not(autoMixSelected) then
+			right = " OFF"
+			deactivatePermanentLed(autoMixLedPattern)
+		end
+		display(autoMixMultifunctionName, right, myDevice, 500)
 	end
-	display(autoMixMultifunctionName, right, myDevice, 500)
 end
 
 function processAutoMixButtonEvent(button)
@@ -151,7 +153,7 @@ local function learnTrack()
 end
 
 function autoMixRegularProcessing()
-	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then		
+	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		learnTrack()
 		
 		local fuelTarget = getFuelTarget()
