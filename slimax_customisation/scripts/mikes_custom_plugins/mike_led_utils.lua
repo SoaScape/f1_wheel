@@ -8,6 +8,11 @@ alternateLedBlinkDelay = 500
 ledOn = 1
 ledOff = 0
 
+-- LED Patterns Calculated As Follows
+--
+-- LED ID:		54321---
+-- Binary Bit:	XXXXX000
+
 function updateLeds()
 	updateBlinkingLeds()
 	updateActivePermanentLeds()

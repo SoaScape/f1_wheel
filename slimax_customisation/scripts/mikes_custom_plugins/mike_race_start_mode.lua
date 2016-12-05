@@ -5,10 +5,10 @@ raceStartModeActive = false
 lastMode = ""
 raceStartLedId = "racestart"
 raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 80	-- 2, 4
-raceStartLedPatterns[1] = 160	-- 3, 5
-raceStartPermLedPattern = 8		-- 1
-raceGoLedPattern = 56
+raceStartLedPatterns[0] = 80	-- 2, 4  = 1010000
+raceStartLedPatterns[1] = 160	-- 3, 5  = 10100000
+raceStartPermLedPattern = 8		-- 1     = 1000
+raceGoLedPattern = 56           -- 1,2,3 = 111000
 
 function raceStartModeSelected()	
 	if mSessionEnter ~= 1 and m_is_sim_idle then
