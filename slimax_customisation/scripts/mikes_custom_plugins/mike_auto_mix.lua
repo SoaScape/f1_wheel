@@ -16,7 +16,7 @@ local learnLowThrottleActive = false
 
 local autoMixSelected = false
 
-local autoMixLedPattern = 128 -- 5, 10000000
+local autoMixLedPattern = 128 -- LED 5, binary 10000000
 
 function resetAutoMixData()
 	learnedData = {}
@@ -93,7 +93,7 @@ function autoMixRegularProcessing()
 end
 
 function learnTrack()
-	local minTimeBetweenMixChange = 2000
+	local minTimeBetweenMixChange = 2100
 	local throttle = GetCarInfo("throttle")
 	local yellow = GetContextInfo("yellow_flag")
 	if GetInPitsState() > 1 or yellow then
