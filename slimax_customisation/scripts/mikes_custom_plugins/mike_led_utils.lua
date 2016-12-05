@@ -1,12 +1,12 @@
 require "scripts/mikes_custom_plugins/mike_utils"
 
-activeBlinkingLeds = {}
-activeAlternateBlinkingLeds = {}
-activePermanentLeds = {}
-defaultBlinkDelay = 500
-alternateLedBlinkDelay = 500
-ledOn = 1
-ledOff = 0
+local activeBlinkingLeds = {}
+local activeAlternateBlinkingLeds = {}
+local activePermanentLeds = {}
+local defaultBlinkDelay = 500
+local alternateLedBlinkDelay = 500
+local ledOn = 1
+local ledOff = 0
 
 -- LED Patterns Calculated As Follows
 --

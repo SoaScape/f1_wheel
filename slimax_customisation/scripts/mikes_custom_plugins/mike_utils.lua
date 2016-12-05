@@ -7,8 +7,9 @@ downButton = 27
 upEncoder = 23
 downEncoder = 24
 buttonReleaseValue = 0
-customDisplayActive = false
-customDisplayTicksTimeout = 0
+
+local customDisplayActive = false
+local customDisplayTicksTimeout = 0
 
 function customDisplayIsActive()
 	if customDisplayActive and getTks() > customDisplayTicksTimeout then		

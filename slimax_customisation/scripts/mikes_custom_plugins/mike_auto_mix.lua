@@ -2,26 +2,26 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 
 autoMixMultifunctionName = "AUTO"
 
-autoMixLearnedData = {}
+local learnedData = {}
 
-autoMixLearnFullThrottleTimeout = 4000
-autoMixLearnFullThrottleStartTicks = 0
-autoMixLearnFullThrottleStartDistance = 0
-autoMixLearnFullThrottleActive = false
+local learnFullThrottleTimeout = 4000
+local learnFullThrottleStartTicks = 0
+local learnFullThrottleStartDistance = 0
+local learnFullThrottleActive = false
 
-autoMixLearnLowThrottleTimeout = 2000
-autoMixLearnLowThrottleStartTicks = 0
-autoMixLearnLowThrottleStartDistance = 0
-autoMixLearnLowThrottleActive = false
+local learnLowThrottleTimeout = 2000
+local learnLowThrottleStartTicks = 0
+local learnLowThrottleStartDistance = 0
+local learnLowThrottleActive = false
 
-autoMixSelected = false
+local autoMixSelected = false
 
-autoMixLedPattern = 128 -- 5, 10000000
+local autoMixLedPattern = 128 -- 5, 10000000
 
 function resetAutoMixData()
-	autoMixLearnedData = {}
-	autoMixLearnFullThrottleActive = false
-	autoMixLearnLowThrottleActive = false
+	learnedData = {}
+	learnFullThrottleActive = false
+	learnLowThrottleActive = false
 	autoMixSelected = false
 	lastLowMixEvent = nil
 	lastHighMixEvent = nil
@@ -51,7 +51,7 @@ function autoMixRegularProcessing()
 		if autoMixSelected then
 			if autoMixActiveType == nil then -- Automix not currently set, check if we can set it
 				local distance = GetContextInfo("lap_distance")
-				activeAutoMixData = autoMixLearnedData[round(distance, 0)]				
+				activeAutoMixData = learnedData[round(distance, 0)]				
 				if activeAutoMixData ~= nil then
 					local autoMix = activeAutoMixData["mix"]	
 					autoMixReturnMix = activeAutoMixData["returnMix"]
@@ -97,63 +97,63 @@ function learnTrack()
 	local throttle = GetCarInfo("throttle")
 	local yellow = GetContextInfo("yellow_flag")
 	if GetInPitsState() > 1 or yellow then
-		autoMixLearnFullThrottleActive = false
-		autoMixLearnLowThrottleActive = false
+		learnFullThrottleActive = false
+		learnLowThrottleActive = false
 		return
 	end
 
-	if autoMixLearnFullThrottleActive then
+	if learnFullThrottleActive then
 		if throttle < 1 then
-			autoMixLearnFullThrottleActive = false
+			learnFullThrottleActive = false
 			if highLearnt then
 				lastHighTime = getTks()
 			end
-		elseif (getTks() - autoMixLearnFullThrottleStartTicks) >= autoMixLearnFullThrottleTimeout and GetCarInfo("speed") > 100 and not (highLearnt) then				
+		elseif (getTks() - learnFullThrottleStartTicks) >= learnFullThrottleTimeout and GetCarInfo("speed") > 100 and not (highLearnt) then				
 			highLearnt = true
-			if lastLowTime ~= nil and lastLowMixEvent ~= nil and lastLowTime + minTimeBetweenMixChange > autoMixLearnFullThrottleStartTicks then
+			if lastLowTime ~= nil and lastLowMixEvent ~= nil and lastLowTime + minTimeBetweenMixChange > learnFullThrottleStartTicks then
 				lastLowMixEvent["returnMix"] = fuelMultiFunction["max"]
 				lastHighMixEvent = nil
 				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
 			else
-				autoMixLearnedData[autoMixLearnFullThrottleStartDistance] = {}
-				autoMixLearnedData[autoMixLearnFullThrottleStartDistance]["mix"] = fuelMultiFunction["max"]
-				autoMixLearnedData[autoMixLearnFullThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
-				lastHighMixEvent = autoMixLearnedData[autoMixLearnFullThrottleStartDistance]
+				learnedData[learnFullThrottleStartDistance] = {}
+				learnedData[learnFullThrottleStartDistance]["mix"] = fuelMultiFunction["max"]
+				learnedData[learnFullThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
+				lastHighMixEvent = learnedData[learnFullThrottleStartDistance]
 				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
 			end			
 		end
 	elseif throttle == 1 then
-		autoMixLearnFullThrottleStartTicks = getTks()
-		autoMixLearnFullThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
-		autoMixLearnFullThrottleActive = true
+		learnFullThrottleStartTicks = getTks()
+		learnFullThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
+		learnFullThrottleActive = true
 		highLearnt = false
 	end
 	
 
-	if autoMixLearnLowThrottleActive then		
+	if learnLowThrottleActive then		
 		if throttle == 1 then
-			autoMixLearnLowThrottleActive = false
+			learnLowThrottleActive = false
 			if lowLearnt then
 				lastLowTime = getTks()
 			end
-		elseif (getTks() - autoMixLearnLowThrottleStartTicks) >= autoMixLearnLowThrottleTimeout and not (lowLearnt) then
+		elseif (getTks() - learnLowThrottleStartTicks) >= learnLowThrottleTimeout and not (lowLearnt) then
 			lowLearnt = true
-			if lastHighTime ~= nil and lastHighMixEvent ~= nil and lastHighTime + minTimeBetweenMixChange > autoMixLearnLowThrottleStartTicks then
+			if lastHighTime ~= nil and lastHighMixEvent ~= nil and lastHighTime + minTimeBetweenMixChange > learnLowThrottleStartTicks then
 				lastHighMixEvent["returnMix"] = fuelMultiFunction["min"]
 				lastLowMixEvent = nil
 				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)				
 			else
-				autoMixLearnedData[autoMixLearnLowThrottleStartDistance] = {}
-				autoMixLearnedData[autoMixLearnLowThrottleStartDistance]["mix"] = fuelMultiFunction["min"]
-				autoMixLearnedData[autoMixLearnLowThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
-				lastLowMixEvent = autoMixLearnedData[autoMixLearnLowThrottleStartDistance]			
+				learnedData[learnLowThrottleStartDistance] = {}
+				learnedData[learnLowThrottleStartDistance]["mix"] = fuelMultiFunction["min"]
+				learnedData[learnLowThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
+				lastLowMixEvent = learnedData[learnLowThrottleStartDistance]			
 				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)
 			end
 		end
 	elseif throttle < 1 then
-		autoMixLearnLowThrottleStartTicks = getTks()
-		autoMixLearnLowThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
-		autoMixLearnLowThrottleActive = true
+		learnLowThrottleStartTicks = getTks()
+		learnLowThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
+		learnLowThrottleActive = true
 		lowLearnt = false
 	end
 end

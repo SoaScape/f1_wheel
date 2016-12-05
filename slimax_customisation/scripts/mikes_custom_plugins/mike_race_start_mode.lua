@@ -1,14 +1,14 @@
 require "scripts/mikes_custom_plugins/mike_led_utils"
 
 startMultifunctionName = "STRT"
-raceStartModeActive = false
-lastMode = ""
-raceStartLedId = "racestart"
-raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 80	-- 2, 4  = 1010000
-raceStartLedPatterns[1] = 160	-- 3, 5  = 10100000
-raceStartPermLedPattern = 8		-- 1     = 1000
-raceGoLedPattern = 56           -- 1,2,3 = 111000
+local raceStartModeActive = false
+local lastMode = ""
+local raceStartLedId = "racestart"
+local raceStartLedPatterns = {}
+local raceStartLedPatterns[0] = 80	-- 2, 4  = 1010000
+local raceStartLedPatterns[1] = 160	-- 3, 5  = 10100000
+local raceStartPermLedPattern = 8		-- 1     = 1000
+local raceGoLedPattern = 56           -- 1,2,3 = 111000
 
 function raceStartModeSelected()	
 	if mSessionEnter ~= 1 and m_is_sim_idle then

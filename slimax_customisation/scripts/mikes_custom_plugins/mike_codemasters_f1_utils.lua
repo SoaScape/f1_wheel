@@ -1,17 +1,16 @@
-quickMenuToggleButton = 13
-quickMenuToggleKey = "M"
 quickMenuUp = "NUMPAD8"
 quickMenuDn = "NUMPAD2"
 quickMenuLeft = "NUMPAD4"
 quickMenuRight = "NUMPAD6"
-quickMenuFirstPage = quickMenuLeft
-radioKey = "T"
-prevCameraKey = "X"
-nextCameraKey = "C"
 
-extraDelay = 400
-openMenuDelay = 500
-closeMenuDelay = 600
+local quickMenuToggleButton = 13
+local quickMenuToggleKey = "M"
+local radioKey = "T"
+local quickMenuFirstPage = quickMenuLeft
+
+local extraDelay = 400
+local openMenuDelay = 500
+local closeMenuDelay = 600
 
 buttonTrackerMap = {}
 buttonTrackerMap[quickMenuToggleButton] = 0

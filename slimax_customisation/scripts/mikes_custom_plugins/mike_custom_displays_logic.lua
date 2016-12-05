@@ -2,10 +2,10 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 require "scripts/mikes_custom_plugins/mike_utils"
 
 -- MIKE CUSTOM FUNCTIONS
-fuelAtStart = 0
-lowFuelLedPattern = 64
-startFuelStoredLedPattern = 248
-fuelResetDisplayTimeout = 1000
+local fuelAtStart = 0
+local lowFuelLedPattern = 64
+local startFuelStoredLedPattern = 248
+local fuelResetDisplayTimeout = 1000
 
 function performRegularCustomDisplayProcessing()
 	-- Calculate fuel target

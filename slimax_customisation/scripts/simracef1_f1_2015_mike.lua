@@ -1,6 +1,9 @@
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
+local prevCameraKey = "X"
+local nextCameraKey = "C"
+
 minFuel = 10
 
 numMenus = 3

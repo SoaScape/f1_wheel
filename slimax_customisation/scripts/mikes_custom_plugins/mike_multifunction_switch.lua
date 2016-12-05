@@ -2,27 +2,27 @@ require "scripts/mikes_custom_plugins/mike_utils"
 
 --------------------------------------------------
 -- Set These Values To The Buttons You Want To Use
-multiFunctionSwitchId = 3
+local multiFunctionSwitchId = 3
 
-setValueSwitchId = 1
+local setValueSwitchId = 1
 
-overtakeButton = 10
-overtakeLedPatterns = {}
-overtakeLedPatterns[0] = 128
-overtakeLedPatterns[1] = 64
+local overtakeButton = 10
+local overtakeLedPatterns = {}
+local overtakeLedPatterns[0] = 128
+local overtakeLedPatterns[1] = 64
 --------------------------------------------------
-selectDelay = 600
 confirmDelay = 1000
-multiSelectDelay = 500
-keystrokeDelay = 200
-keyHoldDelay = 20
-kiloDivider = 0.750
-encoderIncrement = 10
-confirmTimeout = 0
-resetMultiFunctionName = "RSET"
 currentMultifunction = nil
-overtakeEngaged = false
-customDisplayActive = false
+
+local selectDelay = 600
+local multiSelectDelay = 500
+local keystrokeDelay = 200
+local keyHoldDelay = 20
+local kiloDivider = 0.750
+local encoderIncrement = 10
+local confirmTimeout = 0
+local resetMultiFunctionName = "RSET"
+local overtakeEngaged = false
 
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	if deviceType == myDevice then
