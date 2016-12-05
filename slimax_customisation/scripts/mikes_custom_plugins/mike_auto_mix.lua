@@ -55,24 +55,26 @@ function processAutoMixButtonEvent(button)
 		toggleAutoMixSelected()
 	elseif button == upButton then
 		if selectedTimeout < tablelength(timeoutIds) - 1 then
-			selectedTimeout = 0
-		else
 			selectedTimeout = selectedTimeout + 1
+		else
+			selectedTimeout = 0
 		end
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
 	elseif button == downButton then
 		if selectedTimeout == 0 then
 			selectedTimeout = tablelength(timeoutIds) - 1
 		else
 			selectedTimeout = selectedTimeout - 1
-		end	
+		end
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
 	elseif button == upEncoder then
 		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + encoderIncrement
-		display(timeoutIds[selectedTimeout], encoderIncrement, myDevice, 500)
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
 	elseif button == downEncoder then
 		if timeouts[timeoutIds[selectedTimeout]] >= encoderIncrement then
 			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - encoderIncrement
 		end
-		display(timeoutIds[selectedTimeout], encoderIncrement, myDevice, 500)
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
 	end
 end
 
