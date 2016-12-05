@@ -24,6 +24,12 @@ local confirmTimeout = 0
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
 
+local function trackButtons(ctrlType, ctrlPos, value)
+	if ctrlType == pushbutton and value == buttonReleaseValue and buttonTrackerMap[ctrlPos] ~= nil then
+		buttonTrackerMap[ctrlPos] = buttonTrackerMap[ctrlPos] + 1
+	end
+end
+
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	if deviceType == myDevice then
 		trackButtons(ctrlType, ctrlPos, value)
@@ -229,12 +235,6 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 			ospBak = GetContextInfo("osp_factor")
 			SetOSPFactor(GetContextInfo("osp_overdrive"))
 		end
-	end
-end
-
-local function trackButtons(ctrlType, ctrlPos, value)
-	if ctrlType == pushbutton and value == buttonReleaseValue and buttonTrackerMap[ctrlPos] ~= nil then
-		buttonTrackerMap[ctrlPos] = buttonTrackerMap[ctrlPos] + 1
 	end
 end
 

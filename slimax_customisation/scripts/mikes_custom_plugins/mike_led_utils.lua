@@ -13,34 +13,6 @@ local ledOff = 0
 -- LED ID:		54321---
 -- Binary Bit:	XXXXX000
 
-function updateLeds()
-	updateBlinkingLeds()
-	updateActivePermanentLeds()
-	updateAlternateBlinkingLeds()
-end
-
-local function updateBlinkingLeds()
-	for key, value in pairs(activeBlinkingLeds) do
-		if mSessionEnter == 1 and not(m_is_sim_idle) then
-			updateBlinkingLed(value, key)
-		else
-			SetPatternLed(key, ledOff)
-		end
-	end	
-end
-
-local function updateAlternateBlinkingLeds()
-	for key, value in pairs(activeAlternateBlinkingLeds) do		
-		updateAlternateBlinkingLed(value)
-	end	
-end
-
-local function updateActivePermanentLeds()
-	for key, value in pairs(activePermanentLeds) do
-		updatePermLed(key, value)
-	end	
-end
-
 local function updateBlinkingLed(ledInfo, pattern)
 	if ledInfo["duration"] > 0 and getTks() > ledInfo["duration"] then
 		deactivateBlinkingLed(pattern)
@@ -91,6 +63,34 @@ local function updatePermLed(pattern, ledInfo)
 	else
 		deactivatePermanentLed(pattern)
 	end
+end
+
+local function updateBlinkingLeds()
+	for key, value in pairs(activeBlinkingLeds) do
+		if mSessionEnter == 1 and not(m_is_sim_idle) then
+			updateBlinkingLed(value, key)
+		else
+			SetPatternLed(key, ledOff)
+		end
+	end	
+end
+
+local function updateAlternateBlinkingLeds()
+	for key, value in pairs(activeAlternateBlinkingLeds) do		
+		updateAlternateBlinkingLed(value)
+	end	
+end
+
+local function updateActivePermanentLeds()
+	for key, value in pairs(activePermanentLeds) do
+		updatePermLed(key, value)
+	end	
+end
+
+function updateLeds()
+	updateBlinkingLeds()
+	updateActivePermanentLeds()
+	updateAlternateBlinkingLeds()
 end
 
 function activateBlinkingLed(pattern, delay, duration, enabledWhenIdle)

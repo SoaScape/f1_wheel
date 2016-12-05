@@ -15,15 +15,6 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 	end
 end
 
-function custom_left_Display_Event(swPosition)	
-	return dispEvent(0, swPosition)
-end
-
-function custom_right_Display_Event(swPosition)
-	oneSwitchRightDisplayEvent(swPosition)
-	return dispEvent(1, swPosition)
-end
-
 local function dispEvent(side, swPosition)
 	autoMixRegularProcessing()
 	raceStartRegularProcessing()
@@ -33,4 +24,13 @@ local function dispEvent(side, swPosition)
 	else
 		return 1
 	end
+end
+
+function custom_left_Display_Event(swPosition)	
+	return dispEvent(0, swPosition)
+end
+
+function custom_right_Display_Event(swPosition)
+	oneSwitchRightDisplayEvent(swPosition)
+	return dispEvent(1, swPosition)
 end

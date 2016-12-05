@@ -44,6 +44,14 @@ function getVoiceMenuButtons(currentMultifunction)
 	return buttonMap
 end
 
+local function getSelectRowButtons(chosenRow)
+	local buttons = {}
+	for i = 0, chosenRow - 1 do
+		buttons[i] = quickMenuDn
+	end
+	return buttons
+end
+
 function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
 	-- selected, therefore the button maps will need to change on the fly.
@@ -99,14 +107,6 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	keyHoldMap[index] = closeMenuDelay
 
 	return buttonMap
-end
-
-local function getSelectRowButtons(chosenRow)
-	local buttons = {}
-	for i = 0, chosenRow - 1 do
-		buttons[i] = quickMenuDn
-	end
-	return buttons
 end
 
 function performRaceStart()
