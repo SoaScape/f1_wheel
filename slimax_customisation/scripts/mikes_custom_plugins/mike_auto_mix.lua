@@ -76,7 +76,7 @@ function autoMixRegularProcessing()
 end
 
 function learnTrack()
-	local minTimeBetweenMixChange = confirmDelay + 50
+	local minTimeBetweenMixChange = 2000
 	local throttle = GetCarInfo("throttle")
 	local yellow = GetContextInfo("yellow_flag")
 	if GetInPitsState() > 1 or yellow then
