@@ -16,6 +16,8 @@ autoMixLearnLowThrottleActive = false
 
 autoMixSelected = false
 
+autoMixLedPattern = 128 -- 5, 10000000
+
 function resetAutoMixData()
 	autoMixLearnedData = {}
 	autoMixLearnFullThrottleActive = false
@@ -29,8 +31,10 @@ end
 function toggleAutoMixSelected()
 	autoMixSelected = not(autoMixSelected)
 	local right = "ACTV"
+	activatePermanentLed(autoMixLedPattern, 0, false)
 	if not(autoMixSelected) then
 		" OFF"
+		deactivatePermanentLed(autoMixLedPattern)
 	end
 	display(autoMixMultifunctionName, right, myDevice, 500)
 end
