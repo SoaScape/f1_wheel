@@ -103,17 +103,17 @@ local function learnTrack()
 			if highLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnFullThrottleStartTicks) >= timeouts["FULL"] and GetCarInfo("speed") > 100 and not (highLearnt) then				
-			highLearnt = true
+		elseif (getTks() - learnFullThrottleStartTicks) >= timeouts["FULL"] and GetCarInfo("speed") > 100 and not (highLearnt) then							
 			if recentEvent(learnFullThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
 				lastMixEvent = nil
 				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
-			else
+			else				
 				learnedData[learnFullThrottleStartDistance] = {}
 				learnedData[learnFullThrottleStartDistance]["mix"] = fuelMultiFunction["max"]
 				learnedData[learnFullThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
 				lastMixEvent = learnedData[learnFullThrottleStartDistance]
+				highLearnt = true
 				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
 			end			
 		end
@@ -130,17 +130,17 @@ local function learnTrack()
 			if lowLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnLowThrottleStartTicks) >= timeouts["LOW "] and not (lowLearnt) then
-			lowLearnt = true
+		elseif (getTks() - learnLowThrottleStartTicks) >= timeouts["LOW "] and not (lowLearnt) then			
 			if recentEvent(learnLowThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
 				lastMixEvent = nil
 				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)				
-			else
+			else				
 				learnedData[learnLowThrottleStartDistance] = {}
 				learnedData[learnLowThrottleStartDistance]["mix"] = fuelMultiFunction["min"]
 				learnedData[learnLowThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
 				lastMixEvent = learnedData[learnLowThrottleStartDistance]			
+				lowLearnt = true
 				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)
 			end
 		end
