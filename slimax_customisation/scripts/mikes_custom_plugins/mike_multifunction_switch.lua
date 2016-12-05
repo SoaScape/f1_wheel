@@ -8,8 +8,8 @@ local setValueSwitchId = 1
 
 local overtakeButton = 10
 local overtakeLedPatterns = {}
-local overtakeLedPatterns[0] = 128
-local overtakeLedPatterns[1] = 64
+overtakeLedPatterns[0] = 128
+overtakeLedPatterns[1] = 64
 --------------------------------------------------
 confirmDelay = 1000
 currentMultifunction = nil

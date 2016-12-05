@@ -43,7 +43,7 @@ local function toggleAutoMixSelected()
 	local right = "ACTV"
 	activatePermanentLed(autoMixLedPattern, 0, false)
 	if not(autoMixSelected) then
-		" OFF"
+		right = " OFF"
 		deactivatePermanentLed(autoMixLedPattern)
 	end
 	display(autoMixMultifunctionName, right, myDevice, 500)

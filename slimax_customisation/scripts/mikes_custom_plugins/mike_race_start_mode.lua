@@ -5,8 +5,8 @@ local raceStartModeActive = false
 local lastMode = ""
 local raceStartLedId = "racestart"
 local raceStartLedPatterns = {}
-local raceStartLedPatterns[0] = 80	-- 2, 4  = 1010000
-local raceStartLedPatterns[1] = 160	-- 3, 5  = 10100000
+raceStartLedPatterns[0] = 80	-- 2, 4  = 1010000
+raceStartLedPatterns[1] = 160	-- 3, 5  = 10100000
 local raceStartPermLedPattern = 8		-- 1     = 1000
 local raceGoLedPattern = 56           -- 1,2,3 = 111000
 
