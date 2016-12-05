@@ -4,12 +4,16 @@ autoMixMultifunctionName = "AUTO"
 
 local learnedData = {}
 
-local learnFullThrottleTimeout = 4000
+local timeouts =  {}
+timeouts["minTimeBetweenMixChange"] = 2100
+timeouts["learnFullThrottleTimeout"] = 4000
+timeouts["learnLowThrottleTimeout"] = 2000
+local selectedTimeout = timeouts["minTimeBetweenMixChange"]
+
 local learnFullThrottleStartTicks = 0
 local learnFullThrottleStartDistance = 0
 local learnFullThrottleActive = false
 
-local learnLowThrottleTimeout = 2000
 local learnLowThrottleStartTicks = 0
 local learnLowThrottleStartDistance = 0
 local learnLowThrottleActive = false
@@ -28,7 +32,13 @@ function resetAutoMixData()
 	autoMixActiveType = nil
 end
 
-function toggleAutoMixSelected()
+function processAutoMixButtonEvent(button)
+	if button == confirmButton then
+		toggleAutoMixSelected()	
+	end
+end
+
+local function toggleAutoMixSelected()
 	autoMixSelected = not(autoMixSelected)
 	local right = "ACTV"
 	activatePermanentLed(autoMixLedPattern, 0, false)
@@ -92,8 +102,7 @@ function autoMixRegularProcessing()
 	end
 end
 
-local function learnTrack()
-	local minTimeBetweenMixChange = 2100
+local function learnTrack()	
 	local throttle = GetCarInfo("throttle")
 	local yellow = GetContextInfo("yellow_flag")
 	if GetInPitsState() > 1 or yellow then
@@ -108,7 +117,7 @@ local function learnTrack()
 			if highLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnFullThrottleStartTicks) >= learnFullThrottleTimeout and GetCarInfo("speed") > 100 and not (highLearnt) then				
+		elseif (getTks() - learnFullThrottleStartTicks) >= timeouts["learnFullThrottleTimeout"] and GetCarInfo("speed") > 100 and not (highLearnt) then				
 			highLearnt = true
 			if recentEvent(learnFullThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
@@ -135,7 +144,7 @@ local function learnTrack()
 			if lowLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnLowThrottleStartTicks) >= learnLowThrottleTimeout and not (lowLearnt) then
+		elseif (getTks() - learnLowThrottleStartTicks) >= timeouts["learnLowThrottleTimeout"] and not (lowLearnt) then
 			lowLearnt = true
 			if recentEvent(learnLowThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
@@ -158,7 +167,7 @@ local function learnTrack()
 end
 
 local function recentEvent(startTicks)
-	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + minTimeBetweenMixChange > startTicks then
+	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + timeouts["minTimeBetweenMixChange"] > startTicks then
 		return true
 	else
 		return false
