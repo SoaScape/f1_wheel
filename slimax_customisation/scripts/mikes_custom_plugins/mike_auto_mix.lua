@@ -20,6 +20,7 @@ function resetAutoMixData()
 	autoMixLearnLowThrottleActive = false
 	lastLowMixEvent = nil
 	lastHighMixEvent = nil
+	autoMixActiveType = nil
 end
 
 function autoMixRegularProcessing()
