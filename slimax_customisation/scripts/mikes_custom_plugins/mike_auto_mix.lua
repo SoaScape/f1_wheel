@@ -14,6 +14,7 @@ local learnLowThrottleStartTicks = 0
 local learnLowThrottleStartDistance = 0
 local learnLowThrottleActive = false
 
+local lastMixEvent = nil
 local autoMixSelected = false
 
 local autoMixLedPattern = 128 -- LED 5, binary 10000000
@@ -23,8 +24,7 @@ function resetAutoMixData()
 	learnFullThrottleActive = false
 	learnLowThrottleActive = false
 	autoMixSelected = false
-	lastLowMixEvent = nil
-	lastHighMixEvent = nil
+	lastMixEvent = nil
 	autoMixActiveType = nil
 end
 
@@ -92,7 +92,7 @@ function autoMixRegularProcessing()
 	end
 end
 
-function learnTrack()
+local function learnTrack()
 	local minTimeBetweenMixChange = 2100
 	local throttle = GetCarInfo("throttle")
 	local yellow = GetContextInfo("yellow_flag")
@@ -106,19 +106,19 @@ function learnTrack()
 		if throttle < 1 then
 			learnFullThrottleActive = false
 			if highLearnt then
-				lastHighTime = getTks()
+				lastMixEvent["endTicks"] = getTks()
 			end
 		elseif (getTks() - learnFullThrottleStartTicks) >= learnFullThrottleTimeout and GetCarInfo("speed") > 100 and not (highLearnt) then				
 			highLearnt = true
-			if lastLowTime ~= nil and lastLowMixEvent ~= nil and lastLowTime + minTimeBetweenMixChange > learnFullThrottleStartTicks then
-				lastLowMixEvent["returnMix"] = fuelMultiFunction["max"]
-				lastHighMixEvent = nil
+			if recentEvent(learnFullThrottleStartTicks) then
+				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
+				lastMixEvent = nil
 				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
 			else
 				learnedData[learnFullThrottleStartDistance] = {}
 				learnedData[learnFullThrottleStartDistance]["mix"] = fuelMultiFunction["max"]
 				learnedData[learnFullThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
-				lastHighMixEvent = learnedData[learnFullThrottleStartDistance]
+				lastMixEvent = learnedData[learnFullThrottleStartDistance]
 				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
 			end			
 		end
@@ -127,26 +127,25 @@ function learnTrack()
 		learnFullThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
 		learnFullThrottleActive = true
 		highLearnt = false
-	end
-	
+	end	
 
 	if learnLowThrottleActive then		
 		if throttle == 1 then
 			learnLowThrottleActive = false
 			if lowLearnt then
-				lastLowTime = getTks()
+				lastMixEvent["endTicks"] = getTks()
 			end
 		elseif (getTks() - learnLowThrottleStartTicks) >= learnLowThrottleTimeout and not (lowLearnt) then
 			lowLearnt = true
-			if lastHighTime ~= nil and lastHighMixEvent ~= nil and lastHighTime + minTimeBetweenMixChange > learnLowThrottleStartTicks then
-				lastHighMixEvent["returnMix"] = fuelMultiFunction["min"]
-				lastLowMixEvent = nil
+			if recentEvent(learnLowThrottleStartTicks) then
+				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
+				lastMixEvent = nil
 				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)				
 			else
 				learnedData[learnLowThrottleStartDistance] = {}
 				learnedData[learnLowThrottleStartDistance]["mix"] = fuelMultiFunction["min"]
 				learnedData[learnLowThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
-				lastLowMixEvent = learnedData[learnLowThrottleStartDistance]			
+				lastMixEvent = learnedData[learnLowThrottleStartDistance]			
 				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)
 			end
 		end
@@ -156,4 +155,12 @@ function learnTrack()
 		learnLowThrottleActive = true
 		lowLearnt = false
 	end
+end
+
+local function recentEvent(startTicks)
+	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + minTimeBetweenMixChange > startTicks then
+		return true
+	else
+		return false
+	end	
 end
