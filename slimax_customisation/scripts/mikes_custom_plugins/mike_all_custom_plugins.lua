@@ -24,7 +24,7 @@ function custom_right_Display_Event(swPosition)
 	return dispEvent(1, swPosition)
 end
 
-function dispEvent(side, swPosition)
+local function dispEvent(side, swPosition)
 	autoMixRegularProcessing()
 	raceStartRegularProcessing()
 	updateLeds()

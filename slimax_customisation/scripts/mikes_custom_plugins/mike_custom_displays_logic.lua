@@ -12,7 +12,7 @@ function performRegularCustomDisplayProcessing()
 	fuelTarget = getFuelTarget()
 end
 
-function getPercentageLapComplete()
+local function getPercentageLapComplete()
 	-- percentage of current lap completed
 	local dist = GetContextInfo("lap_distance")		
 	local trcksz = GetContextInfo("track_size")

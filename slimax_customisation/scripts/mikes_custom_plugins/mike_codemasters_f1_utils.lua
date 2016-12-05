@@ -101,11 +101,7 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	return buttonMap
 end
 
-function getCurrentMenu()
-	return buttonTrackerMap[quickMenuToggleButton] % (numMenus + 1)
-end
-
-function getSelectRowButtons(chosenRow)
+local function getSelectRowButtons(chosenRow)
 	local buttons = {}
 	for i = 0, chosenRow - 1 do
 		buttons[i] = quickMenuDn

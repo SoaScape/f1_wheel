@@ -233,7 +233,7 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 	end
 end
 
-function trackButtons(ctrlType, ctrlPos, value)
+local function trackButtons(ctrlType, ctrlPos, value)
 	if ctrlType == pushbutton and value == buttonReleaseValue and buttonTrackerMap[ctrlPos] ~= nil then
 		buttonTrackerMap[ctrlPos] = buttonTrackerMap[ctrlPos] + 1
 	end

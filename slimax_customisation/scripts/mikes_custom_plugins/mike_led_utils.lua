@@ -19,7 +19,7 @@ function updateLeds()
 	updateAlternateBlinkingLeds()
 end
 
-function updateBlinkingLeds()
+local function updateBlinkingLeds()
 	for key, value in pairs(activeBlinkingLeds) do
 		if mSessionEnter == 1 and not(m_is_sim_idle) then
 			updateBlinkingLed(value, key)
@@ -29,19 +29,19 @@ function updateBlinkingLeds()
 	end	
 end
 
-function updateAlternateBlinkingLeds()
+local function updateAlternateBlinkingLeds()
 	for key, value in pairs(activeAlternateBlinkingLeds) do		
 		updateAlternateBlinkingLed(value)
 	end	
 end
 
-function updateActivePermanentLeds()
+local function updateActivePermanentLeds()
 	for key, value in pairs(activePermanentLeds) do
 		updatePermLed(key, value)
 	end	
 end
 
-function updateBlinkingLed(ledInfo, pattern)
+local function updateBlinkingLed(ledInfo, pattern)
 	if ledInfo["duration"] > 0 and getTks() > ledInfo["duration"] then
 		deactivateBlinkingLed(pattern)
 	print("duration end")
@@ -63,7 +63,7 @@ function updateBlinkingLed(ledInfo, pattern)
 	end
 end
 
-function updateAlternateBlinkingLed(ledInfo) 
+local function updateAlternateBlinkingLed(ledInfo)
 	if getTks() >= ledInfo["nextChange"] then
 		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
 		
@@ -83,7 +83,7 @@ function updateAlternateBlinkingLed(ledInfo)
 	end
 end
 
-function updatePermLed(pattern, ledInfo)
+local function updatePermLed(pattern, ledInfo)
 	if not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle then
 		SetPatternLed(pattern, ledOff)
 	elseif ledInfo["nextChange"] == 0 or getTks() <= ledInfo["nextChange"] then
