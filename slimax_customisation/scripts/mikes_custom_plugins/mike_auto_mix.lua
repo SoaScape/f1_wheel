@@ -144,7 +144,7 @@ local function learnTrack()
 			if highLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnFullThrottleStartTicks) >= timeouts["learnFullThrottleTimeout"] and GetCarInfo("speed") > 100 and not (highLearnt) then				
+		elseif (getTks() - learnFullThrottleStartTicks) >= timeouts["FULL"] and GetCarInfo("speed") > 100 and not (highLearnt) then				
 			highLearnt = true
 			if recentEvent(learnFullThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
@@ -171,7 +171,7 @@ local function learnTrack()
 			if lowLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnLowThrottleStartTicks) >= timeouts["learnLowThrottleTimeout"] and not (lowLearnt) then
+		elseif (getTks() - learnLowThrottleStartTicks) >= timeouts["LOW "] and not (lowLearnt) then
 			lowLearnt = true
 			if recentEvent(learnLowThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
@@ -194,7 +194,7 @@ local function learnTrack()
 end
 
 local function recentEvent(startTicks)
-	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + timeouts["minTimeBetweenMixChange"] > startTicks then
+	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + timeouts["INTV"] > startTicks then
 		return true
 	else
 		return false
