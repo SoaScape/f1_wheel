@@ -130,7 +130,11 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
 				elseif ctrlPos == confirmButton then
-					confirmSelection(currentMultifunction["name"], "CONF", deviceType, getButtonMap(currentMultifunction), true)
+					if currentMultifunction["name"] == autoMixMultifunctionName then
+						toggleAutoMixSelected()
+					else
+						confirmSelection(currentMultifunction["name"], "CONF", deviceType, getButtonMap(currentMultifunction), true)
+					end
 					return 1
 				end
 

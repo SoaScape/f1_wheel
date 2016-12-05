@@ -14,13 +14,25 @@ autoMixLearnLowThrottleStartTicks = 0
 autoMixLearnLowThrottleStartDistance = 0
 autoMixLearnLowThrottleActive = false
 
+autoMixSelected = false
+
 function resetAutoMixData()
 	autoMixLearnedData = {}
 	autoMixLearnFullThrottleActive = false
 	autoMixLearnLowThrottleActive = false
+	autoMixSelected = false
 	lastLowMixEvent = nil
 	lastHighMixEvent = nil
 	autoMixActiveType = nil
+end
+
+function toggleAutoMixSelected()
+	autoMixSelected = not(autoMixSelected)
+	local right = "ACTV"
+	if not(autoMixSelected) then
+		" OFF"
+	end
+	display(autoMixMultifunctionName, right, myDevice, 500)
 end
 
 function autoMixRegularProcessing()
@@ -32,7 +44,7 @@ function autoMixRegularProcessing()
 			fuelTarget = 1
 		end
 		
-		if currentMultifunction ~= nil and currentMultifunction["name"] == autoMixMultifunctionName then
+		if autoMixSelected then
 			if autoMixActiveType == nil then -- Automix not currently set, check if we can set it
 				local distance = GetContextInfo("lap_distance")
 				activeAutoMixData = autoMixLearnedData[round(distance, 0)]				
