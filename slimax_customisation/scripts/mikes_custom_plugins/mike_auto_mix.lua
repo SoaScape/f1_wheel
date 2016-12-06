@@ -43,9 +43,10 @@ end
 local function toggleAutoMixSelected()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		autoMixSelected = not(autoMixSelected)
-		local right = "ACTV"
-		activatePermanentLed(autoMixLedPattern, 0, false)
-		if not(autoMixSelected) then
+		local right = "ACTV"		
+		if autoMixSelected then
+			autoMixOn()
+		else
 			right = " OFF"
 			autoMixOff()
 		end
