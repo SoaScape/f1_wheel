@@ -27,6 +27,7 @@ local learnLowThrottleActive = false
 
 local lastMixEvent = nil
 local autoMixSelected = false
+local autoMixReturnMix = nil
 
 local autoMixLedPattern = 128 -- LED 5, binary 10000000
 
