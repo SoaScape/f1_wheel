@@ -37,7 +37,7 @@ function getVoiceMenuButtons(currentMultifunction)
 			index = index + 1
 		end
 	else
-		delayMap[index - 1] = 200
+		delayMap[index - 1] = extraDelay
 	end
 
 	buttonMap[index] = quickMenuRight
