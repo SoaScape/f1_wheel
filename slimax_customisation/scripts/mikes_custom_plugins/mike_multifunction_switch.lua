@@ -23,6 +23,7 @@ local encoderIncrement = 10
 local confirmTimeout = 0
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
+local autoMixActiveBeforeOvertakeButton = false
 
 local function trackButtons(ctrlType, ctrlPos, value)
 	if ctrlType == pushbutton and value == buttonReleaseValue and buttonTrackerMap[ctrlPos] ~= nil then
@@ -199,6 +200,11 @@ end
 function toggleOvertakeMode(sendButtons, showDisplay)
 	if overtakeEngaged then
 		overtakeEngaged = false
+		
+		if autoMixActiveBeforeOvertakeButton then
+			autoMixActiveBeforeOvertakeButton = false
+			autoMixOn()
+		end
 
 		if sendButtons then
 			multiFunctionBak = currentMultifunction
@@ -215,7 +221,12 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 			SetOSPFactor(ospBak)
 		end
 	else
-		overtakeEngaged = true		
+		overtakeEngaged = true
+		
+		autoMixActiveBeforeOvertakeButton = isAutoMixActive()
+		if autoMixActiveBeforeOvertakeButton then
+			autoMixOff()
+		end
 
 		if sendButtons then
 			multiFunctionBak = currentMultifunction

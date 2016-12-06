@@ -47,10 +47,29 @@ local function toggleAutoMixSelected()
 		activatePermanentLed(autoMixLedPattern, 0, false)
 		if not(autoMixSelected) then
 			right = " OFF"
-			deactivatePermanentLed(autoMixLedPattern)
+			autoMixOff()
 		end
 		display(autoMixMultifunctionName, right, myDevice, 500)
 	end
+end
+
+function isAutoMixActive()
+	return autoMixSelected
+end
+
+function autoMixOn()
+	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+		autoMixSelected = true
+		activatePermanentLed(autoMixLedPattern, 0, false)
+	end
+end
+
+function autoMixOff()
+	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+		autoMixSelected = false
+		autoMixActiveType == nil
+		deactivatePermanentLed(autoMixLedPattern)
+	end	
 end
 
 function processAutoMixButtonEvent(button)
