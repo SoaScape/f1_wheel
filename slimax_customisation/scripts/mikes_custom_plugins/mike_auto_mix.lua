@@ -8,11 +8,13 @@ local timeouts =  {}
 timeouts["INTV"] = 2100 -- minTimeBetweenMixChange
 timeouts["LOW "] = 2000 -- learnLowThrottleTimeout
 timeouts["FULL"] = 4000 -- learnFullThrottleTimeout
+timeouts["INC "] = 500
 
 local timeoutIds = {}
 timeoutIds[0] = "INTV"
 timeoutIds[1] = "LOW "
 timeoutIds[2] = "FULL"
+timeoutIds[3] = "INC "
 
 local selectedTimeout = 0
 local encoderIncrement = 500
@@ -82,22 +84,22 @@ function processAutoMixButtonEvent(button)
 		else
 			selectedTimeout = 0
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
 	elseif button == downButton then
 		if selectedTimeout == 0 then
 			selectedTimeout = tablelength(timeoutIds) - 1
 		else
 			selectedTimeout = selectedTimeout - 1
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
 	elseif button == upEncoder then
 		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + encoderIncrement
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
 	elseif button == downEncoder then
 		if timeouts[timeoutIds[selectedTimeout]] >= encoderIncrement then
 			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - encoderIncrement
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, 500)
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
 	end
 end
 
