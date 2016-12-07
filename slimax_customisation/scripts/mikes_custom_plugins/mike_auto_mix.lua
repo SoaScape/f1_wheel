@@ -17,7 +17,8 @@ timeoutIds[2] = "FULL"
 timeoutIds[3] = "INC "
 
 local selectedTimeout = 0
-local encoderIncrement = 500
+
+local displayTimeout = 500
 
 local learnFullThrottleStartTicks = 0
 local learnFullThrottleStartDistance = 0
@@ -52,7 +53,7 @@ local function toggleAutoMixSelected()
 			right = " OFF"
 			autoMixOff()
 		end
-		display(autoMixMultifunctionName, right, myDevice, 500)
+		display(autoMixMultifunctionName, right, myDevice, displayTimeout)
 	end
 end
 
@@ -84,22 +85,22 @@ function processAutoMixButtonEvent(button)
 		else
 			selectedTimeout = 0
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
 	elseif button == downButton then
 		if selectedTimeout == 0 then
 			selectedTimeout = tablelength(timeoutIds) - 1
 		else
 			selectedTimeout = selectedTimeout - 1
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
 	elseif button == upEncoder then
-		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + encoderIncrement
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
+		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + timeouts["INC "]
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
 	elseif button == downEncoder then
-		if timeouts[timeoutIds[selectedTimeout]] >= encoderIncrement then
-			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - encoderIncrement
+		if timeouts[timeoutIds[selectedTimeout]] >= timeouts["INC "] then
+			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - timeouts["INC "]
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, timeouts["INC "])
+		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
 	end
 end
 
@@ -130,14 +131,14 @@ local function learnTrack()
 			if recentEvent(learnFullThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
 				lastMixEvent = nil
-				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
+				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, displayTimeout)
 			else				
 				learnedData[learnFullThrottleStartDistance] = {}
 				learnedData[learnFullThrottleStartDistance]["mix"] = fuelMultiFunction["max"]
 				learnedData[learnFullThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
 				lastMixEvent = learnedData[learnFullThrottleStartDistance]
 				highLearnt = true
-				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, 500)
+				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, displayTimeout)
 			end			
 		end
 	elseif throttle == 1 then
@@ -157,14 +158,14 @@ local function learnTrack()
 			if recentEvent(learnLowThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
 				lastMixEvent = nil
-				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)				
+				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, displayTimeout)				
 			else				
 				learnedData[learnLowThrottleStartDistance] = {}
 				learnedData[learnLowThrottleStartDistance]["mix"] = fuelMultiFunction["min"]
 				learnedData[learnLowThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
 				lastMixEvent = learnedData[learnLowThrottleStartDistance]			
 				lowLearnt = true
-				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, 500)
+				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, displayTimeout)
 			end
 		end
 	elseif throttle < 1 then
