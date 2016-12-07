@@ -8,7 +8,7 @@ local timeouts =  {}
 timeouts["INTV"] = 2100 -- minTimeBetweenMixChange
 timeouts["LOW "] = 2000 -- learnLowThrottleTimeout
 timeouts["FULL"] = 4000 -- learnFullThrottleTimeout
-timeouts["INC "] = 500
+timeouts["INC "] = 100
 
 local timeoutIds = {}
 timeoutIds[0] = "INTV"
