@@ -34,9 +34,7 @@ end
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	if deviceType == myDevice then
 		trackButtons(ctrlType, ctrlPos, value)
-		if debug then
-			print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
-		end
+--print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then
 			if multifunctionMap[value] ~= nil then
 				currentMultifunction = multifunctionMap[value]
