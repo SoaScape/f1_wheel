@@ -9,7 +9,7 @@ timeouts["INTV"] = 2100 -- minTimeBetweenMixChange
 timeouts["LOW "] = 2000 -- learnLowThrottleTimeout
 timeouts["FULL"] = 4000 -- learnFullThrottleTimeout
 
-timeoutIds = {}
+local timeoutIds = {}
 timeoutIds[0] = "INTV"
 timeoutIds[1] = "LOW "
 timeoutIds[2] = "FULL"
