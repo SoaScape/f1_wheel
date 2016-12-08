@@ -94,11 +94,20 @@ function processAutoMixButtonEvent(button)
 		end
 		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
 	elseif button == upEncoder then
-		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + timeouts["INC "]
+		local inc = timeouts["INC "]
+		if timeoutIds[selectedTimeout] == "INC " then
+			inc = 100
+		end
+		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + inc
 		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
 	elseif button == downEncoder then
-		if timeouts[timeoutIds[selectedTimeout]] >= timeouts["INC "] then
-			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - timeouts["INC "]
+		local inc = timeouts["INC "]
+		if timeoutIds[selectedTimeout] == "INC " then
+			inc = 100
+		end
+		
+		if timeouts[timeoutIds[selectedTimeout]] > inc then
+			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - inc
 		end
 		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
 	end
