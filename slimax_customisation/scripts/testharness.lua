@@ -14,12 +14,16 @@ local trackSize = 100
 local laps = 0
 local totalLaps = 10
 local fuel = 70
+local startFuel = 100
 local yellow = false
 
 local left = ""
 local right = ""
 
 mDisplay_Info_Delay = 600
+mRefreshLapTimeRate = 50
+mDeltaTimeDelay = 50
+mDeltaTimeAlternateOldTicks = 0
 
 displayFunctionIndex = {}
 displayFunctionIndex["left"] = {}
@@ -74,16 +78,18 @@ function SetKeystroke(key, holdDelay, str)
 	print("Key: " .. key .. " (" .. holdDelay .. "ms)")
 end
 function SLISleep(delay)
-	local endTime = getTks() + delay
+	--local endTime = getTks() + delay
 	print("Wait: " .. delay)
-	while getTks() < endTime do		
-	end
+	--while getTks() < endTime do		
+	--end
 end
 function GetCarInfo(item)
 	if item == "throttle" then
 		return throttle
 	elseif item == "fuel" then
 		return fuel
+	elseif item == "fuel_total" then
+		return startFuel
 	end
 end
 function GetContextInfo(item)
@@ -104,6 +110,13 @@ function GetInPitsState()
 end
 function GetDisplayFunctionIndex(side, pos)
 	return displayFunctionIndex[side][pos]
+end
+function GetTimeInfo(info)
+	return 3.3
+end
+function timeDispatcher(lpt)
+	-- hr, mn, sc, hd, tms
+	return 13, 00, 00, 00, 00
 end
 function SetPatternLed(pattern, state)
 	print("LED Pattern: " .. pattern .. ", State: " .. state)
