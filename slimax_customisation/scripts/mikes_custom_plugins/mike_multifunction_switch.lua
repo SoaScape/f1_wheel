@@ -164,7 +164,8 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 end
 
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDisplay)
-	if mSessionEnter == 1 and not(m_is_sim_idle) and getTks() > confirmTimeout then
+	local startTicks = getTks()
+	if mSessionEnter == 1 and not(m_is_sim_idle) and startTicks > confirmTimeout then
 		if showDisplay then
 			display(leftDisp, rightDisplay, deviceType, 0)
 		end
@@ -187,8 +188,10 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDis
 			SLISleep(delay)
 		end
 		delayMap = nil
-		if showDisplay then
-			setDisplayTimeout(confirmDelay)
+		
+		local runningTime = getTks() - startTicks
+		if showDisplay and runningTime < confirmDelay then
+			setDisplayTimeout(confirmDelay - runningTime)
 		end
 --print("===Keypresses End===")
 		if currentMultifunction["confirmDelay"] ~= nil then
