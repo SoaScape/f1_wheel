@@ -46,14 +46,15 @@ end
 local function toggleAutoMixSelected()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		autoMixSelected = not(autoMixSelected)
-		local right = "ACTV"		
 		if autoMixSelected then
 			autoMixOn()
+			display(autoMixMultifunctionName, "ACTV", myDevice, displayTimeout)
 		else
-			right = " OFF"
 			autoMixOff()
+			display(autoMixMultifunctionName, " OFF", myDevice, displayTimeout)
+			fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
+			confirmSelection(nil, nil, myDevice, getButtonMap(fuelMultiFunction), false)
 		end
-		display(autoMixMultifunctionName, right, myDevice, displayTimeout)
 	end
 end
 
