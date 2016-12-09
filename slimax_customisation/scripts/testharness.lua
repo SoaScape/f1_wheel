@@ -7,18 +7,20 @@ print(instructions)
 -- Stubs
 devName = "SIMRACE-F1"
 
-local throttle = 0
-local pits = 0
-local lapDistance = 0
-local trackSize = 100
-local laps = 6
-local totalLaps = 10
-local fuel = 51
-local startFuel = 101
-local yellow = false
+local locals = {}
 
-local left = ""
-local right = ""
+locals["throttle"] = 0
+locals["pits"] = 0
+locals["lapDistance"] = 0
+locals["trackSize"] = 100
+locals["laps"] = 6
+locals["totalLaps"] = 10
+locals["fuel"] = 51
+locals["startFuel"] = 101
+locals["yellow"] = false
+
+locals["left"] = ""
+locals["right"] = ""
 
 mDisplay_Info_Delay = 600
 mRefreshLapTimeRate = 50
@@ -87,28 +89,28 @@ function SLISleep(delay)
 end
 function GetCarInfo(item)
 	if item == "throttle" then
-		return throttle
+		return locals["throttle"]
 	elseif item == "fuel" then
-		return fuel
+		return locals["fuel"]
 	elseif item == "fuel_total" then
-		return startFuel
+		return locals["startFuel"]
 	end
 end
 function GetContextInfo(item)
 	if item == "yellow_flag" then
-		return yellow
+		return locals["yellow"]
 	elseif item == "lap_distance" then
-		return lapDistance
+		return locals["lapDistance"]
 	elseif item == "laps" then
-		return laps
+		return locals["laps"]
 	elseif item == "laps_count" then
-		return totalLaps
+		return locals["totalLaps"]
 	elseif item == "track_size" then
-		return trackSize
+		return locals["trackSize"]
 	end
 end
 function GetInPitsState()
-	return pits
+	return locals["pits"]
 end
 function GetDisplayFunctionIndex(side, pos)
 	return displayFunctionIndex[side][pos]
@@ -117,7 +119,7 @@ function GetTimeInfo(info)
 	return 3.3
 end
 function GetFuelKilogram(fuel)
-	return fuel
+	return locals["fuel"]
 end
 function timeDispatcher(lpt)
 	-- hr, mn, sc, hd, tms
@@ -139,6 +141,8 @@ while true do
 	local buttonEvent = string.find(input, "b")
 	local switchEvent = string.find(input, "s")
 	local sessionEvent = string.find(input, "z")
+	local globalVarEvent = string.find(input, "g")
+	local localVarEvent = string.find(input, "l")
 	
 	if buttonEvent ~= nil then
 		local button = tonumber(string.sub(input, buttonEvent + 1))
@@ -164,6 +168,21 @@ while true do
 			m_is_sim_idle = true
 			print("Session Idle")
 		end
+	elseif globalVarEvent then
+		print("global variable name: ")
+		local name = io.read("*l")
+		print("global variable value: ")
+		local val = io.read("*l")		
+		_G[name] = val
+		print("set global '" .. name .. "' to value: " .. _G[name])
+	
+	elseif localVarEvent then
+		print("local variable name: ")
+		local name = io.read("*l")
+		print("local variable value: ")
+		local val = io.read("*l")		
+		locals[name] = val
+		print("set local '" .. name .. "' to value: " .. locals[name])
 	end
 	swValue = GetDisplayFunctionIndex("left", leftDisplayPos)
 	custom_left_Display_Event(leftDisplayPos)
