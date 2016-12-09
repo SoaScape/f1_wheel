@@ -4,21 +4,24 @@ autoMixMultifunctionName = "AUTO"
 
 local learnedData = {}
 
-local timeouts =  {}
-timeouts["INTV"] = 2100 -- minTimeBetweenMixChange
-timeouts["LOW "] = 2000 -- learnLowThrottleTimeout
-timeouts["FULL"] = 4000 -- learnFullThrottleTimeout
-timeouts["INC "] = 100
+local config =  {}
+config["INTV"] = 2100 -- minTimeBetweenMixChange
+config["LOW "] = 2000 -- learnLowThrottleTimeout
+config["FULL"] = 4000 -- learnFullThrottleTimeout
+config["INC "] = 100  -- The amount to increment when adjusting the timeouts.
+config["DISP"] = false -- Whether to display auto mix changes on the dash
 
-local timeoutIds = {}
-timeoutIds[0] = "INTV"
-timeoutIds[1] = "LOW "
-timeoutIds[2] = "FULL"
-timeoutIds[3] = "INC "
+local configIds = {}
+configIds[0] = "INTV"
+configIds[1] = "LOW "
+configIds[2] = "FULL"
+configIds[3] = "INC "
+configIds[4] = "DISP"
 
-local selectedTimeout = 0
+local selectedConfig = 0
 
-local displayTimeout = 500
+local displayAutoMixChanges = false
+local displayTimeout = 1000
 
 local learnFullThrottleStartTicks = 0
 local learnFullThrottleStartDistance = 0
@@ -77,45 +80,60 @@ function autoMixOff()
 	end	
 end
 
+local function displaySelectedConfig()
+	local setting = config[configIds[selectedConfig]]
+	if configIds[selectedConfig] == "DISP" then
+		if setting then
+			setting = "  ON"
+		else
+			setting = " OFF"
+		end
+	end
+	display(configIds[selectedConfig], setting, myDevice, displayTimeout)
+end
+
 function processAutoMixButtonEvent(button)
 	if button == confirmButton then
 		toggleAutoMixSelected()
+	elseif configIds[selectedConfig] == "DISP" and button == upEncoder or button == downEncoder then
+		config[configIds[selectedConfig]] = not(config[configIds[selectedConfig]])
+		displaySelectedConfig()
 	elseif button == upButton then
-		if selectedTimeout < tablelength(timeoutIds) - 1 then
-			selectedTimeout = selectedTimeout + 1
+		if selectedConfig < tablelength(configIds) - 1 then
+			selectedConfig = selectedConfig + 1
 		else
-			selectedTimeout = 0
+			selectedConfig = 0
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
+		displaySelectedConfig()
 	elseif button == downButton then
-		if selectedTimeout == 0 then
-			selectedTimeout = tablelength(timeoutIds) - 1
+		if selectedConfig == 0 then
+			selectedConfig = tablelength(configIds) - 1
 		else
-			selectedTimeout = selectedTimeout - 1
+			selectedConfig = selectedConfig - 1
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
+		displaySelectedConfig()
 	elseif button == upEncoder then
-		local inc = timeouts["INC "]
-		if timeoutIds[selectedTimeout] == "INC " then
+		local inc = config["INC "]
+		if configIds[selectedConfig] == "INC " then
 			inc = 100
 		end
-		timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] + inc
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
+		config[configIds[selectedConfig]] = config[configIds[selectedConfig]] + inc
+		display(configIds[selectedConfig], config[configIds[selectedConfig]], myDevice, displayTimeout)
 	elseif button == downEncoder then
-		local inc = timeouts["INC "]
-		if timeoutIds[selectedTimeout] == "INC " then
+		local inc = config["INC "]
+		if configIds[selectedConfig] == "INC " then
 			inc = 100
 		end
 		
-		if timeouts[timeoutIds[selectedTimeout]] > inc then
-			timeouts[timeoutIds[selectedTimeout]] = timeouts[timeoutIds[selectedTimeout]] - inc
+		if config[configIds[selectedConfig]] > inc then
+			config[configIds[selectedConfig]] = config[configIds[selectedConfig]] - inc
 		end
-		display(timeoutIds[selectedTimeout], timeouts[timeoutIds[selectedTimeout]], myDevice, displayTimeout)
+		display(configIds[selectedConfig], config[configIds[selectedConfig]], myDevice, displayTimeout)
 	end
 end
 
 local function recentEvent(startTicks)
-	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + timeouts["INTV"] > startTicks then
+	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + config["INTV"] > startTicks then
 		return true
 	else
 		return false
@@ -137,7 +155,7 @@ local function learnTrack()
 			if highLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnFullThrottleStartTicks) >= timeouts["FULL"] and GetCarInfo("speed") > 100 and not (highLearnt) then							
+		elseif (getTks() - learnFullThrottleStartTicks) >= config["FULL"] and GetCarInfo("speed") > 100 and not (highLearnt) then							
 			if recentEvent(learnFullThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
 				lastMixEvent = nil
@@ -164,7 +182,7 @@ local function learnTrack()
 			if lowLearnt then
 				lastMixEvent["endTicks"] = getTks()
 			end
-		elseif (getTks() - learnLowThrottleStartTicks) >= timeouts["LOW "] and not (lowLearnt) then			
+		elseif (getTks() - learnLowThrottleStartTicks) >= config["LOW "] and not (lowLearnt) then			
 			if recentEvent(learnLowThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
 				lastMixEvent = nil
@@ -212,7 +230,7 @@ function autoMixRegularProcessing()
 					end
 					
 					fuelMultiFunction["currentUpDnMode"] = autoMix
-					confirmSelection("AUTO", fuelMultiFunction["modes"][autoMix], myDevice, getButtonMap(fuelMultiFunction), true)
+					confirmSelection("AUTO", fuelMultiFunction["modes"][autoMix], myDevice, getButtonMap(fuelMultiFunction), config["DISP"])
 					if autoMix == fuelMultiFunction["max"] then
 						autoMixActiveType = "max"
 					else
@@ -225,13 +243,13 @@ function autoMixRegularProcessing()
 					if throttle < 1 then
 						autoMixActiveType = nil
 						fuelMultiFunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", fuelMultiFunction["modes"][autoMixReturnMix], myDevice, getButtonMap(fuelMultiFunction), true)
+						confirmSelection("AUTO", fuelMultiFunction["modes"][autoMixReturnMix], myDevice, getButtonMap(fuelMultiFunction), config["DISP"])
 					end
 				else
 					if throttle == 1 then
 						autoMixActiveType = nil
 						fuelMultiFunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", fuelMultiFunction["modes"][autoMixReturnMix], myDevice, getButtonMap(fuelMultiFunction), true)
+						confirmSelection("AUTO", fuelMultiFunction["modes"][autoMixReturnMix], myDevice, getButtonMap(fuelMultiFunction), config["DISP"])
 					end
 				end				
 			end
