@@ -9,12 +9,12 @@ devName = "SIMRACE-F1"
 
 local throttle = 0
 local pits = 0
-local lapDistance = 10
+local lapDistance = 0
 local trackSize = 100
-local laps = 0
+local laps = 6
 local totalLaps = 10
-local fuel = 70
-local startFuel = 100
+local fuel = 51
+local startFuel = 101
 local yellow = false
 
 local left = ""
@@ -24,6 +24,7 @@ mDisplay_Info_Delay = 600
 mRefreshLapTimeRate = 50
 mDeltaTimeDelay = 50
 mDeltaTimeAlternateOldTicks = 0
+mDeltaTimeOldTicks = 0
 
 displayFunctionIndex = {}
 displayFunctionIndex["left"] = {}
@@ -42,18 +43,19 @@ displayFunctionIndex["left"][10] = 121
 displayFunctionIndex["left"][11] = 198
 displayFunctionIndex["left"][12] = 194
 
-displayFunctionIndex["right"][0] = 199
-displayFunctionIndex["right"][1] = 6
-displayFunctionIndex["right"][2] = 11
-displayFunctionIndex["right"][3] = 10
-displayFunctionIndex["right"][4] = 48
-displayFunctionIndex["right"][5] = 49
-displayFunctionIndex["right"][6] = 41
-displayFunctionIndex["right"][7] = 126
-displayFunctionIndex["right"][8] = 8
-displayFunctionIndex["right"][9] = 195
-displayFunctionIndex["right"][10] = 199
-displayFunctionIndex["right"][11] = 199
+-- The one switch function adds 1 onto the swValue for right hand switch
+displayFunctionIndex["right"][0] = 199-1
+displayFunctionIndex["right"][1] = 6-1
+displayFunctionIndex["right"][2] = 11-1
+displayFunctionIndex["right"][3] = 10-1
+displayFunctionIndex["right"][4] = 48-1
+displayFunctionIndex["right"][5] = 49-1
+displayFunctionIndex["right"][6] = 41-1
+displayFunctionIndex["right"][7] = 126-1
+displayFunctionIndex["right"][8] = 8-1
+displayFunctionIndex["right"][9] = 195-1
+displayFunctionIndex["right"][10] = 199-1
+displayFunctionIndex["right"][11] = 199-1
 
 function GetDeviceType(deviceType)
 	return deviceType
@@ -114,6 +116,9 @@ end
 function GetTimeInfo(info)
 	return 3.3
 end
+function GetFuelKilogram(fuel)
+	return fuel
+end
 function timeDispatcher(lpt)
 	-- hr, mn, sc, hd, tms
 	return 13, 00, 00, 00, 00
@@ -129,11 +134,6 @@ m_is_sim_idle = false
 local leftDisplayPos = 1
 local rightDisplayPos = 1
 while true do
-	swValue = GetDisplayFunctionIndex("left", leftDisplayPos)
-	custom_left_Display_Event(leftDisplayPos)
-	custom_right_Display_Event(rightDisplayPos)
-	UpdateDigits(left, right, 3)
-	
 	print("user input: ")
 	local input = io.read("*l")
 	local buttonEvent = string.find(input, "b")
@@ -165,4 +165,8 @@ while true do
 			print("Session Idle")
 		end
 	end
+	swValue = GetDisplayFunctionIndex("left", leftDisplayPos)
+	custom_left_Display_Event(leftDisplayPos)
+	custom_right_Display_Event(rightDisplayPos)
+	UpdateDigits(left, right, 3)
 end
