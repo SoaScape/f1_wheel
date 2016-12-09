@@ -90,3 +90,7 @@ function storeStartFuel()
 	fuelAtStart = startFuel
 	--activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout, false)
 end
+
+function getFuelAtStart()
+	return fuelAtStart
+end
