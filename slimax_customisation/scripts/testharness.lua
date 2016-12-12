@@ -171,21 +171,32 @@ while true do
 	elseif globalVarEvent then
 		print("global variable name: ")
 		local name = io.read("*l")
-		print("global variable value: ")
-		local val = io.read("*l")		
-		_G[name] = val
-		print("set global '" .. name .. "' to value: " .. _G[name])
-	
+		if _G[name] ~= nil then
+			print("global variable value (currently: " .. _G[name] .. "): ")
+			local val = io.read("*l")
+			if val ~= nil and string.len(val) > 0 then
+				_G[name] = val
+				print("set global '" .. name .. "' to value: " .. _G[name])
+			end
+		else
+			print("variable " .. name .. " does not exist")
+		end
 	elseif localVarEvent then
 		print("local variable name: ")
 		local name = io.read("*l")
-		print("local variable value: ")
-		local val = io.read("*l")		
-		locals[name] = val
-		print("set local '" .. name .. "' to value: " .. locals[name])
+		if locals[name] ~= nil then
+			print("local variable value (currently: " .. locals[name] .. "): ")
+			local val = io.read("*l")
+			if val ~= nil and string.len(val) > 0 then
+				locals[name] = val		
+				print("set local '" .. name .. "' to value: " .. locals[name])
+			end
+		else
+			print("variable " .. name .. " does not exist")
+		end
 	end
 	swValue = GetDisplayFunctionIndex("left", leftDisplayPos)
 	custom_left_Display_Event(leftDisplayPos)
 	custom_right_Display_Event(rightDisplayPos)
-	UpdateDigits(left, right, 3)
+	UpdateDigits(locals["left"], locals["right"], 3)
 end
