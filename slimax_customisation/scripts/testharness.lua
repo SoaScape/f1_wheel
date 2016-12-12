@@ -137,10 +137,8 @@ local function numberise(line)
 	local result = tonumber(line)
 
 	if result ~= nil then
-		print("cheese1")
 		return result
 	else
-		print("cheese2")
 		return line
 	end
 end
