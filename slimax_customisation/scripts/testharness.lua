@@ -11,11 +11,11 @@ local locals = {}
 
 locals["throttle"] = 0
 locals["pits"] = 0
-locals["lapDistance"] = 0
+locals["lapDistance"] = 50
 locals["trackSize"] = 100
-locals["laps"] = 6
+locals["laps"] = 3
 locals["totalLaps"] = 10
-locals["fuel"] = 51
+locals["fuel"] = 76
 locals["startFuel"] = 101
 locals["yellow"] = false
 
