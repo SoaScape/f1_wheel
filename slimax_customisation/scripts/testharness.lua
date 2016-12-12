@@ -66,10 +66,10 @@ function UpdateDigits(leftStr, rightStr, dev)
 	print("Display: " .. leftStr .. " : " .. rightStr)
 end
 function SetLeftDigits(text)
-	left = text
+	locals["left"] = text
 end
 function SetRightDigits(text)
-	right = text
+	locals["right"] = text
 end
 function SLISendReport(val)
 end
