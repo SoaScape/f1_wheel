@@ -133,9 +133,31 @@ mSessionEnter = 1
 m_is_sim_idle = false
 -- End Stubs
 
+local function numberise(line)
+	local result = tonumber(line)
+
+	if result ~= nil then
+		print("cheese1")
+		return result
+	else
+		print("cheese2")
+		return line
+	end
+end
+
 local leftDisplayPos = 1
 local rightDisplayPos = 1
+
+local function showDisplay()	
+	swValue = GetDisplayFunctionIndex("left", leftDisplayPos)
+	custom_left_Display_Event(leftDisplayPos)
+	custom_right_Display_Event(rightDisplayPos)
+	UpdateDigits(locals["left"], locals["right"], 3)
+end
+
 while true do
+	showDisplay()
+
 	print("user input: ")
 	local input = io.read("*l")
 	local buttonEvent = string.find(input, "b")
@@ -175,7 +197,7 @@ while true do
 			print("global variable value (currently: " .. _G[name] .. "): ")
 			local val = io.read("*l")
 			if val ~= nil and string.len(val) > 0 then
-				_G[name] = val
+				_G[name] = numberise(val)
 				print("set global '" .. name .. "' to value: " .. _G[name])
 			end
 		else
@@ -188,15 +210,11 @@ while true do
 			print("local variable value (currently: " .. locals[name] .. "): ")
 			local val = io.read("*l")
 			if val ~= nil and string.len(val) > 0 then
-				locals[name] = val		
+				locals[name] = numberise(val)
 				print("set local '" .. name .. "' to value: " .. locals[name])
 			end
 		else
 			print("variable " .. name .. " does not exist")
 		end
 	end
-	swValue = GetDisplayFunctionIndex("left", leftDisplayPos)
-	custom_left_Display_Event(leftDisplayPos)
-	custom_right_Display_Event(rightDisplayPos)
-	UpdateDigits(locals["left"], locals["right"], 3)
 end
