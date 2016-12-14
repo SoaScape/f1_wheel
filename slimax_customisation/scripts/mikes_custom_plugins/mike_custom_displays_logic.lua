@@ -86,8 +86,7 @@ end
 
 function storeStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
-	local startFuel = GetCarInfo("fuel_total")
-	fuelAtStart = startFuel
+	fuelAtStart = GetCarInfo("fuel_total")
 	--activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout, false)
 end
 
