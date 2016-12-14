@@ -95,7 +95,7 @@ end
 function processAutoMixButtonEvent(button)
 	if button == confirmButton then
 		toggleAutoMixSelected()
-	elseif configIds[selectedConfig] == "DISP" and button == upEncoder or button == downEncoder then
+	elseif configIds[selectedConfig] == "DISP" and (button == upEncoder or button == downEncoder) then
 		config[configIds[selectedConfig]] = not(config[configIds[selectedConfig]])
 		displaySelectedConfig()
 	elseif button == upButton then
