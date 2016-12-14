@@ -193,13 +193,13 @@ while true do
 		local name = io.read("*l")
 		if _G[name] ~= nil then
 			print("global variable value (currently: " .. _G[name] .. "): ")
-			local val = io.read("*l")
-			if val ~= nil and string.len(val) > 0 then
-				_G[name] = numberise(val)
-				print("set global '" .. name .. "' to value: " .. _G[name])
-			end
 		else
-			print("variable " .. name .. " does not exist")
+			print("new global variable value (currently: null): ")
+		end
+		local val = io.read("*l")
+		if val ~= nil and string.len(val) > 0 then
+			_G[name] = numberise(val)
+			print("set global '" .. name .. "' to value: " .. _G[name])
 		end
 	elseif localVarEvent then
 		print("local variable name: ")
