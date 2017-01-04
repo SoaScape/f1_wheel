@@ -13,9 +13,11 @@ confirmDelay = 1000
 local customDisplayActive = false
 local customDisplayTicksTimeout = 0
 
-local confirmTimeout = 0
 local keystrokeDelay = 200
 local keyHoldDelay = 30
+
+local keyQueueActive = false
+local keyQueue = {}
 
 function customDisplayIsActive()
 	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
@@ -38,19 +40,36 @@ function setDisplayTimeout(timeout)
 	customDisplayActive = true	
 end
 
-local function processKeyPress(key, holdDelay, delayTime)
-	SetKeystroke(key, holdDelay, "")
-	SLISleep(delayTime)
+function keyPressRegularProcessing()
+	if keyQueue ~= nil and keyQueue[1] ~= nil then
+		local nextKey = keyQueue[1]
+		if nextKey["expires"] ~= nil then
+			if nextKey["expires"] > getTks() then
+				table.remove(keyQueue, 1)
+			end
+		else
+			SetKeystroke(nextKey["key"], nextKey["holdDelay"], "")
+			nextKey["expires"] = getTks() + nextKey["delayTime"]
+--print("DEBUG key: " .. nextKey["key"] .. ", holdDelay, " .. nextKey["holdDelay"] .. ", delay: " .. nextKey["delayTime"])
+		end
+	else
+		keyQueueActive = false
+	end	
+end
+
+local function queueKeyPress(key, holdDelay, delayTime)
+	keyQueueActive = true
+	local keyPress = {}
+	keyPress["key"] = key
+	keyPress["holdDelay"] = holdDelay
+	keyPress["delayTime"] = delayTime
+	table.insert(keyQueue, keyPress)	
 end
 
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDisplay)
 	local startTicks = getTks()
-	if mSessionEnter == 1 and not(m_is_sim_idle) and startTicks > confirmTimeout then
-		if showDisplay then
-			display(leftDisp, rightDisplay, deviceType, 0)
-		end
---print("===Keypresses Start===")
-		for i=0, tablelength(buttonMap) - 1 do
+	if mSessionEnter == 1 and not(m_is_sim_idle) and not(keyQueueActive) then
+		for i = 0, tablelength(buttonMap) - 1 do
 			local delay = keystrokeDelay
 			local holdDelay = keyHoldDelay
 			if delayMap ~= nil and delayMap[i] ~= nil then
@@ -62,19 +81,12 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDis
 			if keyHoldMap ~= nil and keyHoldMap[i] ~= nil then
 				holdDelay = keyHoldMap[i]
 			end
---print("Key: " .. buttonMap[i] .. ", Delay: " .. delay)
-			-- params: key, delay, modifier
-			processKeyPress(buttonMap[i], holdDelay, delay)			
+			queueKeyPress(buttonMap[i], holdDelay, delay)			
 		end
 		delayMap = nil
-		
-		local runningTime = getTks() - startTicks
-		if showDisplay and runningTime < confirmDelay then
-			setDisplayTimeout(confirmDelay - runningTime)
-		end
---print("===Keypresses End===")
-		if currentMultifunction["confirmDelay"] ~= nil then
-			confirmTimeout = getTks() + currentMultifunction["confirmDelay"]
+
+		if showDisplay then
+			display(leftDisp, rightDisplay, deviceType, confirmDelay)
 		end
 	end
 end

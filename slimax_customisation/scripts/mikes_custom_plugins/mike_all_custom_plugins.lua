@@ -18,6 +18,7 @@ end
 local function dispEvent(side, swPosition)
 	autoMixRegularProcessing()
 	raceStartRegularProcessing()
+	keyPressRegularProcessing()
 	updateLeds()
 	if not(customDisplayIsActive()) then		
 		return customDisplayEventProcessing(swValue, side)
