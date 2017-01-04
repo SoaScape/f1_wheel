@@ -38,6 +38,11 @@ function setDisplayTimeout(timeout)
 	customDisplayActive = true	
 end
 
+local function processKeyPress(key, holdDelay, delayTime)
+	SetKeystroke(key, holdDelay, "")
+	SLISleep(delayTime)
+end
+
 function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDisplay)
 	local startTicks = getTks()
 	if mSessionEnter == 1 and not(m_is_sim_idle) and startTicks > confirmTimeout then
@@ -59,8 +64,7 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDis
 			end
 --print("Key: " .. buttonMap[i] .. ", Delay: " .. delay)
 			-- params: key, delay, modifier
-			SetKeystroke(buttonMap[i], holdDelay, "")
-			SLISleep(delay)
+			processKeyPress(buttonMap[i], holdDelay, delay)			
 		end
 		delayMap = nil
 		
