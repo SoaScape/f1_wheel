@@ -11,16 +11,12 @@ local overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 128
 overtakeLedPatterns[1] = 64
 --------------------------------------------------
-confirmDelay = 1000
 currentMultifunction = nil
 
 local selectDelay = 600
 local multiSelectDelay = 500
-local keystrokeDelay = 200
-local keyHoldDelay = 30
 local kiloDivider = 0.750
 local encoderIncrement = 10
-local confirmTimeout = 0
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
 local autoMixActiveBeforeOvertakeButton = false
@@ -161,43 +157,6 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	end
 
 	return 2
-end
-
-function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDisplay)
-	local startTicks = getTks()
-	if mSessionEnter == 1 and not(m_is_sim_idle) and startTicks > confirmTimeout then
-		if showDisplay then
-			display(leftDisp, rightDisplay, deviceType, 0)
-		end
---print("===Keypresses Start===")
-		for i=0,tablelength(buttonMap)-1 do
-			local delay = keystrokeDelay
-			local holdDelay = keyHoldDelay
-			if delayMap ~= nil and delayMap[i] ~= nil then
-				delay = delayMap[i]
-			elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
-				delay = customKeystrokeDelays[buttonMap[i]]
-			end
-			
-			if keyHoldMap ~= nil and keyHoldMap[i] ~= nil then
-				holdDelay = keyHoldMap[i]
-			end
---print("Key: " .. buttonMap[i] .. ", Delay: " .. delay)
-			-- params: key, delay, modifier
-			SetKeystroke(buttonMap[i], holdDelay, "")
-			SLISleep(delay)
-		end
-		delayMap = nil
-		
-		local runningTime = getTks() - startTicks
-		if showDisplay and runningTime < confirmDelay then
-			setDisplayTimeout(confirmDelay - runningTime)
-		end
---print("===Keypresses End===")
-		if currentMultifunction["confirmDelay"] ~= nil then
-			confirmTimeout = getTks() + currentMultifunction["confirmDelay"]
-		end
-	end
 end
 
 function toggleOvertakeMode(sendButtons, showDisplay)
