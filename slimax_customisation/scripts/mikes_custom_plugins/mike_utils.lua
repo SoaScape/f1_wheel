@@ -44,7 +44,7 @@ function keyPressRegularProcessing()
 	if keyQueue ~= nil and keyQueue[1] ~= nil then
 		local nextKey = keyQueue[1]
 		if nextKey["expires"] ~= nil then
-			if nextKey["expires"] > getTks() then
+			if getTks() > nextKey["expires"] then
 				table.remove(keyQueue, 1)
 			end
 		else
