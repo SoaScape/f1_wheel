@@ -84,7 +84,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		end
 	end
 	
-	local fuelOffset = 0
+	local fuelOffset = 1
 	for mix, dist in pairs(fuelMixes) do
 		local distPercentage = dist / GetContextInfo("track_size")
 		local offset = fuelMultiFunction["fuelUsageOffset"][mix]
