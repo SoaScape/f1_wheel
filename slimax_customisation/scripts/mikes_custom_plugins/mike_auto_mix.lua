@@ -216,7 +216,7 @@ function autoMixRegularProcessing()
 		if autoMixSelected then
 			if autoMixActiveType == nil then -- Automix not currently set, check if we can set it
 				local distance = GetContextInfo("lap_distance")
-				activeAutoMixData = learnedData[round(distance, 0)]				
+				activeAutoMixData = learnedData[round(distance, 0)]
 				if activeAutoMixData ~= nil then
 					local autoMix = activeAutoMixData["mix"]	
 					autoMixReturnMix = activeAutoMixData["returnMix"]
@@ -229,8 +229,11 @@ function autoMixRegularProcessing()
 						end
 					end
 					
-					fuelMultiFunction["currentUpDnMode"] = autoMix
-					confirmSelection("AUTO", fuelMultiFunction["modes"][autoMix], myDevice, getButtonMap(fuelMultiFunction), config["DISP"])
+					local multiFunctionBak = currentMultifunction
+					currentMultifunction = fuelMultiFunction
+					currentMultifunction["currentUpDnMode"] = autoMix
+					confirmSelection("AUTO", currentMultifunction["modes"][autoMix], myDevice, getButtonMap(currentMultifunction), config["DISP"])
+					currentMultifunction = multiFunctionBak
 					if autoMix == fuelMultiFunction["max"] then
 						autoMixActiveType = "max"
 					else
@@ -242,14 +245,20 @@ function autoMixRegularProcessing()
 				if autoMixActiveType == "max" then
 					if throttle < 1 then
 						autoMixActiveType = nil
-						fuelMultiFunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", fuelMultiFunction["modes"][autoMixReturnMix], myDevice, getButtonMap(fuelMultiFunction), config["DISP"])
+						local multiFunctionBak = currentMultifunction
+						currentMultifunction = fuelMultiFunction
+						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
+						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], myDevice, getButtonMap(currentMultifunction), config["DISP"])
+						currentMultifunction = multiFunctionBak
 					end
 				else
 					if throttle == 1 then
 						autoMixActiveType = nil
-						fuelMultiFunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", fuelMultiFunction["modes"][autoMixReturnMix], myDevice, getButtonMap(fuelMultiFunction), config["DISP"])
+						local multiFunctionBak = currentMultifunction
+						currentMultifunction = fuelMultiFunction
+						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
+						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], myDevice, getButtonMap(currentMultifunction), config["DISP"])
+						currentMultifunction = multiFunctionBak
 					end
 				end				
 			end
