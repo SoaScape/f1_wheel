@@ -2,6 +2,31 @@ require "scripts/mikes_custom_plugins/mike_common"
 require "scripts/mikes_custom_plugins/mike_custom_displays_logic"
 require "scripts/mikes_custom_plugins/mike_utils"
 
+local function displayFuelTarget(fuelTarget)
+	local sliPanel = "NREF"
+	if fuelTarget ~= nil then
+		local fuelRemaining = GetCarInfo("fuel")
+		local c = ""
+		if(fuelTarget >= 0) then
+			c = "+"
+		end
+	
+		if firstLapCompleted() and remainingLapsInTank ~= 0 then
+			if(fuelTarget >= 10 or fuelTarget <= -10) then
+				sliPanel = string.format("%s%2.1f",  c, fuelTarget, 1)
+			else
+				sliPanel = string.format("T%s%1.1f",  c, fuelTarget, 1)
+			end
+			isSlowUpdate = true
+		else
+			if(fuelRemaining <= minFuel) then
+				sliPanel = "OUT "
+			end
+		end	
+	end
+	return sliPanel
+end
+
 function customDisplayEventProcessing(swValue, side)
 	performRegularCustomDisplayProcessing()
 	
@@ -21,31 +46,7 @@ function customDisplayEventProcessing(swValue, side)
 	elseif swValue == 194 then		
 		-- Mike custom: fuel target.
 		customFunction = true
-		local fuelTarget = getFuelTarget()
-		if fuelTarget ~= nil then
-			local fuelRemaining = GetCarInfo("fuel")
-			local c = ""
-			if(fuelTarget >= 0) then
-				c = "+"
-			end
-		
-			if firstLapCompleted() and remainingLapsInTank ~= 0 then
-				if(fuelTarget >= 10 or fuelTarget <= -10) then
-					sliPanel = string.format("%s%2.1f",  c, fuelTarget, 1)
-				else
-					sliPanel = string.format("T%s%1.1f",  c, fuelTarget, 1)
-				end
-				isSlowUpdate = true
-			else
-				if(fuelRemaining <= minFuel) then
-					sliPanel = "OUT "
-				else
-					sliPanel = "NREF"
-				end
-			end
-		else
-			sliPanel = "NREF"
-		end
+		sliPanel = displayFuelTarget(getFuelTarget())
 
 	elseif swValue == 195 then
 		-- Mike custom: total fuel in tank at start(doesn't reset with flashback in F1)
