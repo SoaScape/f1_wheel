@@ -169,7 +169,7 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 		end
 
 		if sendButtons then
-			multiFunctionBak = currentMultifunction
+			local multiFunctionBak = currentMultifunction
 			currentMultifunction = fuelMultiFunction			
 			confirmSelection("OVTK", " END", myDevice, getButtonMap(currentMultifunction), showDisplay)			
 			currentMultifunction = multiFunctionBak
@@ -191,9 +191,9 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 		end
 
 		if sendButtons then
-			multiFunctionBak = currentMultifunction
+			local multiFunctionBak = currentMultifunction
 			currentMultifunction = fuelMultiFunction
-			fuelModeBak = currentMultifunction["currentUpDnMode"]
+			local fuelModeBak = currentMultifunction["currentUpDnMode"]
 			currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
 			confirmSelection("OVER", "TAKE", myDevice, getButtonMap(currentMultifunction), showDisplay)
 			currentMultifunction["currentUpDnMode"] = fuelModeBak

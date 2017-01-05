@@ -26,6 +26,11 @@ function customDisplayIsActive()
 	return customDisplayActive
 end
 
+local function setDisplayTimeout(timeout)		
+	customDisplayTicksTimeout = getTks() + timeout
+	customDisplayActive = true	
+end
+
 function display(leftStr, rightStr, deviceType, timeout)
 	if leftStr ~= nul and rightStr ~= nil then
 		local dev = GetDeviceType(deviceType)
@@ -33,11 +38,6 @@ function display(leftStr, rightStr, deviceType, timeout)
 		SLISendReport(0)
 		setDisplayTimeout(timeout)
 	end
-end
-
-local function setDisplayTimeout(timeout)		
-	customDisplayTicksTimeout = getTks() + timeout
-	customDisplayActive = true	
 end
 
 function keyPressRegularProcessing()

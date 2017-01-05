@@ -7,9 +7,10 @@ local lowFuelLedPattern = 64
 local startFuelStoredLedPattern = 248
 local fuelResetDisplayTimeout = 1000
 
+local fuelTarget = nil
 function performRegularCustomDisplayProcessing()
 	-- Calculate fuel target
-	fuelTarget = getFuelTarget()
+	fuelTarget = calculateFuelTarget()
 end
 
 local function getPercentageLapComplete()
@@ -65,6 +66,9 @@ function getRemainingLapsInTank(fuelRemaining)
 end
 
 function getFuelTarget()
+	return fuelTarget
+end
+function calculateFuelTarget()
 	local fuelRemaining = GetCarInfo("fuel")
 	if firstLapCompleted() and fuelAtStart > 0 and fuelRemaining > 0 then
 		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)

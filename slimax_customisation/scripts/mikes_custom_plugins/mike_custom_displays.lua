@@ -21,6 +21,7 @@ function customDisplayEventProcessing(swValue, side)
 	elseif swValue == 194 then		
 		-- Mike custom: fuel target.
 		customFunction = true
+		local fuelTarget = getFuelTarget()
 		if fuelTarget ~= nil then
 			local fuelRemaining = GetCarInfo("fuel")
 			local c = ""
