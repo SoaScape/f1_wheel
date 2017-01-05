@@ -123,3 +123,7 @@ function tablelength(T)
   for _ in pairs(T) do count = count + 1 end
   return count
 end
+
+function resetUtilsData()
+	activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
+end
