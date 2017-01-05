@@ -43,7 +43,7 @@ function display(leftStr, rightStr, deviceType, timeout)
 end
 
 function keyPressRegularProcessing()
-	if activeFuelMix = nil then
+	if activeFuelMix == nil then
 		activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
 	end
 	
