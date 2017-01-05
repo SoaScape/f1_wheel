@@ -31,10 +31,16 @@ function customDisplayEventProcessing(swValue, side)
 	performRegularCustomDisplayProcessing()
 	
 	local sliPanel = ""
+	local isSlowUpdate = false
 	local customFunction = false
 	local diffTimeFlag = false
 	local lpt = nil
-	if swValue == 193 then
+	
+	if swValue == 192 then		
+		-- Mike custom: fuel target.
+		customFunction = true
+		sliPanel = displayFuelTarget(getAdjustedFuelTarget())
+	elseif swValue == 193 then
 		-- Mike custom: LAPS COMPLETED SCRIPT INCLUDING CURRENT DECIMAL PLACE LAP
 		customFunction = true
 		local lapsCompleted = getLapsCompleteIncludingCurrent()

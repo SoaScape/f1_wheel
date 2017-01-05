@@ -34,6 +34,10 @@ multifunctionMap[2]["modes"] = {}
 multifunctionMap[2]["modes"][0] = "LEAN"
 multifunctionMap[2]["modes"][1] = "NORM"
 multifunctionMap[2]["modes"][2] = "RICH"
+multifunctionMap[2]["fuelUsageOffset"] = {}
+multifunctionMap[2]["fuelUsageOffset"][0] = -0.3
+multifunctionMap[2]["fuelUsageOffset"][1] = 0
+multifunctionMap[2]["fuelUsageOffset"][2] = 0.3
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "DIFF"

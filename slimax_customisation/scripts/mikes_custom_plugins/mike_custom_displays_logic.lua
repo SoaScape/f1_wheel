@@ -8,10 +8,10 @@ local startFuelStoredLedPattern = 248
 local fuelResetDisplayTimeout = 1000
 
 local fuelTarget = nil
-function performRegularCustomDisplayProcessing()
-	-- Calculate fuel target
-	fuelTarget = calculateFuelTarget()
-end
+local adjustedFuelTarget = nil
+
+local fuelLaps = {}
+local lastLapCompleted = -1
 
 local function getPercentageLapComplete()
 	-- percentage of current lap completed
@@ -68,29 +68,116 @@ end
 function getFuelTarget()
 	return fuelTarget
 end
-function calculateFuelTarget()
+
+function getAdjustedFuelTarget()
+	return adjustedFuelTarget
+end
+
+local function calculateMixAdjustedFuelLap(fuelLap)
+	local fuelUsed = fuelLap["startFuel"] - fuelLap["endFuel"]
+	local fuelMixes = {}
+	for distance, fuelMode in pairs(fuelLap["mixdata"]) do
+		if fuelMixes[fuelMode] == nil then
+			fuelMixes[fuelMode] = 1
+		else
+			fuelMixes[fuelMode] = fuelMixes[fuelMode] + 1
+		end
+	end
+	
+	local fuelOffset = 0
+	for mix, dist in pairs(fuelMixes) do
+		local distPercentage = dist / GetContextInfo("track_size")
+		local offset = fuelMultiFunction["fuelUsageOffset"][mix]
+		fuelOffset = fuelOffset + (offset * distPercentage)
+	end
+	fuelLap["fuelUsed"] = fuelUsed * fuelOffset
+end
+
+local function trackFuelLapData()	
+	local lapsCompleted = GetContextInfo("laps")
+	if lapsCompleted ~= nil then
+		if lapsCompleted > lastLapCompleted then
+			local fuel = GetCarInfo("fuel")
+			if fuelLaps[lastLapCompleted] ~= nil then				
+				fuelLaps[lastLapCompleted]["endFuel"] = fuel
+				calculateMixAdjustedFuelLap(fuelLaps[lastLapCompleted])
+			end
+			
+			local fuelLap = {}
+			fuelLap["startFuel"] = fuel
+			fuelLap["mixdata"] = {}
+			fuelLaps[lapsCompleted] = fuelLap
+			
+			lastLapCompleted = lapsCompleted
+		else
+			local fuelLap = fuelLaps[lapsCompleted]
+			local distance = round(GetContextInfo("lap_distance"), 0)
+			if fuelLap["mixdata"][distance] ~= nil then
+				fuelLap["mixdata"][distance] = getActiveFuelMix()
+			end
+		end
+	end
+end
+
+local function calculateAdjustedFuelTarget()
+	if fuelMultiFunction["fuelUsageOffset"] ~= nil then
+		trackFuelLapData()
+		
+		local totalFuelUsed = 0
+		local fuelLapsCompleted = 0
+		
+		for lapId, fuelLap in pairs(fuelLaps) do		
+			if fuelLap["fuelUsed"] ~= nil then
+				totalFuelUsed = totalFuelUsed + fuelLap["fuelUsed"]
+				fuelLapsCompleted = fuelLapsCompleted + 1
+			end
+		end
+		
+		if fuelLapsCompleted > 0 then
+			local fuelPerLap = totalFuelUsed / fuelLapsCompleted
+			local fuelRemaining = GetCarInfo("fuel") - minFuel
+			local fuelLapsRemaining = fuelRemaining / fuelPerLap
+			local lapsRemaining = getLapsRemaining()
+			adjustedFuelTarget = fuelLapsRemaining - lapsRemaining
+		else
+			adjustedFuelTarget = nil
+		end
+	end
+end
+
+local function calculateRawFuelTarget()	
 	local fuelRemaining = GetCarInfo("fuel")
 	if firstLapCompleted() and fuelAtStart > 0 and fuelRemaining > 0 then
 		local remainingLapsInTank = getRemainingLapsInTank(fuelRemaining)
 		local remainingLaps = getLapsRemaining()
-		local target = round(remainingLapsInTank - remainingLaps, 1)
+		fuelTarget = round(remainingLapsInTank - remainingLaps, 1)
 
-		if target < 0 then
+		if fuelTarget < 0 then
 			activateBlinkingLed(lowFuelLedPattern, 500, 0, false)
 		else
 			deactivateBlinkingLed(lowFuelLedPattern)
 		end
-
-		return target
 	else
 		deactivateBlinkingLed(lowFuelLedPattern)
-		return nil
+		fuelTarget = nil
 	end
+end
+
+local function calculateFuelTargets()
+	calculateRawFuelTarget()
+	calculateAdjustedFuelTarget()
+end
+
+function performRegularCustomDisplayProcessing()
+	-- Calculate fuel targets
+	calculateFuelTargets()
 end
 
 function storeStartFuel()
 	-- Store Fuel At Start (to preserve after flashback)
 	fuelAtStart = GetCarInfo("fuel_total")
+	fuelLaps = {}
+	lastLapCompleted = -1
 	--activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout, false)
 end
 
