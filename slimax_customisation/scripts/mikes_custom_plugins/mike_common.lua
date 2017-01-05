@@ -2,7 +2,7 @@ require "scripts/mikes_custom_plugins/mike_utils"
 
 -- This file houses non-changed code from original SliMaxManager scripts
 -- =====================================================================
-function commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side)
+function commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side, isSlowUpdate)
 	local hr = 0
 	local mn = 0
 	local sc = 0

@@ -118,7 +118,7 @@ function customDisplayEventProcessing(swValue, side)
 	end
 	
 	if customFunction and not(m_is_sim_idle) then
-		commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side)
+		commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side, isSlowUpdate)
 		return 1
 	else
 		return 2
