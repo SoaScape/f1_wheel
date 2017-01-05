@@ -173,12 +173,16 @@ function performRegularCustomDisplayProcessing()
 	calculateFuelTargets()
 end
 
-function storeStartFuel()
-	-- Store Fuel At Start (to preserve after flashback)
+function storeStartFuel()	
 	fuelAtStart = GetCarInfo("fuel_total")
+end
+
+function resetFuelData()
+	fuelAtStart = 0
 	fuelLaps = {}
 	lastLapCompleted = -1
-	--activatePermanentLed(startFuelStoredLedPattern, fuelResetDisplayTimeout, false)
+	fuelTarget = nil
+	adjustedFuelTarget = nil
 end
 
 function getFuelAtStart()
