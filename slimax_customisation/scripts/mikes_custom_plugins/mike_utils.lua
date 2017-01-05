@@ -35,7 +35,7 @@ function display(leftStr, rightStr, deviceType, timeout)
 	end
 end
 
-function setDisplayTimeout(timeout)		
+local function setDisplayTimeout(timeout)		
 	customDisplayTicksTimeout = getTks() + timeout
 	customDisplayActive = true	
 end
