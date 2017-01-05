@@ -11,11 +11,11 @@ local locals = {}
 
 locals["throttle"] = 0
 locals["pits"] = 0
-locals["lapDistance"] = 50
+locals["lapDistance"] = 0
 locals["trackSize"] = 100
-locals["laps"] = 3
+locals["laps"] = 1
 locals["totalLaps"] = 10
-locals["fuel"] = 76
+locals["fuel"] = 101
 locals["startFuel"] = 101
 locals["yellow"] = false
 
@@ -57,7 +57,7 @@ displayFunctionIndex["right"][7] = 126-1
 displayFunctionIndex["right"][8] = 8-1
 displayFunctionIndex["right"][9] = 195-1
 displayFunctionIndex["right"][10] = 199-1
-displayFunctionIndex["right"][11] = 199-1
+displayFunctionIndex["right"][11] = 192-1
 
 function GetDeviceType(deviceType)
 	return deviceType
@@ -129,8 +129,8 @@ function SetPatternLed(pattern, state)
 	print("LED Pattern: " .. pattern .. ", State: " .. state)
 end
 
-mSessionEnter = 1
-m_is_sim_idle = false
+mSessionEnter = 0
+m_is_sim_idle = true
 -- End Stubs
 
 local function numberise(line)
