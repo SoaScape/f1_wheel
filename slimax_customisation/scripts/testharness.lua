@@ -17,7 +17,7 @@ locals["laps"] = 1
 locals["totalLaps"] = 10
 locals["fuel"] = 101
 locals["startFuel"] = 101
-locals["yellow"] = false
+locals["yellow"] = "false"
 
 locals["left"] = ""
 locals["right"] = ""
@@ -98,7 +98,7 @@ function GetCarInfo(item)
 end
 function GetContextInfo(item)
 	if item == "yellow_flag" then
-		return locals["yellow"]
+		return locals["yellow"] == "true"
 	elseif item == "lap_distance" then
 		return locals["lapDistance"]
 	elseif item == "laps" then
