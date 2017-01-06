@@ -82,6 +82,7 @@ local function assessFuelLapData()
 	local count = 0
 	
 	for _, key in ipairs(sortedKeys) do
+		count = count + 1
 		local fuelLap = fuelLaps[key]
 		if fuelLap.accuracy < 100 and count > maxNonStandardFuelLapsToStore then
 			table.remove(fuelLaps, key)
@@ -89,7 +90,6 @@ local function assessFuelLapData()
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
 			fuelLap.new = false
 		end
-		count = count + 1
 	end
 end
 
