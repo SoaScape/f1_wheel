@@ -119,9 +119,24 @@ function round(num, idp)
 end
 
 function tablelength(T)
-  local count = 0
-  for _ in pairs(T) do count = count + 1 end
-  return count
+	local count = 0
+	for _ in pairs(T) do
+		count = count + 1
+	end
+	return count
+end
+
+function getKeysSortedByValue(tbl, sortFunction)
+	local keys = {}
+	for key in pairs(tbl) do
+		table.insert(keys, key)
+	end
+
+	table.sort(keys, function(a, b)
+		return sortFunction(tbl[a], tbl[b])
+	end)
+
+	return keys
 end
 
 function resetUtilsData()

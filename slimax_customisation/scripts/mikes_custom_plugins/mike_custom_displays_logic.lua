@@ -76,12 +76,15 @@ function getAdjustedFuelTarget()
 end
 
 local function assessFuelLapData()
-	local lapComparator = function(a, b) return a.accuracy > b.accuracy end
-	table.sort(fuelLaps, lapComparator)
+	local lapComparator = function(a, b) return a.accuracy > b.accuracy end	
+	local sortedKeys = getKeysSortedByValue(fuelLaps, comparator)
+	
 	local count = 0
-	for id, fuelLap in pairs(fuelLaps) do		
+	
+	for _, key in ipairs(sortedKeys) do
+		local fuelLap = fuelLaps[key]
 		if fuelLap.accuracy < 100 and count > maxNonStandardFuelLapsToStore then
-			table.remove(id, fuelLaps)
+			table.remove(key, fuelLaps)
 		elseif fuelLap.new then
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
 			fuelLap.new = false
