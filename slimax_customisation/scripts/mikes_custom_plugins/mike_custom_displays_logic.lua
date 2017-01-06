@@ -96,6 +96,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	local adjustedFuelUsed = fuelUsed * fuelOffset
 	if adjustedFuelUsed > 0 then
 		fuelLap["fuelUsed"] = adjustedFuelUsed
+		print("Lap completed, fuelUsed: " .. adjustedFuelUsed)
 	end
 end
 
@@ -116,10 +117,12 @@ local function trackFuelLapData()
 			
 			lastLapCompleted = lapsCompleted
 		else
-			local fuelLap = fuelLaps[lapsCompleted]
-			local distance = round(GetContextInfo("lap_distance"), 0)
-			if fuelLap["mixdata"][distance] ~= nil then
-				fuelLap["mixdata"][distance] = getActiveFuelMix()
+			if not(GetContextInfo("yellow_flag")) then
+				local fuelLap = fuelLaps[lapsCompleted]
+				local distance = round(GetContextInfo("lap_distance"), 0)
+				if fuelLap["mixdata"][distance] ~= nil then
+					fuelLap["mixdata"][distance] = getActiveFuelMix()
+				end
 			end
 		end
 	end
