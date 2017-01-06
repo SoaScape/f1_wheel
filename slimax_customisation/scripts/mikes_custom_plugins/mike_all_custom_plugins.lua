@@ -15,11 +15,15 @@ function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, 
 	end
 end
 
-local function dispEvent(side, swPosition)
+local function performRegularProcessing()
+	performRegularCustomDisplayProcessing()
 	autoMixRegularProcessing()
 	raceStartRegularProcessing()
 	keyPressRegularProcessing()
 	updateLeds()
+end
+
+local function dispEvent(side, swPosition)	
 	if not(customDisplayIsActive()) then		
 		return customDisplayEventProcessing(swValue, side)
 	else
@@ -28,6 +32,7 @@ local function dispEvent(side, swPosition)
 end
 
 function custom_left_Display_Event(swPosition)	
+	performRegularProcessing()
 	return dispEvent(0, swPosition)
 end
 
