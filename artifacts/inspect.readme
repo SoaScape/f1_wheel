@@ -1,0 +1,8 @@
+put inspect.lua in <lua_dir>\lib\lua
+
+in your code, use as follows:
+
+local inspect = require('inspect')
+print(inspect(tbl))
+
+(where tbl is some table)
