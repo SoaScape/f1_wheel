@@ -90,7 +90,11 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		local offset = fuelMultiFunction["fuelUsageOffset"][mix]
 		fuelOffset = fuelOffset + (offset * distPercentage)
 	end
-	fuelLap["fuelUsed"] = fuelUsed * fuelOffset
+	
+	local adjustedFuelUsed = fuelUsed * fuelOffset
+	if adjustedFuelUsed > 0 then
+		fuelLap["fuelUsed"] = adjustedFuelUsed
+	end
 end
 
 local function trackFuelLapData()	
