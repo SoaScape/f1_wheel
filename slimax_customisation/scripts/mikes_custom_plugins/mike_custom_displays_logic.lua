@@ -89,6 +89,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	local fuelOffset = 1
 	for mix, total in pairs(fuelMixes) do
 		local distPercentage = total / numMixEvents
+		local offset = -fuelMultiFunction["fuelUsageOffset"][mix]
 		fuelOffset = fuelOffset + (offset * distPercentage)
 	end
 	
