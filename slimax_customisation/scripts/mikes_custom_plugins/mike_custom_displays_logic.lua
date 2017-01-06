@@ -76,18 +76,19 @@ end
 local function calculateMixAdjustedFuelLap(fuelLap)
 	local fuelUsed = fuelLap["startFuel"] - fuelLap["endFuel"]
 	local fuelMixes = {}
+	local numMixEvents = 0
 	for distance, fuelMode in pairs(fuelLap["mixdata"]) do
 		if fuelMixes[fuelMode] == nil then
 			fuelMixes[fuelMode] = 1
 		else
 			fuelMixes[fuelMode] = fuelMixes[fuelMode] + 1
 		end
+		numMixEvents = numMixEvents + 1
 	end
 	
 	local fuelOffset = 1
-	for mix, dist in pairs(fuelMixes) do
-		local distPercentage = dist / GetContextInfo("track_size")
-		local offset = fuelMultiFunction["fuelUsageOffset"][mix]
+	for mix, total in pairs(fuelMixes) do
+		local distPercentage = total / numMixEvents
 		fuelOffset = fuelOffset + (offset * distPercentage)
 	end
 	
