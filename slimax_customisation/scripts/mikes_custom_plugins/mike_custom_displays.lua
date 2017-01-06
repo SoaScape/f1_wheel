@@ -28,8 +28,6 @@ local function displayFuelTarget(fuelTarget)
 end
 
 function customDisplayEventProcessing(swValue, side)
-	performRegularCustomDisplayProcessing()
-	
 	local sliPanel = ""
 	local isSlowUpdate = false
 	local customFunction = false

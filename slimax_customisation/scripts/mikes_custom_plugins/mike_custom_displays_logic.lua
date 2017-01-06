@@ -78,13 +78,13 @@ end
 local function assessFuelLapData()
 	local lapComparator = function(a, b) return a["accuracy"] > b["accuracy"] end
 	table.sort(fuelLaps, lapComparator)
-	
 	local count = 0
 	for id, fuelLap in pairs(fuelLaps) do		
 		if fuelLap["accuracy"] < 100 and count > maxNonStandardFuelLapsToStore then
 			table.remove(id, fuelLaps)
 		elseif fuelLap["new"] then
 			display("DATA", tostring(fuelLap["accuracy"]), mDisplay_Info_Delay)
+			fuelLap["new"] = false
 		end
 		count = count + 1
 	end
@@ -112,9 +112,9 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		end
 		numMixEvents = numMixEvents + 1
 	end
-	
+
 	local yellowFlagLapPrecentage = ((numYellow / numMixEvents) * 100)
-	if yellowFlagLapPrecentage < maxYellowFlagPercentageForValidFuelLap then	
+	if yellowFlagLapPrecentage < maxYellowFlagPercentageForValidFuelLap then
 		local fuelOffset = 1
 		for mix, total in pairs(fuelMixes) do
 			local distPercentage = total / numMixEvents
@@ -141,23 +141,19 @@ local function trackFuelLapData()
 				fuelLaps[lastLapCompleted]["endFuel"] = fuel
 				calculateMixAdjustedFuelLap(fuelLaps[lastLapCompleted])
 			end
-			
 			local fuelLap = {}
 			fuelLap["startFuel"] = fuel
 			fuelLap["mixdata"] = {}
 			fuelLaps[lapsCompleted] = fuelLap
 			
 			lastLapCompleted = lapsCompleted
-		else
+		elseif lapsCompleted == lastLapCompleted then
 			local fuelLap = fuelLaps[lapsCompleted]
 			local distance = round(GetContextInfo("lap_distance"), 0)
-			if fuelLap["mixdata"][distance] ~= nil then
+			if fuelLap["mixdata"][distance] == nil then
 				fuelLap["mixdata"][distance] = {}
 				fuelLap["mixdata"][distance]["mix"] = getActiveFuelMix()
-				if GetContextInfo("yellow_flag") then
-					-- Do it this way so we don't remove a previous yellow
-					fuelLap["mixdata"][distance]["yellow"] = true
-				end
+				fuelLap["mixdata"][distance]["yellow"] = GetContextInfo("yellow_flag")
 			end			
 		end
 	end
@@ -213,8 +209,10 @@ local function calculateFuelTargets()
 end
 
 function performRegularCustomDisplayProcessing()
-	-- Calculate fuel targets
-	calculateFuelTargets()
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
+		-- Calculate fuel targets
+		calculateFuelTargets()
+	end
 end
 
 function storeStartFuel()	
