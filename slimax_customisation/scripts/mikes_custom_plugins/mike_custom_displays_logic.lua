@@ -77,7 +77,7 @@ end
 
 local function assessFuelLapData()
 	local lapComparator = function(a, b) return a.accuracy > b.accuracy end	
-	local sortedKeys = getKeysSortedByValue(fuelLaps, comparator)
+	local sortedKeys = getKeysSortedByValue(fuelLaps, lapComparator)
 	
 	local count = 0
 	
