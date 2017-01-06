@@ -9,10 +9,11 @@ local fuelResetDisplayTimeout = 1000
 
 local fuelTarget = nil
 local adjustedFuelTarget = nil
-local maxYellowFlagPercentageForValidFuelLap = 1
+local maxYellowFlagPercentageForValidFuelLap = 2
 
 local fuelLaps = {}
 local lastLapCompleted = -1
+local maxNonStandardFuelLapsToStore = 3
 
 local function getPercentageLapComplete()
 	-- percentage of current lap completed
@@ -74,26 +75,46 @@ function getAdjustedFuelTarget()
 	return adjustedFuelTarget
 end
 
+local function assessFuelLapData()
+	local lapComparator = function(a, b) return a["accuracy"] > b["accuracy"] end
+	table.sort(fuelLaps, lapComparator)
+	
+	local count = 0
+	for id, fuelLap in pairs(fuelLaps) do		
+		if fuelLap["accuracy"] < 100 and count > maxNonStandardFuelLapsToStore then
+			table.remove(id, fuelLaps)
+		elseif fuelLap["new"] then
+			display("DATA", tostring(fuelLap["accuracy"]), mDisplay_Info_Delay)
+		end
+		count = count + 1
+	end
+end
+
 local function calculateMixAdjustedFuelLap(fuelLap)
 	local fuelUsed = fuelLap["startFuel"] - fuelLap["endFuel"]
 	local fuelMixes = {}
 	local numMixEvents = 0
+	local numStandardMixEvents = 0
 	local numYellow = 0
 	for distance, mixData in pairs(fuelLap["mixdata"]) do
-		local fuelMix = mixData["mix"]
+		local fuelMode = mixData["mix"]
 		if fuelMixes[fuelMode] == nil then
 			fuelMixes[fuelMode] = 1
 		else
 			fuelMixes[fuelMode] = fuelMixes[fuelMode] + 1
 		end
 		
+		if fuelMode == fuelMultiFunction["defaultUpDnMode"] then
+			numStandardMixEvents = numStandardMixEvents + 1
+		end
 		if mixData["yellow"] then
 			numYellow = numYellow + 1
 		end
 		numMixEvents = numMixEvents + 1
 	end
 	
-	if ((numYellow / numMixEvents) * 100) < maxYellowFlagPercentageForValidFuelLap then	
+	local yellowFlagLapPrecentage = ((numYellow / numMixEvents) * 100)
+	if yellowFlagLapPrecentage < maxYellowFlagPercentageForValidFuelLap then	
 		local fuelOffset = 1
 		for mix, total in pairs(fuelMixes) do
 			local distPercentage = total / numMixEvents
@@ -104,7 +125,9 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		local adjustedFuelUsed = fuelUsed * fuelOffset
 		if adjustedFuelUsed > 0 then
 			fuelLap["fuelUsed"] = adjustedFuelUsed
-			print("Lap completed, fuelUsed: " .. adjustedFuelUsed)
+			fuelLap["accuracy"] = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage * 3)
+			fuelLap["new"] = true
+			assessFuelLapData()
 		end
 	end
 end
@@ -131,7 +154,10 @@ local function trackFuelLapData()
 			if fuelLap["mixdata"][distance] ~= nil then
 				fuelLap["mixdata"][distance] = {}
 				fuelLap["mixdata"][distance]["mix"] = getActiveFuelMix()
-				fuelLap["mixdata"][distance]["yellow"] = GetContextInfo("yellow_flag")
+				if GetContextInfo("yellow_flag") then
+					-- Do it this way so we don't remove a previous yellow
+					fuelLap["mixdata"][distance]["yellow"] = true
+				end
 			end			
 		end
 	end
