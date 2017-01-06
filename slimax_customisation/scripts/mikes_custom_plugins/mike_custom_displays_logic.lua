@@ -76,27 +76,27 @@ function getAdjustedFuelTarget()
 end
 
 local function assessFuelLapData()
-	local lapComparator = function(a, b) return a["accuracy"] > b["accuracy"] end
+	local lapComparator = function(a, b) return a.accuracy > b.accuracy end
 	table.sort(fuelLaps, lapComparator)
 	local count = 0
 	for id, fuelLap in pairs(fuelLaps) do		
-		if fuelLap["accuracy"] < 100 and count > maxNonStandardFuelLapsToStore then
+		if fuelLap.accuracy < 100 and count > maxNonStandardFuelLapsToStore then
 			table.remove(id, fuelLaps)
-		elseif fuelLap["new"] then
-			display("DATA", tostring(fuelLap["accuracy"]), mDisplay_Info_Delay)
-			fuelLap["new"] = false
+		elseif fuelLap.new then
+			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
+			fuelLap.new = false
 		end
 		count = count + 1
 	end
 end
 
 local function calculateMixAdjustedFuelLap(fuelLap)
-	local fuelUsed = fuelLap["startFuel"] - fuelLap["endFuel"]
+	local fuelUsed = fuelLap.startFuel - fuelLap.endFuel
 	local fuelMixes = {}
 	local numMixEvents = 0
 	local numStandardMixEvents = 0
 	local numYellow = 0
-	for distance, mixData in pairs(fuelLap["mixdata"]) do
+	for distance, mixData in pairs(fuelLap.mixdata) do
 		local fuelMode = mixData["mix"]
 		if fuelMixes[fuelMode] == nil then
 			fuelMixes[fuelMode] = 1
@@ -104,10 +104,10 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 			fuelMixes[fuelMode] = fuelMixes[fuelMode] + 1
 		end
 		
-		if fuelMode == fuelMultiFunction["defaultUpDnMode"] then
+		if fuelMode == fuelMultiFunction.defaultUpDnMode then
 			numStandardMixEvents = numStandardMixEvents + 1
 		end
-		if mixData["yellow"] then
+		if mixData.yellow then
 			numYellow = numYellow + 1
 		end
 		numMixEvents = numMixEvents + 1
@@ -118,15 +118,15 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		local fuelOffset = 1
 		for mix, total in pairs(fuelMixes) do
 			local distPercentage = total / numMixEvents
-			local offset = -fuelMultiFunction["fuelUsageOffset"][mix]
+			local offset = -fuelMultiFunction.fuelUsageOffset[mix]
 			fuelOffset = fuelOffset + (offset * distPercentage)
 		end
 		
 		local adjustedFuelUsed = fuelUsed * fuelOffset
 		if adjustedFuelUsed > 0 then
-			fuelLap["fuelUsed"] = adjustedFuelUsed
-			fuelLap["accuracy"] = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage * 3)
-			fuelLap["new"] = true
+			fuelLap.fuelUsed = adjustedFuelUsed
+			fuelLap.accuracy = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage * 3)
+			fuelLap.new = true
 			assessFuelLapData()
 		end
 	end
@@ -138,37 +138,38 @@ local function trackFuelLapData()
 		if lapsCompleted > lastLapCompleted then
 			local fuel = GetCarInfo("fuel")
 			if fuelLaps[lastLapCompleted] ~= nil then				
-				fuelLaps[lastLapCompleted]["endFuel"] = fuel
+				fuelLaps[lastLapCompleted].endFuel = fuel
+				fuelLaps[lastLapCompleted].accuracy = 0
 				calculateMixAdjustedFuelLap(fuelLaps[lastLapCompleted])
 			end
 			local fuelLap = {}
-			fuelLap["startFuel"] = fuel
-			fuelLap["mixdata"] = {}
+			fuelLap.startFuel = fuel
+			fuelLap.mixdata = {}
 			fuelLaps[lapsCompleted] = fuelLap
 			
 			lastLapCompleted = lapsCompleted
 		elseif lapsCompleted == lastLapCompleted then
 			local fuelLap = fuelLaps[lapsCompleted]
 			local distance = round(GetContextInfo("lap_distance"), 0)
-			if fuelLap["mixdata"][distance] == nil then
-				fuelLap["mixdata"][distance] = {}
-				fuelLap["mixdata"][distance]["mix"] = getActiveFuelMix()
-				fuelLap["mixdata"][distance]["yellow"] = GetContextInfo("yellow_flag")
+			if fuelLap.mixdata[distance] == nil then
+				fuelLap.mixdata[distance] = {}
+				fuelLap.mixdata[distance].mix = getActiveFuelMix()
+				fuelLap.mixdata[distance].yellow = GetContextInfo("yellow_flag")
 			end			
 		end
 	end
 end
 
 local function calculateAdjustedFuelTarget()
-	if fuelMultiFunction["fuelUsageOffset"] ~= nil then
+	if fuelMultiFunction.fuelUsageOffset ~= nil then
 		trackFuelLapData()
 		
 		local totalFuelUsed = 0
 		local fuelLapsCompleted = 0
 		
-		for lapId, fuelLap in pairs(fuelLaps) do		
-			if fuelLap["fuelUsed"] ~= nil then
-				totalFuelUsed = totalFuelUsed + fuelLap["fuelUsed"]
+		for lapId, fuelLap in pairs(fuelLaps) do
+			if fuelLap.fuelUsed ~= nil then
+				totalFuelUsed = totalFuelUsed + fuelLap.fuelUsed
 				fuelLapsCompleted = fuelLapsCompleted + 1
 			end
 		end
