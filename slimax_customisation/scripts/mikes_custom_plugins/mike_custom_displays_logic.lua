@@ -88,11 +88,6 @@ local function assessFuelLapData()
 			fuelLap.adjustedFuelUsed = nil
 		end
 	end
-	
-	local inspect = require('inspect')
-	--print("=====")
-	--print(inspect(fuelLaps))
-	--print("=====")
 end
 
 local function calculateMixAdjustedFuelLap(fuelLap)
