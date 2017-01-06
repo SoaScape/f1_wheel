@@ -21,7 +21,7 @@ function raceStartModeSelected()
 		right = "UNAV"
 		currentMultifunction = nil
 	end
-	display(left, right, myDevice, 2000)	
+	display(left, right, 2000)	
 end
 
 function raceStartRegularProcessing()
@@ -38,7 +38,7 @@ function raceStartRegularProcessing()
 				deactivatePermanentLed(raceStartPermLedPattern)
 				resetAutoMixData()
 				activateBlinkingLed(raceGoLedPattern, 50, 2000, false)
-				display(startMultifunctionName, " GO ", myDevice, 2000)				
+				display(startMultifunctionName, " GO ", 2000)				
 				performRaceStart()
 				storeStartFuel()
 			end
@@ -46,7 +46,7 @@ function raceStartRegularProcessing()
 			if raceStartModeActive then
 				exitRaceStart()
 				raceStartModeActive = false
-				display(startMultifunctionName, " END", myDevice, 2000)
+				display(startMultifunctionName, " END", 2000)
 			end
 			deactivateAlternateBlinkingLeds(raceStartLedId)
 			deactivatePermanentLed(raceStartPermLedPattern)

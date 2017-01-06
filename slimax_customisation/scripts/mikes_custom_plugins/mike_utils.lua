@@ -33,9 +33,9 @@ local function setDisplayTimeout(timeout)
 	customDisplayActive = true	
 end
 
-function display(leftStr, rightStr, deviceType, timeout)
+function display(leftStr, rightStr, timeout)
 	if leftStr ~= nul and rightStr ~= nil then
-		local dev = GetDeviceType(deviceType)
+		local dev = GetDeviceType(myDevice)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
 		setDisplayTimeout(timeout)
@@ -72,7 +72,7 @@ local function queueKeyPress(key, holdDelay, delayTime)
 	table.insert(keyQueue, keyPress)	
 end
 
-function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDisplay)
+function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	local startTicks = getTks()
 	if mSessionEnter == 1 and not(m_is_sim_idle) and not(keyQueueActive) then
 		if currentMultifunction["name"] == fuelMultiFunction["name"] then
@@ -96,7 +96,7 @@ function confirmSelection(leftDisp, rightDisplay, deviceType, buttonMap, showDis
 		delayMap = nil
 
 		if showDisplay then
-			display(leftDisp, rightDisplay, deviceType, confirmDelay)
+			display(leftDisp, rightDisplay, confirmDelay)
 		end
 	end
 end

@@ -51,12 +51,12 @@ local function toggleAutoMixSelected()
 		autoMixSelected = not(autoMixSelected)
 		if autoMixSelected then
 			autoMixOn()
-			display(autoMixMultifunctionName, "ACTV", myDevice, displayTimeout)
+			display(autoMixMultifunctionName, "ACTV", displayTimeout)
 		else
 			autoMixOff()
-			display(autoMixMultifunctionName, " OFF", myDevice, displayTimeout)
+			display(autoMixMultifunctionName, " OFF", displayTimeout)
 			fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
-			confirmSelection(nil, nil, myDevice, getButtonMap(fuelMultiFunction), false)
+			confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
 		end
 	end
 end
@@ -89,7 +89,7 @@ local function displaySelectedConfig()
 			setting = " OFF"
 		end
 	end
-	display(configIds[selectedConfig], setting, myDevice, displayTimeout)
+	display(configIds[selectedConfig], setting, displayTimeout)
 end
 
 function processAutoMixButtonEvent(button)
@@ -118,7 +118,7 @@ function processAutoMixButtonEvent(button)
 			inc = 100
 		end
 		config[configIds[selectedConfig]] = config[configIds[selectedConfig]] + inc
-		display(configIds[selectedConfig], config[configIds[selectedConfig]], myDevice, displayTimeout)
+		display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
 	elseif button == downEncoder then
 		local inc = config["INC "]
 		if configIds[selectedConfig] == "INC " then
@@ -128,7 +128,7 @@ function processAutoMixButtonEvent(button)
 		if config[configIds[selectedConfig]] > inc then
 			config[configIds[selectedConfig]] = config[configIds[selectedConfig]] - inc
 		end
-		display(configIds[selectedConfig], config[configIds[selectedConfig]], myDevice, displayTimeout)
+		display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
 	end
 end
 
@@ -159,14 +159,14 @@ local function learnTrack()
 			if recentEvent(learnFullThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
 				lastMixEvent = nil
-				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, displayTimeout)
+				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], displayTimeout)
 			else				
 				learnedData[learnFullThrottleStartDistance] = {}
 				learnedData[learnFullThrottleStartDistance]["mix"] = fuelMultiFunction["max"]
 				learnedData[learnFullThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
 				lastMixEvent = learnedData[learnFullThrottleStartDistance]
 				highLearnt = true
-				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], myDevice, displayTimeout)
+				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], displayTimeout)
 			end			
 		end
 	elseif throttle == 1 then
@@ -186,14 +186,14 @@ local function learnTrack()
 			if recentEvent(learnLowThrottleStartTicks) then
 				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
 				lastMixEvent = nil
-				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, displayTimeout)				
+				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], displayTimeout)				
 			else				
 				learnedData[learnLowThrottleStartDistance] = {}
 				learnedData[learnLowThrottleStartDistance]["mix"] = fuelMultiFunction["min"]
 				learnedData[learnLowThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
 				lastMixEvent = learnedData[learnLowThrottleStartDistance]			
 				lowLearnt = true
-				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], myDevice, displayTimeout)
+				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], displayTimeout)
 			end
 		end
 	elseif throttle < 1 then
@@ -232,7 +232,7 @@ function autoMixRegularProcessing()
 					local multiFunctionBak = currentMultifunction
 					currentMultifunction = fuelMultiFunction
 					currentMultifunction["currentUpDnMode"] = autoMix
-					confirmSelection("AUTO", currentMultifunction["modes"][autoMix], myDevice, getButtonMap(currentMultifunction), config["DISP"])
+					confirmSelection("AUTO", currentMultifunction["modes"][autoMix], getButtonMap(currentMultifunction), config["DISP"])
 					currentMultifunction = multiFunctionBak
 					if autoMix == fuelMultiFunction["max"] then
 						autoMixActiveType = "max"
@@ -248,7 +248,7 @@ function autoMixRegularProcessing()
 						local multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
 						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], myDevice, getButtonMap(currentMultifunction), config["DISP"])
+						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
 						currentMultifunction = multiFunctionBak
 					end
 				else
@@ -257,7 +257,7 @@ function autoMixRegularProcessing()
 						local multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
 						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], myDevice, getButtonMap(currentMultifunction), config["DISP"])
+						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
 						currentMultifunction = multiFunctionBak
 					end
 				end				
