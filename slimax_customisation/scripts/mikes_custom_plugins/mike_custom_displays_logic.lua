@@ -12,7 +12,7 @@ local adjustedFuelTarget = nil
 local maxYellowFlagPercentageForValidFuelLap = 0
 
 local fuelLaps = {}
-local lastLapCompleted = -1
+local lastFuelLapCompleted = -1
 local maxNonStandardFuelLapsToStore = 3
 
 local function getPercentageLapComplete()
@@ -137,22 +137,24 @@ end
 local function trackFuelLapData()	
 	local lapsCompleted = GetContextInfo("laps")
 	if lapsCompleted ~= nil then
-		if lapsCompleted > lastLapCompleted then
+		local distance = round(GetContextInfo("lap_distance"), 0)
+		if lapsCompleted > lastFuelLapCompleted then
 			local fuel = GetCarInfo("fuel")
-			if fuelLaps[lastLapCompleted] ~= nil then				
-				fuelLaps[lastLapCompleted].endFuel = fuel
-				fuelLaps[lastLapCompleted].accuracy = 0
-				calculateMixAdjustedFuelLap(fuelLaps[lastLapCompleted])
+			if fuelLaps[lastFuelLapCompleted] ~= nil and fuelLaps[lastFuelLapCompleted].endFuel == nil then				
+				fuelLaps[lastFuelLapCompleted].endFuel = fuel
+				fuelLaps[lastFuelLapCompleted].accuracy = 0
+				calculateMixAdjustedFuelLap(fuelLaps[lastFuelLapCompleted])
 			end
-			local fuelLap = {}
-			fuelLap.startFuel = fuel
-			fuelLap.mixdata = {}
-			fuelLaps[lapsCompleted] = fuelLap
 			
-			lastLapCompleted = lapsCompleted
-		elseif lapsCompleted == lastLapCompleted then
-			local fuelLap = fuelLaps[lapsCompleted]
-			local distance = round(GetContextInfo("lap_distance"), 0)
+			if distance <= 1 then
+				local fuelLap = {}
+				fuelLap.startFuel = fuel
+				fuelLap.mixdata = {}
+				fuelLaps[lapsCompleted] = fuelLap			
+				lastFuelLapCompleted = lapsCompleted
+			end
+		elseif lapsCompleted == lastFuelLapCompleted then
+			local fuelLap = fuelLaps[lapsCompleted]			
 			if fuelLap.mixdata[distance] == nil then
 				fuelLap.mixdata[distance] = {}
 				fuelLap.mixdata[distance].mix = getActiveFuelMix()
@@ -210,7 +212,7 @@ end
 function resetFuelData()
 	fuelAtStart = nil
 	fuelLaps = {}
-	lastLapCompleted = -1
+	lastFuelLapCompleted = -1
 	fuelTarget = nil
 	adjustedFuelTarget = nil
 end
