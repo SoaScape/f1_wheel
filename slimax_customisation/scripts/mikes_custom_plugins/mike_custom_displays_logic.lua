@@ -208,7 +208,7 @@ function storeStartFuel()
 end
 
 function resetFuelData()
-	fuelAtStart = 0
+	fuelAtStart = nil
 	fuelLaps = {}
 	lastLapCompleted = -1
 	fuelTarget = nil
