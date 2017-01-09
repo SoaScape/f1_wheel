@@ -210,7 +210,9 @@ function storeStartFuel()
 end
 
 function resetFuelData()
-	fuelAtStart = nil
+	if mSessionEnter ~= 1 and m_is_sim_idle then
+		fuelAtStart = nil
+	end
 	fuelLaps = {}
 	lastFuelLapCompleted = -1
 	fuelTarget = nil
