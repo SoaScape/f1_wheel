@@ -151,6 +151,9 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
 				if ctrlPos == confirmButton then
 					setDefaultModes()
+					if mSessionEnter == 1 and not(m_is_sim_idle) then
+						display(currentMultifunction["name"], "DATA", selectDelay)
+					end
 				end
 			end
 		end
