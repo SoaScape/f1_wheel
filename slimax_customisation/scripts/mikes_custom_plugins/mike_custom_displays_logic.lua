@@ -97,7 +97,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	local numStandardMixEvents = 0
 	local numYellow = 0
 	for distance, mixData in pairs(fuelLap.mixdata) do
-		local fuelMode = mixData["mix"]
+		local fuelMode = mixData.mix
 		if fuelMixes[fuelMode] == nil then
 			fuelMixes[fuelMode] = 1
 		else
