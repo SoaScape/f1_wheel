@@ -16,7 +16,6 @@ local ledOff = 0
 local function updateBlinkingLed(ledInfo, pattern)
 	if ledInfo["duration"] > 0 and getTks() > ledInfo["duration"] then
 		deactivateBlinkingLed(pattern)
-	print("duration end")
 	else
 		if getTks() >= ledInfo["nextChange"] then
 			ledInfo["nextChange"] = getTks() + ledInfo["delay"]
@@ -107,10 +106,9 @@ function activateBlinkingLed(pattern, delay, duration, enabledWhenIdle)
 		end		 
 		
 		activeBlinkingLeds[pattern]["duration"] = dur
-		activeBlinkingLeds[pattern]["state"] = ledOn
-		activeBlinkingLeds[pattern]["nextChange"] = getTks() + delay
+		activeBlinkingLeds[pattern]["state"] = ledOff
+		activeBlinkingLeds[pattern]["nextChange"] = 0
 		activeBlinkingLeds[pattern]["enabledWhenIdle"] = enabledWhenIdle
-		SetPatternLed(pattern, ledOn)
 	end
 end
 
@@ -138,7 +136,6 @@ function activatePermanentLed(pattern, delay, enabledWhenIdle)
 		activePermanentLeds[pattern] = {}
 		activePermanentLeds[pattern]["nextChange"] = nextChange
 		activePermanentLeds[pattern]["enabledWhenIdle"] = enabledWhenIdle
-		SetPatternLed(pattern, ledOn)
 	end
 end
 
