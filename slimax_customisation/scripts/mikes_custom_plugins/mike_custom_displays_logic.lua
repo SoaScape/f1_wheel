@@ -1,9 +1,7 @@
-require "scripts/mikes_custom_plugins/mike_led_utils"
-require "scripts/mikes_custom_plugins/mike_utils"
-
 -- MIKE CUSTOM FUNCTIONS
 local fuelAtStart = 0
 local lowFuelLedPattern = 64
+local lowFuelLedBlinkDelay = 500
 local startFuelStoredLedPattern = 248
 local fuelResetDisplayTimeout = 1000
 
@@ -192,9 +190,16 @@ local function calculateFuelTargets()
 	if fuelLapsCompleted > 0 then
 		fuelTarget = calcFuelTarget(totalFuelUsed, fuelLapsCompleted)
 		adjustedFuelTarget = calcFuelTarget(totalAdjustedFuelUsed, fuelLapsCompleted)
+		
+		if fuelTarget < 0 then
+			activateBlinkingLed(lowFuelLedPattern, lowFuelLedBlinkDelay, 0, false)
+		else
+			deactivateBlinkingLed(lowFuelLedPattern)
+		end
 	else
 		fuelTarget = nil
 		adjustedFuelTarget = nil
+		deactivateBlinkingLed(lowFuelLedPattern)
 	end
 end
 
