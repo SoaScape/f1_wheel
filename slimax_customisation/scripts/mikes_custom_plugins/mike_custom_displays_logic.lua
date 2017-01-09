@@ -53,15 +53,10 @@ end
 function getRemainingLapsInTank(fuelRemaining)
 	-- Mike custom: fuel laps remaining.
 	-- Discounts 2.6 litres as car stutters when down to that level
-	local lapsCompleted = getLapsCompleteIncludingCurrent()
-
 	local remainingLapsInTank = 0
-	if fuelRemaining > 0 and fuelAtStart > 0 and lapsCompleted >= 1 then
-		local fuelUsed = fuelAtStart - fuelRemaining
-		local fuelPerLap = fuelUsed / lapsCompleted	
-		if fuelPerLap > 0 then				
-			remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
-		end
+	local fuelPerLap = getAverageFuelPerLap()
+	if fuelPerLap ~= nil and fuelRemaining > 0 then		
+		remainingLapsInTank = (fuelRemaining - minFuel) / fuelPerLap
 	end
 	return remainingLapsInTank	
 end
