@@ -8,6 +8,7 @@ local fuelResetDisplayTimeout = 1000
 local fuelTarget = nil
 local adjustedFuelTarget = nil
 local maxYellowFlagPercentageForValidFuelLap = 0
+local fuelUsedLastLap = nil
 
 local fuelLaps = {}
 local lastFuelLapCompleted = -1
@@ -65,6 +66,27 @@ function getRemainingLapsInTank(fuelRemaining)
 	return remainingLapsInTank	
 end
 
+function getFuelUsedLastLap()
+	return fuelUsedLastLap
+end
+
+function getAverageFuelPerLap()
+	local totalFuelUsed = 0
+	local count = 0
+	for key, fuelLap in pairs(fuelLaps) do
+		if fuelLap.fuelUsed ~= nil then
+			totalFuelUsed = totalFuelUsed + fuelLap.fuelUsed
+			count = count + 1
+		end
+	end
+	
+	if count > 0 then
+		return totalFuelUsed / count
+	else
+		return nil
+	end
+end
+
 function getFuelTarget()
 	return fuelTarget
 end
@@ -89,7 +111,7 @@ local function assessFuelLapData()
 end
 
 local function calculateMixAdjustedFuelLap(fuelLap)
-	local fuelUsed = fuelLap.startFuel - fuelLap.endFuel
+	fuelUsedLastLap = fuelLap.startFuel - fuelLap.endFuel
 	local fuelMixes = {}
 	local numMixEvents = 0
 	local numStandardMixEvents = 0
@@ -122,9 +144,9 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 			end
 		end
 		
-		if fuelUsed > 0 then
-			fuelLap.fuelUsed = fuelUsed
-			fuelLap.adjustedFuelUsed = fuelUsed * fuelOffset
+		if fuelUsedLastLap > 0 then
+			fuelLap.fuelUsed = fuelUsedLastLap
+			fuelLap.adjustedFuelUsed = fuelUsedLastLap * fuelOffset
 			fuelLap.accuracy = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage * 3)			
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
 			assessFuelLapData()			
@@ -222,6 +244,7 @@ function resetFuelData()
 	lastFuelLapCompleted = -1
 	fuelTarget = nil
 	adjustedFuelTarget = nil
+	fuelUsedLastLap = nil
 end
 
 function getFuelAtStart()

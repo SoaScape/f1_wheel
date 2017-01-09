@@ -17,6 +17,7 @@ locals["laps"] = 1
 locals["totalLaps"] = 10
 locals["fuel"] = 101
 locals["startFuel"] = 101
+locals["kiloMultiplier"] = 1
 locals["yellow"] = "false"
 
 locals["left"] = ""
@@ -40,7 +41,7 @@ displayFunctionIndex["left"][5] = 47
 displayFunctionIndex["left"][6] = 5
 displayFunctionIndex["left"][7] = 42
 displayFunctionIndex["left"][8] = 127
-displayFunctionIndex["left"][9] = 7
+displayFunctionIndex["left"][9] = 190
 displayFunctionIndex["left"][10] = 121
 displayFunctionIndex["left"][11] = 198
 displayFunctionIndex["left"][12] = 194
@@ -54,7 +55,7 @@ displayFunctionIndex["right"][4] = 48-1
 displayFunctionIndex["right"][5] = 49-1
 displayFunctionIndex["right"][6] = 41-1
 displayFunctionIndex["right"][7] = 126-1
-displayFunctionIndex["right"][8] = 8-1
+displayFunctionIndex["right"][8] = 191-1
 displayFunctionIndex["right"][9] = 195-1
 displayFunctionIndex["right"][10] = 199-1
 displayFunctionIndex["right"][11] = 192-1
@@ -119,7 +120,7 @@ function GetTimeInfo(info)
 	return 3.3
 end
 function GetFuelKilogram(fuel)
-	return locals["fuel"]
+	return fuel * locals["kiloMultiplier"]
 end
 function timeDispatcher(lpt)
 	-- hr, mn, sc, hd, tms

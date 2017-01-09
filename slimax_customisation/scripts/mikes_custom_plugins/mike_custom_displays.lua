@@ -27,6 +27,32 @@ local function displayFuelTarget(fuelTarget)
 	return sliPanel
 end
 
+local function displayFuel(fuel)
+	if fuel ~= nil and fuel > 0 then 
+		local ft = GetFuelKilogram(fuel)
+		if devName == "SLI-PRO" then
+			if ft >= 100 then
+				sliPanel = string.format(" F%3d  ", round(ft))
+			elseif ft >= 10 then
+				sliPanel = string.format(" F%2d   ", round(ft))
+			else
+				sliPanel = string.format(" F%1.1f  ", ft)
+			end
+		else
+			if ft >= 100 then
+				sliPanel = string.format("F%3d", round(ft))
+			elseif ft >= 10 then
+				sliPanel = string.format(" F%2d", round(ft))
+			else
+				sliPanel = string.format(" F%1.1f", ft)
+			end
+		end
+	else
+		sliPanel = "NREF"
+	end
+	return sliPanel
+end
+
 function customDisplayEventProcessing(swValue, side)
 	local sliPanel = ""
 	local isSlowUpdate = false
@@ -34,7 +60,15 @@ function customDisplayEventProcessing(swValue, side)
 	local diffTimeFlag = false
 	local lpt = nil
 	
-	if swValue == 192 then		
+	if swValue == 190 then
+		-- Mike custom: average fuel used per lap
+		customFunction = true				
+		sliPanel = displayFuel(getAverageFuelPerLap())
+	elseif swValue == 191 then
+		-- Mike custom: fuel used last lap
+		customFunction = true				
+		sliPanel = displayFuel(getFuelUsedLastLap())
+	elseif swValue == 192 then		
 		-- Mike custom: fuel target.
 		customFunction = true
 		sliPanel = displayFuelTarget(getAdjustedFuelTarget())
@@ -54,29 +88,8 @@ function customDisplayEventProcessing(swValue, side)
 
 	elseif swValue == 195 then
 		-- Mike custom: total fuel in tank at start(doesn't reset with flashback in F1)
-		customFunction = true		
-		if getFuelAtStart() ~= nil and getFuelAtStart() > 0 then 
-			local ft = GetFuelKilogram(getFuelAtStart())
-			if devName == "SLI-PRO" then
-				if ft >= 100 then
-					sliPanel = string.format(" F%3d  ", round(ft))
-				elseif ft >= 10 then
-					sliPanel = string.format(" F%2d   ", round(ft))
-				else
-					sliPanel = string.format(" F%1.1f  ", ft)
-				end
-			else
-				if ft >= 100 then
-					sliPanel = string.format("F%3d", round(ft))
-				elseif ft >= 10 then
-					sliPanel = string.format(" F%2d", round(ft))
-				else
-					sliPanel = string.format(" F%1.1f", ft)
-				end
-			end
-		else
-			sliPanel = "NREF"
-		end
+		customFunction = true				
+		sliPanel = displayFuel(getFuelAtStart())
 
 	elseif swValue == 196 then
 		-- Mike custom: real time diff vs next

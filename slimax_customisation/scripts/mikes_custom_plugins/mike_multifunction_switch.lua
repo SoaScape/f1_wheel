@@ -15,7 +15,6 @@ currentMultifunction = nil
 
 local selectDelay = 600
 local multiSelectDelay = 500
-local kiloDivider = 0.750
 local encoderIncrement = 10
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
