@@ -5,12 +5,12 @@ require "scripts/mikes_custom_plugins/mike_utils"
 local multiFunctionSwitchId = 3
 
 local setValueSwitchId = 1
-
+--------------------------------------------------
 local overtakeButton = 10
 local overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 128
 overtakeLedPatterns[1] = 64
---------------------------------------------------
+local resetLedPattern = 56	-- 1,2,3 = 111000
 currentMultifunction = nil
 
 local selectDelay = 600
@@ -152,6 +152,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				if ctrlPos == confirmButton then
 					setDefaultModes()
 					if mSessionEnter == 1 and not(m_is_sim_idle) then
+						activateBlinkingLed(resetLedPattern, 45, 100, false)
 						display(currentMultifunction["name"], "DATA", selectDelay)
 					end
 				end
