@@ -20,6 +20,7 @@ local keyQueueActive = false
 local keyQueue = {}
 
 local activeFuelMix = nil
+local nextActiveFuelMix = nil
 
 function customDisplayIsActive()
 	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
@@ -43,10 +44,6 @@ function display(leftStr, rightStr, timeout)
 end
 
 function keyPressRegularProcessing()
-	if activeFuelMix == nil then
-		activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
-	end
-	
 	if keyQueue ~= nil and keyQueue[1] ~= nil then
 		local nextKey = keyQueue[1]
 		if nextKey["expires"] ~= nil then
@@ -60,6 +57,10 @@ function keyPressRegularProcessing()
 		end
 	else
 		keyQueueActive = false
+		if nextActiveFuelMix ~= nil then
+			activeFuelMix = nextActiveFuelMix
+			nextActiveFuelMix = nil
+		end
 	end	
 end
 
@@ -76,7 +77,7 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	local startTicks = getTks()
 	if mSessionEnter == 1 and not(m_is_sim_idle) and not(keyQueueActive) then
 		if currentMultifunction["name"] == fuelMultiFunction["name"] then
-			activeFuelMix = currentMultifunction["currentUpDnMode"]
+			nextActiveFuelMix = currentMultifunction["currentUpDnMode"]
 		end
 		
 		for i = 0, tablelength(buttonMap) - 1 do
@@ -102,6 +103,9 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 end
 
 function getActiveFuelMix()
+	if activeFuelMix == nil then
+		activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
+	end
 	return activeFuelMix
 end
 
@@ -141,4 +145,5 @@ end
 
 function resetUtilsData()
 	activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
+	nextActiveFuelMix = nil
 end
