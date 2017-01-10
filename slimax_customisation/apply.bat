@@ -6,6 +6,7 @@ echo Copying into %script_location%.
 echo.
 xcopy /E /Y cfg\* %cfg_location%
 xcopy /E /Y scripts\* %script_location%
+del %script_location%\testharness.lua
 echo.
 echo Done.
 echo.
