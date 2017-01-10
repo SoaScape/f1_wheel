@@ -231,6 +231,5 @@ function setDefaultModes()
 
 	overtakeEngaged = false
 	resetAutoMixData()
-	resetUtilsData()
 	resetFuelData()
 end
