@@ -130,18 +130,18 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 
 	local yellowFlagLapPrecentage = ((numYellow / numMixEvents) * 100)
 	if yellowFlagLapPrecentage <= maxYellowFlagPercentageForValidFuelLap then
-		local fuelOffset = 1
+		local fuelOffset = 0
 		if fuelMultiFunction.fuelUsageOffset ~= nil then
 			for mix, total in pairs(fuelMixes) do
 				local distPercentage = total / numMixEvents
-				local offset = -fuelMultiFunction.fuelUsageOffset[mix]
+				local offset = fuelMultiFunction.fuelUsageOffset[mix]
 				fuelOffset = fuelOffset + (offset * distPercentage)
 			end
 		end
 		
 		if fuelUsedLastLap > 0 then
 			fuelLap.fuelUsed = fuelUsedLastLap
-			fuelLap.adjustedFuelUsed = fuelUsedLastLap * fuelOffset
+			fuelLap.adjustedFuelUsed = fuelUsedLastLap / fuelOffset
 			fuelLap.accuracy = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage * 3)			
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
 			assessFuelLapData()			
