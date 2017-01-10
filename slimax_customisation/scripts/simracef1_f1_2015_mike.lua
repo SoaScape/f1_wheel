@@ -47,9 +47,9 @@ multifunctionMap[2]["buttonMap"][2][0] = quickMenuUp
 multifunctionMap[2]["buttonMap"][2][1] = quickMenuUp
 multifunctionMap[2]["buttonMap"][2][2] = quickMenuUp
 multifunctionMap[2]["fuelUsageOffset"] = {}
-multifunctionMap[2]["fuelUsageOffset"][0] = -0.3
+multifunctionMap[2]["fuelUsageOffset"][0] = -0.3181
 multifunctionMap[2]["fuelUsageOffset"][1] = 0
-multifunctionMap[2]["fuelUsageOffset"][2] = 0.3
+multifunctionMap[2]["fuelUsageOffset"][2] = 0.3636
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "DIFF"
