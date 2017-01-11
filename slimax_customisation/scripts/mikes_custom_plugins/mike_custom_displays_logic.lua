@@ -7,7 +7,7 @@ local fuelResetDisplayTimeout = 1000
 
 local fuelTarget = nil
 local adjustedFuelTarget = nil
-local maxYellowFlagPercentageForValidFuelLap = 0
+local maxYellowFlagPercentageForValidFuelLap = 1
 local fuelUsedLastLap = nil
 
 local fuelLaps = {}
