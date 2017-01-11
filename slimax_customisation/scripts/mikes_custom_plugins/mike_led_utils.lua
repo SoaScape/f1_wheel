@@ -87,8 +87,8 @@ local function updateActivePermanentLeds()
 end
 
 function updateLeds()
-	updateBlinkingLeds()
 	updateActivePermanentLeds()
+	updateBlinkingLeds()
 	updateAlternateBlinkingLeds()
 end
 
