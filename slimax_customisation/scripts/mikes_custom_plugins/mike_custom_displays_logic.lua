@@ -41,6 +41,8 @@ dataTypes[6].key = "numStandardMixEvents"
 dataTypes[7] = {}
 dataTypes[7].display = "YELW"
 dataTypes[7].key = "yellowFlagLapPrecentage"
+dataTypes[8].display = "ACRY"
+dataTypes[8].key = "accuracy"
 
 local function displayFuelData()
 	local left = dataTypes[currentDataTypeIndex].display
@@ -69,13 +71,17 @@ function processFuelDataButtonEvent(button)
 	elseif button == upEncoder then
 		if dataTypes[currentDataTypeIndex + 1] ~= nil then
 			currentDataTypeIndex = currentDataTypeIndex + 1
-			displayFuelData()
-		end		
+		else
+			currentDataTypeIndex = 1
+		end
+		displayFuelData()
 	elseif button == downEncoder then
 		if dataTypes[currentDataTypeIndex - 1] ~= nil then
 			currentDataTypeIndex = currentDataTypeIndex - 1
-			displayFuelData()
-		end		
+		else
+			currentDataTypeIndex = tablelength(dataTypes)
+		end
+		displayFuelData()
 	end
 end
 
