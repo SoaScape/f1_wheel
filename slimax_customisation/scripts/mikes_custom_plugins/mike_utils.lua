@@ -162,3 +162,16 @@ function showupvalues(f)
     end
   until not name
 end
+
+function getLocal(key)
+	local i = 1
+	while true do
+		local name, val = debug.getlocal(3, i)
+		if not name then
+			return nil
+		elseif name == key then
+			return val
+		end
+		i = i + 1		
+	end
+end
