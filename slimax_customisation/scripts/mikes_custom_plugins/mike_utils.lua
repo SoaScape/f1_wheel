@@ -147,3 +147,18 @@ function resetUtilsData()
 	activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
 	nextActiveFuelMix = nil
 end
+
+function showupvalues(f)
+  assert (type (f) == "function")
+  
+  local i = 1
+  local name, val
+  
+  repeat
+    name, val = debug.getupvalue (f, i)
+    if name then
+      print ("index", i, name, "=", val)
+      i = i + 1
+    end
+  until not name
+end
