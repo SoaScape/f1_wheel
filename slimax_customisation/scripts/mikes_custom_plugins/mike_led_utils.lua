@@ -88,8 +88,8 @@ end
 
 function updateLeds()
 	updateActivePermanentLeds()
-	updateBlinkingLeds()
 	updateAlternateBlinkingLeds()
+	updateBlinkingLeds()
 end
 
 function activateBlinkingLed(pattern, delay, duration, enabledWhenIdle)
