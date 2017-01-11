@@ -153,8 +153,8 @@ multifunctionMap[9] = {}
 multifunctionMap[9]["name"] = startMultifunctionName
 multifunctionMap[9]["display"] = false
 multifunctionMap[10] = {}
-multifunctionMap[10]["name"] = "OFF"
-multifunctionMap[10]["display"] = true
+multifunctionMap[10]["name"] = "DATA"
+multifunctionMap[10]["enabled"] = true
 
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = "CAM"

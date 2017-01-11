@@ -14,7 +14,70 @@ local fuelLaps = {}
 local lastFuelLapCompleted = -1
 local maxNonStandardFuelLapsToStore = 3
 local fuelLapBeginLedPattern = 192 -- 4, 5  = 11000000
-local currentFuelLap
+local currentFuelLap = nil
+
+local dataDisplayDelay = 1000
+local currentDataItemIndex = 1
+local currentDataTypeIndex = 1
+local dataTypes = {}
+dataTypes[1] = {}
+dataTypes[1].display = "LAP "
+dataTypes[1].key = "lap"
+dataTypes[2] = {}
+dataTypes[2].display = "USED"
+dataTypes[2].key = "fuelUsed"
+dataTypes[3] = {}
+dataTypes[3].display = "AJST"
+dataTypes[3].key = "adjustedFuelUsed"
+dataTypes[4] = {}
+dataTypes[4].display = "OFST"
+dataTypes[4].key = "offset"
+dataTypes[5] = {}
+dataTypes[5].display = "#ALL"
+dataTypes[5].key = "numMixEvents"
+dataTypes[6] = {}
+dataTypes[6].display = "#STD"
+dataTypes[6].key = "numStandardMixEvents"
+dataTypes[7] = {}
+dataTypes[7].display = "YELW"
+dataTypes[7].key = "yellowFlagLapPrecentage"
+
+local function displayFuelData()
+	local left = dataTypes[currentDataTypeIndex].display
+	local right = fuelLaps[currentDataItemIndex][dataTypes[currentDataTypeIndex].key]
+	if right == nil then
+		right = "NREF"
+	else
+		right = tostring(right)
+	end
+	display(left, right, dataDisplayDelay)
+end
+
+function processFuelDataButtonEvent(button)
+	if button == confirmButton then
+		displayFuelData()
+	elseif button == upButton then
+		if fuelLaps[currentDataItemIndex + 1] ~= nil then
+			currentDataItemIndex = currentDataItemIndex + 1
+			displayFuelData()
+		end
+	elseif button == downButton then
+		if fuelLaps[currentDataItemIndex - 1] ~= nil then
+			currentDataItemIndex = currentDataItemIndex - 1
+			displayFuelData()
+		end
+	elseif button == upEncoder then
+		if dataTypes[currentDataTypeIndex + 1] ~= nil then
+			currentDataTypeIndex = currentDataTypeIndex + 1
+			displayFuelData()
+		end		
+	elseif button == downEncoder then
+		if dataTypes[currentDataTypeIndex - 1] ~= nil then
+			currentDataTypeIndex = currentDataTypeIndex - 1
+			displayFuelData()
+		end		
+	end
+end
 
 local function getPercentageLapComplete()
 	-- percentage of current lap completed
@@ -148,6 +211,10 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		
 		if fuelUsedLastLap > 0 then
 			fuelLap.fuelUsed = fuelUsedLastLap
+			fuelLap.offset = fuelOffset
+			fuelLap.numMixEvents = numMixEvents
+			fuelLap.numStandardMixEvents = numStandardMixEvents
+			fuelLap.yellowFlagLapPrecentage = yellowFlagLapPrecentage
 			fuelLap.adjustedFuelUsed = fuelUsedLastLap / fuelOffset
 			fuelLap.accuracy = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage * 3)			
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
@@ -249,6 +316,8 @@ function resetFuelData()
 	fuelTarget = nil
 	adjustedFuelTarget = nil
 	fuelUsedLastLap = nil
+	currentFuelLap = nil
+	currentDataItemIndex = 1
 end
 
 function getFuelAtStart()
