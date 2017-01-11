@@ -47,12 +47,11 @@ dataTypes[8].key = "accuracy"
 
 local function displayFuelData()
 	local left = dataTypes[currentDataTypeIndex].display
-	local right = fuelLaps[currentDataItemIndex][dataTypes[currentDataTypeIndex].key]
-	if right == nil then
-		right = "NREF"
-	else
-		right = tostring(right)
+	local right = "NREF"
+	if fuelLaps[currentDataItemIndex] ~= nil then
+		right = fuelLaps[currentDataItemIndex][dataTypes[currentDataTypeIndex].key]
 	end
+	right = tostring(right)
 	display(left, right, dataDisplayDelay)
 end
 
