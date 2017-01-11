@@ -14,6 +14,7 @@ local fuelLaps = {}
 local lastFuelLapCompleted = -1
 local maxNonStandardFuelLapsToStore = 3
 local fuelLapBeginLedPattern = 192 -- 4, 5  = 11000000
+local currentFuelLap
 
 local function getPercentageLapComplete()
 	-- percentage of current lap completed
@@ -98,7 +99,7 @@ local function assessFuelLapData(functionToRunEachLap)
 	local count = 0
 	for _, key in ipairs(sortedKeys) do
 		count = count + 1
-		func()
+		functionToRunEachLap()
 	end
 end
 
@@ -155,7 +156,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	end
 end
 
-local function trackFuelLapData()	
+local function trackFuelLapData()
 	local lapsCompleted = GetContextInfo("laps")
 	if lapsCompleted ~= nil then
 		local distance = round(GetContextInfo("lap_distance"), 0)
@@ -169,18 +170,19 @@ local function trackFuelLapData()
 			
 			if distance <= 1 then
 				local fuelLap = {}
+				fuelLap.lap = lapsCompleted
 				fuelLap.startFuel = fuel
 				fuelLap.mixdata = {}
-				fuelLaps[lapsCompleted] = fuelLap			
+				table.insert(fuelLaps, fuelLap)
+				currentFuelLap = fuelLap
 				lastFuelLapCompleted = lapsCompleted
 				activateBlinkingLed(fuelLapBeginLedPattern, 100, 250, false)
 			end
 		elseif lapsCompleted == lastFuelLapCompleted then
-			local fuelLap = fuelLaps[lapsCompleted]			
-			if fuelLap.mixdata[distance] == nil then
-				fuelLap.mixdata[distance] = {}
-				fuelLap.mixdata[distance].mix = getActiveFuelMix()
-				fuelLap.mixdata[distance].yellow = GetContextInfo("yellow_flag")
+			if currentFuelLap.mixdata[distance] == nil then
+				currentFuelLap.mixdata[distance] = {}
+				currentFuelLap.mixdata[distance].mix = getActiveFuelMix()
+				currentFuelLap.mixdata[distance].yellow = GetContextInfo("yellow_flag")
 			end			
 		end
 	end
