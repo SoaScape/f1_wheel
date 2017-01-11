@@ -41,6 +41,7 @@ dataTypes[6].key = "numStandardMixEvents"
 dataTypes[7] = {}
 dataTypes[7].display = "YELW"
 dataTypes[7].key = "yellowFlagLapPrecentage"
+dataTypes[8] = {}
 dataTypes[8].display = "ACRY"
 dataTypes[8].key = "accuracy"
 
