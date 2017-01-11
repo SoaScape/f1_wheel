@@ -269,12 +269,14 @@ local function calculateFuelTargets()
 	local totalFuelUsed = 0
 	local totalAdjustedFuelUsed = 0
 	local fuelLapsCompleted = 0
+	local adjustedFuelLapsCompleted = 0
 	
 	for lapId, fuelLap in pairs(fuelLaps) do
 		if fuelLap.fuelUsed ~= nil then
 			totalFuelUsed = totalFuelUsed + fuelLap.fuelUsed
 			if fuelLap.adjustedFuelUsed ~= nil then
 				totalAdjustedFuelUsed = totalAdjustedFuelUsed + fuelLap.adjustedFuelUsed
+				adjustedFuelLapsCompleted = adjustedFuelLapsCompleted + 1
 			end
 			fuelLapsCompleted = fuelLapsCompleted + 1
 		end			
@@ -282,7 +284,7 @@ local function calculateFuelTargets()
 	
 	if fuelLapsCompleted > 0 then
 		fuelTarget = calcFuelTarget(totalFuelUsed, fuelLapsCompleted)
-		adjustedFuelTarget = calcFuelTarget(totalAdjustedFuelUsed, fuelLapsCompleted)
+		adjustedFuelTarget = calcFuelTarget(totalAdjustedFuelUsed, adjustedFuelLapsCompleted)
 		
 		if fuelTarget < 0 then
 			activateBlinkingLed(lowFuelLedPattern, lowFuelLedBlinkDelay, 0, false)
