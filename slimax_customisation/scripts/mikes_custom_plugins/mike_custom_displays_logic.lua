@@ -13,6 +13,7 @@ local fuelUsedLastLap = nil
 local fuelLaps = {}
 local lastFuelLapCompleted = -1
 local maxNonStandardFuelLapsToStore = 3
+local fuelLapBeginLedPattern = 192 -- 4, 5  = 11000000
 
 local function getPercentageLapComplete()
 	-- percentage of current lap completed
@@ -167,6 +168,7 @@ local function trackFuelLapData()
 				fuelLap.mixdata = {}
 				fuelLaps[lapsCompleted] = fuelLap			
 				lastFuelLapCompleted = lapsCompleted
+				activateBlinkingLed(fuelLapBeginLedPattern, 100, 250, false)
 			end
 		elseif lapsCompleted == lastFuelLapCompleted then
 			local fuelLap = fuelLaps[lapsCompleted]			
