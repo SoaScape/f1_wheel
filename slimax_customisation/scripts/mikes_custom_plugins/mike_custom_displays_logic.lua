@@ -44,6 +44,12 @@ dataTypes[7].key = "yellowFlagLapPrecentage"
 dataTypes[8] = {}
 dataTypes[8].display = "ACRY"
 dataTypes[8].key = "accuracy"
+dataTypes[9] = {}
+dataTypes[9].display = "STRT"
+dataTypes[9].key = "startFuel"
+dataTypes[10] = {}
+dataTypes[10].display = "END "
+dataTypes[10].key = "endFuel"
 
 local function displayFuelData()
 	local left = dataTypes[currentDataTypeIndex].display
@@ -234,10 +240,10 @@ local function trackFuelLapData()
 		local distance = round(GetContextInfo("lap_distance"), 0)
 		if lapsCompleted > lastFuelLapCompleted then
 			local fuel = GetCarInfo("fuel")
-			if fuelLaps[lastFuelLapCompleted] ~= nil and fuelLaps[lastFuelLapCompleted].endFuel == nil then				
-				fuelLaps[lastFuelLapCompleted].endFuel = fuel
-				fuelLaps[lastFuelLapCompleted].accuracy = 0
-				calculateMixAdjustedFuelLap(fuelLaps[lastFuelLapCompleted])
+			if currentFuelLap ~= nil and currentFuelLap.endFuel == nil then				
+				currentFuelLap.endFuel = fuel
+				currentFuelLap.accuracy = 0
+				calculateMixAdjustedFuelLap(currentFuelLap)
 			end
 			
 			if distance <= 1 then
