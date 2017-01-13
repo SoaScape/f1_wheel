@@ -183,7 +183,7 @@ local function filterMixAdjustedLaps()
 	local key = getLocal("key")
 	local fuelLap = fuelLaps[key]
 	if fuelLap.accuracy < 100 and count > maxNonStandardFuelLapsToStore then
-		table.remove(fuelLaps)
+		table.remove(fuelLaps, key)
 	end
 end
 
