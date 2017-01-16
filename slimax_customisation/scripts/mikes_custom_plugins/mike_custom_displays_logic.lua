@@ -167,23 +167,17 @@ function getAdjustedFuelTarget()
 	return adjustedFuelTarget
 end
 
-local function assessFuelLapData(functionToRunEachLap)
+local function assessFuelLapData()
 	local lapComparator = function(a, b) return a.accuracy > b.accuracy end	
 	local sortedKeys = getKeysSortedByValue(fuelLaps, lapComparator)
 	
 	local count = 0
 	for _, key in ipairs(sortedKeys) do
 		count = count + 1
-		functionToRunEachLap()
-	end
-end
-
-local function filterMixAdjustedLaps()
-	local count = getLocal("count")
-	local key = getLocal("key")
-	local fuelLap = fuelLaps[key]
-	if fuelLap.accuracy < 100 and count > maxNonStandardFuelLapsToStore then
-		fuelLap.adjustedFuelUsed = nil
+		local fuelLap = fuelLaps[key]
+		if fuelLap.accuracy < 100 and count > maxNonStandardFuelLapsToStore then
+			fuelLap.adjustedFuelUsed = nil
+		end
 	end
 end
 
@@ -230,7 +224,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	if yellowFlagLapPrecentage <= maxYellowFlagPercentageForValidFuelLap and fuelUsedLastLap > 0 then
 		fuelLap.fuelUsed = fuelUsedLastLap		
 		display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
-		assessFuelLapData(filterMixAdjustedLaps)
+		assessFuelLapData()
 	end
 end
 
