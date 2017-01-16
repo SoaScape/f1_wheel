@@ -58,7 +58,6 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	local index = 0
 	local buttonMap = {}
 	local numQuickMenuChanges = 0
-	local numRowChanges = 0
 
 	delayMap = {}
 	delayMap[0] = openMenuDelay
@@ -71,7 +70,6 @@ function getTrackableQuickMenuSettingButtons(currentMultifunction)
 	for key, value in pairs(selectRowButtons) do
 		buttonMap[index] = value
 		index = index + 1
-		numRowChanges = numRowChanges + 1
 	end
 
 	-- We don't know what's currently selected. Therefore move the selector
