@@ -38,7 +38,7 @@ function raceStartRegularProcessing()
 				deactivatePermanentLed(raceStartPermLedPattern)
 				resetAutoMixData()
 				resetUtilsData()
-				activateBlinkingLed(raceGoLedPattern, 100, 2000, false)
+				activateBlinkingLed(raceGoLedPattern, 50, 2000, false)
 				display(startMultifunctionName, " GO ", 2000)				
 				performRaceStart()
 				storeStartFuel()
@@ -47,7 +47,7 @@ function raceStartRegularProcessing()
 			if raceStartModeActive then
 				exitRaceStart()
 				raceStartModeActive = false
-				display(startMultifunctionName, " END", 2000)
+				display(startMultifunctionName, "EXIT", 2000)
 			end
 			deactivateAlternateBlinkingLeds(raceStartLedId)
 			deactivatePermanentLed(raceStartPermLedPattern)
