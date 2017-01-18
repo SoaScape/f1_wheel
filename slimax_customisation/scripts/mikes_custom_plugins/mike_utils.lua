@@ -23,15 +23,7 @@ local activeFuelMix = nil
 local nextActiveFuelMix = nil
 
 function customDisplayIsActive()
-	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
-		customDisplayActive = false
-	end
 	return customDisplayActive
-end
-
-local function setDisplayTimeout(timeout)		
-	customDisplayTicksTimeout = getTks() + timeout
-	customDisplayActive = true	
 end
 
 function display(leftStr, rightStr, timeout)
@@ -39,11 +31,16 @@ function display(leftStr, rightStr, timeout)
 		local dev = GetDeviceType(myDevice)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
-		setDisplayTimeout(timeout)
+		customDisplayTicksTimeout = getTks() + timeout
+		customDisplayActive = true
 	end
 end
 
-function keyPressRegularProcessing()
+function utilsRegularProcessing()
+	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
+		customDisplayActive = false
+	end
+
 	if keyQueue ~= nil and keyQueue[1] ~= nil then
 		local nextKey = keyQueue[1]
 		if nextKey["expires"] ~= nil then

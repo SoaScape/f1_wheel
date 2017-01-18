@@ -19,7 +19,7 @@ local function performRegularProcessing()
 	performRegularCustomDisplayProcessing()
 	autoMixRegularProcessing()
 	raceStartRegularProcessing()
-	keyPressRegularProcessing()
+	utilsRegularProcessing()
 	updateLeds()
 end
 
