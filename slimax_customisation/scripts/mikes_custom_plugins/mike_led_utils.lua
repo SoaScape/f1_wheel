@@ -14,11 +14,12 @@ local ledOff = 0
 -- Binary Bit:	XXXXX000
 
 local function updateBlinkingLed(ledInfo, pattern)
-	if ledInfo["duration"] > 0 and getTks() > ledInfo["duration"] then
+	local ticks = getTks()
+	if ledInfo["endTime"] > 0 and ticks >= ledInfo["endTime"] then
 		deactivateBlinkingLed(pattern)
 	else
-		if getTks() >= ledInfo["nextChange"] then
-			ledInfo["nextChange"] = getTks() + ledInfo["delay"]
+		if ticks >= ledInfo["nextChange"] then
+			ledInfo["nextChange"] = ticks + ledInfo["delay"]
 			if ledInfo["state"] == ledOn then
 				ledInfo["state"] = ledOff
 			else
@@ -34,23 +35,28 @@ local function updateBlinkingLed(ledInfo, pattern)
 	end
 end
 
-local function updateAlternateBlinkingLed(ledInfo)
-	if getTks() >= ledInfo["nextChange"] then
-		ledInfo["nextChange"] = getTks() + ledInfo["delay"]
+local function updateAlternateBlinkingLed(id, ledInfo)
+	local ticks = getTks()
+	if ledInfo["endTime"] > 0 and ticks >= ledInfo["endTime"] then
+		deactivateAlternateBlinkingLeds(id)
+	else
+		if ticks >= ledInfo["nextChange"] then
+			ledInfo["nextChange"] = ticks + ledInfo["delay"]
+			
+			if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"])-1 then
+				ledInfo["currentPatternIndex"] = ledInfo["currentPatternIndex"] + 1
+			else
+				ledInfo["currentPatternIndex"] = 0
+			end
+		end
 		
-		if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"])-1 then
-			ledInfo["currentPatternIndex"] = ledInfo["currentPatternIndex"] + 1
-		else
-			ledInfo["currentPatternIndex"] = 0
+		for key, value in pairs(ledInfo["patterns"]) do
+			local ledState = ledOff
+			if key == ledInfo["currentPatternIndex"] and not(not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle) then
+				ledState = ledOn
+			end
+			SetPatternLed(value, ledState)
 		end
-	end
-	
-	for key, value in pairs(ledInfo["patterns"]) do
-		local ledState = ledOff
-		if key == ledInfo["currentPatternIndex"] and not(not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle) then
-			ledState = ledOn
-		end
-		SetPatternLed(value, ledState)
 	end
 end
 
@@ -76,7 +82,7 @@ end
 
 local function updateAlternateBlinkingLeds()
 	for key, value in pairs(activeAlternateBlinkingLeds) do		
-		updateAlternateBlinkingLed(value)
+		updateAlternateBlinkingLed(key, value)
 	end	
 end
 
@@ -100,29 +106,36 @@ function activateBlinkingLed(pattern, delay, duration, enabledWhenIdle)
 		activeBlinkingLeds[pattern] = {}
 		activeBlinkingLeds[pattern]["delay"] = delay
 		
-		local dur = 0
+		local endTime = 0
 		if duration > 0 then
-			dur = getTks() + duration
-		end		 
+			endTime = getTks() + duration
+		end
 		
-		activeBlinkingLeds[pattern]["duration"] = dur
+		activeBlinkingLeds[pattern]["endTime"] = endTime
 		activeBlinkingLeds[pattern]["state"] = ledOff
 		activeBlinkingLeds[pattern]["nextChange"] = 0
 		activeBlinkingLeds[pattern]["enabledWhenIdle"] = enabledWhenIdle
 	end
 end
 
-function activateAlternateBlinkingLeds(id, patterns, delay, enabledWhenIdle)
+function activateAlternateBlinkingLeds(id, patterns, delay, enabledWhenIdle, duration)
 	if activeAlternateBlinkingLeds[id] == nil then
 		if delay == nil then
 			delay = alternateLedBlinkDelay
 		end
+		
+		local endTime = 0
+		if duration > 0 then
+			endTime = getTks() + duration
+		end
+		
 		activeAlternateBlinkingLeds[id] = {}
 		activeAlternateBlinkingLeds[id]["delay"] = delay
 		activeAlternateBlinkingLeds[id]["nextChange"] = getTks() + delay
 		activeAlternateBlinkingLeds[id]["currentPatternIndex"] = 0
 		activeAlternateBlinkingLeds[id]["patterns"] = patterns
 		activeAlternateBlinkingLeds[id]["enabledWhenIdle"] = enabledWhenIdle
+		activeAlternateBlinkingLeds[id]["endTime"] = endTime
 	end
 end
 
