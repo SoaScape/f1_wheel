@@ -36,11 +36,7 @@ function display(leftStr, rightStr, timeout)
 	end
 end
 
-function utilsRegularProcessing()
-	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
-		customDisplayActive = false
-	end
-
+local function processKeyPressQueue()
 	if keyQueue ~= nil and keyQueue[1] ~= nil then
 		local nextKey = keyQueue[1]
 		if nextKey["expires"] ~= nil then
@@ -58,7 +54,18 @@ function utilsRegularProcessing()
 			activeFuelMix = nextActiveFuelMix
 			nextActiveFuelMix = nil
 		end
-	end	
+	end
+end
+
+local function checkForDisplayTimeout()
+	if customDisplayActive and getTks() > customDisplayTicksTimeout then		
+		customDisplayActive = false
+	end
+end
+
+function utilsRegularProcessing()
+	checkForDisplayTimeout()
+	processKeyPressQueue()
 end
 
 local function queueKeyPress(key, holdDelay, delayTime)
