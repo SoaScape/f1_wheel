@@ -206,7 +206,7 @@ function toggleOvertakeMode(sendButtons, showDisplay)
 		end
 		
 		if showDisplay then
-			activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false)
+			activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false, 0)
 		end
 
 		if overtakeOspOverdrive then
