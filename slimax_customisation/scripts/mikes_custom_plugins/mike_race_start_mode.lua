@@ -14,6 +14,7 @@ raceGoLedPatterns[0] = 16			-- 2 = 10000
 raceGoLedPatterns[1] = 8			-- 1 = 1000
 raceGoLedPatterns[2] = 32			-- 3 = 100000
 raceGoLedPatterns[3] = 8			-- 1 = 1000
+raceGoLedPatterns[4] = 16			-- 2 = 10000
 
 function raceStartModeSelected()	
 	if mSessionEnter ~= 1 and m_is_sim_idle then
