@@ -6,15 +6,15 @@ local lastMode = ""
 local raceStartLedId = "racestart"
 local raceGoLedId = "racego"
 local raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 80		-- 2, 4  = 1010000
-raceStartLedPatterns[1] = 160		-- 3, 5  = 10100000
-local raceStartPermLedPattern = 8	-- 1     = 1000
+raceStartLedPatterns[0] = 0x50		-- 2, 4  = 1010000
+raceStartLedPatterns[1] = 0xA0		-- 3, 5  = 10100000
+local raceStartPermLedPattern = 0x8	-- 1     = 1000
 local raceGoLedPatterns = {}		-- 1,2,3 = 111000
-raceGoLedPatterns[0] = 16			-- 2 = 10000
-raceGoLedPatterns[1] = 8			-- 1 = 1000
-raceGoLedPatterns[2] = 32			-- 3 = 100000
-raceGoLedPatterns[3] = 8			-- 1 = 1000
-raceGoLedPatterns[4] = 16			-- 2 = 10000
+raceGoLedPatterns[0] = 0x10			-- 2 = 10000
+raceGoLedPatterns[1] = 0x8			-- 1 = 1000
+raceGoLedPatterns[2] = 0x20			-- 3 = 100000
+raceGoLedPatterns[3] = 0x8			-- 1 = 1000
+raceGoLedPatterns[4] = 0x10			-- 2 = 10000
 
 function raceStartModeSelected()	
 	if mSessionEnter ~= 1 and m_is_sim_idle then
