@@ -37,13 +37,13 @@ end
 
 local function updateAlternateBlinkingLed(id, ledInfo)
 	local ticks = getTks()
-	if ledInfo["endTime"] > 0 and ticks >= ledInfo["endTime"] then
+	if ledInfo["endTime"] > 0 and ticks >= ledInfo["endTime"] and ledInfo["currentPatternIndex"] == tablelength(ledInfo["patterns"]) - 1 then
 		deactivateAlternateBlinkingLeds(id)
 	else
 		if ticks >= ledInfo["nextChange"] then
 			ledInfo["nextChange"] = ticks + ledInfo["delay"]
 			
-			if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"])-1 then
+			if ledInfo["currentPatternIndex"] < tablelength(ledInfo["patterns"]) - 1 then
 				ledInfo["currentPatternIndex"] = ledInfo["currentPatternIndex"] + 1
 			else
 				ledInfo["currentPatternIndex"] = 0
