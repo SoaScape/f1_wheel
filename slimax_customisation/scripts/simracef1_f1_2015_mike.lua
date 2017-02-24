@@ -194,6 +194,8 @@ multifunctionMap[12]["modes"][3] = "TEMP"
 fuelMultiFunction = multifunctionMap[2]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = true
+autoMixEnabled = false
+raceStartModeEnabled = false
 
 function custom_init_Event(scriptfile)	
 end

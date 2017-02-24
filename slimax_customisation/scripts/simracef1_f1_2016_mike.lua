@@ -163,6 +163,7 @@ fuelMultiFunction = multifunctionMap[2]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = false
 autoMixEnabled = true
+raceStartModeEnabled = true
 
 function custom_init_Event(scriptfile)
 end

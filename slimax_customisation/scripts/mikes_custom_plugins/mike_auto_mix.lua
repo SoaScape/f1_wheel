@@ -93,42 +93,44 @@ local function displaySelectedConfig()
 end
 
 function processAutoMixButtonEvent(button)
-	if button == confirmButton then
-		toggleAutoMixSelected()
-	elseif configIds[selectedConfig] == "DISP" and (button == upEncoder or button == downEncoder) then
-		config[configIds[selectedConfig]] = not(config[configIds[selectedConfig]])
-		displaySelectedConfig()
-	elseif button == upButton then
-		if selectedConfig < tablelength(configIds) - 1 then
-			selectedConfig = selectedConfig + 1
-		else
-			selectedConfig = 0
+	if autoMixEnabled then
+		if button == confirmButton then
+			toggleAutoMixSelected()
+		elseif configIds[selectedConfig] == "DISP" and (button == upEncoder or button == downEncoder) then
+			config[configIds[selectedConfig]] = not(config[configIds[selectedConfig]])
+			displaySelectedConfig()
+		elseif button == upButton then
+			if selectedConfig < tablelength(configIds) - 1 then
+				selectedConfig = selectedConfig + 1
+			else
+				selectedConfig = 0
+			end
+			displaySelectedConfig()
+		elseif button == downButton then
+			if selectedConfig == 0 then
+				selectedConfig = tablelength(configIds) - 1
+			else
+				selectedConfig = selectedConfig - 1
+			end
+			displaySelectedConfig()
+		elseif button == upEncoder then
+			local inc = config["INC "]
+			if configIds[selectedConfig] == "INC " then
+				inc = 100
+			end
+			config[configIds[selectedConfig]] = config[configIds[selectedConfig]] + inc
+			display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
+		elseif button == downEncoder then
+			local inc = config["INC "]
+			if configIds[selectedConfig] == "INC " then
+				inc = 100
+			end
+			
+			if config[configIds[selectedConfig]] > inc then
+				config[configIds[selectedConfig]] = config[configIds[selectedConfig]] - inc
+			end
+			display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
 		end
-		displaySelectedConfig()
-	elseif button == downButton then
-		if selectedConfig == 0 then
-			selectedConfig = tablelength(configIds) - 1
-		else
-			selectedConfig = selectedConfig - 1
-		end
-		displaySelectedConfig()
-	elseif button == upEncoder then
-		local inc = config["INC "]
-		if configIds[selectedConfig] == "INC " then
-			inc = 100
-		end
-		config[configIds[selectedConfig]] = config[configIds[selectedConfig]] + inc
-		display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
-	elseif button == downEncoder then
-		local inc = config["INC "]
-		if configIds[selectedConfig] == "INC " then
-			inc = 100
-		end
-		
-		if config[configIds[selectedConfig]] > inc then
-			config[configIds[selectedConfig]] = config[configIds[selectedConfig]] - inc
-		end
-		display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
 	end
 end
 

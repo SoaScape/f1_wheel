@@ -16,7 +16,7 @@ raceGoLedPatterns[2] = 0x20			-- 3 = 100000
 raceGoLedPatterns[3] = 0x8			-- 1 = 1000
 raceGoLedPatterns[4] = 0x10			-- 2 = 10000
 
-function raceStartModeSelected()	
+local function raceStartModeSelected()	
 	if mSessionEnter ~= 1 and m_is_sim_idle then
 		activateAlternateBlinkingLeds(raceStartLedId, raceStartLedPatterns, nil, true, 0)
 		activatePermanentLed(raceStartPermLedPattern, 0, true)
@@ -31,7 +31,7 @@ function raceStartModeSelected()
 end
 
 function raceStartRegularProcessing()
-	if currentMultifunction ~= nil then
+	if raceStartModeEnabled and currentMultifunction ~= nil then
 		local inStartMode = currentMultifunction["name"] == startMultifunctionName
 		local modeName = currentMultifunction["name"]
 		
