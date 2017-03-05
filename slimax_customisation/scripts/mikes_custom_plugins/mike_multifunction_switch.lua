@@ -21,7 +21,7 @@ local overtakeEngaged = false
 local autoMixActiveBeforeOvertakeButton = false
 
 local function trackButtons(ctrlType, ctrlPos, value)
-	if ctrlType == pushbutton and value == buttonReleaseValue and buttonTrackerMap[ctrlPos] ~= nil then
+	if ctrlType == pushbutton and value == buttonReleaseValue and buttonTrackerMap ~= nil and buttonTrackerMap[ctrlPos] ~= nil then
 		buttonTrackerMap[ctrlPos] = buttonTrackerMap[ctrlPos] + 1
 	end
 end
