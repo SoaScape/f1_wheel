@@ -3,23 +3,19 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 startMultifunctionName = "STRT"
 local raceStartModeActive = false
 local lastMode = ""
+
 local raceStartLedId = "racestart"
-local raceGoLedId = "racego"
 local raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 0x50		-- 2, 4  = 1010000
-raceStartLedPatterns[1] = 0xA0		-- 3, 5  = 10100000
-local raceStartPermLedPattern = 0x8	-- 1     = 1000
-local raceGoLedPatterns = {}		-- 1,2,3 = 111000
-raceGoLedPatterns[0] = 0x10			-- 2 = 10000
-raceGoLedPatterns[1] = 0x8			-- 1 = 1000
-raceGoLedPatterns[2] = 0x20			-- 3 = 100000
-raceGoLedPatterns[3] = 0x8			-- 1 = 1000
-raceGoLedPatterns[4] = 0x10			-- 2 = 10000
+raceStartLedPatterns[0] = 0x58		-- 1, 2, 4  = 01011000
+raceStartLedPatterns[1] = 0xA8		-- 1, 3, 5  = 10101000
+
+local raceGoLedPattern = 0xF8		-- 1 - 5 = 0xF8 (248)
+local raceGoLedDelay = 75
+local raceGoLedDuration = 600
 
 local function raceStartModeSelected()	
 	if mSessionEnter ~= 1 and m_is_sim_idle then
 		activateAlternateBlinkingLeds(raceStartLedId, raceStartLedPatterns, nil, true, 0)
-		activatePermanentLed(raceStartPermLedPattern, 0, true)
 		left = startMultifunctionName
 		right = "WAIT"
 	else
@@ -41,10 +37,9 @@ function raceStartRegularProcessing()
 			elseif not(raceStartModeActive) and mSessionEnter == 1 and not(m_is_sim_idle) then
 				raceStartModeActive = true
 				deactivateAlternateBlinkingLeds(raceStartLedId)
-				deactivatePermanentLed(raceStartPermLedPattern)
 				resetAutoMixData()
 				resetUtilsData()
-				activateAlternateBlinkingLeds(raceGoLedId, raceGoLedPatterns, 50, true, 500)
+				activateBlinkingLed(raceGoLedPattern, raceGoLedDelay, raceGoLedDuration, false)
 				display(startMultifunctionName, " GO ", 2000)				
 				performRaceStart()
 				storeStartFuel()
@@ -56,7 +51,6 @@ function raceStartRegularProcessing()
 				display(startMultifunctionName, "EXIT", 2000)
 			end
 			deactivateAlternateBlinkingLeds(raceStartLedId)
-			deactivatePermanentLed(raceStartPermLedPattern)
 		end
 		
 		lastMode = modeName
