@@ -54,8 +54,8 @@ local function updateAlternateBlinkingLed(id, ledInfo)
 			local ledState = ledOff
 			if key == ledInfo["currentPatternIndex"] and not(not(ledInfo["enabledWhenIdle"]) and mSessionEnter ~= 1 and m_is_sim_idle) then
 				ledState = ledOn
-			end
-			SetPatternLed(value, ledState)
+				SetPatternLed(value, ledState)
+			end			
 		end
 	end
 end
