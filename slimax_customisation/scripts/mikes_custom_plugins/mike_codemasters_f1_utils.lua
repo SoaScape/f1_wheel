@@ -12,9 +12,6 @@ local extraDelay = 400
 local openMenuDelay = 500
 local closeMenuDelay = 600
 
-buttonTrackerMap = {}
-buttonTrackerMap[quickMenuToggleButton] = 0
-
 function getVoiceMenuButtons(currentMultifunction)
 	local index = 0
 	local buttonMap = {}

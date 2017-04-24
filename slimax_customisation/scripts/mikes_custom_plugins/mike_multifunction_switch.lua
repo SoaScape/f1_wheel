@@ -20,15 +20,8 @@ local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
 local autoMixActiveBeforeOvertakeButton = false
 
-local function trackButtons(ctrlType, ctrlPos, value)
-	if ctrlType == pushbutton and value == buttonReleaseValue and buttonTrackerMap ~= nil and buttonTrackerMap[ctrlPos] ~= nil then
-		buttonTrackerMap[ctrlPos] = buttonTrackerMap[ctrlPos] + 1
-	end
-end
-
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	if deviceType == myDevice then
-		trackButtons(ctrlType, ctrlPos, value)
 --print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then
 			if multifunctionMap[value] ~= nil then
@@ -222,12 +215,6 @@ function setDefaultModes()
 			value["currentUpDnMode"] = value["defaultUpDnMode"]
 		else
 			value["currentUpDnMode"] = nil
-		end
-	end
-
-	if buttonTrackerMap ~= nil then
-		for key, value in pairs(buttonTrackerMap) do
-			buttonTrackerMap[key] = 0
 		end
 	end
 
