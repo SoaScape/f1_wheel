@@ -27,33 +27,6 @@ local function displayFuelTarget(fuelTarget)
 	return sliPanel
 end
 
-local function displayFuel(fuel)
-	local sliPanel = "NREF"
-	if fuel ~= nil and fuel > 0 then 
-		local ft = GetFuelKilogram(fuel)
-		if devName == "SLI-PRO" then
-			if ft >= 100 then
-				sliPanel = string.format(" F%3d  ", round(ft))
-			elseif ft >= 10 then
-				sliPanel = string.format(" F%2d   ", round(ft))
-			else
-				sliPanel = string.format(" F%1.1f  ", ft)
-			end
-		else
-			if ft >= 100 then
-				sliPanel = string.format("F%3d", round(ft))
-			elseif ft >= 10 then
-				sliPanel = string.format(" F%2d", round(ft))
-			else
-				sliPanel = string.format(" F%1.1f", ft)
-			end
-		end
-	else
-		sliPanel = "NREF"
-	end
-	return sliPanel
-end
-
 function customDisplayEventProcessing(swValue, side)
 	local sliPanel = ""
 	local isSlowUpdate = false
