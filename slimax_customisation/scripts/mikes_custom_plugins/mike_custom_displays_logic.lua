@@ -170,13 +170,15 @@ end
 local function assessFuelLapData()
 	local lapComparator = function(a, b) return a.accuracy > b.accuracy end	
 	local sortedKeys = getKeysSortedByValue(fuelLaps, lapComparator)
-	
+	local stdCount = 0
 	local count = 0
 	for _, key in ipairs(sortedKeys) do
 		count = count + 1
 		local fuelLap = fuelLaps[key]
-		if fuelLap.accuracy < 100 and count > maxNonStandardFuelLapsToStore then
+		if fuelLap.accuracy < 100 and (count > maxNonStandardFuelLapsToStore or stdCount > 0) then
 			fuelLap.adjustedFuelUsed = nil
+		elseif fuelLap.accuracy == 100
+			stdCount = stdCount + 1
 		end
 	end
 end
