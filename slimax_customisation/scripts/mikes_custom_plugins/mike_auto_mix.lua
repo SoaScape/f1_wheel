@@ -38,6 +38,7 @@ local autoMixReturnMix = nil
 local richModePreviouslyDisabled = false
 
 local autoMixLedPattern = 128 -- LED 5, binary 10000000
+local autoMixEventActiveBlinkTime = 400
 
 function resetAutoMixData()
 	learnedData = {}
@@ -253,7 +254,7 @@ function autoMixRegularProcessing()
 						autoMixActiveType = "min"
 					end
 					deactivatePermanentLed(autoMixLedPattern)
-					activateBlinkingLed(autoMixLedPattern, 400, 0, false)
+					activateBlinkingLed(autoMixLedPattern, autoMixEventActiveBlinkTime, 0, false)
 				end
 			elseif autoMixActiveType ~= nil then
 				local throttle = GetCarInfo("throttle")
