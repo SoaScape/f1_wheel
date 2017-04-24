@@ -99,11 +99,11 @@ end
 
 function performRaceStart()
 	setDefaultModes()	
-	toggleOvertakeMode(true, false)	
+	toggleOvertakeMode(false)
 end
 
 function exitRaceStart()
-	toggleOvertakeMode(true, false)	
+	toggleOvertakeMode(false)
 end
 
 customFunctionNamesTable = {}

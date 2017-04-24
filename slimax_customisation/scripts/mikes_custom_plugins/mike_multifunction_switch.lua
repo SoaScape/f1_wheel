@@ -49,7 +49,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName
 			   and currentMultifunction["name"] ~= "autoMixMultifunctionName" then
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
-					toggleOvertakeMode(true, true)
+					toggleOvertakeMode(true)
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
@@ -157,7 +157,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	return 2
 end
 
-function toggleOvertakeMode(sendButtons, showDisplay)
+function toggleOvertakeMode(showDisplay)
 	if overtakeEngaged then
 		overtakeEngaged = false
 		
