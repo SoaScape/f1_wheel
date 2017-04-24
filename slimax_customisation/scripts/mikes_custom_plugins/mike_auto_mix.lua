@@ -252,6 +252,8 @@ function autoMixRegularProcessing()
 					else
 						autoMixActiveType = "min"
 					end
+					deactivatePermanentLed(autoMixLedPattern)
+					activateBlinkingLed(autoMixLedPattern, 400, 0, false)
 				end
 			elseif autoMixActiveType ~= nil then
 				local throttle = GetCarInfo("throttle")
@@ -263,6 +265,8 @@ function autoMixRegularProcessing()
 						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
 						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
 						currentMultifunction = multiFunctionBak
+						deactivateBlinkingLed(autoMixLedPattern)
+						activatePermanentLed(autoMixLedPattern, 0, false)
 					end
 				else
 					if throttle == 1 then
@@ -271,7 +275,9 @@ function autoMixRegularProcessing()
 						currentMultifunction = fuelMultiFunction
 						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
 						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
-						currentMultifunction = multiFunctionBak
+						currentMultifunction = multiFunctionBak			
+						deactivateBlinkingLed(autoMixLedPattern)
+						activatePermanentLed(autoMixLedPattern, 0, false)
 					end
 				end				
 			end
