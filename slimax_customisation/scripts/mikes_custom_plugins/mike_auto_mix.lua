@@ -35,6 +35,8 @@ local lastMixEvent = nil
 local autoMixSelected = false
 local autoMixReturnMix = nil
 
+local richModePreviouslyDisabled = false
+
 local autoMixLedPattern = 128 -- LED 5, binary 10000000
 
 function resetAutoMixData()
@@ -42,6 +44,7 @@ function resetAutoMixData()
 	learnFullThrottleActive = false
 	learnLowThrottleActive = false
 	autoMixSelected = false
+	richModePreviouslyDisabled = false
 	lastMixEvent = nil
 	autoMixActiveType = nil
 end
@@ -68,6 +71,7 @@ end
 function autoMixOn()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		autoMixSelected = true
+		richModePreviouslyDisabled = false
 		activatePermanentLed(autoMixLedPattern, 0, false)
 	end
 end
@@ -229,6 +233,13 @@ function autoMixRegularProcessing()
 						elseif autoMixReturnMix == fuelMultiFunction["max"] then
 							autoMixReturnMix = fuelMultiFunction["defaultUpDnMode"]
 						end
+						
+						if not(richModePreviouslyDisabled) then
+							display("RICH", "DISB", displayTimeout)
+							richModePreviouslyDisabled = true
+						end						
+					else
+						richModePreviouslyDisabled = false
 					end
 					
 					local multiFunctionBak = currentMultifunction
