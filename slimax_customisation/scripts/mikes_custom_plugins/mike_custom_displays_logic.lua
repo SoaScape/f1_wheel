@@ -178,7 +178,7 @@ local function assessFuelLapData()
 		local fuelLap = fuelLaps[key]
 		if fuelLap.accuracy < 100 and (count > maxNonStandardFuelLapsToStore or accurateFuelLapCalculated) then
 			fuelLap.adjustedFuelUsed = nil
-		elseif fuelLap.accuracy == 100
+		elseif fuelLap.accuracy == 100 then
 			accurateFuelLapCalculated = true
 		end
 	end
