@@ -172,14 +172,13 @@ function getButtonMap(currentMultifunction)
 	if currentMultifunction["voiceMenuPage"] ~= nil then
 		return getVoiceMenuButtons(currentMultifunction)
 	elseif currentMultifunction["menu"] ~= nil then
-		return getTrackableQuickMenuSettingButtons(currentMultifunction)
+		return getMfdMenuButtons(currentMultifunction)
 	elseif currentMultifunction["name"] == "INFO" then
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
 	elseif currentMultifunction["confirmButtonMap"] ~= nil then
 		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
 		return currentMultifunction["confirmButtonMap"]
 	else
-		-- F1 2015 quick-menu doesn't keep track of what's selected so button maps are always static
 		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
 	end
 end
