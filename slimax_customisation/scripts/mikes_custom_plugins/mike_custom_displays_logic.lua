@@ -13,7 +13,7 @@ local fuelUsedLastLap = nil
 local fuelLaps = {}
 local lastFuelLapCompleted = -1
 local maxNonStandardFuelLapsToStore = 3
-local fuelLapBeginLedPattern = 192 -- 4, 5  = 11000000
+local fuelLapCompleteLedPattern = 192 -- 4, 5  = 11000000
 local currentFuelLap = nil
 
 local dataDisplayDelay = 1000
@@ -232,6 +232,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		else
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
 		end
+		activateBlinkingLed(fuelLapCompleteLedPattern, 100, 250, false)
 	end
 end
 
@@ -255,7 +256,6 @@ local function trackFuelLapData()
 				table.insert(fuelLaps, fuelLap)
 				currentFuelLap = fuelLap
 				lastFuelLapCompleted = lapsCompleted
-				activateBlinkingLed(fuelLapBeginLedPattern, 100, 250, false)
 			end
 		elseif lapsCompleted == lastFuelLapCompleted then
 			if currentFuelLap.mixdata[distance] == nil then
