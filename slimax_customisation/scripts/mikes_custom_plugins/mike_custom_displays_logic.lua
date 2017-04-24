@@ -221,7 +221,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	fuelLap.numStandardMixEvents = numStandardMixEvents
 	fuelLap.yellowFlagLapPrecentage = yellowFlagLapPrecentage
 	fuelLap.offset = fuelOffset
-	fuelLap.accuracy = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage * 3)
+	fuelLap.accuracy = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage)
 	fuelLap.adjustedFuelUsed = fuelUsedLastLap / fuelOffset			
 	
 	if not (GetContextInfo("yellow_flag")) and yellowFlagLapPrecentage <= maxYellowFlagPercentageForValidFuelLap and fuelUsedLastLap > 0 then
