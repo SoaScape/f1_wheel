@@ -93,6 +93,33 @@ function processFuelDataButtonEvent(button)
 	end
 end
 
+local function displayFuel(fuel)
+	local sliPanel = "NREF"
+	if fuel ~= nil and fuel > 0 then 
+		local ft = GetFuelKilogram(fuel)
+		if devName == "SLI-PRO" then
+			if ft >= 100 then
+				sliPanel = string.format(" F%3d  ", round(ft))
+			elseif ft >= 10 then
+				sliPanel = string.format(" F%2d   ", round(ft))
+			else
+				sliPanel = string.format(" F%1.1f  ", ft)
+			end
+		else
+			if ft >= 100 then
+				sliPanel = string.format("F%3d", round(ft))
+			elseif ft >= 10 then
+				sliPanel = string.format(" F%2d", round(ft))
+			else
+				sliPanel = string.format(" F%1.1f", ft)
+			end
+		end
+	else
+		sliPanel = "NREF"
+	end
+	return sliPanel
+end
+
 local function getPercentageLapComplete()
 	-- percentage of current lap completed
 	local dist = GetContextInfo("lap_distance")		
@@ -228,7 +255,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		fuelLap.fuelUsed = fuelUsedLastLap
 		assessFuelLapData()
 		if accurateFuelLapCalculated then
-			display("USED", tostring(fuelLap.fuelUsed) .. "KG", mDisplay_Info_Delay)
+			display("USED", displayFuel(fuelLap.fuelUsed), mDisplay_Info_Delay)
 		else
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
 		end

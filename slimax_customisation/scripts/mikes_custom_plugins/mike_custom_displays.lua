@@ -28,6 +28,7 @@ local function displayFuelTarget(fuelTarget)
 end
 
 local function displayFuel(fuel)
+	local sliPanel = "NREF"
 	if fuel ~= nil and fuel > 0 then 
 		local ft = GetFuelKilogram(fuel)
 		if devName == "SLI-PRO" then
