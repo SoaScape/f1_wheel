@@ -40,7 +40,7 @@ function raceStartRegularProcessing()
 				resetAutoMixData()
 				resetUtilsData()
 				activateBlinkingLed(raceGoLedPattern, raceGoLedDelay, raceGoLedDuration, false)
-				display(startMultifunctionName, " GO ", 2000)				
+				display("RACE", " GO ", 2000)				
 				performRaceStart()
 				storeStartFuel()
 			end
