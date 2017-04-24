@@ -165,13 +165,11 @@ function toggleOvertakeMode(showDisplay)
 			autoMixActiveBeforeOvertakeButton = false
 			autoMixOn()
 		end
-
-		if sendButtons then
-			local multiFunctionBak = currentMultifunction
-			currentMultifunction = fuelMultiFunction			
-			confirmSelection("OVTK", " END", getButtonMap(currentMultifunction), showDisplay)			
-			currentMultifunction = multiFunctionBak
-		end
+		
+		local multiFunctionBak = currentMultifunction
+		currentMultifunction = fuelMultiFunction			
+		confirmSelection("OVTK", " END", getButtonMap(currentMultifunction), showDisplay)			
+		currentMultifunction = multiFunctionBak
 		
 		if showDisplay then
 			deactivateAlternateBlinkingLeds("overtake")
@@ -188,15 +186,13 @@ function toggleOvertakeMode(showDisplay)
 			autoMixOff()
 		end
 
-		if sendButtons then
-			local multiFunctionBak = currentMultifunction
-			currentMultifunction = fuelMultiFunction
-			local fuelModeBak = currentMultifunction["currentUpDnMode"]
-			currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
-			confirmSelection("OVER", "TAKE", getButtonMap(currentMultifunction), showDisplay)
-			currentMultifunction["currentUpDnMode"] = fuelModeBak
-			currentMultifunction = multiFunctionBak
-		end
+		local multiFunctionBak = currentMultifunction
+		currentMultifunction = fuelMultiFunction
+		local fuelModeBak = currentMultifunction["currentUpDnMode"]
+		currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
+		confirmSelection("OVER", "TAKE", getButtonMap(currentMultifunction), showDisplay)
+		currentMultifunction["currentUpDnMode"] = fuelModeBak
+		currentMultifunction = multiFunctionBak
 		
 		if showDisplay then
 			activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false, 0)
