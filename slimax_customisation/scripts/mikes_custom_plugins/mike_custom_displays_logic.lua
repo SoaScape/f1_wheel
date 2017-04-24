@@ -5,6 +5,8 @@ local lowFuelLedBlinkDelay = 500
 local startFuelStoredLedPattern = 248
 local fuelResetDisplayTimeout = 1000
 
+local accurateFuelLapCalculated = false
+
 local fuelTarget = nil
 local adjustedFuelTarget = nil
 local maxYellowFlagPercentageForValidFuelLap = 5
@@ -170,18 +172,16 @@ end
 local function assessFuelLapData()
 	local lapComparator = function(a, b) return a.accuracy > b.accuracy end	
 	local sortedKeys = getKeysSortedByValue(fuelLaps, lapComparator)
-	local stdCount = 0
 	local count = 0
 	for _, key in ipairs(sortedKeys) do
 		count = count + 1
 		local fuelLap = fuelLaps[key]
-		if fuelLap.accuracy < 100 and (count > maxNonStandardFuelLapsToStore or stdCount > 0) then
+		if fuelLap.accuracy < 100 and (count > maxNonStandardFuelLapsToStore or accurateFuelLapCalculated) then
 			fuelLap.adjustedFuelUsed = nil
 		elseif fuelLap.accuracy == 100
-			stdCount = stdCount + 1
+			accurateFuelLapCalculated = true
 		end
 	end
-	return stdCount
 end
 
 local function calculateMixAdjustedFuelLap(fuelLap)
@@ -226,9 +226,9 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	
 	if not (GetContextInfo("yellow_flag")) and yellowFlagLapPrecentage <= maxYellowFlagPercentageForValidFuelLap and fuelUsedLastLap > 0 then
 		fuelLap.fuelUsed = fuelUsedLastLap
-		local stdCount = assessFuelLapData()
-		if stdCount > 0 then
-			display("TARG", tostring(stdCount), mDisplay_Info_Delay)
+		assessFuelLapData()
+		if accurateFuelLapCalculated then
+			display("USED", tostring(fuelLap.fuelUsed) .. "KG", mDisplay_Info_Delay)
 		else
 			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
 		end
@@ -332,6 +332,7 @@ function resetFuelData()
 	fuelUsedLastLap = nil
 	currentFuelLap = nil
 	currentDataItemIndex = 1
+	accurateFuelLapCalculated = false
 end
 
 function getFuelAtStart()
