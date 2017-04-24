@@ -181,6 +181,7 @@ local function assessFuelLapData()
 			stdCount = stdCount + 1
 		end
 	end
+	return stdCount
 end
 
 local function calculateMixAdjustedFuelLap(fuelLap)
@@ -224,9 +225,13 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	fuelLap.adjustedFuelUsed = fuelUsedLastLap / fuelOffset			
 	
 	if not (GetContextInfo("yellow_flag")) and yellowFlagLapPrecentage <= maxYellowFlagPercentageForValidFuelLap and fuelUsedLastLap > 0 then
-		fuelLap.fuelUsed = fuelUsedLastLap		
-		display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
-		assessFuelLapData()
+		fuelLap.fuelUsed = fuelUsedLastLap
+		local stdCount = assessFuelLapData()
+		if stdCount > 0 then
+			display("TARG", tostring(stdCount), mDisplay_Info_Delay)
+		else
+			display("DATA", tostring(fuelLap.accuracy), mDisplay_Info_Delay)
+		end
 	end
 end
 
