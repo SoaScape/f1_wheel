@@ -210,7 +210,7 @@ function autoMixRegularProcessing()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		learnTrack()
 		
-		local fuelTarget = getFuelTarget()
+		local fuelTarget = getAdjustedFuelTarget()
 		if fuelTarget == nil then
 			fuelTarget = 1
 		end
