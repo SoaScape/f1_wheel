@@ -93,7 +93,7 @@ function processFuelDataButtonEvent(button)
 	end
 end
 
-local function displayFuel(fuel)
+function displayFuel(fuel)
 	local sliPanel = "NREF"
 	if fuel ~= nil and fuel > 0 then 
 		local ft = GetFuelKilogram(fuel)
