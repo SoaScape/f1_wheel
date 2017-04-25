@@ -82,6 +82,7 @@ function autoMixOff()
 		autoMixSelected = false
 		autoMixActiveType = nil
 		deactivatePermanentLed(autoMixLedPattern)
+		deactivateBlinkingLed(autoMixLedPattern)
 	end	
 end
 
