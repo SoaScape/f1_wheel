@@ -195,6 +195,7 @@ trackMultiFunction = multifunctionMap[10]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = false
 autoMixEnabled = true
+autoDiffEnabled = true
 raceStartModeEnabled = true
 
 function custom_init_Event(scriptfile)
@@ -207,10 +208,7 @@ function getButtonMap(currentMultifunction)
 		return getMfdMenuButtons(currentMultifunction)
 	elseif currentMultifunction["name"] == "INFO" then
 		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
-	elseif currentMultifunction["confirmButtonMap"] ~= nil then
-		-- This is for multifunctions where up/dn modes aren't used, just a single button map for confirm
-		return currentMultifunction["confirmButtonMap"]
 	else
-		return currentMultifunction["buttonMap"][currentMultifunction["currentUpDnMode"]]
+		return nil
 	end
 end
