@@ -18,6 +18,7 @@ end
 local function performRegularProcessing()
 	performRegularCustomDisplayProcessing()
 	autoMixRegularProcessing()
+	autoDiffRegularProcessing()
 	raceStartRegularProcessing()
 	utilsRegularProcessing()
 	updateLeds()

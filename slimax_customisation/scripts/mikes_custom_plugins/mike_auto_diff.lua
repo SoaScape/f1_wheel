@@ -13,6 +13,12 @@ function processAutoDiffButtonEvent(button)
 	end
 end
 
-function processTrackChange(trackId)
+function loadDiffEventsForTrack(trackId)
+	diffEvents = loadProperties(trackId .. ".diff")
+end
 
+function autoDiffRegularProcessing()
+	if autoDiffEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+		
+	end
 end
