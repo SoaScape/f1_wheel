@@ -2,9 +2,17 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 
 autoDiffMultifunctionName = "ADIF"
 
+local autoDiffActive = false
+local diffEvents = nil
 function processAutoDiffButtonEvent(button)
 	if autoDiffEnabled then
 		if button == confirmButton then
+			if autoDiffActive then
+				autoDiffActive = false
+			else
+				autoDiffActive = true
+				loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]])
+			end
 		elseif button == upButton then
 		elseif button == downButton then
 		elseif button == upEncoder then
