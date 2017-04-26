@@ -142,14 +142,45 @@ multifunctionMap[7]["enabled"] = true
 multifunctionMap[7]["upDnSelectable"] = true
 
 multifunctionMap[8] = {}
-multifunctionMap[8]["name"] = "PIT"
+multifunctionMap[8]["name"] = "DATA"
 multifunctionMap[8]["display"] = true
+multifunctionMap[8]["enabled"] = true
+
 multifunctionMap[9] = {}
-multifunctionMap[9]["name"] = "SPR"
-multifunctionMap[9]["display"] = true
+multifunctionMap[9]["name"] = autoDiffMultifunctionName
+multifunctionMap[9]["enabled"] = true
+
 multifunctionMap[10] = {}
-multifunctionMap[10]["name"] = "DATA"
+multifunctionMap[10]["name"] = "TRCK"
 multifunctionMap[10]["enabled"] = true
+multifunctionMap[10]["upDnSelectable"] = true
+multifunctionMap[10]["defaultUpDnMode"] = 0
+multifunctionMap[10]["currentUpDnMode"] = multifunctionMap[10]["defaultUpDnMode"]
+multifunctionMap[10]["upDnConfirmRequired"] = false
+multifunctionMap[10]["min"] = 0
+multifunctionMap[10]["max"] = 19
+multifunctionMap[10]["modes"] = {}
+multifunctionMap[10]["modes"][0] = "ASTL"
+multifunctionMap[10]["modes"][1] = "CHIN"
+multifunctionMap[10]["modes"][2] = "BAHR"
+multifunctionMap[10]["modes"][3] = "RUSS"
+multifunctionMap[10]["modes"][4] = "SPAN"
+multifunctionMap[10]["modes"][5] = "MONA"
+multifunctionMap[10]["modes"][6] = "CAND"
+multifunctionMap[10]["modes"][7] = "AZER"
+multifunctionMap[10]["modes"][8] = "AUST"
+multifunctionMap[10]["modes"][9] = "BRIT"
+multifunctionMap[10]["modes"][10] = "HUNG"
+multifunctionMap[10]["modes"][11] = "BELG"
+multifunctionMap[10]["modes"][12] = "ITLY"
+multifunctionMap[10]["modes"][13] = "SING"
+multifunctionMap[10]["modes"][14] = "MALY"
+multifunctionMap[10]["modes"][15] = "JAPN"
+multifunctionMap[10]["modes"][16] = " USA"
+multifunctionMap[10]["modes"][17] = "MEXI"
+multifunctionMap[10]["modes"][18] = "BRAZ"
+multifunctionMap[10]["modes"][19] = " ABU"
+
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = autoMixMultifunctionName
 multifunctionMap[11]["enabled"] = true
@@ -160,6 +191,7 @@ multifunctionMap[12]["display"] = false
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
+trackMultiFunction = multifunctionMap[10]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = false
 autoMixEnabled = true
