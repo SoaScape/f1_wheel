@@ -84,21 +84,23 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 			nextActiveFuelMix = currentMultifunction["currentUpDnMode"]
 		end
 		
-		for i = 0, tablelength(buttonMap) - 1 do
-			local delay = keystrokeDelay
-			local holdDelay = keyHoldDelay
-			if delayMap ~= nil and delayMap[i] ~= nil then
-				delay = delayMap[i]
-			elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
-				delay = customKeystrokeDelays[buttonMap[i]]
+		if buttonMap ~= nil then
+			for i = 0, tablelength(buttonMap) - 1 do
+				local delay = keystrokeDelay
+				local holdDelay = keyHoldDelay
+				if delayMap ~= nil and delayMap[i] ~= nil then
+					delay = delayMap[i]
+				elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
+					delay = customKeystrokeDelays[buttonMap[i]]
+				end
+				
+				if keyHoldMap ~= nil and keyHoldMap[i] ~= nil then
+					holdDelay = keyHoldMap[i]
+				end
+				queueKeyPress(buttonMap[i], holdDelay, delay)			
 			end
-			
-			if keyHoldMap ~= nil and keyHoldMap[i] ~= nil then
-				holdDelay = keyHoldMap[i]
-			end
-			queueKeyPress(buttonMap[i], holdDelay, delay)			
+			delayMap = nil
 		end
-		delayMap = nil
 
 		if showDisplay then
 			display(leftDisp, rightDisplay, confirmDelay)
