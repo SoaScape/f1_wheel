@@ -181,3 +181,14 @@ function getLocal(key)
 		i = i + 1		
 	end
 end
+
+function loadProperties(fileName)
+	local file = assert(io.open(fileName, "r"))
+	local props = {}
+	for line in file:lines() do
+		for key, value in string.gmatch(line, "(.-)=(%w+)") do 
+			props[key] = value 
+		end
+	end
+	return props
+end
