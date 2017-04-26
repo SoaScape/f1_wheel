@@ -174,3 +174,9 @@ function deactivateAlternateBlinkingLeds(id)
 		activeAlternateBlinkingLeds[id] = nil
 	end
 end
+
+function resetLeds()
+	activeBlinkingLeds = {}
+	activeAlternateBlinkingLeds = {}
+	activePermanentLeds = {}
+end
