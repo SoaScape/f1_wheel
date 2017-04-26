@@ -122,7 +122,8 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
 						return 1
 					end
-
+				elseif currentMultifunction["name"] == autoDiffMultifunctionName then
+					processAutoDiffButtonEvent(ctrlPos)
 				elseif currentMultifunction["name"] == autoMixMultifunctionName then
 					processAutoMixButtonEvent(ctrlPos)
 				elseif currentMultifunction["name"] == "DATA" then
