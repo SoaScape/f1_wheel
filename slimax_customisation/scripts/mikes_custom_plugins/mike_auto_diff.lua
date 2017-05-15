@@ -36,8 +36,9 @@ local config =  {}
 config["DISP"] = false
 
 local function loadDiffEventsForTrack(trackId)
-	if fileExists(diffMapDir .. trackId .. ".diff") then
-		diffEvents = loadProperties(trackId .. ".diff")
+	local fileName = diffMapDir .. trackId .. ".diff"
+	if fileExists(fileName) then
+		diffEvents = loadProperties(fileName)
 		return true
 	else
 		return false
