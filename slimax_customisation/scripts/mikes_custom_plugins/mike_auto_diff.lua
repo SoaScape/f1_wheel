@@ -86,7 +86,7 @@ local function setDifferential(diffOffset)
 	local key = getKeyForValue(diffMultiFunction["modes"], diff .. "%")
 	diffMultiFunction["currentUpDnMode"] = key
 	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction), config["DISP"])
-	print("Diff: " .. diff .. "%" .. "(key: " .. key .. ", tyre: " ..  tyres[currentTyre] .. ", base: " .. baseDiffs[tyres[currentTyre]])
+	--print("Diff: " .. diff .. "%" .. "(key: " .. key .. ", tyre: " ..  tyres[currentTyre] .. ", base: " .. baseDiffs[tyres[currentTyre]])
 end
 
 function autoDiffRegularProcessing()
