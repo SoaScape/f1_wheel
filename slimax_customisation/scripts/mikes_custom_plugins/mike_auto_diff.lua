@@ -39,6 +39,7 @@ local function loadDiffEventsForTrack(trackId)
 	local fileName = diffMapDir .. trackId .. ".diff"
 	if fileExists(fileName) then
 		diffEvents = loadProperties(fileName)
+		lastEvent = -1
 		return true
 	else
 		return false
