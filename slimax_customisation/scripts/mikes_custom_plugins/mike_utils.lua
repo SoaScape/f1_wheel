@@ -191,7 +191,7 @@ function loadProperties(fileName)
 	local file = assert(io.open(fileName, "r"))
 	local props = {}
 	for line in file:lines() do
-		for key, value in string.gmatch(line, "(.-)=(%w+)") do 
+		for key, value in string.gmatch(line, "(.-)=(.*)") do 
 			props[key] = value 
 		end
 	end
