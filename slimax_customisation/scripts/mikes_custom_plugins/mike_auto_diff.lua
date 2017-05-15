@@ -34,8 +34,12 @@ local config =  {}
 config["DISP"] = false
 
 local function loadDiffEventsForTrack(trackId)
-	diffEvents = loadProperties(trackId .. ".diff")	
-	return true
+	if fileExists(trackId .. ".diff") then
+		diffEvents = loadProperties(trackId .. ".diff")
+		return true
+	else
+		return false
+	end
 end
 
 function processAutoDiffButtonEvent(button)

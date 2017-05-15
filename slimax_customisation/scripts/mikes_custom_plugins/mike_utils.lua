@@ -198,6 +198,16 @@ function loadProperties(fileName)
 	return props
 end
 
+function fileExists(name)
+	local file = io.open(name, "r")
+	if file ~= nil then
+		io.close(file)
+		return true
+	else
+		return false
+	end
+end
+
 function getKeyForValue(tableToSearch, value)
 	for key, val in pairs(tableToSearch) do
 		if val == value then
