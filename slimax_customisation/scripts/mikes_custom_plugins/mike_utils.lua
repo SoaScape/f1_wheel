@@ -102,9 +102,9 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 			end
 			delayMap = nil
 		end
-	end
-	if showDisplay then
+		if showDisplay then
 			display(leftDisp, rightDisplay, confirmDelay)
+		end
 	end
 end
 
