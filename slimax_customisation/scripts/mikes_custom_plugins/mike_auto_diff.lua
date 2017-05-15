@@ -9,6 +9,8 @@ local displayTimeout = 500
 
 local lastEvent = -1
 
+local diffMapDir = "./diff-maps/"
+
 local tyres = {}
 tyres[0] = "ULTR"
 tyres[1] = "SUPR"
@@ -34,7 +36,7 @@ local config =  {}
 config["DISP"] = false
 
 local function loadDiffEventsForTrack(trackId)
-	if fileExists(trackId .. ".diff") then
+	if fileExists(diffMapDir .. trackId .. ".diff") then
 		diffEvents = loadProperties(trackId .. ".diff")
 		return true
 	else
