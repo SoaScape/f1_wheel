@@ -35,8 +35,9 @@ function customDisplayEventProcessing(swValue, side)
 	local lpt = nil
 	
 	if swValue == 189 then
+		customFunction = true
 		-- distance
-		local dist = GetContextInfo("lap_distance")		
+		local dist = getLapDistance()
 		if devName == "SLI-PRO" then
 			sliPanel = string.format(" D%3d   ", dist )
 		else
