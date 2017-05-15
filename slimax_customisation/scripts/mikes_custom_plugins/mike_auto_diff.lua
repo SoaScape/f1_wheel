@@ -90,7 +90,7 @@ local function setDifferential(diffOffset)
 end
 
 function autoDiffRegularProcessing()
-	if autoDiffEnabled and autoDiffActive and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if autoDiffActive and mSessionEnter == 1 and not(m_is_sim_idle) then
 		local distance = getLapDistance()
 		if diffEvents[tostring(distance)] ~= nil and lastEvent ~= distance then
 			lastEvent = distance
