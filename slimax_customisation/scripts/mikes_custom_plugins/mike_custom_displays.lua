@@ -34,7 +34,15 @@ function customDisplayEventProcessing(swValue, side)
 	local diffTimeFlag = false
 	local lpt = nil
 	
-	if swValue == 190 then
+	if swValue == 189 then
+		-- distance
+		local dist = GetContextInfo("lap_distance")		
+		if devName == "SLI-PRO" then
+			sliPanel = string.format(" D%3d   ", dist )
+		else
+			sliPanel = string.format("D%3d", dist )
+		end		
+	elseif swValue == 190 then
 		-- Mike custom: average fuel used per lap
 		customFunction = true				
 		sliPanel = displayFuel(getAverageFuelPerLap())
