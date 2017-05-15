@@ -195,6 +195,7 @@ function loadProperties(fileName)
 			props[key] = value 
 		end
 	end
+	file:close()
 	return props
 end
 
