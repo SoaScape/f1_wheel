@@ -41,7 +41,7 @@ function customDisplayEventProcessing(swValue, side)
 		if devName == "SLI-PRO" then
 			sliPanel = string.format(" D%3d   ", dist )
 		else
-			sliPanel = string.format("D%3d", dist )
+			sliPanel = string.format("%3d", dist )
 		end		
 	elseif swValue == 190 then
 		-- Mike custom: average fuel used per lap
