@@ -130,8 +130,8 @@ function SetPatternLed(pattern, state)
 	print("LED Pattern: " .. pattern .. ", State: " .. state)
 end
 
-mSessionEnter = 0
-m_is_sim_idle = true
+mSessionEnter = 1
+m_is_sim_idle = false
 -- End Stubs
 
 local function numberise(line)

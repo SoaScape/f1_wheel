@@ -179,7 +179,7 @@ local function learnTrack()
 		end
 	elseif throttle == 1 then
 		learnFullThrottleStartTicks = getTks()
-		learnFullThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
+		learnFullThrottleStartDistance = getLapDistance()
 		learnFullThrottleActive = true
 		highLearnt = false
 	end	
@@ -206,7 +206,7 @@ local function learnTrack()
 		end
 	elseif throttle < 1 then
 		learnLowThrottleStartTicks = getTks()
-		learnLowThrottleStartDistance = round(GetContextInfo("lap_distance"), 0)
+		learnLowThrottleStartDistance = getLapDistance()
 		learnLowThrottleActive = true
 		lowLearnt = false
 	end
@@ -223,8 +223,7 @@ function autoMixRegularProcessing()
 		
 		if autoMixSelected then
 			if autoMixActiveType == nil then -- Automix not currently set, check if we can set it
-				local distance = GetContextInfo("lap_distance")
-				activeAutoMixData = learnedData[round(distance, 0)]
+				activeAutoMixData = learnedData[getLapDistance()]
 				if activeAutoMixData ~= nil then
 					local autoMix = activeAutoMixData["mix"]	
 					autoMixReturnMix = activeAutoMixData["returnMix"]
@@ -247,7 +246,7 @@ function autoMixRegularProcessing()
 					local multiFunctionBak = currentMultifunction
 					currentMultifunction = fuelMultiFunction
 					currentMultifunction["currentUpDnMode"] = autoMix
-					confirmSelection("AUTO", currentMultifunction["modes"][autoMix], getButtonMap(currentMultifunction), config["DISP"])
+					confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMix], getButtonMap(currentMultifunction), config["DISP"])
 					currentMultifunction = multiFunctionBak
 					if autoMix == fuelMultiFunction["max"] then
 						autoMixActiveType = "max"
@@ -265,7 +264,7 @@ function autoMixRegularProcessing()
 						local multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
 						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
+						confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
 						currentMultifunction = multiFunctionBak
 						deactivateBlinkingLed(autoMixLedPattern)
 						activatePermanentLed(autoMixLedPattern, 0, false)
@@ -276,7 +275,7 @@ function autoMixRegularProcessing()
 						local multiFunctionBak = currentMultifunction
 						currentMultifunction = fuelMultiFunction
 						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection("AUTO", currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
+						confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
 						currentMultifunction = multiFunctionBak			
 						deactivateBlinkingLed(autoMixLedPattern)
 						activatePermanentLed(autoMixLedPattern, 0, false)

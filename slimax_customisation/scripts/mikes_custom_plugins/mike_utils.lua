@@ -83,8 +83,9 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 		if currentMultifunction["name"] == fuelMultiFunction["name"] then
 			nextActiveFuelMix = currentMultifunction["currentUpDnMode"]
 		end
-		
 		if buttonMap ~= nil then
+local inspect = require('inspect')
+print(inspect(buttonMap))
 			for i = 0, tablelength(buttonMap) - 1 do
 				local delay = keystrokeDelay
 				local holdDelay = keyHoldDelay
@@ -182,6 +183,10 @@ function getLocal(key)
 	end
 end
 
+function getLapDistance()
+	return round(GetContextInfo("lap_distance"), 0)
+end
+
 function loadProperties(fileName)
 	local file = assert(io.open(fileName, "r"))
 	local props = {}
@@ -192,3 +197,13 @@ function loadProperties(fileName)
 	end
 	return props
 end
+
+function getKeyForValue(tableToSearch, value)
+	for key, val in pairs(tableToSearch) do
+		if val == value then
+			return key
+		end
+	end
+	return nil
+end
+

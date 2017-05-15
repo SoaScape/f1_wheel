@@ -1,4 +1,5 @@
 require "scripts/mikes_custom_plugins/mike_auto_mix"
+require "scripts/mikes_custom_plugins/mike_auto_diff"
 require "scripts/mikes_custom_plugins/mike_multifunction_switch"
 require "scripts/mikes_custom_plugins/mike_custom_displays"
 require "scripts/mikes_custom_plugins/mike_utils"

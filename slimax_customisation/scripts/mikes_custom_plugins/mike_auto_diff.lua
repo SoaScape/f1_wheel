@@ -5,6 +5,10 @@ autoDiffMultifunctionName = "ADIF"
 local autoDiffActive = false
 local diffEvents = nil
 
+local displayTimeout = 500
+
+local lastEvent = -1
+
 local tyres = {}
 tyres[0] = "ULTR"
 tyres[1] = "SUPR"
@@ -17,30 +21,72 @@ local minTyre = 0
 local maxTyre = 6
 local currentTyre = 1
 
+local baseDiffs = {}
+baseDiffs["ULTR"] = 95
+baseDiffs["SUPR"] = 90
+baseDiffs["SOFT"] = 80
+baseDiffs["MEDM"] = 70
+baseDiffs["HARD"] = 60
+baseDiffs["INTR"] = 55
+baseDiffs["WETS"] = 50
+
+local config =  {}
+config["DISP"] = false
+
+local function loadDiffEventsForTrack(trackId)
+	diffEvents = loadProperties(trackId .. ".diff")	
+	return true
+end
+
 function processAutoDiffButtonEvent(button)
 	if autoDiffEnabled then
 		if button == confirmButton then
 			if autoDiffActive then
 				autoDiffActive = false
+				display(autoDiffMultifunctionName, " OFF", displayTimeout)
 			else
 				autoDiffActive = true
-				loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]])
+				if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
+					autoDiffActive = true						
+					display(autoDiffMultifunctionName, "ACTV", displayTimeout)
+				else
+					display(autoDiffMultifunctionName, " ERR", displayTimeout)
+				end
 			end
 		elseif button == upButton then
+			if currentTyre < maxTyre then
+				currentTyre = currentTyre + 1
+			else
+				currentTyre = minTyre
+			end
+			display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
 		elseif button == downButton then
+			if currentTyre > minTyre then
+				currentTyre = currentTyre - 1
+			else
+				currentTyre = maxTyre
+			end
+			display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
 		elseif button == upEncoder then
 		elseif button == downEncoder then
 		end
 	end
 end
 
-function loadDiffEventsForTrack(trackId)
-	diffEvents = loadProperties(trackId .. ".diff")
+local function setDifferential(diffOffset)
+	local diff = baseDiffs[tyres[currentTyre]] + diffOffset
+	local key = getKeyForValue(diffMultiFunction["modes"], diff .. "%")
+	diffMultiFunction["currentUpDnMode"] = key
+	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction), config["DISP"])
 end
 
 function autoDiffRegularProcessing()
-	if autoDiffEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
-		
+	if autoDiffEnabled and autoDiffActive and mSessionEnter == 1 and not(m_is_sim_idle) then
+		local distance = getLapDistance()
+		if diffEvents[tostring(distance)] ~= nil and lastEvent ~= distance then
+			lastEvent = distance
+			setDifferential(diffEvents[tostring(distance)])
+		end
 	end
 end
 
