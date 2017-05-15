@@ -84,8 +84,8 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 			nextActiveFuelMix = currentMultifunction["currentUpDnMode"]
 		end
 		if buttonMap ~= nil then
-local inspect = require('inspect')
-print(inspect(buttonMap))
+--local inspect = require('inspect')
+--print(inspect(buttonMap))
 			for i = 0, tablelength(buttonMap) - 1 do
 				local delay = keystrokeDelay
 				local holdDelay = keyHoldDelay
