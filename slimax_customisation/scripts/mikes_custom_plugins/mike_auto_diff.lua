@@ -59,7 +59,6 @@ function resetAutoDiff()
 	autoDiffActive = false
 	progActive = false
 	diffEvents = nil
-	currentTyre = 5
 	lastProgButtonPress = 0
 	progOffset = 0
 end
