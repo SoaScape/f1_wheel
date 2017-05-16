@@ -156,7 +156,16 @@ end
 
 local function setDifferential(diffOffset)
 	local diff = baseDiffs[tyres[currentTyre]] + diffOffset
+
 	local key = getKeyForValue(diffMultiFunction["modes"], diff .. "%")
+	
+	if key == nil then
+		if diff > 100 then
+			key = diffMultiFunction["max"]
+		else
+			key = diffMultiFunction["min"]
+		end
+	end
 	diffMultiFunction["currentUpDnMode"] = key
 	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction), config["DISP"])
 	--print("Diff: " .. diff .. "%" .. "(key: " .. key .. ", tyre: " ..  tyres[currentTyre] .. ", base: " .. baseDiffs[tyres[currentTyre]])
