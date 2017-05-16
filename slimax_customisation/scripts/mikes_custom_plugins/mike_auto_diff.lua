@@ -1,18 +1,23 @@
 require "scripts/mikes_custom_plugins/mike_led_utils"
 
 autoDiffMultifunctionName = "ADIF"
+local progBlinkLedPatterns = {}
+progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
+progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5
+local autoDiffProgBlinkLedId = "ADIFPROG"
+local progButton = 3
+local displayTimeout = 500
+local progDoubleClickTime = 500
+local progInc = 5
 
 local autoDiffActive = false
 local progActive = false
+local lastEvent = -1
+local diffMapDir = "./diff-maps/"
 local diffEvents = nil
 
-local progButton = 3
-
-local displayTimeout = 500
-
-local lastEvent = -1
-
-local diffMapDir = "./diff-maps/"
+local lastProgButtonPress = 0
+local progOffset = 0
 
 local tyres = {}
 tyres[0] = "WETS"
@@ -55,45 +60,97 @@ function resetAutoDiff()
 	progActive = false
 	diffEvents = nil
 	currentTyre = 5
+	lastProgButtonPress = 0
+	progOffset = 0
+end
+
+local function storeDiffEvent(offset)
+	if(mSessionEnter == 1 and not(m_is_sim_idle)) then
+		local distStr = tostring(getLapDistance())
+		diffEvents[distStr] = tostring(offset)
+		display(distStr, tostring(offset), displayTimeout)
+	end
+end
+
+local function startDiffProgramming()
+	diffEvents = {}
+	activateAlternateBlinkingLeds(autoDiffProgBlinkLedId, progBlinkLedPatterns, nil, false, 0)
+	progActive = true
+	display("PROG", "STRT", displayTimeout)
+end
+
+local function endDiffProgramming()
+	local propertyText = buildPropertyStringFromTable(diffEvents)
+	local fileName = diffMapDir .. trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]] .. ".diff"
+	saveTextToFile(propertyText, fileName)
+	diffEvents = nil
+	progActive = false
+	deactivateAlternateBlinkingLeds(autoDiffProgBlinkLedId)
+	display("PROG", "DONE", displayTimeout)
+end
+
+local function displayProgOffset(offset)
+	local offsetStr = string.format("%3d", offset)	
+	display("PROG", offsetStr, displayTimeout)
 end
 
 function processAutoDiffButtonEvent(button)
 	if autoDiffEnabled then
 		if button == confirmButton then
-			if autoDiffActive then
-				autoDiffActive = false
-				display(autoDiffMultifunctionName, " OFF", displayTimeout)
+			if progActive then
+				storeDiffEvent(progOffset)
 			else
-				autoDiffActive = true
-				if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
-					autoDiffActive = true						
-					display(autoDiffMultifunctionName, "ACTV", displayTimeout)
+				if autoDiffActive then
+					autoDiffActive = false
+					display(autoDiffMultifunctionName, " OFF", displayTimeout)
 				else
-					display(autoDiffMultifunctionName, " ERR", displayTimeout)
+					autoDiffActive = true
+					if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
+						autoDiffActive = true						
+						display(autoDiffMultifunctionName, "ACTV", displayTimeout)
+					else
+						display(autoDiffMultifunctionName, " ERR", displayTimeout)
+					end
 				end
 			end
-		elseif button == upButton then
-			if currentTyre < maxTyre then
-				currentTyre = currentTyre + 1
+		elseif button == upButton or button == upEncoder then
+			if progActive then
+				progOffset = progOffset + progInc
+				displayProgOffset(progOffset)
 			else
-				currentTyre = minTyre
+				if currentTyre < maxTyre then
+					currentTyre = currentTyre + 1
+				else
+					currentTyre = minTyre
+				end
+				display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
 			end
-			display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
-		elseif button == downButton then
-			if currentTyre > minTyre then
-				currentTyre = currentTyre - 1
+		elseif button == downButton or button == downEncoder then
+			if progActive then
+				progOffset = progOffset - progInc
+				displayProgOffset(progOffset)
 			else
-				currentTyre = maxTyre
+				if currentTyre > minTyre then
+					currentTyre = currentTyre - 1
+				else
+					currentTyre = maxTyre
+				end
+				display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
 			end
-			display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
-		elseif button == upEncoder then
-		elseif button == downEncoder then
 		elseif button == progButton then
-			if autoDiffActive then
+			if autoDiffActive or (mSessionEnter ~= 1 or m_is_sim_idle) then
 				display("PROG", "UNAV", displayTimeout)
 				return
 			end
-			
+			if getTks() - lastProgButtonPress < progDoubleClickTime then
+				if progActive then
+					endDiffProgramming()
+				else
+					startDiffProgramming()
+				end
+			else
+				lastProgButtonPress = getTks()
+			end			
 		end
 	end
 end
