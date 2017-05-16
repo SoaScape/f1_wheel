@@ -50,6 +50,8 @@ local function getSelectRowButtons(chosenRow)
 end
 
 function getMfdMenuButtons(currentMultifunction)
+	-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
+	-- selected, therefore the button maps will need to change on the fly.
 	local index = 0
 	local buttonMap = {}
 	local numQuickMenuChanges = 0
@@ -76,11 +78,16 @@ function getMfdMenuButtons(currentMultifunction)
 	-- Now we know the currently selected mode so store it
 	currentMultifunction["currentPosition"] = currentMultifunction["min"]
 
-	-- Now increment to reach the requested mode (currentUpDnMode)
+	-- Now increment or decrement to reach the requested mode (currentUpDnMode)
 	local keyPress = quickMenuRight
+	local step = 1
 	local loopStartIndex = currentMultifunction["currentPosition"] + 1
-	
-	for i = 1, currentMultifunction["currentUpDnMode"], 1 do
+	if currentMultifunction["currentPosition"] > currentMultifunction["currentUpDnMode"] then
+		keyPress = quickMenuLeft
+		loopStartIndex = currentMultifunction["currentPosition"] - 1
+		step = -1
+	end
+	for i = loopStartIndex, currentMultifunction["currentUpDnMode"], step do
 		buttonMap[index] = keyPress
 		index = index + 1
 	end
