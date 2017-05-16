@@ -8,16 +8,16 @@ local quickMenuToggleKey = "M"
 local radioKey = "T"
 local quickMenuFirstPage = quickMenuLeft
 
-local extraDelay = 400
+local voiceMenuDelay = 400
 local openMenuDelay = 500
-local closeMenuDelay = 600
+local closeMenuDelay = 500
 
 function getVoiceMenuButtons(currentMultifunction)
 	local index = 0
 	local buttonMap = {}
 
 	delayMap = {}
-	delayMap[0] = extraDelay
+	delayMap[0] = voiceMenuDelay
 	
 	buttonMap[index] = radioKey
 	index = index + 1
@@ -34,7 +34,7 @@ function getVoiceMenuButtons(currentMultifunction)
 			index = index + 1
 		end
 	else
-		delayMap[index - 1] = extraDelay
+		delayMap[index - 1] = voiceMenuDelay
 	end
 
 	buttonMap[index] = quickMenuRight

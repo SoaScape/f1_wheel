@@ -5,13 +5,13 @@ minFuel = 1
 
 numMenus = 4
 
-confirmDelay = 1100
+confirmDelay = 1000
 
 customKeystrokeDelays = {}
-customKeystrokeDelays[quickMenuLeft] = 60
-customKeystrokeDelays[quickMenuRight] = 60
-customKeystrokeDelays[quickMenuUp] = 60
-customKeystrokeDelays[quickMenuDn] = 60
+customKeystrokeDelays[quickMenuLeft] = 40
+customKeystrokeDelays[quickMenuRight] = 40
+customKeystrokeDelays[quickMenuUp] = 40
+customKeystrokeDelays[quickMenuDn] = 40
 
 multifunctionMap = {}
 
