@@ -52,6 +52,7 @@ end
 
 function resetAutoDiff()
 	autoDiffActive = false
+	progActive = false
 	diffEvents = nil
 	currentTyre = 5
 end
@@ -87,6 +88,12 @@ function processAutoDiffButtonEvent(button)
 			display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
 		elseif button == upEncoder then
 		elseif button == downEncoder then
+		elseif button == progButton then
+			if autoDiffActive then
+				display("PROG", "UNAV", displayTimeout)
+				return
+			end
+			
 		end
 	end
 end
