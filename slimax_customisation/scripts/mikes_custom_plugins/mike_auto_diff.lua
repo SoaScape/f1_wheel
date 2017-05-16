@@ -61,6 +61,7 @@ function resetAutoDiff()
 	diffEvents = nil
 	lastProgButtonPress = 0
 	progOffset = 0
+	lastEvent = -1
 end
 
 local function storeDiffEvent(offset)
