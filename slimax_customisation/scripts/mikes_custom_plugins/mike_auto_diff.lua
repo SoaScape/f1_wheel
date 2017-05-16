@@ -12,16 +12,17 @@ local lastEvent = -1
 local diffMapDir = "./diff-maps/"
 
 local tyres = {}
-tyres[0] = "ULTR"
-tyres[1] = "SUPR"
-tyres[2] = "SOFT"
+tyres[0] = "WETS"
+tyres[1] = "INTR"
+tyres[2] = "HARD"
 tyres[3] = "MEDM"
-tyres[4] = "HARD"
-tyres[5] = "INTR"
-tyres[6] = "WETS"
+tyres[4] = "SOFT"
+tyres[5] = "SUPR"
+tyres[6] = "ULTR"
+
 local minTyre = 0
 local maxTyre = 6
-local currentTyre = 1
+local currentTyre = 5
 
 local baseDiffs = {}
 baseDiffs["ULTR"] = 95
