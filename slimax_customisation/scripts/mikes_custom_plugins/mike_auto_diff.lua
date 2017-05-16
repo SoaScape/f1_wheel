@@ -3,7 +3,10 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 autoDiffMultifunctionName = "ADIF"
 
 local autoDiffActive = false
+local progActive = false
 local diffEvents = nil
+
+local progButton = 3
 
 local displayTimeout = 500
 
@@ -45,6 +48,12 @@ local function loadDiffEventsForTrack(trackId)
 	else
 		return false
 	end
+end
+
+function resetAutoDiff()
+	autoDiffActive = false
+	diffEvents = nil
+	currentTyre = 5
 end
 
 function processAutoDiffButtonEvent(button)

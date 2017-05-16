@@ -220,4 +220,5 @@ function setDefaultModes()
 	resetAutoMixData()
 	resetFuelData()
 	resetLeds()
+	resetAutoDiff()
 end
