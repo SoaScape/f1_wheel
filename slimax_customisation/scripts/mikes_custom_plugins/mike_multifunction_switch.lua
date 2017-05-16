@@ -213,6 +213,7 @@ function setDefaultModes()
 		else
 			value["currentUpDnMode"] = nil
 		end
+		currentMultifunction["currentPosition"] = nil
 	end
 
 	overtakeEngaged = false

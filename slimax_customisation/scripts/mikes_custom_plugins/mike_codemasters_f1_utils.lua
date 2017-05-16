@@ -69,15 +69,17 @@ function getMfdMenuButtons(currentMultifunction)
 		index = index + 1
 	end
 
-	-- We don't know what's currently selected. Therefore move the selector
-	-- all the way to the bottom so we know the 'min' mode is selected
-	for i = currentMultifunction["min"], currentMultifunction["max"] - 1 do
-		buttonMap[index] = quickMenuLeft
-		index = index + 1
+	if currentMultifunction["currentPosition"] == nil then
+		-- If We don't know what's currently selected. Therefore move the selector
+		-- all the way to the bottom so we know the 'min' mode is selected
+		for i = currentMultifunction["min"], currentMultifunction["max"] - 1 do
+			buttonMap[index] = quickMenuLeft
+			index = index + 1
+		end
+		-- Now we know the currently selected mode so store it
+		currentMultifunction["currentPosition"] = currentMultifunction["min"]
 	end
-	-- Now we know the currently selected mode so store it
-	currentMultifunction["currentPosition"] = currentMultifunction["min"]
-
+	
 	-- Now increment or decrement to reach the requested mode (currentUpDnMode)
 	local keyPress = quickMenuRight
 	local step = 1
