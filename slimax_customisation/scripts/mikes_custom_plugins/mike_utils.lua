@@ -198,6 +198,12 @@ function loadProperties(fileName)
 	return props
 end
 
+function saveTextToFile(text, fileName)
+	file = io.open(fileName, "w")
+	file:write(text)
+	file:close()
+end
+
 function fileExists(name)
 	local file = io.open(name, "r")
 	if file ~= nil then
@@ -217,3 +223,10 @@ function getKeyForValue(tableToSearch, value)
 	return nil
 end
 
+function buildPropertyStringFromTable(tabl)
+	local text = ""
+	for key, val in pairs(tabl) do
+		text = text .. key .. "=" .. val .. "\n"
+	end
+	return text
+end
