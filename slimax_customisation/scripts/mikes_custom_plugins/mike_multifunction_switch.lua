@@ -208,12 +208,14 @@ end
 
 function setDefaultModes()
 	for key, value in pairs(multifunctionMap) do
-		if value["defaultUpDnMode"] ~= nil then
-			value["currentUpDnMode"] = value["defaultUpDnMode"]
-		else
-			value["currentUpDnMode"] = nil
+		if value["noReset"] == nil or not (value["noReset"]) then
+			if value["defaultUpDnMode"] ~= nil then
+				value["currentUpDnMode"] = value["defaultUpDnMode"]
+			else
+				value["currentUpDnMode"] = nil
+			end
+			value["currentPosition"] = nil
 		end
-		value["currentPosition"] = nil
 	end
 
 	overtakeEngaged = false

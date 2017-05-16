@@ -150,6 +150,7 @@ multifunctionMap[9] = {}
 multifunctionMap[9]["name"] = "TRCK"
 multifunctionMap[9]["wrap"] = true
 multifunctionMap[9]["enabled"] = true
+multifunctionMap[9]["noReset"] = true
 multifunctionMap[9]["upDnSelectable"] = true
 multifunctionMap[9]["defaultUpDnMode"] = 0
 multifunctionMap[9]["currentUpDnMode"] = multifunctionMap[9]["defaultUpDnMode"]
