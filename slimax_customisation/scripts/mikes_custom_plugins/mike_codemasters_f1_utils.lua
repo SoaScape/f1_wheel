@@ -10,7 +10,7 @@ local quickMenuFirstPage = quickMenuLeft
 
 local voiceMenuDelay = 400
 local openMenuDelay = 500
-local closeMenuDelay = 500
+local closeMenuDelay = 600
 
 function getVoiceMenuButtons(currentMultifunction)
 	local index = 0
