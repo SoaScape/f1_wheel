@@ -104,7 +104,6 @@ function processAutoDiffButtonEvent(button)
 					autoDiffActive = false
 					display(autoDiffMultifunctionName, " OFF", displayTimeout)
 				else
-					autoDiffActive = true
 					if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
 						autoDiffActive = true						
 						display(autoDiffMultifunctionName, "ACTV", displayTimeout)
