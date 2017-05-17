@@ -1,6 +1,7 @@
 myDevice = 3 -- 3 = SIMR-F1
 switch = 0
 pushbutton = 1
+progButton = 3
 confirmButton = 14
 upButton = 26
 downButton = 27
@@ -9,6 +10,13 @@ downEncoder = 24
 buttonReleaseValue = 0
 
 confirmDelay = 1000
+
+local progBlinkLedPatterns = {}
+progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
+progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5
+local progBlinkLedId = "PROG"
+local progDoubleClickTime = 500
+local progDataDir = "./diff-maps/"
 
 local customDisplayActive = false
 local customDisplayTicksTimeout = 0
@@ -21,6 +29,9 @@ local keyQueue = {}
 
 local activeFuelMix = nil
 local nextActiveFuelMix = nil
+
+local progActive = false
+local lastProgButtonPress = 0
 
 function customDisplayIsActive()
 	return customDisplayActive
@@ -152,6 +163,9 @@ end
 function resetUtilsData()
 	activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
 	nextActiveFuelMix = nil
+	progEvents = nil
+	progActive = false
+	lastProgButtonPress = 0
 end
 
 function showupvalues(f)
@@ -240,4 +254,42 @@ function buildPropertyStringFromTable(tabl, numericKeySort)
 		end
 	end
 	return text
+end
+
+function startProgramming()
+	progEvents = {}
+	activateAlternateBlinkingLeds(progBlinkLedId, progBlinkLedPatterns, nil, false, 0)
+	progActive = true
+	display("PROG", "STRT", displayTimeout)
+end
+
+function endProgramming(fileExtension)
+	local propertyText = buildPropertyStringFromTable(progEvents, true)
+	local fileName = progDataDir .. trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]] .. "." .. fileExtension
+	saveTextToFile(propertyText, fileName)
+	progEvents = nil
+	progActive = false
+	deactivateAlternateBlinkingLeds(progBlinkLedId)
+	display("PROG", "DONE", displayTimeout)
+end
+
+function toggleProgrammingMode(fileExtension)
+	if getTks() - lastProgButtonPress < progDoubleClickTime then
+		if progActive then
+			endProgramming(fileExtension)
+		else
+			startProgramming()
+		end
+	else
+		lastProgButtonPress = getTks()
+	end
+end
+
+function loadEventsForTrack(trackId, fileExtension)
+	local fileName = progDataDir .. trackId .. "." .. fileExtension
+	if fileExists(fileName) then
+		return loadProperties(fileName)
+	else
+		return nil
+	end
 end

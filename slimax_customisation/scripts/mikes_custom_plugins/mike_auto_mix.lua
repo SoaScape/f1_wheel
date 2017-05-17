@@ -2,51 +2,23 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 
 autoMixMultifunctionName = "AMIX"
 
-local learnedData = {}
-
-local config =  {}
-config["INTV"] = 2100 -- minTimeBetweenMixChange
-config["LOW "] = 2000 -- learnLowThrottleTimeout
-config["FULL"] = 4000 -- learnFullThrottleTimeout
-config["INC "] = 100  -- The amount to increment when adjusting the timeouts.
-config["DISP"] = false -- Whether to display auto mix changes on the dash
-
-local configIds = {}
-configIds[0] = "INTV"
-configIds[1] = "LOW "
-configIds[2] = "FULL"
-configIds[3] = "INC "
-configIds[4] = "DISP"
-
-local selectedConfig = 0
-
-local displayAutoMixChanges = false
+local autoMixFileExtension = "amix"
+local autoMixLedPattern = 128 -- LED 5, binary 10000000
+local displayMixEvents = false
 local displayTimeout = 1000
 
-local learnFullThrottleStartTicks = 0
-local learnFullThrottleStartDistance = 0
-local learnFullThrottleActive = false
-
-local learnLowThrottleStartTicks = 0
-local learnLowThrottleStartDistance = 0
-local learnLowThrottleActive = false
-
-local lastMixEvent = nil
+local mixEvents = nil
+local lastEvent = -1
 local autoMixSelected = false
-local autoMixReturnMix = nil
-
 local richModePreviouslyDisabled = false
 
-local autoMixLedPattern = 128 -- LED 5, binary 10000000
-local autoMixEventActiveBlinkTime = 400
+local progMix;
 
 function resetAutoMixData()
-	learnedData = {}
-	learnFullThrottleActive = false
-	learnLowThrottleActive = false
+	mixEvents = nil
 	autoMixSelected = false
 	richModePreviouslyDisabled = false
-	lastMixEvent = nil
+	lastEvent = -1
 	autoMixActiveType = nil
 end
 
@@ -54,8 +26,12 @@ local function toggleAutoMixSelected()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		autoMixSelected = not(autoMixSelected)
 		if autoMixSelected then
-			autoMixOn()
-			display(autoMixMultifunctionName, "ACTV", displayTimeout)
+			if autoMixOn() then
+				display(autoMixMultifunctionName, "ACTV", displayTimeout)
+			else
+				autoMixSelected = false
+				display(autoMixMultifunctionName, " ERR", displayTimeout)
+			end
 		else
 			autoMixOff()
 			display(autoMixMultifunctionName, " OFF", displayTimeout)
@@ -69,219 +45,108 @@ function isAutoMixActive()
 	return autoMixSelected
 end
 
+local function loadMixEventsForTrack(trackId)
+	mixEvents = loadEventsForTrack(trackId, autoMixFileExtension)
+	lastEvent = -1
+	if mixEvents ~= nil then
+		return true
+	end
+end
+
 function autoMixOn()
-	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) and loadMixEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
 		autoMixSelected = true
 		richModePreviouslyDisabled = false
 		activatePermanentLed(autoMixLedPattern, 0, false)
+		return true
 	end
+	return false
 end
 
 function autoMixOff()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+		mixEvents = nil
 		autoMixSelected = false
 		autoMixActiveType = nil
 		deactivatePermanentLed(autoMixLedPattern)
-		deactivateBlinkingLed(autoMixLedPattern)
 	end	
 end
 
-local function displaySelectedConfig()
-	local setting = config[configIds[selectedConfig]]
-	if configIds[selectedConfig] == "DISP" then
-		if setting then
-			setting = "  ON"
-		else
-			setting = " OFF"
-		end
+local function storeMixEvent(mix)
+	if(mSessionEnter == 1 and not(m_is_sim_idle)) then
+		local distStr = tostring(getLapDistance())
+		local mixStr = fuelMultiFunction["modes"][mix]
+		progEvents[distStr] = mixStr
+		display(distStr, mixStr, displayTimeout)
 	end
-	display(configIds[selectedConfig], setting, displayTimeout)
 end
 
 function processAutoMixButtonEvent(button)
 	if autoMixEnabled then
 		if button == confirmButton then
-			toggleAutoMixSelected()
-		elseif configIds[selectedConfig] == "DISP" and (button == upEncoder or button == downEncoder) then
-			config[configIds[selectedConfig]] = not(config[configIds[selectedConfig]])
-			displaySelectedConfig()
-		elseif button == upButton then
-			if selectedConfig < tablelength(configIds) - 1 then
-				selectedConfig = selectedConfig + 1
+			if progActive then
+				storeMixEvent(progMix)
 			else
-				selectedConfig = 0
+				toggleAutoMixSelected()
 			end
-			displaySelectedConfig()
-		elseif button == downButton then
-			if selectedConfig == 0 then
-				selectedConfig = tablelength(configIds) - 1
-			else
-				selectedConfig = selectedConfig - 1
+		elseif button == upButton or button == upEncoder then
+			if progActive then
+				if progMix < fuelMultiFunction["max"] then
+					progMix = progMix + 1
+				end
+				displayProgMix(progMix)
 			end
-			displaySelectedConfig()
-		elseif button == upEncoder then
-			local inc = config["INC "]
-			if configIds[selectedConfig] == "INC " then
-				inc = 100
+		elseif button == downButton or button == downEncoder then
+			if progActive then
+				if progMix > fuelMultiFunction["min"] then
+					progMix = progMix - 1
+				end
+				displayProgMix(progMix)
 			end
-			config[configIds[selectedConfig]] = config[configIds[selectedConfig]] + inc
-			display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
-		elseif button == downEncoder then
-			local inc = config["INC "]
-			if configIds[selectedConfig] == "INC " then
-				inc = 100
+		elseif button == progButton then
+			if autoDiffActive or (mSessionEnter ~= 1 or m_is_sim_idle) then
+				display("PROG", "UNAV", displayTimeout)
+				return
 			end
-			
-			if config[configIds[selectedConfig]] > inc then
-				config[configIds[selectedConfig]] = config[configIds[selectedConfig]] - inc
-			end
-			display(configIds[selectedConfig], config[configIds[selectedConfig]], displayTimeout)
+			toggleProgrammingMode(autoMixFileExtension)
+			progMix = fuelMultiFunction["defaultUpDnMode"]
 		end
-	end
-end
-
-local function recentEvent(startTicks)
-	if lastMixEvent ~= nil and lastMixEvent["endTicks"] ~= nil and lastMixEvent["endTicks"] + config["INTV"] > startTicks then
-		return true
-	else
-		return false
-	end	
-end
-
-local function learnTrack()	
-	local throttle = GetCarInfo("throttle")
-	local yellow = GetContextInfo("yellow_flag")
-	if GetInPitsState() > 1 or yellow then
-		learnFullThrottleActive = false
-		learnLowThrottleActive = false
-		return
-	end
-
-	if learnFullThrottleActive then
-		if throttle < 1 then
-			learnFullThrottleActive = false
-			if highLearnt then
-				lastMixEvent["endTicks"] = getTks()
-			end
-		elseif (getTks() - learnFullThrottleStartTicks) >= config["FULL"] and GetCarInfo("speed") > 100 and not (highLearnt) then							
-			if recentEvent(learnFullThrottleStartTicks) then
-				lastMixEvent["returnMix"] = fuelMultiFunction["max"]
-				lastMixEvent = nil
-				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], displayTimeout)
-			else				
-				learnedData[learnFullThrottleStartDistance] = {}
-				learnedData[learnFullThrottleStartDistance]["mix"] = fuelMultiFunction["max"]
-				learnedData[learnFullThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
-				lastMixEvent = learnedData[learnFullThrottleStartDistance]
-				highLearnt = true
-				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["max"]], displayTimeout)
-			end			
-		end
-	elseif throttle == 1 then
-		learnFullThrottleStartTicks = getTks()
-		learnFullThrottleStartDistance = getLapDistance()
-		learnFullThrottleActive = true
-		highLearnt = false
-	end	
-
-	if learnLowThrottleActive then		
-		if throttle == 1 then
-			learnLowThrottleActive = false
-			if lowLearnt then
-				lastMixEvent["endTicks"] = getTks()
-			end
-		elseif (getTks() - learnLowThrottleStartTicks) >= config["LOW "] and not (lowLearnt) then			
-			if recentEvent(learnLowThrottleStartTicks) then
-				lastMixEvent["returnMix"] = fuelMultiFunction["min"]
-				lastMixEvent = nil
-				--display("ZMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], displayTimeout)				
-			else				
-				learnedData[learnLowThrottleStartDistance] = {}
-				learnedData[learnLowThrottleStartDistance]["mix"] = fuelMultiFunction["min"]
-				learnedData[learnLowThrottleStartDistance]["returnMix"] = fuelMultiFunction["defaultUpDnMode"]
-				lastMixEvent = learnedData[learnLowThrottleStartDistance]			
-				lowLearnt = true
-				--display("AMIX", fuelMultiFunction["modes"][fuelMultiFunction["min"]], displayTimeout)
-			end
-		end
-	elseif throttle < 1 then
-		learnLowThrottleStartTicks = getTks()
-		learnLowThrottleStartDistance = getLapDistance()
-		learnLowThrottleActive = true
-		lowLearnt = false
 	end
 end
 
 function autoMixRegularProcessing()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
-		learnTrack()
-		
 		local fuelTarget = getAdjustedFuelTarget()
 		if fuelTarget == nil then
 			fuelTarget = 1
 		end
 		
 		if autoMixSelected then
-			if autoMixActiveType == nil then -- Automix not currently set, check if we can set it
-				activeAutoMixData = learnedData[getLapDistance()]
-				if activeAutoMixData ~= nil then
-					local autoMix = activeAutoMixData["mix"]	
-					autoMixReturnMix = activeAutoMixData["returnMix"]
-					
-					if fuelTarget < 0 then
-						if autoMix == fuelMultiFunction["max"] then
-							return -- don't process a rich mix if we're below target
-						elseif autoMixReturnMix == fuelMultiFunction["max"] then
-							autoMixReturnMix = fuelMultiFunction["defaultUpDnMode"]
-						end
-						
-						if not(richModePreviouslyDisabled) then
-							display("RICH", "DISB", displayTimeout)
-							richModePreviouslyDisabled = true
-						end						
-					else
-						richModePreviouslyDisabled = false
-					end
-					
-					local multiFunctionBak = currentMultifunction
-					currentMultifunction = fuelMultiFunction
-					currentMultifunction["currentUpDnMode"] = autoMix
-					confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMix], getButtonMap(currentMultifunction), config["DISP"])
-					currentMultifunction = multiFunctionBak
+			local dist = getLapDistance()
+			if mixEvents[dist] ~= nil then
+				local autoMix = getKeyForValue(fuelMultiFunction["modes"], mixEvents[dist])
+				if fuelTarget < 0 then
 					if autoMix == fuelMultiFunction["max"] then
-						autoMixActiveType = "max"
-					else
-						autoMixActiveType = "min"
+						return -- don't process a rich mix if we're below target
+					elseif autoMixReturnMix == fuelMultiFunction["max"] then
+						autoMixReturnMix = fuelMultiFunction["defaultUpDnMode"]
 					end
-					deactivatePermanentLed(autoMixLedPattern)
-					activateBlinkingLed(autoMixLedPattern, autoMixEventActiveBlinkTime, 0, false)
+					
+					if not(richModePreviouslyDisabled) then
+						display("RICH", "DISB", displayTimeout)
+						richModePreviouslyDisabled = true
+					end						
+				elseif richModePreviouslyDisabled then
+					display("RICH", "ENBL", displayTimeout)
+					richModePreviouslyDisabled = false
 				end
-			elseif autoMixActiveType ~= nil then
-				local throttle = GetCarInfo("throttle")
-				if autoMixActiveType == "max" then
-					if throttle < 1 then
-						autoMixActiveType = nil
-						local multiFunctionBak = currentMultifunction
-						currentMultifunction = fuelMultiFunction
-						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
-						currentMultifunction = multiFunctionBak
-						deactivateBlinkingLed(autoMixLedPattern)
-						activatePermanentLed(autoMixLedPattern, 0, false)
-					end
-				else
-					if throttle == 1 then
-						autoMixActiveType = nil
-						local multiFunctionBak = currentMultifunction
-						currentMultifunction = fuelMultiFunction
-						currentMultifunction["currentUpDnMode"] = autoMixReturnMix
-						confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMixReturnMix], getButtonMap(currentMultifunction), config["DISP"])
-						currentMultifunction = multiFunctionBak			
-						deactivateBlinkingLed(autoMixLedPattern)
-						activatePermanentLed(autoMixLedPattern, 0, false)
-					end
-				end				
-			end
+				
+				local multiFunctionBak = currentMultifunction
+				currentMultifunction = fuelMultiFunction
+				currentMultifunction["currentUpDnMode"] = autoMix
+				confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMix], getButtonMap(currentMultifunction), displayMixEvents)
+				currentMultifunction = multiFunctionBak
+			end			
 		end
 	end
 end

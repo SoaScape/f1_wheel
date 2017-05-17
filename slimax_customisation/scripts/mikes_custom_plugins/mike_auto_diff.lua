@@ -1,22 +1,15 @@
 require "scripts/mikes_custom_plugins/mike_led_utils"
 
 autoDiffMultifunctionName = "ADIF"
-local progBlinkLedPatterns = {}
-progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
-progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5
-local autoDiffProgBlinkLedId = "ADIFPROG"
-local progButton = 3
+
 local displayTimeout = 500
-local progDoubleClickTime = 500
 local progInc = 5
+local displayDiffEvents = false
 
 local autoDiffActive = false
-local progActive = false
 local lastEvent = -1
-local diffMapDir = "./diff-maps/"
 local diffEvents = nil
 
-local lastProgButtonPress = 0
 local progOffset = 0
 
 local tyres = {}
@@ -41,25 +34,17 @@ baseDiffs["HARD"] = 60
 baseDiffs["INTR"] = 55
 baseDiffs["WETS"] = 50
 
-local config =  {}
-config["DISP"] = false
-
 local function loadDiffEventsForTrack(trackId)
-	local fileName = diffMapDir .. trackId .. ".diff"
-	if fileExists(fileName) then
-		diffEvents = loadProperties(fileName)
-		lastEvent = -1
+	diffEvents = loadEventsForTrack(trackId, autoMixFileExtension)
+	lastEvent = -1
+	if diffEvents ~= nil then
 		return true
-	else
-		return false
 	end
 end
 
 function resetAutoDiff()
 	autoDiffActive = false
-	progActive = false
 	diffEvents = nil
-	lastProgButtonPress = 0
 	progOffset = 0
 	lastEvent = -1
 end
@@ -67,26 +52,9 @@ end
 local function storeDiffEvent(offset)
 	if(mSessionEnter == 1 and not(m_is_sim_idle)) then
 		local distStr = tostring(getLapDistance())
-		diffEvents[distStr] = tostring(offset)
+		progEvents[distStr] = tostring(offset)
 		display(distStr, tostring(offset), displayTimeout)
 	end
-end
-
-local function startDiffProgramming()
-	diffEvents = {}
-	activateAlternateBlinkingLeds(autoDiffProgBlinkLedId, progBlinkLedPatterns, nil, false, 0)
-	progActive = true
-	display("PROG", "STRT", displayTimeout)
-end
-
-local function endDiffProgramming()
-	local propertyText = buildPropertyStringFromTable(diffEvents, true)
-	local fileName = diffMapDir .. trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]] .. ".diff"
-	saveTextToFile(propertyText, fileName)
-	diffEvents = nil
-	progActive = false
-	deactivateAlternateBlinkingLeds(autoDiffProgBlinkLedId)
-	display("PROG", "DONE", displayTimeout)
 end
 
 local function displayProgOffset(offset)
@@ -141,15 +109,7 @@ function processAutoDiffButtonEvent(button)
 				display("PROG", "UNAV", displayTimeout)
 				return
 			end
-			if getTks() - lastProgButtonPress < progDoubleClickTime then
-				if progActive then
-					endDiffProgramming()
-				else
-					startDiffProgramming()
-				end
-			else
-				lastProgButtonPress = getTks()
-			end			
+			toggleProgrammingMode("diff")
 		end
 	end
 end
@@ -167,7 +127,7 @@ local function setDifferential(diffOffset)
 		end
 	end
 	diffMultiFunction["currentUpDnMode"] = key
-	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction), config["DISP"])
+	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction), displayDiffEvents)
 	--print("Diff: " .. diff .. "%" .. "(key: " .. key .. ", tyre: " ..  tyres[currentTyre] .. ", base: " .. baseDiffs[tyres[currentTyre]])
 end
 
