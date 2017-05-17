@@ -53,19 +53,19 @@ local function storeDiffEvent(offset)
 	if(mSessionEnter == 1 and not(m_is_sim_idle)) then
 		local distStr = tostring(getLapDistance())
 		progEvents[distStr] = tostring(offset)
-		display(distStr, tostring(offset), displayTimeout)
+		display(distStr, tostring(offset), progDisplayTimeout)
 	end
 end
 
 local function displayProgOffset(offset)
 	local offsetStr = string.format("%3d", offset)	
-	display("PROG", offsetStr, displayTimeout)
+	display("PROG", offsetStr, progDisplayTimeout)
 end
 
 function processAutoDiffButtonEvent(button)
 	if autoDiffEnabled then
 		if button == confirmButton then
-			if progActive then
+			if inProgrammingMode() then
 				storeDiffEvent(progOffset)
 			else
 				if autoDiffActive then
@@ -81,7 +81,7 @@ function processAutoDiffButtonEvent(button)
 				end
 			end
 		elseif button == upButton or button == upEncoder then
-			if progActive then
+			if inProgrammingMode() then
 				progOffset = progOffset + progInc
 				displayProgOffset(progOffset)
 			else
@@ -93,7 +93,7 @@ function processAutoDiffButtonEvent(button)
 				display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
 			end
 		elseif button == downButton or button == downEncoder then
-			if progActive then
+			if inProgrammingMode() then
 				progOffset = progOffset - progInc
 				displayProgOffset(progOffset)
 			else

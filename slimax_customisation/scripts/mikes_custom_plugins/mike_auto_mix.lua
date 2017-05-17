@@ -77,27 +77,31 @@ local function storeMixEvent(mix)
 		local distStr = tostring(getLapDistance())
 		local mixStr = fuelMultiFunction["modes"][mix]
 		progEvents[distStr] = mixStr
-		display(distStr, mixStr, displayTimeout)
+		display(distStr, mixStr, progDisplayTimeout)
 	end
+end
+
+local function displayProgMix(mix)	
+	display("PROG", fuelMultiFunction["modes"][mix], progDisplayTimeout)
 end
 
 function processAutoMixButtonEvent(button)
 	if autoMixEnabled then
 		if button == confirmButton then
-			if progActive then
+			if inProgrammingMode() then
 				storeMixEvent(progMix)
 			else
 				toggleAutoMixSelected()
 			end
 		elseif button == upButton or button == upEncoder then
-			if progActive then
+			if inProgrammingMode() then
 				if progMix < fuelMultiFunction["max"] then
 					progMix = progMix + 1
 				end
 				displayProgMix(progMix)
 			end
 		elseif button == downButton or button == downEncoder then
-			if progActive then
+			if inProgrammingMode() then
 				if progMix > fuelMultiFunction["min"] then
 					progMix = progMix - 1
 				end

@@ -10,6 +10,7 @@ downEncoder = 24
 buttonReleaseValue = 0
 
 confirmDelay = 1000
+progDisplayTimeout = 500
 
 local progBlinkLedPatterns = {}
 progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
@@ -260,7 +261,7 @@ function startProgramming()
 	progEvents = {}
 	activateAlternateBlinkingLeds(progBlinkLedId, progBlinkLedPatterns, nil, false, 0)
 	progActive = true
-	display("PROG", "STRT", displayTimeout)
+	display("PROG", "STRT", progDisplayTimeout)
 end
 
 function endProgramming(fileExtension)
@@ -270,7 +271,7 @@ function endProgramming(fileExtension)
 	progEvents = nil
 	progActive = false
 	deactivateAlternateBlinkingLeds(progBlinkLedId)
-	display("PROG", "DONE", displayTimeout)
+	display("PROG", "DONE", progDisplayTimeout)
 end
 
 function toggleProgrammingMode(fileExtension)
@@ -292,4 +293,8 @@ function loadEventsForTrack(trackId, fileExtension)
 	else
 		return nil
 	end
+end
+
+function inProgrammingMode()
+	return progActive
 end
