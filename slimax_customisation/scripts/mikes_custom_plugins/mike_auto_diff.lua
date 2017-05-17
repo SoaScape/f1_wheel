@@ -120,7 +120,7 @@ end
 
 local function setDifferential(diffOffset)
 	local diff = baseDiff + diffOffset
-	local key = getKeyForValue(diffMultiFunction["modes"], tostring(diff))
+	local key = getKeyForValue(diffMultiFunction["modes"], diff)
 	
 	if key == nil then
 		if diff > 100 then
