@@ -1,6 +1,7 @@
 require "scripts/mikes_custom_plugins/mike_led_utils"
 
 autoDiffMultifunctionName = "ADIF"
+local autoDiffFileExtension = "diff"
 
 local displayTimeout = 500
 local progInc = 5
@@ -35,7 +36,7 @@ baseDiffs["INTR"] = 55
 baseDiffs["WETS"] = 50
 
 local function loadDiffEventsForTrack(trackId)
-	diffEvents = loadEventsForTrack(trackId, autoMixFileExtension)
+	diffEvents = loadEventsForTrack(trackId, autoDiffFileExtension)
 	lastEvent = -1
 	if diffEvents ~= nil then
 		return true
