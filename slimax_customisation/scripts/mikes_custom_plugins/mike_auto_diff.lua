@@ -4,7 +4,8 @@ autoDiffMultifunctionName = "ADIF"
 local autoDiffFileExtension = "diff"
 
 local displayTimeout = 500
-local progInc = 5
+local diffInc = 5
+local additionalButtonInc = 5
 local displayDiffEvents = false
 
 local autoDiffActive = false
@@ -12,28 +13,20 @@ local lastEvent = -1
 local diffEvents = nil
 
 local progOffset = 0
+local initialised = false
 
-local tyres = {}
-tyres[0] = "WETS"
-tyres[1] = "INTR"
-tyres[2] = "HARD"
-tyres[3] = "MEDM"
-tyres[4] = "SOFT"
-tyres[5] = "SUPR"
-tyres[6] = "ULTR"
+local minDiff = nil
+local maxDiff = nil
+local baseDiff = nil
 
-local minTyre = 0
-local maxTyre = 6
-local currentTyre = 5
-
-local baseDiffs = {}
-baseDiffs["ULTR"] = 95
-baseDiffs["SUPR"] = 90
-baseDiffs["SOFT"] = 80
-baseDiffs["MEDM"] = 70
-baseDiffs["HARD"] = 60
-baseDiffs["INTR"] = 55
-baseDiffs["WETS"] = 50
+local function init()
+	if not(initialised) then
+		minDiff = diffMultiFunction["modes"][diffMultiFunction["min"]]
+		maxDiff = diffMultiFunction["modes"][diffMultiFunction["max"]]
+		baseDiff = diffMultiFunction["modes"][diffMultiFunction["defaultUpDnMode"]]
+		initialised = true
+	end
+end
 
 local function loadDiffEventsForTrack(trackId)
 	diffEvents = loadEventsForTrack(trackId, autoDiffFileExtension)
@@ -82,28 +75,38 @@ function processAutoDiffButtonEvent(button)
 				end
 			end
 		elseif button == upButton or button == upEncoder then
+			local inc = diffInc
+			if button == upButton then
+				inc = inc + additionalButtonInc
+			end
+			
 			if inProgrammingMode() then
-				progOffset = progOffset + progInc
+				progOffset = progOffset + inc
 				displayProgOffset(progOffset)
 			else
-				if currentTyre < maxTyre then
-					currentTyre = currentTyre + 1
+				if baseDiff < maxDiff then
+					baseDiff = baseDiff + inc
 				else
-					currentTyre = minTyre
+					baseDiff = minDiff
 				end
-				display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
+				display(autoDiffMultifunctionName, tostring(baseDiff), displayTimeout)
 			end
 		elseif button == downButton or button == downEncoder then
+			local inc = diffInc
+			if button == downButton then
+				inc = inc + additionalButtonInc
+			end
+			
 			if inProgrammingMode() then
-				progOffset = progOffset - progInc
+				progOffset = progOffset - inc
 				displayProgOffset(progOffset)
 			else
-				if currentTyre > minTyre then
-					currentTyre = currentTyre - 1
+				if baseDiff > minDiff then
+					baseDiff = baseDiff - inc
 				else
-					currentTyre = maxTyre
+					baseDiff = maxDiff
 				end
-				display(autoDiffMultifunctionName, tyres[currentTyre], displayTimeout)
+				display(autoDiffMultifunctionName, tostring(baseDiff), displayTimeout)
 			end
 		elseif button == progButton then
 			if autoDiffActive or (mSessionEnter ~= 1 or m_is_sim_idle) then
@@ -116,9 +119,9 @@ function processAutoDiffButtonEvent(button)
 end
 
 local function setDifferential(diffOffset)
-	local diff = baseDiffs[tyres[currentTyre]] + diffOffset
+	local diff = baseDiff + diffOffset
 
-	local key = getKeyForValue(diffMultiFunction["modes"], diff .. "%")
+	local key = getKeyForValue(diffMultiFunction["modes"], diff)
 	
 	if key == nil then
 		if diff > 100 then
@@ -133,6 +136,7 @@ local function setDifferential(diffOffset)
 end
 
 function autoDiffRegularProcessing()
+	init()
 	if autoDiffActive and mSessionEnter == 1 and not(m_is_sim_idle) then
 		local distance = getLapDistance()
 		if diffEvents[tostring(distance)] ~= nil and lastEvent ~= distance then
