@@ -80,7 +80,7 @@ local function startDiffProgramming()
 end
 
 local function endDiffProgramming()
-	local propertyText = buildPropertyStringFromTable(diffEvents)
+	local propertyText = buildPropertyStringFromTable(diffEvents, true)
 	local fileName = diffMapDir .. trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]] .. ".diff"
 	saveTextToFile(propertyText, fileName)
 	diffEvents = nil

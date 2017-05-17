@@ -223,10 +223,21 @@ function getKeyForValue(tableToSearch, value)
 	return nil
 end
 
-function buildPropertyStringFromTable(tabl)
-	local text = ""
-	for key, val in pairs(tabl) do
-		text = text .. key .. "=" .. val .. "\n"
+function buildPropertyStringFromTable(tabl, numericKeySort)
+	local text = ""	
+	if numericKeySort then
+		local tkeys = {}
+		for key in pairs(tabl) do
+			table.insert(tkeys, key)
+		end		
+		table.sort(tkeys)
+		for _, key in ipairs(tkeys) do
+			text = text .. key .. "=" .. tabl[key] .. "\n"
+		end
+	else
+		for key, val in pairs(tabl) do
+			text = text .. key .. "=" .. val .. "\n"
+		end
 	end
 	return text
 end
