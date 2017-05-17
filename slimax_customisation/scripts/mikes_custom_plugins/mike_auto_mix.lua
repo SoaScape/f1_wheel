@@ -130,21 +130,18 @@ function autoMixRegularProcessing()
 			if mixEvents[dist] ~= nil then
 				local autoMix = getKeyForValue(fuelMultiFunction["modes"], mixEvents[dist])
 				if fuelTarget < 0 then
-					if autoMix == fuelMultiFunction["max"] then
-						return -- don't process a rich mix if we're below target
-					elseif autoMixReturnMix == fuelMultiFunction["max"] then
-						autoMixReturnMix = fuelMultiFunction["defaultUpDnMode"]
+					if autoMix > fuelMultiFunction["defaultUpDnMode"] then
+						autoMix = fuelMultiFunction["defaultUpDnMode"]
+						if not(richModePreviouslyDisabled) then
+							richModePreviouslyDisabled = true
+							display("RICH", "DISB", displayTimeout)							
+						end
 					end
-					
-					if not(richModePreviouslyDisabled) then
-						display("RICH", "DISB", displayTimeout)
-						richModePreviouslyDisabled = true
-					end						
-				elseif richModePreviouslyDisabled then
+				elseif richModePreviouslyDisabled and autoMix > fuelMultiFunction["defaultUpDnMode"] then
 					display("RICH", "ENBL", displayTimeout)
 					richModePreviouslyDisabled = false
 				end
-				
+
 				local multiFunctionBak = currentMultifunction
 				currentMultifunction = fuelMultiFunction
 				currentMultifunction["currentUpDnMode"] = autoMix
