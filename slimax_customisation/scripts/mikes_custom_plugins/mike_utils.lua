@@ -92,7 +92,7 @@ end
 function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	local startTicks = getTks()
 	if mSessionEnter == 1 and not(m_is_sim_idle) and not(keyQueueActive) then
-		if currentMultifunction["name"] == fuelMultiFunction["name"] then
+		if currentMultifunction["name"] ~= nil and currentMultifunction["name"] == fuelMultiFunction["name"] then
 			nextActiveFuelMix = currentMultifunction["currentUpDnMode"]
 		end
 		if buttonMap ~= nil then
