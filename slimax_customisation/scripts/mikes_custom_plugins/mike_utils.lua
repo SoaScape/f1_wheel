@@ -17,7 +17,7 @@ progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
 progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5
 local progBlinkLedId = "PROG"
 local progDoubleClickTime = 500
-local progDataDir = "./diff-maps/"
+local progDataDir = "./auto-cfg/"
 
 local customDisplayActive = false
 local customDisplayTicksTimeout = 0
