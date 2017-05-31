@@ -176,7 +176,9 @@ function deactivateAlternateBlinkingLeds(id)
 end
 
 function resetLeds()
-	activeBlinkingLeds = {}
-	activeAlternateBlinkingLeds = {}
-	activePermanentLeds = {}
+	if mSessionEnter ~= 1 and m_is_sim_idle then
+		activeBlinkingLeds = {}
+		activeAlternateBlinkingLeds = {}
+		activePermanentLeds = {}
+	end
 end
