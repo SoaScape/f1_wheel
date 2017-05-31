@@ -19,7 +19,6 @@ function resetAutoMixData()
 	autoMixSelected = false
 	richModePreviouslyDisabled = false
 	lastEvent = -1
-	autoMixActiveType = nil
 end
 
 local function toggleAutoMixSelected()
@@ -67,7 +66,6 @@ function autoMixOff()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		mixEvents = nil
 		autoMixSelected = false
-		autoMixActiveType = nil
 		deactivatePermanentLed(autoMixLedPattern)
 	end	
 end
