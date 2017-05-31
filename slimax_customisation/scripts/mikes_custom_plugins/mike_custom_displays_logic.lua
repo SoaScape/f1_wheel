@@ -2,7 +2,6 @@
 local fuelAtStart = 0
 local lowFuelLedPattern = 64
 local lowFuelLedBlinkDelay = 500
-local startFuelStoredLedPattern = 248
 local fuelResetDisplayTimeout = 1000
 
 local accurateFuelLapCalculated = false

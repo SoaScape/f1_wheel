@@ -206,7 +206,7 @@ function toggleOvertakeMode(showDisplay)
 	end
 end
 
-function setDefaultModes()
+local function setDefaultModes()
 	for key, value in pairs(multifunctionMap) do
 		if value["noReset"] == nil or not (value["noReset"]) then
 			if value["defaultUpDnMode"] ~= nil then

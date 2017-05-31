@@ -107,7 +107,6 @@ function getMfdMenuButtons(currentMultifunction)
 end
 
 function performRaceStart()
-	setDefaultModes()	
 	toggleOvertakeMode(false)
 end
 
