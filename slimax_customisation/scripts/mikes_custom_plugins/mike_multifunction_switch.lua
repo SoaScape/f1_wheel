@@ -20,6 +20,35 @@ local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
 local autoMixActiveBeforeOvertakeButton = false
 
+local function performReset()
+	for key, value in pairs(multifunctionMap) do
+		if value["noReset"] == nil or not (value["noReset"]) then
+			if value["defaultUpDnMode"] ~= nil then
+				value["currentUpDnMode"] = value["defaultUpDnMode"]
+			else
+				value["currentUpDnMode"] = nil
+			end
+			value["currentPosition"] = nil
+		end
+	end
+
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
+		-- If in a session, only reset the multifunction up/down positions.
+		-- Give the driver a visual cue that this has been done.
+		activateBlinkingLed(resetLedPattern, 45, 100, false)
+		display(currentMultifunction["name"], "DONE", selectDelay)
+	else
+		-- Out of a session, do a full reset with no visual cue, as driver
+		-- will leave in reset mode when navigating menus etc., potentially
+		-- performing numerous resets.
+		resetAutoMixData()
+		resetFuelData()
+		resetLeds()
+		resetAutoDiff()
+		overtakeEngaged = false
+	end
+end
+
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	if deviceType == myDevice then
 --print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
@@ -145,7 +174,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 
 			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
 				if ctrlPos == confirmButton then
-					setDefaultModes()
+					performReset()
 				end
 			end
 		end
@@ -199,34 +228,5 @@ function toggleOvertakeMode(showDisplay)
 			ospBak = GetContextInfo("osp_factor")
 			SetOSPFactor(GetContextInfo("osp_overdrive"))
 		end
-	end
-end
-
-local function setDefaultModes()
-	for key, value in pairs(multifunctionMap) do
-		if value["noReset"] == nil or not (value["noReset"]) then
-			if value["defaultUpDnMode"] ~= nil then
-				value["currentUpDnMode"] = value["defaultUpDnMode"]
-			else
-				value["currentUpDnMode"] = nil
-			end
-			value["currentPosition"] = nil
-		end
-	end
-
-	if mSessionEnter == 1 and not(m_is_sim_idle) then
-		-- If in a session, only reset the multifunction up/down positions.
-		-- Give the driver a visual cue that this has been done.
-		activateBlinkingLed(resetLedPattern, 45, 100, false)
-		display(currentMultifunction["name"], "DONE", selectDelay)
-	else
-		-- Out of a session, do a full reset with no visual cue, as driver
-		-- will leave in reset mode when navigating menus etc., potentially
-		-- performing numerous resets.
-		resetAutoMixData()
-		resetFuelData()
-		resetLeds()
-		resetAutoDiff()
-		overtakeEngaged = false
 	end
 end
