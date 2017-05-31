@@ -350,15 +350,15 @@ end
 function resetFuelData()
 	if mSessionEnter ~= 1 and m_is_sim_idle then
 		fuelAtStart = nil
-		fuelLaps = {}
-		lastFuelLapCompleted = -1
-		fuelTarget = nil
-		adjustedFuelTarget = nil
-		fuelUsedLastLap = nil
-		currentFuelLap = nil
-		currentDataItemIndex = 1
-		accurateFuelLapCalculated = false
 	end
+	fuelLaps = {}
+	lastFuelLapCompleted = -1
+	fuelTarget = nil
+	adjustedFuelTarget = nil
+	fuelUsedLastLap = nil
+	currentFuelLap = nil
+	currentDataItemIndex = 1
+	accurateFuelLapCalculated = false
 end
 
 function getFuelAtStart()

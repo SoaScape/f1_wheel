@@ -15,12 +15,10 @@ local richModePreviouslyDisabled = false
 local progMix;
 
 function resetAutoMixData()
-	if mSessionEnter ~= 1 and m_is_sim_idle then
-		mixEvents = nil
-		autoMixSelected = false
-		richModePreviouslyDisabled = false
-		lastEvent = -1
-	end
+	mixEvents = nil
+	autoMixSelected = false
+	richModePreviouslyDisabled = false
+	lastEvent = -1
 end
 
 local function toggleAutoMixSelected()

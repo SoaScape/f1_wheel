@@ -37,12 +37,10 @@ local function loadDiffEventsForTrack(trackId)
 end
 
 function resetAutoDiff()
-	if mSessionEnter ~= 1 and m_is_sim_idle then
-		autoDiffActive = false
-		diffEvents = nil
-		progOffset = 0
-		lastEvent = -1
-	end
+	autoDiffActive = false
+	diffEvents = nil
+	progOffset = 0
+	lastEvent = -1
 end
 
 local function storeDiffEvent(offset)
