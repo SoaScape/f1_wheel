@@ -3,6 +3,8 @@ local fuelAtStart = 0
 local lowFuelLedPattern = 64
 local lowFuelLedBlinkDelay = 500
 local fuelResetDisplayTimeout = 1000
+local saveFuelLedBlinkDelay = 500
+local saveFuelLedPattern = 4
 
 local timeAtSaveFuelMessage = 0
 local timeBetweenSaveFuelMessages = 30000 -- 30 seconds
@@ -349,16 +351,20 @@ local function calculateFuelTargets()
 			deactivateBlinkingLed(lowFuelLedPattern)
 		end
 
-		if adjustedFuelTarget < 0
-			and getTks() - timeAtSaveFuelMessage > timeBetweenSaveFuelMessages
-				and getPercentageRaceComplete() >= saveFuelMessageMinRacePercentageComplete then
-			timeAtSaveFuelMessage = getTks()
-			display("SAVE", "FUEL", saveFuelDisplayTime)
+		if adjustedFuelTarget < 0 and getPercentageRaceComplete() >= saveFuelMessageMinRacePercentageComplete then
+			if getTks() - timeAtSaveFuelMessage > timeBetweenSaveFuelMessages then
+				timeAtSaveFuelMessage = getTks()
+				display("SAVE", "FUEL", saveFuelDisplayTime)
+			end
+			activateBlinkingLed(saveFuelLedPattern, saveFuelLedBlinkDelay, 0, false)
+		else
+			deactivateBlinkingLed(saveFuelLedPattern)
 		end
 	else
 		fuelTarget = nil
 		adjustedFuelTarget = nil
 		deactivateBlinkingLed(lowFuelLedPattern)
+		deactivateBlinkingLed(saveFuelLedPattern)
 	end
 end
 
