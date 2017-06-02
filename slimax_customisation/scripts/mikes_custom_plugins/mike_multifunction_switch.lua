@@ -149,6 +149,9 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						end
 						return 1
 					elseif ctrlPos == confirmButton and currentMultifunction["name"] ~= "OSP" then
+						if currentMultifunction["name"] == fuelMultiFunction["name"] then
+							nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
+						end
 						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
 						return 1
 					end
@@ -193,14 +196,12 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 			autoMixActiveBeforeOvertakeButton = false
 			autoMixOn()
 		end
-		
-		local multiFunctionBak = currentMultifunction
-		currentMultifunction = fuelMultiFunction
+
 		if sendButtons then
-			confirmSelection("OVTK", " END", getButtonMap(currentMultifunction), showDisplay)			
+			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
+			confirmSelection("OVTK", " END", getButtonMap(fuelMultiFunction), showDisplay)			
 		end
-		currentMultifunction = multiFunctionBak
-		
+
 		if showDisplay then
 			deactivateAlternateBlinkingLeds("overtake")
 		end
@@ -216,15 +217,14 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 			autoMixOff()
 		end
 
-		local multiFunctionBak = currentMultifunction
-		currentMultifunction = fuelMultiFunction
-		local fuelModeBak = currentMultifunction["currentUpDnMode"]
-		currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
+
+		local fuelModeBak = fuelMultiFunction["currentUpDnMode"]
+		fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
 		if sendButtons then
-			confirmSelection("OVER", "TAKE", getButtonMap(currentMultifunction), showDisplay)
+			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
+			confirmSelection("OVER", "TAKE", getButtonMap(fuelMultiFunction), showDisplay)
 		end
-		currentMultifunction["currentUpDnMode"] = fuelModeBak
-		currentMultifunction = multiFunctionBak
+		fuelMultiFunction["currentUpDnMode"] = fuelModeBak
 		
 		if showDisplay then
 			activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false, 0)

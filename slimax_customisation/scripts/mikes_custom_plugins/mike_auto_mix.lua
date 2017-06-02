@@ -35,6 +35,7 @@ local function toggleAutoMixSelected()
 			autoMixOff()
 			display(autoMixMultifunctionName, " OFF", displayTimeout)
 			fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
+			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 			confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
 		end
 	end
@@ -140,11 +141,9 @@ function autoMixRegularProcessing()
 					richModePreviouslyDisabled = false
 				end
 
-				local multiFunctionBak = currentMultifunction
-				currentMultifunction = fuelMultiFunction
-				currentMultifunction["currentUpDnMode"] = autoMix
-				confirmSelection(autoMixMultifunctionName, currentMultifunction["modes"][autoMix], getButtonMap(currentMultifunction), displayMixEvents)
-				currentMultifunction = multiFunctionBak
+				fuelMultiFunction["currentUpDnMode"] = autoMix
+				nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
+				confirmSelection(autoMixMultifunctionName, fuelMultiFunction["modes"][autoMix], getButtonMap(fuelMultiFunction), displayMixEvents)
 			end			
 		end
 	end
