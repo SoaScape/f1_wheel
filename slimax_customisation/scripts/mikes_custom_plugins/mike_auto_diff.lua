@@ -60,17 +60,6 @@ function isAutoDiffActive()
 	return autoDiffActive
 end
 
-function autoDiffOn()
-	if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
-		autoDiffActive = true
-	end
-end
-
-function autoDiffOff()
-	autoDiffActive = false
-	setDifferential(0)
-end
-
 function processAutoDiffButtonEvent(button)
 	if autoDiffEnabled then
 		if button == confirmButton then
@@ -147,6 +136,17 @@ local function setDifferential(diffOffset)
 	diffMultiFunction["currentUpDnMode"] = key
 	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction), displayDiffEvents)
 	--print("Diff: " .. diff .. " key: " .. key .. ", base: " .. baseDiff .. ", diffOffset: " .. diffOffset)
+end
+
+function autoDiffOff()
+	autoDiffActive = false
+	setDifferential(0)
+end
+
+function autoDiffOn()
+	if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
+		autoDiffActive = true
+	end
 end
 
 function autoDiffRegularProcessing()
