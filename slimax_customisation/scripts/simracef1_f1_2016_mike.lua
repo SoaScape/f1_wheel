@@ -141,50 +141,54 @@ multifunctionMap[7]["name"] = "OSP"
 multifunctionMap[7]["enabled"] = true
 multifunctionMap[7]["upDnSelectable"] = true
 
+multifunctionMap[8] = {}
+multifunctionMap[8]["name"] = "TRCK"
+multifunctionMap[8]["wrap"] = true
+multifunctionMap[8]["enabled"] = true
+multifunctionMap[8]["noReset"] = true
+multifunctionMap[8]["upDnSelectable"] = true
+multifunctionMap[8]["defaultUpDnMode"] = 0
+multifunctionMap[8]["currentUpDnMode"] = multifunctionMap[8]["defaultUpDnMode"]
+multifunctionMap[8]["upDnConfirmRequired"] = true
+multifunctionMap[8]["min"] = 0
+multifunctionMap[8]["max"] = 19
+multifunctionMap[8]["modes"] = {}
+multifunctionMap[8]["modes"][0] = "ASTL"
+multifunctionMap[8]["modes"][1] = "CHIN"
+multifunctionMap[8]["modes"][2] = "BAHR"
+multifunctionMap[8]["modes"][3] = "RUSS"
+multifunctionMap[8]["modes"][4] = "SPAN"
+multifunctionMap[8]["modes"][5] = "MONA"
+multifunctionMap[8]["modes"][6] = "CAND"
+multifunctionMap[8]["modes"][7] = "AZER"
+multifunctionMap[8]["modes"][8] = "AUST"
+multifunctionMap[8]["modes"][9] = "BRIT"
+multifunctionMap[8]["modes"][10] = "HUNG"
+multifunctionMap[8]["modes"][11] = "BELG"
+multifunctionMap[8]["modes"][12] = "ITLY"
+multifunctionMap[8]["modes"][13] = "SING"
+multifunctionMap[8]["modes"][14] = "MALY"
+multifunctionMap[8]["modes"][15] = "JAPN"
+multifunctionMap[8]["modes"][16] = " USA"
+multifunctionMap[8]["modes"][17] = "MEXI"
+multifunctionMap[8]["modes"][18] = "BRAZ"
+multifunctionMap[8]["modes"][19] = " ABU"
+
 multifunctionMap[9] = {}
-multifunctionMap[9]["name"] = "TRCK"
-multifunctionMap[9]["wrap"] = true
-multifunctionMap[9]["enabled"] = true
-multifunctionMap[9]["noReset"] = true
-multifunctionMap[9]["upDnSelectable"] = true
-multifunctionMap[9]["defaultUpDnMode"] = 0
-multifunctionMap[9]["currentUpDnMode"] = multifunctionMap[9]["defaultUpDnMode"]
-multifunctionMap[9]["upDnConfirmRequired"] = true
-multifunctionMap[9]["min"] = 0
-multifunctionMap[9]["max"] = 19
-multifunctionMap[9]["modes"] = {}
-multifunctionMap[9]["modes"][0] = "ASTL"
-multifunctionMap[9]["modes"][1] = "CHIN"
-multifunctionMap[9]["modes"][2] = "BAHR"
-multifunctionMap[9]["modes"][3] = "RUSS"
-multifunctionMap[9]["modes"][4] = "SPAN"
-multifunctionMap[9]["modes"][5] = "MONA"
-multifunctionMap[9]["modes"][6] = "CAND"
-multifunctionMap[9]["modes"][7] = "AZER"
-multifunctionMap[9]["modes"][8] = "AUST"
-multifunctionMap[9]["modes"][9] = "BRIT"
-multifunctionMap[9]["modes"][10] = "HUNG"
-multifunctionMap[9]["modes"][11] = "BELG"
-multifunctionMap[9]["modes"][12] = "ITLY"
-multifunctionMap[9]["modes"][13] = "SING"
-multifunctionMap[9]["modes"][14] = "MALY"
-multifunctionMap[9]["modes"][15] = "JAPN"
-multifunctionMap[9]["modes"][16] = " USA"
-multifunctionMap[9]["modes"][17] = "MEXI"
-multifunctionMap[9]["modes"][18] = "BRAZ"
-multifunctionMap[9]["modes"][19] = " ABU"
+multifunctionMap[9]["name"] = startMultifunctionName
+multifunctionMap[9]["display"] = false
 
 multifunctionMap[10] = {}
-multifunctionMap[10]["name"] = autoDiffMultifunctionName
-multifunctionMap[10]["enabled"] = true
+multifunctionMap[10]["name"] = safetyCarMultifunctionName
+multifunctionMap[10]["display"] = false
 
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = autoMixMultifunctionName
 multifunctionMap[11]["enabled"] = true
 
 multifunctionMap[12] = {}
-multifunctionMap[12]["name"] = startMultifunctionName
-multifunctionMap[12]["display"] = false
+multifunctionMap[12]["name"] = autoDiffMultifunctionName
+multifunctionMap[12]["enabled"] = true
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
@@ -195,6 +199,7 @@ overtakeOspOverdrive = false
 autoMixEnabled = true
 autoDiffEnabled = true
 raceStartModeEnabled = true
+safetyCarModeEnabled = true
 
 function custom_init_Event(scriptfile)
 end
