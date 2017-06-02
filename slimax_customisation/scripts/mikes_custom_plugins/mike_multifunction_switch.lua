@@ -155,9 +155,6 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					processAutoDiffButtonEvent(ctrlPos)
 				elseif currentMultifunction["name"] == autoMixMultifunctionName then
 					processAutoMixButtonEvent(ctrlPos)
-				elseif currentMultifunction["name"] == "DATA" then
-					processFuelDataButtonEvent(ctrlPos)
-				
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
 				elseif ctrlPos == confirmButton then
 					confirmSelection(currentMultifunction["name"], "CONF", getButtonMap(currentMultifunction), true)

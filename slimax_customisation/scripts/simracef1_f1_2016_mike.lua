@@ -141,11 +141,6 @@ multifunctionMap[7]["name"] = "OSP"
 multifunctionMap[7]["enabled"] = true
 multifunctionMap[7]["upDnSelectable"] = true
 
-multifunctionMap[8] = {}
-multifunctionMap[8]["name"] = "DATA"
-multifunctionMap[8]["display"] = true
-multifunctionMap[8]["enabled"] = true
-
 multifunctionMap[9] = {}
 multifunctionMap[9]["name"] = "TRCK"
 multifunctionMap[9]["wrap"] = true
