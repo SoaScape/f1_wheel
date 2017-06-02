@@ -4,6 +4,11 @@ local lowFuelLedPattern = 64
 local lowFuelLedBlinkDelay = 500
 local fuelResetDisplayTimeout = 1000
 
+local timeAtSaveFuelMessage = 0
+local timeBetweenSaveFuelMessages = 30000 -- 30 seconds
+local saveFuelDisplayTime = 1000
+local saveFuelMessageMinRacePercentageComplete = 50 -- % race complete before displaying save fuel messages
+
 local accurateFuelLapCalculated = false
 
 local fuelTarget = nil
@@ -153,6 +158,12 @@ function getLapsRemaining()
 	
 	lapsRemaining = lapsRemaining + percentLapRemaining
 	return lapsRemaining
+end
+
+local function getPercentageRaceComplete()
+	local lapsCompleted = GetContextInfo("laps") + getPercentageLapComplete()
+	local totalLaps = GetContextInfo("laps_count")
+	return (lapsCompleted / totalLaps) * 100
 end
 
 function getRemainingLapsInTank(fuelRemaining)
@@ -336,6 +347,13 @@ local function calculateFuelTargets()
 			activateBlinkingLed(lowFuelLedPattern, lowFuelLedBlinkDelay, 0, false)
 		else
 			deactivateBlinkingLed(lowFuelLedPattern)
+		end
+
+		if adjustedFuelTarget < 0
+			and getTks() - timeAtSaveFuelMessage > timeBetweenSaveFuelMessages
+				and getPercentageRaceComplete() >= saveFuelMessageMinRacePercentageComplete then
+			timeAtSaveFuelMessage = getTks()
+			display("SAVE", "FUEL", saveFuelDisplayTime)
 		end
 	else
 		fuelTarget = nil
