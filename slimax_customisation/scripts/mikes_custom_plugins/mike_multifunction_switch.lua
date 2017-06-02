@@ -180,6 +180,10 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	return 2
 end
 
+function isOvertakeActive()
+	return overtakeEngaged
+end
+
 function toggleOvertakeMode(showDisplay)
 	if overtakeEngaged then
 		overtakeEngaged = false
