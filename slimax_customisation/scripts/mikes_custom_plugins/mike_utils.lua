@@ -25,7 +25,6 @@ local customDisplayTicksTimeout = 0
 local keystrokeDelay = 200
 local keyHoldDelay = 30
 
-local keyQueueActive = false
 local keyQueue = {}
 
 local activeFuelMix = nil
@@ -61,7 +60,6 @@ local function processKeyPressQueue()
 --print("DEBUG key: " .. nextKey["key"] .. ", holdDelay, " .. nextKey["holdDelay"] .. ", delay: " .. nextKey["delayTime"])
 		end
 	else
-		keyQueueActive = false
 		if nextActiveFuelMix ~= nil then
 			activeFuelMix = nextActiveFuelMix
 			nextActiveFuelMix = nil
@@ -81,7 +79,6 @@ function utilsRegularProcessing()
 end
 
 local function queueKeyPress(key, holdDelay, delayTime)
-	keyQueueActive = true
 	local keyPress = {}
 	keyPress["key"] = key
 	keyPress["holdDelay"] = holdDelay
@@ -91,7 +88,7 @@ end
 
 function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	local startTicks = getTks()
-	if mSessionEnter == 1 and not(m_is_sim_idle) and not(keyQueueActive) then
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
 		if currentMultifunction["name"] ~= nil and currentMultifunction["name"] == fuelMultiFunction["name"] then
 			nextActiveFuelMix = currentMultifunction["currentUpDnMode"]
 		end
