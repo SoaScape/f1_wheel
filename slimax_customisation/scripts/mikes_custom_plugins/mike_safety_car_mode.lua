@@ -4,6 +4,7 @@ local safetyCarModeActive = false
 local autoMixOnBeforeSafetyCar = false
 local autoDiffOnBeforeSafetyCar = false
 local safetyCarActiveMessageDelay = 10000
+local lastSafetyCarMessageTime = 0
 
 local function activateSafetyCarMode()
 	safetyCarModeActive = true
