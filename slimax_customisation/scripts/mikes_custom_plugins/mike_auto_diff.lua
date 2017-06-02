@@ -56,6 +56,21 @@ local function displayProgOffset(offset)
 	display("PROG", offsetStr, progDisplayTimeout)
 end
 
+function isAutoDiffActive()
+	return autoDiffActive
+end
+
+function autoDiffOn()
+	if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
+		autoDiffActive = true
+	end
+end
+
+function autoDiffOff()
+	autoDiffActive = false
+	setDifferential(0)
+end
+
 function processAutoDiffButtonEvent(button)
 	if autoDiffEnabled then
 		if button == confirmButton then
