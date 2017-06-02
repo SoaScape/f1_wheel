@@ -193,7 +193,7 @@ multifunctionMap[12]["enabled"] = true
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
 diffMultiFunction = multifunctionMap[3]
-trackMultiFunction = multifunctionMap[9]
+trackMultiFunction = multifunctionMap[8]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = false
 autoMixEnabled = true
