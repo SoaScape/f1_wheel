@@ -45,6 +45,7 @@ local function performReset()
 		resetFuelData()
 		resetLeds()
 		resetAutoDiff()
+		resetSafetyCarMode()
 		overtakeEngaged = false
 	end
 end
