@@ -69,12 +69,13 @@ function safetyCarModeRegularProcessing()
 			end
 		else
 			if safetyCarModeEnabled and currentMultifunction ~= nil then
-				if currentMultifunction["name"] == safetyCarMultifunctionName then
-					if currentMultifunction["name"] ~= lastMode then
+				currentMode = currentMultifunction["name"]
+				if currentMode == safetyCarMultifunctionName then
+					if currentMode ~= lastMode then
 						safetyCarModeSelected()
 					end
-				end		
-				lastMode = currentMultifunction["name"]
+				end
+				lastMode = currentMode
 			end
 		end
 	end
