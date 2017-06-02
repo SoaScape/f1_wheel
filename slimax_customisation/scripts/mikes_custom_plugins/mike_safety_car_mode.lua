@@ -3,6 +3,7 @@ local lastMode = ""
 local safetyCarModeActive = false
 local autoMixOnBeforeSafetyCar = false
 local autoDiffOnBeforeSafetyCar = false
+local safetyCarActiveMessageDelay = 10000
 
 local function activateSafetyCarMode()
 	safetyCarModeActive = true
@@ -46,37 +47,35 @@ local function safetyCarEnd()
 end
 
 local function safetyCarModeSelected()
-	local displayDelay = 2000
-	if mSessionEnter == 1 and not(m_is_sim_idle) and GetContextInfo("yellow_flag") then		
-		left = safetyCarMultifunctionName
-		right = " CAR"
+	if GetContextInfo("yellow_flag") then
 		activateSafetyCarMode()
 	else
-		left = safetyCarMultifunctionName
-		right = "UNAV"
 		currentMultifunction = nil
-		displayDelay = mDisplay_Info_Delay
-	end
-	display(left, right, displayDelay)
+		display(safetyCarMultifunctionName, "UNAV", mDisplay_Info_Delay)
+	end	
 end
 
 function safetyCarModeRegularProcessing()
-	if safetyCarModeActive then
-		if mSessionEnter == 1 and not(m_is_sim_idle) and not(GetContextInfo("yellow_flag")) then
-			safetyCarEnd()
-			display("SAFE", " END", 2000)
-		end
-	else
-		if safetyCarModeEnabled and currentMultifunction ~= nil then
-			local inScMode = currentMultifunction["name"] == safetyCarMultifunctionName
-			local modeName = currentMultifunction["name"]
-			
-			if inScMode then
-				if currentMultifunction["name"] ~= lastMode then
-					safetyCarModeSelected()
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
+		if safetyCarModeActive then
+			if GetContextInfo("yellow_flag") then
+				if getTks() - lastSafetyCarMessageTime >= safetyCarActiveMessageDelay then
+					lastSafetyCarMessageTime = getTks()
+					display("SAFE", " CAR", 1000)
 				end
-			end		
-			lastMode = modeName
+			else
+				safetyCarEnd()
+				display("SAFE", " END", 2000)
+			end
+		else
+			if safetyCarModeEnabled and currentMultifunction ~= nil then
+				if currentMultifunction["name"] == safetyCarMultifunctionName then
+					if currentMultifunction["name"] ~= lastMode then
+						safetyCarModeSelected()
+					end
+				end		
+				lastMode = currentMultifunction["name"]
+			end
 		end
 	end
 end
