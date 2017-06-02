@@ -216,6 +216,7 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	local numMixEvents = 0
 	local numStandardMixEvents = 0
 	local numYellow = 0
+	local inPitsDuringLap = false
 	for distance, mixData in pairs(fuelLap.mixdata) do
 		local fuelMode = mixData.mix
 		if fuelMixes[fuelMode] == nil then
@@ -229,6 +230,9 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 		end
 		if mixData.yellow then
 			numYellow = numYellow + 1
+		end
+		if mixData.pits then
+			inPitsDuringLap = true
 		end
 		numMixEvents = numMixEvents + 1
 	end
@@ -250,7 +254,10 @@ local function calculateMixAdjustedFuelLap(fuelLap)
 	fuelLap.accuracy = ((numStandardMixEvents / numMixEvents) * 100) - (yellowFlagLapPrecentage)
 	fuelLap.adjustedFuelUsed = fuelUsedLastLap / fuelOffset			
 	
-	if not (GetContextInfo("yellow_flag")) and yellowFlagLapPrecentage <= maxYellowFlagPercentageForValidFuelLap and fuelUsedLastLap > 0 then
+	if not (GetContextInfo("yellow_flag"))
+		and yellowFlagLapPrecentage <= maxYellowFlagPercentageForValidFuelLap
+			and not(inPitsDuringLap)
+				and fuelUsedLastLap > 0 then
 		fuelLap.fuelUsed = fuelUsedLastLap
 		assessFuelLapData()
 		if accurateFuelLapCalculated then
@@ -288,6 +295,7 @@ local function trackFuelLapData()
 				currentFuelLap.mixdata[distance] = {}
 				currentFuelLap.mixdata[distance].mix = getActiveFuelMix()
 				currentFuelLap.mixdata[distance].yellow = GetContextInfo("yellow_flag")
+				currentFuelLap.mixdata[distance].pits = GetInPitsState() > 1
 			end			
 		end
 	end
