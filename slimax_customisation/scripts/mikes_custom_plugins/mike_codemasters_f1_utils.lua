@@ -107,11 +107,11 @@ function getMfdMenuButtons(currentMultifunction)
 end
 
 function performRaceStart()
-	toggleOvertakeMode(false)
+	toggleOvertakeMode(false, true)
 end
 
 function exitRaceStart()
-	toggleOvertakeMode(false)
+	toggleOvertakeMode(false, true)
 end
 
 customFunctionNamesTable = {}

@@ -8,8 +8,13 @@ local function activateSafetyCarMode()
 	safetyCarModeActive = true
 	
 	if isOvertakeActive() then
-		toggleOvertakeMode(false)
+		toggleOvertakeMode(false, false)
 	end
+	
+	local bak = fuelMultiFunction["currentUpDnMode"]
+	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["min"]
+	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
+	fuelMultiFunction["currentUpDnMode"] = bak
 	
 	autoMixOnBeforeSafetyCar = isAutoMixActive()
 	if autoMixOnBeforeSafetyCar then

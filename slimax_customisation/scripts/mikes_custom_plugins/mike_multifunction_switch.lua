@@ -79,7 +79,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 			  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName
 			   and currentMultifunction["name"] ~= "autoMixMultifunctionName" then
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
-					toggleOvertakeMode(true)
+					toggleOvertakeMode(true, true)
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
@@ -185,7 +185,7 @@ function isOvertakeActive()
 	return overtakeEngaged
 end
 
-function toggleOvertakeMode(showDisplay)
+function toggleOvertakeMode(showDisplay, sendButtons)
 	if overtakeEngaged then
 		overtakeEngaged = false
 		
@@ -195,8 +195,10 @@ function toggleOvertakeMode(showDisplay)
 		end
 		
 		local multiFunctionBak = currentMultifunction
-		currentMultifunction = fuelMultiFunction			
-		confirmSelection("OVTK", " END", getButtonMap(currentMultifunction), showDisplay)			
+		currentMultifunction = fuelMultiFunction
+		if sendButtons then
+			confirmSelection("OVTK", " END", getButtonMap(currentMultifunction), showDisplay)			
+		end
 		currentMultifunction = multiFunctionBak
 		
 		if showDisplay then
@@ -218,7 +220,9 @@ function toggleOvertakeMode(showDisplay)
 		currentMultifunction = fuelMultiFunction
 		local fuelModeBak = currentMultifunction["currentUpDnMode"]
 		currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
-		confirmSelection("OVER", "TAKE", getButtonMap(currentMultifunction), showDisplay)
+		if sendButtons then
+			confirmSelection("OVER", "TAKE", getButtonMap(currentMultifunction), showDisplay)
+		end
 		currentMultifunction["currentUpDnMode"] = fuelModeBak
 		currentMultifunction = multiFunctionBak
 		
