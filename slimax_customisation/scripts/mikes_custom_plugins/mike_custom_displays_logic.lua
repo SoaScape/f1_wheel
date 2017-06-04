@@ -88,7 +88,7 @@ function getLapsRemaining()
 end
 
 local function getPercentageRaceComplete()
-	local lapsCompleted = GetContextInfo("laps") + getPercentageLapComplete()
+	local lapsCompleted = GetContextInfo("laps")
 	local totalLaps = GetContextInfo("laps_count")
 	return (lapsCompleted / totalLaps) * 100
 end
