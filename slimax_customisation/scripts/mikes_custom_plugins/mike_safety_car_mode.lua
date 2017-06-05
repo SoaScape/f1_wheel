@@ -34,14 +34,7 @@ local function safetyCarEnd()
 	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
 	nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
-	
-	if not(isOvertakeActive) then
-		toggleOvertakeMode(false, true)
-	end
-	
-	if autoMixOnBeforeSafetyCar then
-		autoMixOn()
-	end	
+
 	if autoDiffOnBeforeSafetyCar then
 		autoDiffOn()
 	end
