@@ -139,8 +139,10 @@ local function setDifferential(diffOffset)
 end
 
 function autoDiffOff()
-	autoDiffActive = false
-	setDifferential(0)
+	if autoDiffActive then
+		autoDiffActive = false
+		setDifferential(0)
+	end
 end
 
 function autoDiffOn()
