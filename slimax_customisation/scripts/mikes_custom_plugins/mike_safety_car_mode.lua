@@ -35,7 +35,7 @@ local function safetyCarEnd()
 end
 
 local function safetyCarModeSelected()
-	if GetContextInfo("yellow_flag") then
+	if GetContextInfo("yellow_flag") and mSessionEnter == 1 and not(m_is_sim_idle) then
 		activateSafetyCarMode()
 	else
 		currentMultifunction = nil
@@ -43,28 +43,26 @@ local function safetyCarModeSelected()
 	end	
 end
 
-function safetyCarModeRegularProcessing()
-	if mSessionEnter == 1 and not(m_is_sim_idle) then
-		if safetyCarModeActive then
-			if GetContextInfo("yellow_flag") then
-				if getTks() - lastSafetyCarMessageTime >= safetyCarActiveMessageDelay then
-					lastSafetyCarMessageTime = getTks()
-					display("SAFE", " CAR", 1000)
-				end
-			else
-				safetyCarEnd()
-				display("SAFE", " END", 2000)
+function safetyCarModeRegularProcessing()	
+	if safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
+		if GetContextInfo("yellow_flag") then
+			if getTks() - lastSafetyCarMessageTime >= safetyCarActiveMessageDelay then
+				lastSafetyCarMessageTime = getTks()
+				display("SAFE", " CAR", 1000)
 			end
 		else
-			if safetyCarModeEnabled and currentMultifunction ~= nil then
-				currentMode = currentMultifunction["name"]
-				if currentMode == safetyCarMultifunctionName then
-					if currentMode ~= lastMode then
-						safetyCarModeSelected()
-					end
+			safetyCarEnd()
+			display("SAFE", " END", 2000)
+		end
+	else
+		if safetyCarModeEnabled and currentMultifunction ~= nil then
+			currentMode = currentMultifunction["name"]
+			if currentMode == safetyCarMultifunctionName then
+				if currentMode ~= lastMode then
+					safetyCarModeSelected()
 				end
-				lastMode = currentMode
 			end
+			lastMode = currentMode
 		end
 	end
 end
