@@ -65,8 +65,7 @@ end
 
 function autoMixOff()
 	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
-		mixEvents = nil
-		autoMixSelected = false
+		resetAutoMixData()
 		deactivatePermanentLed(autoMixLedPattern)
 	end	
 end

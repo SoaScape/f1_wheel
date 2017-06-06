@@ -140,8 +140,8 @@ end
 
 function autoDiffOff()
 	if autoDiffActive then
-		autoDiffActive = false
 		setDifferential(0)
+		resetAutoDiff()
 	end
 end
 
