@@ -126,7 +126,8 @@ function autoMixRegularProcessing()
 		
 		if autoMixSelected then
 			local dist = tostring(getLapDistance())
-			if mixEvents[dist] ~= nil then
+			if mixEvents[dist] ~= nil and lastEvent ~= dist then
+				lastEvent = dist
 				local autoMix = getKeyForValue(fuelMultiFunction["modes"], mixEvents[dist])
 				if fuelTarget < 0 then
 					if autoMix > fuelMultiFunction["defaultUpDnMode"] then
