@@ -3,6 +3,7 @@ switch = 0
 pushbutton = 1
 progButton = 3
 confirmButton = 14
+secondaryConfirmButton = 2
 upButton = 26
 downButton = 27
 upEncoder = 23

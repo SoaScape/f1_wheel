@@ -148,7 +148,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 							end
 						end
 						return 1
-					elseif ctrlPos == confirmButton and currentMultifunction["name"] ~= "OSP" then
+					elseif (ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle)) and currentMultifunction["name"] ~= "OSP" then
 						if currentMultifunction["name"] == fuelMultiFunction["name"] then
 							nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 						end
@@ -160,7 +160,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				elseif currentMultifunction["name"] == autoMixMultifunctionName then
 					processAutoMixButtonEvent(ctrlPos)
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
-				elseif ctrlPos == confirmButton then
+				elseif ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
 					confirmSelection(currentMultifunction["name"], "CONF", getButtonMap(currentMultifunction), true)
 					return 1
 				end
@@ -174,7 +174,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 				return 1
 
 			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
-				if ctrlPos == confirmButton then
+				if ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
 					performReset()
 				end
 			end

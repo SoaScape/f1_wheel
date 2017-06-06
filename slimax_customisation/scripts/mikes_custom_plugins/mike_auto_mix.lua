@@ -85,7 +85,7 @@ end
 
 function processAutoMixButtonEvent(button)
 	if autoMixEnabled then
-		if button == confirmButton then
+		if button == confirmButton or (button == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
 			if inProgrammingMode() then
 				storeMixEvent(progMix)
 			else
