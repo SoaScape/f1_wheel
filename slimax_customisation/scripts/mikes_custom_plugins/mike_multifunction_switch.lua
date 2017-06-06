@@ -159,6 +159,8 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					processAutoDiffButtonEvent(ctrlPos)
 				elseif currentMultifunction["name"] == autoMixMultifunctionName then
 					processAutoMixButtonEvent(ctrlPos)
+				elseif currentMultifunction["name"] == safetyCarMultifunctionName then
+					processSafetyCarButtonEvent(ctrlPos)
 				-- Multifunction Single Confirm (For non Up-Dn Modes)
 				elseif ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
 					confirmSelection(currentMultifunction["name"], "CONF", getButtonMap(currentMultifunction), true)

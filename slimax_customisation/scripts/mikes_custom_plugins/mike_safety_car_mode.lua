@@ -32,6 +32,7 @@ local function safetyCarEnd()
 	if autoDiffOnBeforeSafetyCar then
 		autoDiffOn()
 	end
+	display("SAFE", " END", 2000)
 end
 
 local function safetyCarModeSelected()
@@ -43,6 +44,12 @@ local function safetyCarModeSelected()
 	end	
 end
 
+function processSafetyCarButtonEvent(button)
+	if (button == confirmButton or button == secondaryConfirmButton) and safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
+		safetyCarEnd()
+	end
+end
+
 function safetyCarModeRegularProcessing()	
 	if safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
 		if GetContextInfo("yellow_flag") then
@@ -52,7 +59,6 @@ function safetyCarModeRegularProcessing()
 			end
 		else
 			safetyCarEnd()
-			display("SAFE", " END", 2000)
 		end
 	else
 		if safetyCarModeEnabled and currentMultifunction ~= nil then
