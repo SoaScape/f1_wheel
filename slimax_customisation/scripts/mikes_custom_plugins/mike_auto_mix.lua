@@ -22,7 +22,7 @@ function resetAutoMixData()
 end
 
 local function toggleAutoMixSelected()
-	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if autoMixEnabled then
 		autoMixSelected = not(autoMixSelected)
 		if autoMixSelected then
 			if autoMixOn() then
@@ -34,9 +34,11 @@ local function toggleAutoMixSelected()
 		else
 			autoMixOff()
 			display(autoMixMultifunctionName, " OFF", displayTimeout)
-			fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
-			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
-			confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
+			if(mSessionEnter == 1 and not(m_is_sim_idle)) then
+				fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
+				nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
+				confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
+			end
 		end
 	end
 end
@@ -54,7 +56,7 @@ local function loadMixEventsForTrack(trackId)
 end
 
 function autoMixOn()
-	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) and loadMixEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
+	if autoMixEnabled and loadMixEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
 		autoMixSelected = true
 		richModePreviouslyDisabled = false
 		activatePermanentLed(autoMixLedPattern, 0, false)
@@ -64,7 +66,7 @@ function autoMixOn()
 end
 
 function autoMixOff()
-	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if autoMixEnabled then
 		resetAutoMixData()
 		deactivatePermanentLed(autoMixLedPattern)
 	end	
