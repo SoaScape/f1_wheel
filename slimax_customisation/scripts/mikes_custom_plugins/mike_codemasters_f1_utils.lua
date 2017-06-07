@@ -50,6 +50,9 @@ local function getSelectRowButtons(chosenRow)
 end
 
 function getMfdMenuButtons(currentMultifunction)
+	if GetInPitsState() > 1 then
+		return nil
+	end
 	-- Trackable up/dn modes. Eg in F1 2016, the quick-menu keeps track of what is currently
 	-- selected, therefore the button maps will need to change on the fly.
 	local index = 0
