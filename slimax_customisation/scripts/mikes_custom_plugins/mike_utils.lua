@@ -89,7 +89,7 @@ end
 
 function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	local startTicks = getTks()
-	if mSessionEnter == 1 and not(m_is_sim_idle) then
+	if mSessionEnter == 1 and not(m_is_sim_idle) and not(GetInPitsState() > 1) then
 		if buttonMap ~= nil then
 --local inspect = require('inspect')
 --print(inspect(buttonMap))
