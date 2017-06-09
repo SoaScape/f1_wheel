@@ -50,15 +50,20 @@ end
 
 local function processKeyPressQueue()
 	if keyQueue ~= nil and keyQueue[1] ~= nil then
-		local nextKey = keyQueue[1]
-		if nextKey["expires"] ~= nil then
-			if getTks() > nextKey["expires"] then
-				table.remove(keyQueue, 1)
-			end
+		if GetInPitsState() > 1 then
+			keyQueue = {}
+			nextActiveFuelMix = nil -- Best assumption here is that the fuel mode didn't get set
 		else
-			SetKeystroke(nextKey["key"], nextKey["holdDelay"], "")
-			nextKey["expires"] = getTks() + nextKey["delayTime"]
---print("DEBUG key: " .. nextKey["key"] .. ", holdDelay, " .. nextKey["holdDelay"] .. ", delay: " .. nextKey["delayTime"])
+			local nextKey = keyQueue[1]
+			if nextKey["expires"] ~= nil then
+				if getTks() > nextKey["expires"] then
+					table.remove(keyQueue, 1)
+				end
+			else
+				SetKeystroke(nextKey["key"], nextKey["holdDelay"], "")
+				nextKey["expires"] = getTks() + nextKey["delayTime"]
+	--print("DEBUG key: " .. nextKey["key"] .. ", holdDelay, " .. nextKey["holdDelay"] .. ", delay: " .. nextKey["delayTime"])
+			end
 		end
 	else
 		if nextActiveFuelMix ~= nil then
