@@ -180,7 +180,7 @@ multifunctionMap[9]["display"] = false
 
 multifunctionMap[10] = {}
 multifunctionMap[10]["name"] = safetyCarMultifunctionName
-multifunctionMap[10]["display"] = false
+multifunctionMap[10]["enabled"] = true
 
 multifunctionMap[11] = {}
 multifunctionMap[11]["name"] = autoMixMultifunctionName

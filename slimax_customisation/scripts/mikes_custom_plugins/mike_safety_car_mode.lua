@@ -45,7 +45,7 @@ local function safetyCarModeSelected()
 end
 
 function processSafetyCarButtonEvent(button)
-	if (button == confirmButton or button == secondaryConfirmButton) and safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if button == confirmButton and safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
 		safetyCarEnd()
 	end
 end
