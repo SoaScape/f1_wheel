@@ -1,8 +1,6 @@
 safetyCarMultifunctionName = "SAFE"
 local lastMode = ""
 local safetyCarModeActive = false
-local autoMixOnBeforeSafetyCar = false
-local autoDiffOnBeforeSafetyCar = false
 local safetyCarActiveMessageDelay = 10000
 local lastSafetyCarMessageTime = 0
 
@@ -16,22 +14,16 @@ local function activateSafetyCarMode()
 	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["min"]
 	nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
-
-	autoDiffOnBeforeSafetyCar = isAutoDiffActive()
 	autoMixOff()
-	autoDiffOff()
+	autoDiffInhibitOn()
 end
 
 local function safetyCarEnd()
 	safetyCarModeActive = false
-	
 	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
 	nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
-
-	if autoDiffOnBeforeSafetyCar then
-		autoDiffOn()
-	end
+	autoDiffInhibitOff()
 	display("SAFE", " END", 2000)
 end
 
@@ -75,7 +67,5 @@ end
 
 function resetSafetyCarMode()
 	safetyCarModeActive = false
-	autoMixOnBeforeSafetyCar = false
-	autoDiffOnBeforeSafetyCar = false
 	lastSafetyCarMessageTime = 0
 end

@@ -14,6 +14,7 @@ local diffEvents = nil
 
 local progOffset = 0
 local initialised = false
+local autoDiffInhibit = false
 
 local minDiff = nil
 local maxDiff = nil
@@ -38,6 +39,7 @@ end
 
 function resetAutoDiff()
 	autoDiffActive = false
+	autoDiffInhibit = false
 	diffEvents = nil
 	progOffset = 0
 	lastEvent = -1
@@ -54,10 +56,6 @@ end
 local function displayProgOffset(offset)
 	local offsetStr = string.format("%3d", offset)	
 	display("PROG", offsetStr, progDisplayTimeout)
-end
-
-function isAutoDiffActive()
-	return autoDiffActive
 end
 
 function processAutoDiffButtonEvent(button)
@@ -138,22 +136,20 @@ local function setDifferential(diffOffset)
 	--print("Diff: " .. diff .. " key: " .. key .. ", base: " .. baseDiff .. ", diffOffset: " .. diffOffset)
 end
 
-function autoDiffOff()
+function autoDiffInhibitOn()
 	if autoDiffActive then
 		setDifferential(0)
-		resetAutoDiff()
 	end
+	autoDiffInhibit = true
 end
 
-function autoDiffOn()
-	if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
-		autoDiffActive = true
-	end
+function autoDiffInhibitOff()
+	autoDiffInhibit = false
 end
 
 function autoDiffRegularProcessing()
 	init()
-	if autoDiffActive and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if not (autoDiffInhibit) and autoDiffActive and mSessionEnter == 1 and not(m_is_sim_idle) then
 		local distance = getLapDistance()
 		if diffEvents[tostring(distance)] ~= nil and lastEvent ~= distance then
 			lastEvent = distance
