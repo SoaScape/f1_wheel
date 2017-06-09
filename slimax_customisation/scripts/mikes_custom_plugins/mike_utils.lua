@@ -158,6 +158,7 @@ end
 
 function resetUtilsData()
 	activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
+	keyQueue = {}
 	nextActiveFuelMix = nil
 	progEvents = nil
 	progActive = false
