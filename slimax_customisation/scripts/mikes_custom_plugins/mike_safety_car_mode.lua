@@ -77,4 +77,5 @@ function resetSafetyCarMode()
 	safetyCarModeActive = false
 	autoMixOnBeforeSafetyCar = false
 	autoDiffOnBeforeSafetyCar = false
+	lastSafetyCarMessageTime = 0
 end
