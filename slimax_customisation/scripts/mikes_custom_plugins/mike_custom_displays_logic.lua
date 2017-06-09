@@ -233,7 +233,7 @@ local function trackFuelLapData()
 				currentFuelLap.mixdata[distance] = {}
 				currentFuelLap.mixdata[distance].mix = getActiveFuelMix()
 				currentFuelLap.mixdata[distance].yellow = GetContextInfo("yellow_flag")
-				currentFuelLap.mixdata[distance].pits = GetInPitsState() > 1
+				currentFuelLap.mixdata[distance].pits = inPits()
 			end			
 		end
 	end

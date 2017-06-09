@@ -48,9 +48,13 @@ function display(leftStr, rightStr, timeout)
 	end
 end
 
+function inPits()
+	return GetInPitsState() > 1
+end
+
 local function processKeyPressQueue()
 	if keyQueue ~= nil and keyQueue[1] ~= nil then
-		if GetInPitsState() > 1 then
+		if inPits() then
 			keyQueue = {}
 			nextActiveFuelMix = nil -- Best assumption here is that the fuel mode didn't get set
 		else
@@ -94,7 +98,7 @@ end
 
 function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	local startTicks = getTks()
-	if mSessionEnter == 1 and not(m_is_sim_idle) and not(GetInPitsState() > 1) then
+	if mSessionEnter == 1 and not(m_is_sim_idle) and not(inPits()) then
 		if buttonMap ~= nil then
 --local inspect = require('inspect')
 --print(inspect(buttonMap))
