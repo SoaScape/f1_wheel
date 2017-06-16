@@ -14,7 +14,7 @@ local function activateSafetyCarMode()
 	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["min"]
 	nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
-	autoMixOff()
+	autoMixInhibitOn()
 	autoDiffInhibitOn()
 end
 

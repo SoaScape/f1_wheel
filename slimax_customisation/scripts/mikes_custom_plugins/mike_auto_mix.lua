@@ -9,26 +9,60 @@ local displayTimeout = 1000
 
 local mixEvents = nil
 local lastEvent = -1
-local autoMixSelected = false
+local autoMixActive = false
 local richModePreviouslyDisabled = false
+
+local autoMixInhibit = false
 
 local progMix;
 
 function resetAutoMixData()
 	mixEvents = nil
-	autoMixSelected = false
+	autoMixActive = false
+	autoMixInhibit = false
 	richModePreviouslyDisabled = false
 	lastEvent = -1
 end
 
+local function autoMixOn()
+	if autoMixEnabled and loadMixEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
+		autoMixActive = true
+		richModePreviouslyDisabled = false
+		
+		if not(autoMixInhibit) then
+			activatePermanentLed(autoMixLedPattern, 0, false)
+		end
+		return true
+	end
+	return false
+end
+
+local function autoMixOff()
+	if autoMixActive then
+		resetAutoMixData()
+		deactivatePermanentLed(autoMixLedPattern)
+	end	
+end
+
+function autoMixInhibitOff()
+	if autoMixActive then
+		activatePermanentLed(autoMixLedPattern, 0, false)
+	end
+	autoMixInhibit = false
+end
+
+function autoMixInhibitOn()
+	deactivatePermanentLed(autoMixLedPattern)
+	autoMixInhibit = true
+end
 local function toggleAutoMixSelected()
 	if autoMixEnabled then
-		autoMixSelected = not(autoMixSelected)
-		if autoMixSelected then
+		autoMixActive = not(autoMixActive)
+		if autoMixActive then
 			if autoMixOn() then
 				display(autoMixMultifunctionName, "ACTV", displayTimeout)
 			else
-				autoMixSelected = false
+				autoMixActive = false
 				display(autoMixMultifunctionName, " ERR", displayTimeout)
 			end
 		else
@@ -43,33 +77,12 @@ local function toggleAutoMixSelected()
 	end
 end
 
-function isAutoMixActive()
-	return autoMixSelected
-end
-
 local function loadMixEventsForTrack(trackId)
 	mixEvents = loadEventsForTrack(trackId, autoMixFileExtension)
 	lastEvent = -1
 	if mixEvents ~= nil then
 		return true
 	end
-end
-
-function autoMixOn()
-	if autoMixEnabled and loadMixEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
-		autoMixSelected = true
-		richModePreviouslyDisabled = false
-		activatePermanentLed(autoMixLedPattern, 0, false)
-		return true
-	end
-	return false
-end
-
-function autoMixOff()
-	if autoMixEnabled then
-		resetAutoMixData()
-		deactivatePermanentLed(autoMixLedPattern)
-	end	
 end
 
 local function storeMixEvent(mix)
@@ -119,13 +132,13 @@ function processAutoMixButtonEvent(button)
 end
 
 function autoMixRegularProcessing()
-	if autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if not(autoMixInhibit) and autoMixEnabled and mSessionEnter == 1 and not(m_is_sim_idle) then
 		local fuelTarget = getAdjustedFuelTarget()
 		if fuelTarget == nil then
 			fuelTarget = 1
 		end
 		
-		if autoMixSelected then
+		if autoMixActive then
 			local dist = tostring(getLapDistance())
 			if mixEvents[dist] ~= nil and lastEvent ~= dist then
 				lastEvent = dist

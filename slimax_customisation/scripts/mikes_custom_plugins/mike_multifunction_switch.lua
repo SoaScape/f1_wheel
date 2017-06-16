@@ -18,7 +18,6 @@ local multiSelectDelay = 500
 local encoderIncrement = 10
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
-local autoMixActiveBeforeOvertakeButton = false
 
 local function performReset()
 	for key, value in pairs(multifunctionMap) do
@@ -193,11 +192,7 @@ end
 function toggleOvertakeMode(showDisplay, sendButtons)
 	if overtakeEngaged then
 		overtakeEngaged = false
-		
-		if autoMixActiveBeforeOvertakeButton then
-			autoMixActiveBeforeOvertakeButton = false
-			autoMixOn()
-		end
+		autoMixInhibitOff()
 
 		if sendButtons then
 			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
@@ -213,12 +208,7 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 		end
 	else
 		overtakeEngaged = true
-		
-		autoMixActiveBeforeOvertakeButton = isAutoMixActive()
-		if autoMixActiveBeforeOvertakeButton then
-			autoMixOff()
-		end
-
+		autoMixInhibitOn()
 
 		local fuelModeBak = fuelMultiFunction["currentUpDnMode"]
 		fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
