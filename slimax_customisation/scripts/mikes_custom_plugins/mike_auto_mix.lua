@@ -24,6 +24,14 @@ function resetAutoMixData()
 	lastEvent = -1
 end
 
+local function loadMixEventsForTrack(trackId)
+	mixEvents = loadEventsForTrack(trackId, autoMixFileExtension)
+	lastEvent = -1
+	if mixEvents ~= nil then
+		return true
+	end
+end
+
 local function autoMixOn()
 	if autoMixEnabled and loadMixEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
 		autoMixActive = true
@@ -74,14 +82,6 @@ local function toggleAutoMixSelected()
 				confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
 			end
 		end
-	end
-end
-
-local function loadMixEventsForTrack(trackId)
-	mixEvents = loadEventsForTrack(trackId, autoMixFileExtension)
-	lastEvent = -1
-	if mixEvents ~= nil then
-		return true
 	end
 end
 
