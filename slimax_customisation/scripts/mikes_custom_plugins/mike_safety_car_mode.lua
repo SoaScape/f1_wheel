@@ -46,7 +46,7 @@ end
 
 function safetyCarModeRegularProcessing()	
 	if safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
-		if GetContextInfo("yellow_flag") then
+		if GetContextInfo("yellow_flag") or inPits() then
 			if getTks() - lastSafetyCarMessageTime >= safetyCarActiveMessageDelay then
 				lastSafetyCarMessageTime = getTks()
 				display("SAFE", " CAR", 1000)
