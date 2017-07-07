@@ -30,7 +30,9 @@ local function safetyCarEnd()
 end
 
 local function safetyCarModeSelected()
-	if GetContextInfo("yellow_flag") and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if safetyCarModeActive then
+		display(safetyCarMultifunctionName, "ACTV", mDisplay_Info_Delay)
+	elseif GetContextInfo("yellow_flag") and mSessionEnter == 1 and not(m_is_sim_idle) then
 		activateSafetyCarMode()
 	else
 		currentMultifunction = nil
@@ -54,16 +56,16 @@ function safetyCarModeRegularProcessing()
 		else
 			safetyCarEnd()
 		end
-	else
-		if safetyCarModeEnabled and currentMultifunction ~= nil then
-			currentMode = currentMultifunction["name"]
-			if currentMode == safetyCarMultifunctionName then
-				if currentMode ~= lastMode then
-					safetyCarModeSelected()
-				end
+	end
+
+	if safetyCarModeEnabled and currentMultifunction ~= nil then
+		currentMode = currentMultifunction["name"]
+		if currentMode == safetyCarMultifunctionName then
+			if currentMode ~= lastMode then
+				safetyCarModeSelected()
 			end
-			lastMode = currentMode
 		end
+		lastMode = currentMode
 	end
 end
 
