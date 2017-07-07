@@ -45,7 +45,7 @@ local function autoMixOn()
 	return false
 end
 
-local function autoMixOff()
+function autoMixOff()
 	if autoMixActive then
 		resetAutoMixData()
 		deactivatePermanentLed(autoMixLedPattern)
