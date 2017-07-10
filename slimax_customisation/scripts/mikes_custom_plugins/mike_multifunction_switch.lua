@@ -19,7 +19,7 @@ local encoderIncrement = 10
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
 
-local function performReset()
+local function performReset(forceFull)
 	for key, value in pairs(multifunctionMap) do
 		if value["noReset"] == nil or not (value["noReset"]) then
 			if value["defaultUpDnMode"] ~= nil then
@@ -31,7 +31,7 @@ local function performReset()
 		end
 	end
 
-	if mSessionEnter == 1 and not(m_is_sim_idle) then
+	if mSessionEnter == 1 and not(m_is_sim_idle) and not(forceFull) then
 		-- If in a session, only reset the multifunction up/down positions.
 		-- Give the driver a visual cue that this has been done.
 		activateBlinkingLed(resetLedPattern, 45, 100, false)
@@ -176,7 +176,13 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 
 			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
 				if ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
-					performReset()
+					performReset(false)
+				elseif ctrlPos == upButton then
+					resetFuelData()
+					activateBlinkingLed(resetLedPattern, 45, 100, false)
+					display(currentMultifunction["name"], "FUEL", selectDelay)
+				elseif ctrlPos == downButton then
+					performReset(true) -- Force a full reset
 				end
 			end
 		end
