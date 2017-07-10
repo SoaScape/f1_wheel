@@ -49,7 +49,7 @@ function display(leftStr, rightStr, timeout)
 end
 
 function inPits()
-	return GetInPitsState() > 1
+	return GetInPitsState() > 0
 end
 
 local function processKeyPressQueue()
