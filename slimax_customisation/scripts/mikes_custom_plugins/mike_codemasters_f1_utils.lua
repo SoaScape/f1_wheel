@@ -111,10 +111,12 @@ end
 
 function performRaceStart()
 	toggleOvertakeMode(false, true)
+	autoMixInhibitOn()
 end
 
 function exitRaceStart()
 	toggleOvertakeMode(false, true)
+	autoMixInhibitOff()
 end
 
 customFunctionNamesTable = {}
