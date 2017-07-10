@@ -21,6 +21,7 @@ function resetAutoMixData()
 	autoMixActive = false
 	autoMixInhibit = false
 	richModePreviouslyDisabled = false
+	progMix = fuelMultiFunction["defaultUpDnMode"]
 	lastEvent = -1
 end
 
