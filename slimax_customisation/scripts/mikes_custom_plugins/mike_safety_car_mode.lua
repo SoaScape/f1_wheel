@@ -54,6 +54,19 @@ function safetyCarModeRegularProcessing()
 				display("SAFE", " CAR", 1000)
 			end
 		else
+-- Some debug
+local messLeft = "WTF "
+local messRight = tostring(GetInPitsState())
+if not(GetContextInfo("yellow_flag")) and not(inPits()) then
+	messLeft = "BOTH"
+elseif not(GetContextInfo("yellow_flag")) then
+	messLeft = "YELW"
+elseif not(inPits()) then
+	messLeft = "PITS"
+end
+print(messLeft .. " : " .. messRight)
+display(messLeft, messRight, 60000)
+-- End
 			safetyCarEnd()
 		end
 	end
