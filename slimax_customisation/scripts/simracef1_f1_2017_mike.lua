@@ -5,7 +5,7 @@ myDevice = 3 -- SIMR-F1
 
 minFuel = 1
 
-numMenus = 4
+numMenus = 5
 
 confirmDelay = 1000
 
