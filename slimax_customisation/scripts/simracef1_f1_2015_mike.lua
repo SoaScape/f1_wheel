@@ -4,6 +4,8 @@ require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 local prevCameraKey = "X"
 local nextCameraKey = "C"
 
+myDevice = 3 -- SIMR-F1
+
 minFuel = 10
 
 numMenus = 3

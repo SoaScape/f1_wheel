@@ -1,5 +1,7 @@
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
+myDevice = 3 -- SIMR-F1
+
 minFuel = 0
 
 multifunctionMap = {}

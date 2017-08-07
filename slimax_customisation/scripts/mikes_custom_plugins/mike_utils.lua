@@ -1,4 +1,3 @@
-myDevice = 3 -- 3 = SIMR-F1
 switch = 0
 pushbutton = 1
 progButton = 3
