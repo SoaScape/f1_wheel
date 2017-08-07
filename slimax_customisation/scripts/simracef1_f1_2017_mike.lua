@@ -212,8 +212,6 @@ function getButtonMap(currentMultifunction)
 		return getVoiceMenuButtons(currentMultifunction)
 	elseif currentMultifunction["menu"] ~= nil then
 		return getMfdMenuButtons(currentMultifunction)
-	elseif currentMultifunction["name"] == "INFO" then
-		return getOpenMenuButtons(currentMultifunction["currentUpDnMode"])
 	else
 		return nil
 	end
