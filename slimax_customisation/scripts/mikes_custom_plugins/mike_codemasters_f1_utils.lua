@@ -25,7 +25,7 @@ function getFuelMix()
 	return round(GetCarInfo("fuel_mix"), 0)
 end
 
-function getVoiceMenuButtons(currentMultifunction)
+function getVoiceMenuButtons(multifunction)
 	local index = 0
 	local buttonMap = {}
 
@@ -35,14 +35,14 @@ function getVoiceMenuButtons(currentMultifunction)
 	buttonMap[index] = radioKey
 	index = index + 1
 
-	for i = 1, currentMultifunction["voiceMenuPage"] - 1 do
+	for i = 1, multifunction["voiceMenuPage"] - 1 do
 		buttonMap[index] = quickMenuToggleKey
 		delayMap[index] = 50
 		index = index + 1
 	end
 	
-	if currentMultifunction["voiceMenuRows"][currentMultifunction["currentUpDnMode"]] > 1 then
-		for i = 1, currentMultifunction["voiceMenuRows"][currentMultifunction["currentUpDnMode"]] - 1 do
+	if multifunction["voiceMenuRows"][multifunction["currentUpDnMode"]] > 1 then
+		for i = 1, multifunction["voiceMenuRows"][multifunction["currentUpDnMode"]] - 1 do
 			buttonMap[index] = quickMenuDn
 			index = index + 1
 		end
@@ -62,37 +62,37 @@ local function getSelectRowButtons(chosenRow)
 	return buttons
 end
 
-local function setMinPosition(currentMultifunction, buttonMap, decKey)
+local function setMinPosition(multifunction, buttonMap, decKey)
 	local count = 0
 	-- If We don't know what's currently selected. Therefore move the selector
 	-- all the way to the bottom so we know the 'min' mode is selected
-	for i = currentMultifunction["min"], currentMultifunction["max"] - 1 do
+	for i = multifunction["min"], multifunction["max"] - 1 do
 		table.insert(buttonMap, decKey)
 		count = count + 1
 	end
 	-- Now we know the currently selected mode so store it
-	currentMultifunction["currentPosition"] = currentMultifunction["min"]
+	multifunction["currentPosition"] = multifunction["min"]
 	return count
 end
 
-local function getSelectModeButtons(buttonMap, currentPosition, decKey, incKey)
+local function getSelectModeButtons(buttonMap, multifunction, currentPosition, decKey, incKey)
 	local step = 1
 	local loopStartIndex = currentPosition + 1
 	local keyPress = incKey
 	local count = 0
-	if currentPosition > currentMultifunction["currentUpDnMode"] then
+	if currentPosition > multifunction["currentUpDnMode"] then
 		keyPress = decKey
 		loopStartIndex = currentPosition - 1
 		step = -1
 	end
-	for i = loopStartIndex, currentMultifunction["currentUpDnMode"], step do
+	for i = loopStartIndex, multifunction["currentUpDnMode"], step do
 		table.insert(buttonMap, keyPress)
 		count = count + 1
 	end
 	return count
 end
 
-function getMfdShortcutButtons(currentMultifunction)
+function getMfdShortcutButtons(multifunction)
 	if inPits() then
 		return nil
 	end
@@ -101,20 +101,20 @@ function getMfdShortcutButtons(currentMultifunction)
 	local buttonMap = {}
 	local currentSetting
 	local positionPreviouslyUnknown = false
-	if currentMultifunction["currentSettingMethod"] ~= nil then
-		currentSetting = currentMultifunction["currentSettingMethod"]()
+	if multifunction["currentSettingMethod"] ~= nil then
+		currentSetting = multifunction["currentSettingMethod"]()
 	else
-		if currentMultifunction["currentPosition"] == nil or currentSetting == currentMultifunction["currentUpDnMode"] then
-			nextIndex = nextIndex + setMinPosition(currentMultifunction, buttonMap, currentMultifunction["decrementKey"])
+		if multifunction["currentPosition"] == nil or currentSetting == multifunction["currentUpDnMode"] then
+			nextIndex = nextIndex + setMinPosition(multifunction, buttonMap, multifunction["decrementKey"])
 			positionPreviouslyUnknown = true
 		end
-		currentSetting = currentMultifunction["currentPosition"]
+		currentSetting = multifunction["currentPosition"]
 	end
 
 	-- Don't process if position is already set
-	if positionPreviouslyUnknown or currentSetting ~= currentMultifunction["currentUpDnMode"] then
-		currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
-		nextIndex = nextIndex + getSelectModeButtons(buttonMap, currentSetting, currentMultifunction["decrementKey"], currentMultifunction["incrementKey"])
+	if positionPreviouslyUnknown or currentSetting ~= multifunction["currentUpDnMode"] then
+		multifunction["currentPosition"] = multifunction["currentUpDnMode"]
+		nextIndex = nextIndex + getSelectModeButtons(buttonMap, multifunction, currentSetting, multifunction["decrementKey"], multifunction["incrementKey"])
 
 		-- Close the MFD window
 		buttonMap[nextIndex] = quickMenuToggleKey
@@ -125,7 +125,7 @@ function getMfdShortcutButtons(currentMultifunction)
 	return buttonMap
 end
 
-function getMfdMenuButtons(currentMultifunction)
+function getMfdMenuButtons(multifunction)
 	if inPits() then
 		return nil
 	end
@@ -141,7 +141,7 @@ function getMfdMenuButtons(currentMultifunction)
 	index = index + 1
 
 	-- Scroll down to the required row.
-	local selectRowButtons = getSelectRowButtons(currentMultifunction["row"] - 1)
+	local selectRowButtons = getSelectRowButtons(multifunction["row"] - 1)
 	for key, value in pairs(selectRowButtons) do
 		buttonMap[index] = value
 		index = index + 1
@@ -150,17 +150,17 @@ function getMfdMenuButtons(currentMultifunction)
 	-- Reset currentPosition based off the min, if it wasn't known previously, or if
 	-- the chosen mode matches the current position. If the later, this implies something
 	-- is out of sync and the user is trying to 'force set' the mode.
-	if currentMultifunction["currentPosition"] == nil or currentMultifunction["currentPosition"] == currentMultifunction["currentUpDnMode"] then
+	if multifunction["currentPosition"] == nil or multifunction["currentPosition"] == multifunction["currentUpDnMode"] then
 		positionPreviouslyUnknown = true
-		index = setMinPosition(currentMultifunction, buttonMap, quickMenuLeft) + index
+		index = setMinPosition(multifunction, buttonMap, quickMenuLeft) + index
 	end
 
 	-- Now increment or decrement to reach the requested mode (currentUpDnMode)
-	local numSelectPresses = getSelectModeButtons(buttonMap, currentMultifunction["currentPosition"], quickMenuLeft, quickMenuRight)
+	local numSelectPresses = getSelectModeButtons(buttonMap, multifunction, multifunction["currentPosition"], quickMenuLeft, quickMenuRight)
 	index = index + numSelectPresses
 	
 	-- Update the current position to match what we have selected.
-	currentMultifunction["currentPosition"] = currentMultifunction["currentUpDnMode"]
+	multifunction["currentPosition"] = multifunction["currentUpDnMode"]
 
 	-- Finally, close the multi function display menu.
 	buttonMap[index] = quickMenuToggleKey
