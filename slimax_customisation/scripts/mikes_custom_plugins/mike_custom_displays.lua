@@ -3,11 +3,12 @@ require "scripts/mikes_custom_plugins/mike_custom_displays_logic"
 require "scripts/mikes_custom_plugins/mike_utils"
 
 local function checkFuelChange()
-	if lastMix ~= nil then
+	if GetContextInfo("display_fuel_mix_state") and lastMix ~= nil then
 		local fuelMix = getFuelMix()
-		if fuelMix ~= lastMix then
-			lastMix = fuelMix
+		if fuelMix ~= nil and fuelMix ~= lastMix then
+			fuelMultiFunction["currentPosition"] = fuelMix
 			fuelMultiFunction["currentUpDnMode"] = fuelMix
+			lastMix = fuelMix
 			display("MIX ", fuelMultiFunction["modes"][fuelMix], mDisplay_Info_Delay)
 			return true
 		end

@@ -24,7 +24,10 @@ multifunctionMap[1]["enabled"] = true
 multifunctionMap[2] = {}
 multifunctionMap[2]["name"] = "MIX"
 multifunctionMap[2]["enabled"] = true
-multifunctionMap[2]["menu"] = 1
+multifunctionMap[2]["mfdShortcut"] = true
+multifunctionMap[2]["incrementKey"] = "F"
+multifunctionMap[2]["decrementKey"] = "V"
+--multifunctionMap[2]["currentSettingMethod"] = getFuelMix()
 multifunctionMap[2]["row"] = 1
 multifunctionMap[2]["upDnSelectable"] = true
 multifunctionMap[2]["upDnConfirmRequired"] = true
@@ -45,7 +48,9 @@ multifunctionMap[2]["fuelUsageOffset"][2] = 1.363636364
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "DIFF"
 multifunctionMap[3]["enabled"] = true
-multifunctionMap[3]["menu"] = 1
+multifunctionMap[3]["mfdShortcut"] = true
+multifunctionMap[3]["incrementKey"] = "G"
+multifunctionMap[3]["decrementKey"] = "B"
 multifunctionMap[3]["row"] = 3
 multifunctionMap[3]["upDnSelectable"] = true
 multifunctionMap[3]["upDnConfirmRequired"] = true
@@ -69,7 +74,10 @@ multifunctionMap[3]["modes"][10] = 100
 multifunctionMap[4] = {}
 multifunctionMap[4]["name"] = "BIAS"
 multifunctionMap[4]["enabled"] = true
-multifunctionMap[4]["menu"] = 1
+multifunctionMap[4]["mfdShortcut"] = true
+multifunctionMap[4]["incrementKey"] = "H"
+multifunctionMap[4]["decrementKey"] = "N"
+--multifunctionMap[4]["currentSettingMethod"] = getRearBrakeBias()
 multifunctionMap[4]["row"] = 2
 multifunctionMap[4]["upDnSelectable"] = true
 multifunctionMap[4]["upDnConfirmRequired"] = true
@@ -194,7 +202,7 @@ multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = autoDiffMultifunctionName
 multifunctionMap[12]["enabled"] = true
 
-lastMix = 1
+lastMix = -1
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
@@ -213,6 +221,8 @@ end
 function getButtonMap(currentMultifunction)
 	if currentMultifunction["voiceMenuPage"] ~= nil then
 		return getVoiceMenuButtons(currentMultifunction)
+	elseif currentMultifunction["mfdShortcut"] then
+		return getMfdShortcutButtons(currentMultifunction)
 	elseif currentMultifunction["menu"] ~= nil then
 		return getMfdMenuButtons(currentMultifunction)
 	else
