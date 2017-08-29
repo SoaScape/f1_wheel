@@ -77,7 +77,7 @@ multifunctionMap[4]["enabled"] = true
 multifunctionMap[4]["mfdShortcut"] = true
 multifunctionMap[4]["incrementKey"] = "H"
 multifunctionMap[4]["decrementKey"] = "N"
-multifunctionMap[4]["currentSettingMethod"] = getRearBrakeBias
+multifunctionMap[4]["currentSettingMethod"] = getRearBrakeBiasIndex
 multifunctionMap[4]["row"] = 2
 multifunctionMap[4]["upDnSelectable"] = true
 multifunctionMap[4]["upDnConfirmRequired"] = true
@@ -207,6 +207,7 @@ lastMix = -1
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
 diffMultiFunction = multifunctionMap[3]
+biasMultiFunction = multifunctionMap[4]
 trackMultiFunction = multifunctionMap[8]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = false

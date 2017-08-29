@@ -18,6 +18,7 @@ locals["totalLaps"] = 10
 locals["fuel"] = 101
 locals["startFuel"] = 101
 locals["fuelMix"] = 1.0
+locals["brakeBias"] = 40.0
 locals["kiloMultiplier"] = 1
 locals["yellow"] = "false"
 
@@ -112,6 +113,9 @@ function GetContextInfo(item)
 	elseif item == "track_size" then
 		return locals["trackSize"]
 	end
+end
+function GetBrakeBiasState()
+	return locals["brakeBias"]
 end
 function GetInPitsState()
 	return locals["pits"]

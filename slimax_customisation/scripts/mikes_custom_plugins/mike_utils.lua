@@ -302,7 +302,3 @@ end
 function inProgrammingMode()
 	return progActive
 end
-
-function getFuelMix()
-	return math.floor(GetCarInfo("fuel_mix"))
-end
