@@ -13,7 +13,7 @@ local openMenuDelay = 500
 local closeMenuDelay = 600
 
 local function getRearBrakeBias()
-	local frontBias = math.floor(GetBrakeBiasState())
+	local frontBias = round(GetBrakeBiasState(), 0)
 	return 100 - frontBias
 end
 
@@ -22,7 +22,7 @@ function getRearBrakeBiasIndex()
 end
 
 function getFuelMix()
-	return math.floor(GetCarInfo("fuel_mix"))
+	return round(GetCarInfo("fuel_mix"), 0)
 end
 
 function getVoiceMenuButtons(currentMultifunction)
