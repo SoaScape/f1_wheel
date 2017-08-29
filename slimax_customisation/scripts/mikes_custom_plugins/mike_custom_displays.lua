@@ -2,6 +2,19 @@ require "scripts/mikes_custom_plugins/mike_common"
 require "scripts/mikes_custom_plugins/mike_custom_displays_logic"
 require "scripts/mikes_custom_plugins/mike_utils"
 
+local function checkFuelChange()
+	if lastMix ~= nil then
+		local fuelMix = getFuelMix()
+		if fuelMix ~= lastMix then
+			lastMix = fuelMix
+			fuelMultiFunction["currentUpDnMode"] = fuelMix
+			display("MIX ", fuelMultiFunction["modes"][fuelMix], mDisplay_Info_Delay)
+			return true
+		end
+	end
+	return false
+end
+
 local function displayFuelTarget(fuelTarget)
 	local sliPanel = "NREF"
 	if fuelTarget ~= nil then
@@ -28,6 +41,10 @@ local function displayFuelTarget(fuelTarget)
 end
 
 function customDisplayEventProcessing(swValue, side)
+	if checkFuelChange() then
+		return 1
+	end
+
 	local sliPanel = ""
 	local isSlowUpdate = false
 	local customFunction = false

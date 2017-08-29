@@ -17,6 +17,7 @@ locals["laps"] = 1
 locals["totalLaps"] = 10
 locals["fuel"] = 101
 locals["startFuel"] = 101
+locals["fuelMix"] = 1.0
 locals["kiloMultiplier"] = 1
 locals["yellow"] = "false"
 
@@ -95,6 +96,8 @@ function GetCarInfo(item)
 		return locals["fuel"]
 	elseif item == "fuel_total" then
 		return locals["startFuel"]
+	elseif item == "fuel_mix" then
+		return locals["fuelMix"]
 	end
 end
 function GetContextInfo(item)

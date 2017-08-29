@@ -31,11 +31,12 @@ multifunctionMap[2]["upDnConfirmRequired"] = true
 multifunctionMap[2]["defaultUpDnMode"] = 1
 multifunctionMap[2]["currentUpDnMode"] = multifunctionMap[2]["defaultUpDnMode"]
 multifunctionMap[2]["min"] = 0
-multifunctionMap[2]["max"] = 2
+multifunctionMap[2]["max"] = 3
 multifunctionMap[2]["modes"] = {}
 multifunctionMap[2]["modes"][0] = "LEAN"
 multifunctionMap[2]["modes"][1] = "NORM"
 multifunctionMap[2]["modes"][2] = "RICH"
+multifunctionMap[2]["modes"][3] = "QUAL"
 multifunctionMap[2]["fuelUsageOffset"] = {}
 multifunctionMap[2]["fuelUsageOffset"][0] = 0.681818182
 multifunctionMap[2]["fuelUsageOffset"][1] = 1
@@ -192,6 +193,8 @@ multifunctionMap[11]["enabled"] = true
 multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = autoDiffMultifunctionName
 multifunctionMap[12]["enabled"] = true
+
+lastMix = 1
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
