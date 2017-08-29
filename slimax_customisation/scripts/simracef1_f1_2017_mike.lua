@@ -197,7 +197,8 @@ multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = autoDiffMultifunctionName
 multifunctionMap[12]["enabled"] = true
 
-lastMix = 1
+lastMix = -1
+lastBias = -1
 
 tracks = {}
 tracks[0] = "ASTL"

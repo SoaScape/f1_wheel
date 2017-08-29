@@ -6,10 +6,24 @@ local function checkFuelChange()
 	if lastMix ~= nil then
 		local fuelMix = getFuelMix()
 		if fuelMix ~= nil and fuelMix ~= lastMix then
+			lastMix = fuelMix
 			fuelMultiFunction["currentPosition"] = fuelMix
 			fuelMultiFunction["currentUpDnMode"] = fuelMix
-			lastMix = fuelMix
 			display("MIX ", fuelMultiFunction["modes"][fuelMix], mDisplay_Info_Delay)
+			return true
+		end
+	end
+	return false
+end
+
+local function checkBiasChange()
+	if lastBias ~= nil then
+		local rearBiasIndex = getRearBrakeBiasIndex()
+		if rearBiasIndex ~= nil and rearBiasIndex ~= lastBias then
+			lastBias = rearBiasIndex
+			biasMultiFunction["currentPosition"] = rearBiasIndex
+			biasMultiFunction["currentUpDnMode"] = rearBiasIndex
+			display("BIAS", biasMultiFunction["modes"][rearBiasIndex], mDisplay_Info_Delay)
 			return true
 		end
 	end
@@ -43,6 +57,9 @@ end
 
 function customDisplayEventProcessing(swValue, side)
 	if checkFuelChange() then
+		return 1
+	end
+	if checkBiasChange() then
 		return 1
 	end
 
