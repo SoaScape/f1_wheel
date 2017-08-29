@@ -202,7 +202,7 @@ multifunctionMap[12] = {}
 multifunctionMap[12]["name"] = autoDiffMultifunctionName
 multifunctionMap[12]["enabled"] = true
 
-lastMix = -1
+lastMix = 1
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
