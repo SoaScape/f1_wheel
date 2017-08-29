@@ -1,4 +1,4 @@
-require "scripts/simracef1_f1_2016_mike"
+require "scripts/simracef1_f1_2017_mike"
 
 local instructions = "b1, b2 etc. or s1p10 would be switch 1 position 10"
 
