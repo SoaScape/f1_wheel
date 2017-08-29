@@ -166,8 +166,7 @@ function getMfdMenuButtons(currentMultifunction)
 	buttonMap[index] = quickMenuToggleKey
 	delayMap[index] = closeMenuDelay
 	keyHoldMap = {}
-		keyHoldMap[index] = closeMenuDelay
-
+	keyHoldMap[index] = closeMenuDelay
 	return buttonMap
 end
 

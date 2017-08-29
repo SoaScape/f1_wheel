@@ -14,6 +14,12 @@ customKeystrokeDelays[quickMenuLeft] = 40
 customKeystrokeDelays[quickMenuRight] = 40
 customKeystrokeDelays[quickMenuUp] = 40
 customKeystrokeDelays[quickMenuDn] = 40
+customKeystrokeDelays[fuelMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[fuelMultiFunction["decrementKey"]] = 40
+customKeystrokeDelays[diffMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[diffMultiFunction["decrementKey"]] = 40
+customKeystrokeDelays[biasMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[biasMultiFunction["decrementKey"]] = 40
 
 multifunctionMap = {}
 
