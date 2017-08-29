@@ -198,6 +198,29 @@ multifunctionMap[12]["enabled"] = true
 
 lastMix = 1
 
+tracks = {}
+tracks[0] = "ASTL"
+tracks[1] = "MALY"
+tracks[2] = "CHIN"
+tracks[3] = "BAHR"
+tracks[4] = "SPAN"
+tracks[5] = "MONA"
+tracks[6] = "CAND"
+tracks[7] = "BRIT"
+tracks[8] = "GERM"
+tracks[9] = "HUNG"
+tracks[10] = "BELG"
+tracks[11] = "ITLY"
+tracks[12] = "SING"
+tracks[13] = "JAPN"
+tracks[14] = " ABU"
+tracks[15] = "COTA"
+tracks[16] = "BRAZ"
+tracks[17] = "AUST"
+tracks[18] = "RUSS"
+tracks[19] = "MEXI"
+tracks[20] = "AZER"
+
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
 diffMultiFunction = multifunctionMap[3]
