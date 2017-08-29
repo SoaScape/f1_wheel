@@ -9,18 +9,6 @@ numMenus = 5
 
 confirmDelay = 1000
 
-customKeystrokeDelays = {}
-customKeystrokeDelays[quickMenuLeft] = 40
-customKeystrokeDelays[quickMenuRight] = 40
-customKeystrokeDelays[quickMenuUp] = 40
-customKeystrokeDelays[quickMenuDn] = 40
-customKeystrokeDelays[fuelMultiFunction["incrementKey"]] = 40
-customKeystrokeDelays[fuelMultiFunction["decrementKey"]] = 40
-customKeystrokeDelays[diffMultiFunction["incrementKey"]] = 40
-customKeystrokeDelays[diffMultiFunction["decrementKey"]] = 40
-customKeystrokeDelays[biasMultiFunction["incrementKey"]] = 40
-customKeystrokeDelays[biasMultiFunction["decrementKey"]] = 40
-
 multifunctionMap = {}
 
 multifunctionMap[1] = {}
@@ -221,6 +209,18 @@ autoMixEnabled = true
 autoDiffEnabled = true
 raceStartModeEnabled = true
 safetyCarModeEnabled = true
+
+customKeystrokeDelays = {}
+customKeystrokeDelays[quickMenuLeft] = 40
+customKeystrokeDelays[quickMenuRight] = 40
+customKeystrokeDelays[quickMenuUp] = 40
+customKeystrokeDelays[quickMenuDn] = 40
+customKeystrokeDelays[fuelMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[fuelMultiFunction["decrementKey"]] = 40
+customKeystrokeDelays[diffMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[diffMultiFunction["decrementKey"]] = 40
+customKeystrokeDelays[biasMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[biasMultiFunction["decrementKey"]] = 40
 
 function custom_init_Event(scriptfile)
 end
