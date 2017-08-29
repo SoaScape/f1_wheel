@@ -9,7 +9,7 @@ local function checkFuelChange()
 			fuelMultiFunction["currentPosition"] = fuelMix
 			fuelMultiFunction["currentUpDnMode"] = fuelMix
 			lastMix = fuelMix
-			display("MIX-", fuelMultiFunction["modes"][fuelMix], mDisplay_Info_Delay)
+			display("MIX ", fuelMultiFunction["modes"][fuelMix], mDisplay_Info_Delay)
 			return true
 		end
 	end

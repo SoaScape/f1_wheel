@@ -22,7 +22,7 @@ multifunctionMap[1]["name"] = "RSET"
 multifunctionMap[1]["enabled"] = true
 
 multifunctionMap[2] = {}
-multifunctionMap[2]["name"] = "MIX"
+multifunctionMap[2]["name"] = "MIX "
 multifunctionMap[2]["enabled"] = true
 multifunctionMap[2]["mfdShortcut"] = true
 multifunctionMap[2]["incrementKey"] = "F"
