@@ -38,6 +38,7 @@ multifunctionMap[2]["fuelUsageOffset"] = {}
 multifunctionMap[2]["fuelUsageOffset"][0] = 0.681818182
 multifunctionMap[2]["fuelUsageOffset"][1] = 1
 multifunctionMap[2]["fuelUsageOffset"][2] = 1.363636364
+multifunctionMap[2]["fuelUsageOffset"][3] = 1.363636364
 
 multifunctionMap[3] = {}
 multifunctionMap[3]["name"] = "DIFF"
