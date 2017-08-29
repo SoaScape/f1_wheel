@@ -261,3 +261,8 @@ function getButtonMap(currentMultifunction)
 		return nil
 	end
 end
+
+function customReset()
+	lastMix = -1
+	lastBias = -1
+end

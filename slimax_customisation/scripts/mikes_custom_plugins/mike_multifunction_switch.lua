@@ -50,6 +50,10 @@ local function performReset(forceFull)
 		resetAutoDiff()
 		resetSafetyCarMode()
 		overtakeEngaged = false
+		
+		if customReset ~= nil then
+			customReset()
+		end
 	end
 end
 
