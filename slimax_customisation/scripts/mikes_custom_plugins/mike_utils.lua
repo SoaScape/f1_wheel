@@ -98,7 +98,7 @@ end
 function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	local startTicks = getTks()
 	if mSessionEnter == 1 and not(m_is_sim_idle) and not(inPits()) then
-		if buttonMap ~= nil then
+		if buttonMap ~= nil and tablelength(buttonMap) > 0 then
 --local inspect = require('inspect')
 --print(inspect(buttonMap))
 			for i = 1, tablelength(buttonMap) do
@@ -116,6 +116,8 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 				queueKeyPress(buttonMap[i], holdDelay, delay)			
 			end
 			delayMap = nil
+		else
+			leftDisp = "CURR"
 		end
 		if showDisplay then
 			display(leftDisp, rightDisplay, confirmDelay)
