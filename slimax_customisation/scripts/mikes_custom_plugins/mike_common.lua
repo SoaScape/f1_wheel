@@ -9,6 +9,22 @@ function commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side, isSlowUpdate
 	local ms = 0
 	local hd = 0
 	
+	-- check if diff time is ready
+	local diffOK = GetTimeInfo("delta_time_enough_records") 
+	local isNREF = GetContextInfo("display_nref_allowed") 
+	if isNREF and diffTimeFlag and diffOK == false and dlt == false then
+		diffTimeFlag = false
+		timeFlag = false
+		if devName == "SIMRACE-F1" or devName == "SIMRACE-GT" or devName == "SLI-F1" then
+			sliPanel = "NREF"
+		elseif devName == "SLI-PRO" then
+			sliPanel = " nrEF "
+		else
+			sliPanel = "nrEF"
+		end
+			
+	end
+
 	local c = ""
 	local refreshRate = mRefreshLapTimeRate
 	if diffTimeFlag then
@@ -20,7 +36,8 @@ function commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side, isSlowUpdate
 		refreshRate = mDeltaTimeDelay
 	end		
 	
-	if timeFlag and lpt ~= nil then	
+	if timeFlag and lpt ~= nil then
+	
 		-- set char of negative number
 		if diffTimeFlag then
 			if lpt < 0 then c = "-" end
@@ -32,14 +49,20 @@ function commonDisplayProcessing(diffTimeFlag, lpt, sliPanel, side, isSlowUpdate
 			mDeltaTimeBackup =  "-:--.---" 
 	
 		elseif systemFlag then
+			local is24h = GetAppInfo("system_time_24h")
+			local newHr = hr
+			if is24h ~= nil and is24h == false then
+				if hr > 12 then newHr = hr - 12 end
+				if hr == 0 then newHr = 12 end
+			end
 			if devName == "SLI-PRO" then
 				if side == 0 then
-					mDeltaTimeBackup =  string.format( " %2d:%02d ", hr, mn)
+					mDeltaTimeBackup =  string.format( " %2d:%02d ", newHr, mn)
 				else
-					mDeltaTimeBackup =  string.format( " %2d.%02d ", hr, mn)
+					mDeltaTimeBackup =  string.format( " %2d.%02d ", newHr, mn)
 				end
 			else
-				 mDeltaTimeBackup =  string.format( "%2d.%02d", hr, mn)
+				 mDeltaTimeBackup =  string.format( "%2d.%02d", newHr, mn)
 			end
 		else
 			if devName == "SLI-PRO" then
