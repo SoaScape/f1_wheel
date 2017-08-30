@@ -1,40 +1,35 @@
 package telemetry.repository.impl;
 
-public class UdpRepositoryF12017Impl {
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+
+import org.springframework.stereotype.Repository;
+
+import lombok.extern.log4j.Log4j;
+import telemetry.domain.TelemetryDataF12017Impl;
+
+@Repository
+@Log4j
+public class UdpRepositoryF12017Impl implements Runnable {
+	@Override
+	public void run() {
+		try (final DatagramSocket datagramSocket = new DatagramSocket(20777)) {
+			final byte[] b = new byte[1237];
+			final DatagramPacket datagramPacket = new DatagramPacket(b,1237);
 	
-
-	    public static void main(String[] args) {
-	        int port = args.length == 0 ? 57 : Integer.parseInt(args[0]);
-	        new Receiver().run(port);
-	    }
-
-	    public void run(int port) {    
-	      try {
-	        DatagramSocket serverSocket = new DatagramSocket(port);
-	        byte[] receiveData = new byte[8];
-
-	        System.out.printf("Listening on udp:%s:%d%n",
-	                InetAddress.getLocalHost().getHostAddress(), port);     
-	        DatagramPacket receivePacket = new DatagramPacket(receiveData,
-	                           receiveData.length);
-
-	        while(true)
-	        {
-	              serverSocket.receive(receivePacket);
-	              String sentence = new String( receivePacket.getData(), 0,
-	                                 receivePacket.getLength() );
-	              System.out.println("RECEIVED: " + sentence);
-	              // now send acknowledgement packet back to sender     
-	              InetAddress IPAddress = receivePacket.getAddress();
-	              String sendString = "polo";
-	              byte[] sendData = sendString.getBytes("UTF-8");
-	              DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length,
-	                   IPAddress, receivePacket.getPort());
-	              serverSocket.send(sendPacket);
+			while (true) {
+				datagramSocket.receive(datagramPacket);
+				byte[] data = datagramPacket.getData();
+				final InetAddress address = datagramPacket.getAddress();
+				final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data);
+				log.info("Telem: " + telem);
 	        }
-	      } catch (IOException e) {
-	              System.out.println(e);
-	      }
-	    }
+		} catch(final IOException e) {
+			log.error(e);
+			e.printStackTrace();
+			return;
+		}
 	}
 }
