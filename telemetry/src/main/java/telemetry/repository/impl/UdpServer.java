@@ -23,8 +23,8 @@ public class UdpServer implements Runnable {
 		try {
 			final DatagramSocket datagramSocket = new DatagramSocket();	
 			final String dataString = "hello tester";
-			final DatagramPacket datagramPacket = new DatagramPacket(dataString.getBytes(),dataString.getBytes().length, InetAddress.getByName("127.0.0.1"), 20777);
-			//final DatagramPacket datagramPacket = new DatagramPacket(getPcapBytes(), getPcapBytes().length, InetAddress.getByName("127.0.0.1"), 20777);
+			//final DatagramPacket datagramPacket = new DatagramPacket(dataString.getBytes(),dataString.getBytes().length, InetAddress.getByName("127.0.0.1"), 20777);
+			final DatagramPacket datagramPacket = new DatagramPacket(getPcapBytes(), getPcapBytes().length, InetAddress.getByName("127.0.0.1"), 20777);
 			datagramSocket.send(datagramPacket);
 			datagramSocket.close();
 		} catch(final IOException e) {
