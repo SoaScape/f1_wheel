@@ -1,5 +1,3 @@
-local oneSwCtrlPos = 2
-local oneSWActivated = true
 local mOneSW_Backup = -1
 
 function oneSwitchControlEvent(ctrlType, ctrlPos, value)

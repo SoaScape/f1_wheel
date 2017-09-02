@@ -14,6 +14,9 @@ upEncoder = 24
 downEncoder = 23
 overtakeButton = 13
 
+oneSwCtrlPos = 3
+oneSWActivated = true
+
 overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 9
 overtakeLedPatterns[1] = 32
