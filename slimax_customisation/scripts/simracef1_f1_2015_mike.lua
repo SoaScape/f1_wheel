@@ -5,6 +5,13 @@ local prevCameraKey = "X"
 local nextCameraKey = "C"
 
 myDevice = 3 -- SIMR-F1
+progButton = 3
+confirmButton = 14
+secondaryConfirmButton = 2
+upButton = 26
+downButton = 27
+upEncoder = 23
+downEncoder = 24
 
 minFuel = 10
 

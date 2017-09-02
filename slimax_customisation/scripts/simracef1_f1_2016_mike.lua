@@ -2,6 +2,13 @@ require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
 myDevice = 3 -- SIMR-F1
+progButton = 3
+confirmButton = 14
+secondaryConfirmButton = 2
+upButton = 26
+downButton = 27
+upEncoder = 23
+downEncoder = 24
 
 minFuel = 1
 

@@ -1,12 +1,5 @@
 switch = 0
 pushbutton = 1
-progButton = 3
-confirmButton = 14
-secondaryConfirmButton = 2
-upButton = 26
-downButton = 27
-upEncoder = 23
-downEncoder = 24
 buttonReleaseValue = 0
 
 confirmDelay = 1000
