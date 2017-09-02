@@ -1,7 +1,7 @@
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
-myDevice = 3 -- SIMR-LCD
+myDevice = 16 -- SIMR-LCD
 
 multiFunctionSwitchId = 2
 setValueSwitchId = 1
