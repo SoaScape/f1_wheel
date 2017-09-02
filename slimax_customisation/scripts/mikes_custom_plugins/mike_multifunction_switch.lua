@@ -6,7 +6,6 @@ local multiFunctionSwitchId = 3
 
 local setValueSwitchId = 1
 --------------------------------------------------
-local overtakeButton = 10
 local overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 128
 overtakeLedPatterns[1] = 64
@@ -58,6 +57,7 @@ local function performReset(forceFull)
 end
 
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
+print("deviceType: ".. deviceType.. ", ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
 	if deviceType == myDevice then
 --print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then

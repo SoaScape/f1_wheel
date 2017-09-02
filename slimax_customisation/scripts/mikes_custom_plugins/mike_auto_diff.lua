@@ -2,7 +2,6 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 
 autoDiffMultifunctionName = "ADIF"
 local autoDiffFileExtension = "diff"
-local autoDiffLedPattern = 64 -- LED 4, binary 01000000
 
 local displayTimeout = 500
 local diffInc = 5

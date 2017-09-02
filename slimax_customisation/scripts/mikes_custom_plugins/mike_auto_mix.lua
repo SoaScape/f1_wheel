@@ -3,7 +3,6 @@ require "scripts/mikes_custom_plugins/mike_led_utils"
 autoMixMultifunctionName = "AMIX"
 
 local autoMixFileExtension = "amix"
-local autoMixLedPattern = 128 -- LED 5, binary 10000000
 local displayMixEvents = false
 local displayTimeout = 1000
 

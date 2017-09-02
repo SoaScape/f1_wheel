@@ -12,6 +12,14 @@ upButton = 26
 downButton = 27
 upEncoder = 23
 downEncoder = 24
+overtakeButton = 10
+
+overtakeLedPatterns = {}
+overtakeLedPatterns[0] = 128
+overtakeLedPatterns[1] = 64
+resetLedPattern = 56	-- 1,2,3 = 111000
+autoMixLedPattern = 128 -- LED 5, binary 10000000
+autoDiffLedPattern = 64 -- LED 4
 
 minFuel = 10
 
