@@ -5,6 +5,9 @@ local prevCameraKey = "X"
 local nextCameraKey = "C"
 
 myDevice = 3 -- SIMR-F1
+
+multiFunctionSwitchId = 3
+setValueSwitchId = 1
 progButton = 3
 confirmButton = 14
 secondaryConfirmButton = 2
@@ -20,6 +23,10 @@ overtakeLedPatterns[1] = 64
 resetLedPattern = 56	-- 1,2,3 = 111000
 autoMixLedPattern = 128 -- LED 5, binary 10000000
 autoDiffLedPattern = 64 -- LED 4
+
+progBlinkLedPatterns = {}
+progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
+progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5
 
 minFuel = 10
 

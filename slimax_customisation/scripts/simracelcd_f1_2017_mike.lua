@@ -2,6 +2,9 @@ require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
 myDevice = 3 -- SIMR-LCD
+
+multiFunctionSwitchId = 2
+setValueSwitchId = 1
 progButton = 6
 confirmButton = 1
 secondaryConfirmButton = 6
@@ -17,6 +20,9 @@ overtakeLedPatterns[1] = 32
 resetLedPattern = 120	-- 1,2,3 = 111000
 autoMixLedPattern = 64 -- LED 4
 autoDiffLedPattern = 64 -- LED 4
+
+progBlinkLedPatterns = {}
+progBlinkLedPatterns[0] = 120 -- 1,2,3,4
 
 minFuel = 1
 

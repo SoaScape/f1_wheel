@@ -1,12 +1,5 @@
 require "scripts/mikes_custom_plugins/mike_utils"
 
---------------------------------------------------
--- Set These Values To The Buttons You Want To Use
-local multiFunctionSwitchId = 3
-
-local setValueSwitchId = 1
---------------------------------------------------
-
 currentMultifunction = nil
 
 local selectDelay = 600
