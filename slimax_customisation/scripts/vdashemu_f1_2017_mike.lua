@@ -18,14 +18,14 @@ oneSwCtrlPos = 3
 oneSWActivated = true
 
 overtakeLedPatterns = {}
-overtakeLedPatterns[0] = 9
-overtakeLedPatterns[1] = 32
-resetLedPattern = 120	-- 1,2,3 = 111000
-autoMixLedPattern = 64 -- LED 4
-autoDiffLedPattern = 64 -- LED 4
+overtakeLedPatterns[0] = 8  -- LED 1
+overtakeLedPatterns[1] = 16 --LED 2
+resetLedPattern = 120	-- 1- = 111000
+autoMixLedPattern = 8 -- LED 1
+autoDiffLedPattern = 8 -- LED 1
 
 progBlinkLedPatterns = {}
-progBlinkLedPatterns[0] = 120 -- 1,2,3,4
+progBlinkLedPatterns[0] = 120 -- 1-4
 
 minFuel = 1
 
