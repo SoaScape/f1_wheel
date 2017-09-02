@@ -6,10 +6,7 @@ local multiFunctionSwitchId = 3
 
 local setValueSwitchId = 1
 --------------------------------------------------
-local overtakeLedPatterns = {}
-overtakeLedPatterns[0] = 128
-overtakeLedPatterns[1] = 64
-local resetLedPattern = 56	-- 1,2,3 = 111000
+
 currentMultifunction = nil
 
 local selectDelay = 600
