@@ -47,143 +47,140 @@ local function performReset(forceFull)
 end
 
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
---print("deviceType: " .. deviceType .. ", ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
-	if deviceType == myDevice then
 --print("ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
-		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then
-			if multifunctionMap[value] ~= nil then
-				currentMultifunction = multifunctionMap[value]
-				local left = "MULT"
-				local right = currentMultifunction["name"]
-				if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
-					if currentMultifunction["name"] ~= "OSP" then
-						left = currentMultifunction["name"]
-						right = currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]]
+	if ctrlType == switch and ctrlPos == multiFunctionSwitchId then
+		if multifunctionMap[value] ~= nil then
+			currentMultifunction = multifunctionMap[value]
+			local left = "MULT"
+			local right = currentMultifunction["name"]
+			if currentMultifunction["enabled"] and currentMultifunction["upDnSelectable"] then
+				if currentMultifunction["name"] ~= "OSP" then
+					left = currentMultifunction["name"]
+					right = currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]]
+				else
+					left = "OSP "
+					right = string.format(" %03d  ", GetContextInfo("osp_factor"))
+				end
+			end
+			if (currentMultifunction["enabled"] and (currentMultifunction["display"] == nil or currentMultifunction["display"])) or currentMultifunction["display"] then
+				display(left, right, multiSelectDelay)
+			end
+			return 1
+		end
+
+	elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
+		-- Overtake Button
+		if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue
+		  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName
+		   and currentMultifunction["name"] ~= "autoMixMultifunctionName" then
+			if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
+				toggleOvertakeMode(true, true)
+			end
+		elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
+			-- Multifunction Up/Dn
+			if currentMultifunction["upDnSelectable"] then
+				if ctrlPos == upButton or ctrlPos == upEncoder then
+					if currentMultifunction["name"] == "OSP" then
+						local ospf = GetContextInfo("osp_factor")
+						local inc = 1
+						if ctrlPos == upEncoder then
+							inc = encoderIncrement
+						end
+						ospf = ospf + inc
+						if ospf > 999 then
+							ospf = 999
+						end
+						SetOSPFactor(ospf)
+						display("OSP ", string.format(" %03d  ", ospf), confirmDelay)
+					elseif currentMultifunction["currentUpDnMode"] < currentMultifunction["max"] then
+						currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] + 1
+						if currentMultifunction["upDnConfirmRequired"] then
+							display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
+						else
+							confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
+						end
 					else
-						left = "OSP "
-						right = string.format(" %03d  ", GetContextInfo("osp_factor"))
+						if currentMultifunction["wrap"] then
+							currentMultifunction["currentUpDnMode"] = currentMultifunction["min"]
+						end
+
+						if currentMultifunction["upDnConfirmRequired"] then
+							display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
+						else
+							confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
+						end
 					end
+					return 1
+				elseif ctrlPos == downButton or ctrlPos == downEncoder then
+					if currentMultifunction["name"] == "OSP" then
+						local ospf = GetContextInfo("osp_factor")
+						local inc = 1
+						if ctrlPos == downEncoder then
+							inc = encoderIncrement
+						end
+						ospf = ospf - inc
+						if ospf < 0 then
+							ospf = 0
+						end
+						SetOSPFactor(ospf)
+						display("OSP ", string.format(" %03d  ", ospf), confirmDelay)						
+					elseif currentMultifunction["currentUpDnMode"] > currentMultifunction["min"] then
+						currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] - 1
+						if currentMultifunction["upDnConfirmRequired"] then
+							display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
+						else
+							confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
+						end
+					else
+						if currentMultifunction["wrap"] then
+							currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
+						end
+
+						if currentMultifunction["upDnConfirmRequired"] then
+							display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
+						else
+							confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
+						end
+					end
+					return 1
+				elseif (ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle)) and currentMultifunction["name"] ~= "OSP" then
+					if currentMultifunction["name"] == fuelMultiFunction["name"] then
+						nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
+					end
+					confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
+					return 1
 				end
-				if (currentMultifunction["enabled"] and (currentMultifunction["display"] == nil or currentMultifunction["display"])) or currentMultifunction["display"] then
-					display(left, right, multiSelectDelay)
-				end
+			elseif currentMultifunction["name"] == autoDiffMultifunctionName then
+				processAutoDiffButtonEvent(ctrlPos)
+			elseif currentMultifunction["name"] == autoMixMultifunctionName then
+				processAutoMixButtonEvent(ctrlPos)
+			elseif currentMultifunction["name"] == safetyCarMultifunctionName then
+				processSafetyCarButtonEvent(ctrlPos)
+			-- Multifunction Single Confirm (For non Up-Dn Modes)
+			elseif ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
+				confirmSelection(currentMultifunction["name"], "CONF", getButtonMap(currentMultifunction), true)
 				return 1
 			end
 
-		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
-			-- Overtake Button
-			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue
-			  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName
-			   and currentMultifunction["name"] ~= "autoMixMultifunctionName" then
-				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
-					toggleOvertakeMode(true, true)
-				end
-			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
-				-- Multifunction Up/Dn
-				if currentMultifunction["upDnSelectable"] then
-					if ctrlPos == upButton or ctrlPos == upEncoder then
-						if currentMultifunction["name"] == "OSP" then
-							local ospf = GetContextInfo("osp_factor")
-							local inc = 1
-							if ctrlPos == upEncoder then
-								inc = encoderIncrement
-							end
-							ospf = ospf + inc
-							if ospf > 999 then
-								ospf = 999
-							end
-							SetOSPFactor(ospf)
-							display("OSP ", string.format(" %03d  ", ospf), confirmDelay)
-						elseif currentMultifunction["currentUpDnMode"] < currentMultifunction["max"] then
-							currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] + 1
-							if currentMultifunction["upDnConfirmRequired"] then
-								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
-							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
-							end
-						else
-							if currentMultifunction["wrap"] then
-								currentMultifunction["currentUpDnMode"] = currentMultifunction["min"]
-							end
+		elseif currentMultifunction["name"] ~= resetMultiFunctionName and ctrlType == switch and ctrlPos == setValueSwitchId and currentMultifunction["upDnSelectable"] then
+			upDnValue = value - 1
+			if upDnValue >= currentMultifunction["min"] and upDnValue <= currentMultifunction["max"] then
+				currentMultifunction["currentUpDnMode"] = upDnValue
+				display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
+			end
+			return 1
 
-							if currentMultifunction["upDnConfirmRequired"] then
-								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
-							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
-							end
-						end
-						return 1
-					elseif ctrlPos == downButton or ctrlPos == downEncoder then
-						if currentMultifunction["name"] == "OSP" then
-							local ospf = GetContextInfo("osp_factor")
-							local inc = 1
-							if ctrlPos == downEncoder then
-								inc = encoderIncrement
-							end
-							ospf = ospf - inc
-							if ospf < 0 then
-								ospf = 0
-							end
-							SetOSPFactor(ospf)
-							display("OSP ", string.format(" %03d  ", ospf), confirmDelay)						
-						elseif currentMultifunction["currentUpDnMode"] > currentMultifunction["min"] then
-							currentMultifunction["currentUpDnMode"] = currentMultifunction["currentUpDnMode"] - 1
-							if currentMultifunction["upDnConfirmRequired"] then
-								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
-							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
-							end
-						else
-							if currentMultifunction["wrap"] then
-								currentMultifunction["currentUpDnMode"] = currentMultifunction["max"]
-							end
-
-							if currentMultifunction["upDnConfirmRequired"] then
-								display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
-							else
-								confirmSelection(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
-							end
-						end
-						return 1
-					elseif (ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle)) and currentMultifunction["name"] ~= "OSP" then
-						if currentMultifunction["name"] == fuelMultiFunction["name"] then
-							nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
-						end
-						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
-						return 1
-					end
-				elseif currentMultifunction["name"] == autoDiffMultifunctionName then
-					processAutoDiffButtonEvent(ctrlPos)
-				elseif currentMultifunction["name"] == autoMixMultifunctionName then
-					processAutoMixButtonEvent(ctrlPos)
-				elseif currentMultifunction["name"] == safetyCarMultifunctionName then
-					processSafetyCarButtonEvent(ctrlPos)
-				-- Multifunction Single Confirm (For non Up-Dn Modes)
-				elseif ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
-					confirmSelection(currentMultifunction["name"], "CONF", getButtonMap(currentMultifunction), true)
-					return 1
-				end
-
-			elseif currentMultifunction["name"] ~= resetMultiFunctionName and ctrlType == switch and ctrlPos == setValueSwitchId and currentMultifunction["upDnSelectable"] then
-				upDnValue = value - 1
-				if upDnValue >= currentMultifunction["min"] and upDnValue <= currentMultifunction["max"] then
-					currentMultifunction["currentUpDnMode"] = upDnValue
-					display(currentMultifunction["name"], currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], selectDelay)
-				end
-				return 1
-
-			elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
-				if ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
-					performReset(false)
-				elseif ctrlPos == upButton then
-					resetFuelData()
-					resetLedBlink()
-					display(currentMultifunction["name"], "FUEL", selectDelay)
-				elseif ctrlPos == downButton then
-					performReset(true) -- Force a full reset
-					resetLedBlink()
-					display(currentMultifunction["name"], "FULL", selectDelay)
-				end
+		elseif currentMultifunction["name"] == resetMultiFunctionName and value == buttonReleaseValue then
+			if ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle) then
+				performReset(false)
+			elseif ctrlPos == upButton then
+				resetFuelData()
+				resetLedBlink()
+				display(currentMultifunction["name"], "FUEL", selectDelay)
+			elseif ctrlPos == downButton then
+				performReset(true) -- Force a full reset
+				resetLedBlink()
+				display(currentMultifunction["name"], "FULL", selectDelay)
 			end
 		end
 	end
