@@ -30,11 +30,7 @@ end
 function display(leftStr, rightStr, timeout)
 	if leftStr ~= nul and rightStr ~= nil then
 		local dev
-		if lcdDevice ~= nil then
-			dev = GetDeviceType(lcdDevice)
-		else
-			dev = GetDeviceType(myDevice)
-		end
+		dev = GetDeviceType(myDevice)
 		--print("Display Left: "..leftStr..", Right: "..rightStr..", dev: "..dev)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
