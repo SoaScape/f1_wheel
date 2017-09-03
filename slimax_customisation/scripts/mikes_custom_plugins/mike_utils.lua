@@ -29,7 +29,12 @@ end
 
 function display(leftStr, rightStr, timeout)
 	if leftStr ~= nul and rightStr ~= nil then
-		local dev = GetDeviceType(myDevice)
+		local dev
+		if displayDevice ~= nil then
+			dev = GetDeviceType(displayDevice)
+		else
+			dev = GetDeviceType(myDevice)
+		end
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
 		customDisplayTicksTimeout = getTks() + timeout
