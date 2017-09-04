@@ -30,6 +30,9 @@ public class UdpRepositoryF12017Impl implements Runnable {
 
 	@Value("${forward-udp-data}")
 	private Boolean forwardUdpData;
+	
+	@Value("${proxy-only}")
+	private Boolean proxyOnly;
 
 	@Override
 	public void run() {
@@ -39,8 +42,10 @@ public class UdpRepositoryF12017Impl implements Runnable {
 			while (true) {
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
-				final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data, codemastersLookups);
-				log.info("Telem: " + telem);
+				if(!proxyOnly) {
+					final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data, codemastersLookups);
+					log.info("Telem: " + telem);
+				}
 				if(forwardUdpData) {
 					udpServer.sendProxyUdpData(data);
 				}
