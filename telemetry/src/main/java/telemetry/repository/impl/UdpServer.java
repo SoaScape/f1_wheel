@@ -1,16 +1,18 @@
 package telemetry.repository.impl;
 
-import java.io.BufferedReader;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
 import lombok.extern.log4j.Log4j;
@@ -18,13 +20,27 @@ import lombok.extern.log4j.Log4j;
 @Repository
 @Log4j
 public class UdpServer implements Runnable {
+	@Value("#{${udp-proxy-ports}}")
+	private List<Integer> proxyPorts;
+
+	@Value("${udp-listen-port}")
+	private Integer udpListenPort;
+
+	@Value("${ip}")
+	private String ip;
+
 	@Override
 	public void run() {
+	}
+
+	public void sendProxyUdpData(final byte[] data) {
+		proxyPorts.forEach(port -> sendUdpData(data, port));
+	}
+
+	private void sendUdpData(final byte[] data, final Integer port) {
 		try {
-			final DatagramSocket datagramSocket = new DatagramSocket();	
-			final String dataString = "hello tester";
-			//final DatagramPacket datagramPacket = new DatagramPacket(dataString.getBytes(),dataString.getBytes().length, InetAddress.getByName("127.0.0.1"), 20777);
-			final DatagramPacket datagramPacket = new DatagramPacket(getPcapBytes(), getPcapBytes().length, InetAddress.getByName("127.0.0.1"), 20777);
+			final DatagramSocket datagramSocket = new DatagramSocket();
+			final DatagramPacket datagramPacket = new DatagramPacket(data, data.length, InetAddress.getByName(ip), port);
 			datagramSocket.send(datagramPacket);
 			datagramSocket.close();
 		} catch(final IOException e) {
@@ -32,11 +48,15 @@ public class UdpServer implements Runnable {
 		}
 	}
 	
+	public void sendTestPacket() {
+		sendUdpData(getPcapBytes(), udpListenPort);
+	}
+	
 	private byte[] getPcapBytes() {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	    final DataOutputStream dos = new DataOutputStream(baos);
 	    byte[] data = new byte[4096];
-	    try (final FileInputStream inputStream = new FileInputStream(new File("/packet.bin"))) {
+	    try (final InputStream inputStream = new ClassPathResource("sample-packet.bin").getInputStream()) {
 		    int count = inputStream.read(data);
 		    while(count != -1) {
 		        dos.write(data, 0, count);
@@ -44,7 +64,7 @@ public class UdpServer implements Runnable {
 		    }
 		    return baos.toByteArray();
 	    } catch(final IOException e) {
-	    	log.error(e);
+	    	log.error(e.getMessage());
 	    	return null;
 	    }
 	}

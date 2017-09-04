@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class TelemetryDataF12017Impl implements TelemetryData {
-	
 	private static final Integer FLOAT_SIZE_IN_BYTES = Float.SIZE / Byte.SIZE;
 	private float time;
 	private float lapTime;
