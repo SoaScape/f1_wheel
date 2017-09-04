@@ -110,7 +110,6 @@ function getMfdShortcutButtons(multifunction)
 		end
 		currentSetting = multifunction["currentPosition"]
 	end
-
 	-- Don't process if position is already set
 	if positionPreviouslyUnknown or currentSetting ~= multifunction["currentUpDnMode"] then
 		multifunction["currentPosition"] = multifunction["currentUpDnMode"]

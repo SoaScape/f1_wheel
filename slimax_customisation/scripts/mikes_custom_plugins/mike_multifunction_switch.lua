@@ -7,6 +7,7 @@ local multiSelectDelay = 500
 local encoderIncrement = 10
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
+local fuelModeBak
 
 local function resetLedBlink()
 	activateBlinkingLed(resetLedPattern, 45, 100, false)
@@ -197,7 +198,7 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 	if overtakeEngaged then
 		overtakeEngaged = false
 		autoMixInhibitOff()
-
+		fuelMultiFunction["currentUpDnMode"] = fuelModeBak
 		if sendButtons then
 			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 			confirmSelection("OVTK", " END", getButtonMap(fuelMultiFunction), showDisplay)			
@@ -214,13 +215,12 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 		overtakeEngaged = true
 		autoMixInhibitOn()
 
-		local fuelModeBak = fuelMultiFunction["currentUpDnMode"]
+		fuelModeBak = fuelMultiFunction["currentUpDnMode"]
 		fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
 		if sendButtons then
 			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 			confirmSelection("OVER", "TAKE", getButtonMap(fuelMultiFunction), showDisplay)
 		end
-		fuelMultiFunction["currentUpDnMode"] = fuelModeBak
 		
 		if showDisplay then
 			activateAlternateBlinkingLeds("overtake", overtakeLedPatterns, nil, false, 0)
