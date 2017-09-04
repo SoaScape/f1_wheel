@@ -3,6 +3,9 @@ package telemetry.domain;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
 
 import lombok.Data;
 
@@ -11,6 +14,14 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	private static final Integer FLOAT_SIZE_IN_BYTES = Float.SIZE / Byte.SIZE;
 	private static final Integer CAR_DATA_SIZE_BYTES = 45;
 
+	@Value("#{${fuel-mix-lookup}}")
+	private static Map<Integer, String> fuelMixLookup;	
+	@Value("#{${team-lookup}}")
+	private static Map<Integer, String> teamLookup;	
+	@Value("#{${track-lookup}}")
+	private static Map<Integer, String> trackLookup;
+
+	// Wheel order for all arrays: 0=rear left, 1=rear right, 2=front left, 3=front right
 	private float time;
 	private float lapTime;
 	private float lapDistance;
@@ -53,9 +64,9 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	private float sector;
 	private float sector1Time;
 	private float sector2Time;
-	private float[] brakeTemps = new float[4];
+	private float[] brakeTemps = new float[4]; // Celsius
 	private float[] tyrePressures = new float[4];
-	private float teamInfo;
+	private Integer teamInfo;
 	private float totalLaps;
 	private float trackSize;
 	private float lastLapTime;
@@ -99,6 +110,18 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 		mapFieldsFromBytes(data);
 	}
 	
+	public String getTrackName() {
+		return trackLookup.get(this.trackId);
+	}
+	
+	public String getTeamName() {
+		return teamLookup.get(this.teamInfo);
+	}
+	
+	public String getFuelMixName() {
+		return fuelMixLookup.get(this.fuelMix);
+	}
+	
 	@Data
 	public class CarData {
 		private float[] worldPosition = new float[3]; // world co-ordinates of vehicle
@@ -137,6 +160,10 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 			this.sector = data[42];
 			this.currentLapInvalid = data[43];
 			this.penalties = data[44];
+		}
+		
+		public String getTeamName() {
+			return teamLookup.get(this.teamId);
 		}
 	}
 	
@@ -200,7 +227,7 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 		this.tyrePressures[1] = decodeFloat(data, 224);
 		this.tyrePressures[2] = decodeFloat(data, 228);
 		this.tyrePressures[3] = decodeFloat(data, 232);
-		this.teamInfo = decodeFloat(data, 236);
+		this.teamInfo = Math.round(decodeFloat(data, 236));
 		this.totalLaps = decodeFloat(data, 240);
 		this.trackSize = decodeFloat(data, 244);
 		this.lastLapTime = decodeFloat(data, 248);
