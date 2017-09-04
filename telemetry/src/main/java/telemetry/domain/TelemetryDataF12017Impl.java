@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class TelemetryDataF12017Impl implements TelemetryData {
 	private static final Integer FLOAT_SIZE_IN_BYTES = Float.SIZE / Byte.SIZE;
+	private static final Integer CAR_DATA_SIZE_BYTES = 45;
+
 	private float time;
 	private float lapTime;
 	private float lapDistance;
@@ -91,9 +93,51 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	private byte spectatorCarIndex;
 	private byte numCars;
 	private byte playerCarIndex;
+	private CarData[] carData = new CarData[20];
 
 	public TelemetryDataF12017Impl(final byte[] data) {
 		mapFieldsFromBytes(data);
+	}
+	
+	@Data
+	public class CarData {
+		private float[] worldPosition = new float[3]; // world co-ordinates of vehicle
+		private float lastLapTime;
+		private float currentLapTime;
+		private float bestLapTime;
+		private float sector1Time;
+		private float sector2Time;
+		private float lapDistance;
+		private byte driverId;
+		private byte teamId;
+		private byte carPosition; // UPDATED: track positions of vehicle
+		private byte currentLapNum;
+		private byte tyreCompound;
+		private byte inPits; // 0 = none, 1 = pitting, 2 = in pit area
+		private byte sector; // 0 = sector1, 1 = sector2, 2 = sector3
+		private byte currentLapInvalid; // current lap invalid - 0 = valid, 1 = invalid
+		private byte penalties; // NEW: accumulated time penalties in seconds to be added
+
+		public CarData(final byte[] data) {
+			this.worldPosition[0] = decodeFloat(data, 0);
+			this.worldPosition[1] = decodeFloat(data, 4);
+			this.worldPosition[2] = decodeFloat(data, 8);
+			this.lastLapTime = decodeFloat(data, 12);
+			this.currentLapTime = decodeFloat(data, 16);
+			this.bestLapTime = decodeFloat(data, 20);
+			this.sector1Time = decodeFloat(data, 24);
+			this.sector2Time = decodeFloat(data, 28);
+			this.lapDistance = decodeFloat(data, 32);
+			this.driverId = data[36];
+			this.teamId = data[37];
+			this.carPosition = data[38];
+			this.currentLapNum = data[39];
+			this.tyreCompound = data[40];
+			this.inPits = data[41];
+			this.sector = data[42];
+			this.currentLapInvalid = data[43];
+			this.penalties = data[44];
+		}
 	}
 	
 	private void mapFieldsFromBytes(final byte[] data) {
@@ -203,6 +247,12 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 		this.spectatorCarIndex = data[334];
 		this.numCars = data[335];		
 		this.playerCarIndex = data[336];
+		
+		int carDataIndex = 337;
+		for(int i = 0; i < this.carData.length; i++) {
+			this.carData[i] = new CarData(Arrays.copyOfRange(data, carDataIndex, carDataIndex + CAR_DATA_SIZE_BYTES));
+			carDataIndex = carDataIndex + CAR_DATA_SIZE_BYTES;
+		}
 	}
 	
 	private float decodeFloat(byte[] data, int start) {
