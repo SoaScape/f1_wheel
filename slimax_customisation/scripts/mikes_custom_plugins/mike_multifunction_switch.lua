@@ -198,8 +198,8 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 	if overtakeEngaged then
 		overtakeEngaged = false
 		autoMixInhibitOff()
-		fuelMultiFunction["currentUpDnMode"] = fuelModeBak
 		if sendButtons then
+			fuelMultiFunction["currentUpDnMode"] = fuelModeBak
 			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 			confirmSelection("OVTK", " END", getButtonMap(fuelMultiFunction), showDisplay)			
 		end
