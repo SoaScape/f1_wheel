@@ -3,12 +3,14 @@ package telemetry.repository.impl;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import lombok.extern.log4j.Log4j;
+import telemetry.domain.CodemastersLookups;
 import telemetry.domain.TelemetryDataF12017Impl;
 
 @Repository
@@ -16,6 +18,9 @@ import telemetry.domain.TelemetryDataF12017Impl;
 public class UdpRepositoryF12017Impl implements Runnable {
 	@Autowired
 	private UdpServer udpServer;
+
+	@Autowired
+	private CodemastersLookups codemastersLookups;
 
 	@Value("${udp-listen-port}")
 	private Integer udpListenPort;
@@ -34,7 +39,7 @@ public class UdpRepositoryF12017Impl implements Runnable {
 			while (true) {
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
-				final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data);
+				final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data, codemastersLookups);
 				log.info("Telem: " + telem);
 				if(forwardUdpData) {
 					udpServer.sendProxyUdpData(data);

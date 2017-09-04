@@ -3,23 +3,21 @@ package telemetry.domain;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Value;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString(exclude="codemastersLookups")
 public class TelemetryDataF12017Impl implements TelemetryData {
 	private static final Integer FLOAT_SIZE_IN_BYTES = Float.SIZE / Byte.SIZE;
 	private static final Integer CAR_DATA_SIZE_BYTES = 45;
-
-	@Value("#{${fuel-mix-lookup}}")
-	private static Map<Integer, String> fuelMixLookup;	
-	@Value("#{${team-lookup}}")
-	private static Map<Integer, String> teamLookup;	
-	@Value("#{${track-lookup}}")
-	private static Map<Integer, String> trackLookup;
+	
+	private CodemastersLookups codemastersLookups;
+	
+	private String fuelMixName;
+	private String trackName;
+	private String teamName;
 
 	// Wheel order for all arrays: 0=rear left, 1=rear right, 2=front left, 3=front right
 	private float time;
@@ -87,7 +85,7 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	private byte[] tyreWear = new byte[4];
 	private byte tyreCompound;	
 	private byte frontBrakeBias;
-	private byte fuelMix;
+	private Byte fuelMix;
 	private byte currentLapInvalid;
 	private byte[] tyreDamage = new byte[4];
 	private byte frontLeftWingDamage;
@@ -106,67 +104,24 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	private byte playerCarIndex;
 	private CarData[] carData = new CarData[20];
 
-	public TelemetryDataF12017Impl(final byte[] data) {
+	public TelemetryDataF12017Impl(final byte[] data, final CodemastersLookups codemastersLookups) {
+		this.codemastersLookups = codemastersLookups;
 		mapFieldsFromBytes(data);
 	}
 	
-	public String getTrackName() {
-		return trackLookup.get(this.trackId);
+	private void setTrackName() {
+		this.trackName = codemastersLookups.trackLookup.get(Math.round(this.trackId));
 	}
 	
-	public String getTeamName() {
-		return teamLookup.get(this.teamInfo);
+	private void setTeamName() {
+		this.teamName = codemastersLookups.teamLookup.get(this.teamInfo);
 	}
 	
-	public String getFuelMixName() {
-		return fuelMixLookup.get(this.fuelMix);
+	private void setFuelMixName() {
+		this.fuelMixName = codemastersLookups.fuelMixLookup.get(this.fuelMix.intValue());
 	}
 	
-	@Data
-	public class CarData {
-		private float[] worldPosition = new float[3]; // world co-ordinates of vehicle
-		private float lastLapTime;
-		private float currentLapTime;
-		private float bestLapTime;
-		private float sector1Time;
-		private float sector2Time;
-		private float lapDistance;
-		private byte driverId;
-		private byte teamId;
-		private byte carPosition; // UPDATED: track positions of vehicle
-		private byte currentLapNum;
-		private byte tyreCompound;
-		private byte inPits; // 0 = none, 1 = pitting, 2 = in pit area
-		private byte sector; // 0 = sector1, 1 = sector2, 2 = sector3
-		private byte currentLapInvalid; // current lap invalid - 0 = valid, 1 = invalid
-		private byte penalties; // NEW: accumulated time penalties in seconds to be added
 
-		public CarData(final byte[] data) {
-			this.worldPosition[0] = decodeFloat(data, 0);
-			this.worldPosition[1] = decodeFloat(data, 4);
-			this.worldPosition[2] = decodeFloat(data, 8);
-			this.lastLapTime = decodeFloat(data, 12);
-			this.currentLapTime = decodeFloat(data, 16);
-			this.bestLapTime = decodeFloat(data, 20);
-			this.sector1Time = decodeFloat(data, 24);
-			this.sector2Time = decodeFloat(data, 28);
-			this.lapDistance = decodeFloat(data, 32);
-			this.driverId = data[36];
-			this.teamId = data[37];
-			this.carPosition = data[38];
-			this.currentLapNum = data[39];
-			this.tyreCompound = data[40];
-			this.inPits = data[41];
-			this.sector = data[42];
-			this.currentLapInvalid = data[43];
-			this.penalties = data[44];
-		}
-		
-		public String getTeamName() {
-			return teamLookup.get(this.teamId);
-		}
-	}
-	
 	private void mapFieldsFromBytes(final byte[] data) {
 		this.time = decodeFloat(data, 0);
 		this.lapTime = decodeFloat(data, 4);
@@ -275,6 +230,10 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 		this.numCars = data[335];		
 		this.playerCarIndex = data[336];
 		
+		setFuelMixName();
+		setTrackName();
+		setTeamName();
+		
 		int carDataIndex = 337;
 		for(int i = 0; i < this.carData.length; i++) {
 			this.carData[i] = new CarData(Arrays.copyOfRange(data, carDataIndex, carDataIndex + CAR_DATA_SIZE_BYTES));
@@ -284,5 +243,52 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	
 	private float decodeFloat(byte[] data, int start) {
 		return ByteBuffer.wrap(Arrays.copyOfRange(data, start, start + FLOAT_SIZE_IN_BYTES)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
+	}
+	
+	@Data
+	public class CarData {
+		private String teamName;
+
+		private float[] worldPosition = new float[3]; // world co-ordinates of vehicle
+		private float lastLapTime;
+		private float currentLapTime;
+		private float bestLapTime;
+		private float sector1Time;
+		private float sector2Time;
+		private float lapDistance;
+		private byte driverId;
+		private Byte teamId;		
+		private byte carPosition; // UPDATED: track positions of vehicle
+		private byte currentLapNum;
+		private byte tyreCompound;
+		private byte inPits; // 0 = none, 1 = pitting, 2 = in pit area
+		private byte sector; // 0 = sector1, 1 = sector2, 2 = sector3
+		private byte currentLapInvalid; // current lap invalid - 0 = valid, 1 = invalid
+		private byte penalties; // NEW: accumulated time penalties in seconds to be added
+
+		public CarData(final byte[] data) {
+			this.worldPosition[0] = decodeFloat(data, 0);
+			this.worldPosition[1] = decodeFloat(data, 4);
+			this.worldPosition[2] = decodeFloat(data, 8);
+			this.lastLapTime = decodeFloat(data, 12);
+			this.currentLapTime = decodeFloat(data, 16);
+			this.bestLapTime = decodeFloat(data, 20);
+			this.sector1Time = decodeFloat(data, 24);
+			this.sector2Time = decodeFloat(data, 28);
+			this.lapDistance = decodeFloat(data, 32);
+			this.driverId = data[36];
+			this.teamId = data[37];
+			this.carPosition = data[38];
+			this.currentLapNum = data[39];
+			this.tyreCompound = data[40];
+			this.inPits = data[41];
+			this.sector = data[42];
+			this.currentLapInvalid = data[43];
+			this.penalties = data[44];
+			setTeamName();
+		}
+		private void setTeamName() {
+			this.teamName = codemastersLookups.teamLookup.get(this.teamId.intValue());
+		}
 	}
 }
