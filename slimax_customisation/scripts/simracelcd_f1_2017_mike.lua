@@ -3,6 +3,8 @@ require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
 myDevice = 16 -- SIMR-LCD
 
+ledOnly = true -- Don't process keypress, display events etc. Usefull if running >1 device using the scripts.
+
 multiFunctionSwitchId = 2
 setValueSwitchId = 1
 progButton = 6

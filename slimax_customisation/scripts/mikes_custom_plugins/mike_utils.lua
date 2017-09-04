@@ -28,10 +28,10 @@ function customDisplayIsActive()
 end
 
 function display(leftStr, rightStr, timeout)
-	if leftStr ~= nul and rightStr ~= nil then
+	if ledOnly == nil and leftStr ~= nul and rightStr ~= nil then
 		local dev
 		dev = GetDeviceType(myDevice)
-		--print("Display Left: "..leftStr..", Right: "..rightStr..", dev: "..dev)
+--print("Display Left: "..leftStr..", Right: "..rightStr..", dev: "..dev)
 		UpdateDigits(leftStr, rightStr, dev)
 		SLISendReport(0)
 		customDisplayTicksTimeout = getTks() + timeout
@@ -88,31 +88,32 @@ local function queueKeyPress(key, holdDelay, delayTime)
 end
 
 function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
-	local startTicks = getTks()
-	if mSessionEnter == 1 and not(m_is_sim_idle) and not(inPits()) then
-		if buttonMap ~= nil and tablelength(buttonMap) > 0 then
+	if ledOnly == nil then
+		if mSessionEnter == 1 and not(m_is_sim_idle) and not(inPits()) then
+			if buttonMap ~= nil and tablelength(buttonMap) > 0 then
 --local inspect = require('inspect')
 --print(inspect(buttonMap))
-			for i = 1, tablelength(buttonMap) do
-				local delay = keystrokeDelay
-				local holdDelay = keyHoldDelay
-				if delayMap ~= nil and delayMap[i] ~= nil then
-					delay = delayMap[i]
-				elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
-					delay = customKeystrokeDelays[buttonMap[i]]
+				for i = 1, tablelength(buttonMap) do
+					local delay = keystrokeDelay
+					local holdDelay = keyHoldDelay
+					if delayMap ~= nil and delayMap[i] ~= nil then
+						delay = delayMap[i]
+					elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
+						delay = customKeystrokeDelays[buttonMap[i]]
+					end
+					
+					if keyHoldMap ~= nil and keyHoldMap[i] ~= nil then
+						holdDelay = keyHoldMap[i]
+					end
+					queueKeyPress(buttonMap[i], holdDelay, delay)			
 				end
-				
-				if keyHoldMap ~= nil and keyHoldMap[i] ~= nil then
-					holdDelay = keyHoldMap[i]
-				end
-				queueKeyPress(buttonMap[i], holdDelay, delay)			
+				delayMap = nil
+			else
+				leftDisp = "CURR"
 			end
-			delayMap = nil
-		else
-			leftDisp = "CURR"
-		end
-		if showDisplay then
-			display(leftDisp, rightDisplay, confirmDelay)
+			if showDisplay then
+				display(leftDisp, rightDisplay, confirmDelay)
+			end
 		end
 	end
 end
