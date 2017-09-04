@@ -5,11 +5,6 @@ local raceStartModeActive = false
 local lastMode = ""
 
 local raceStartLedId = "racestart"
-local raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 0x58		-- 1, 2, 4  = 01011000
-raceStartLedPatterns[1] = 0xA8		-- 1, 3, 5  = 10101000
-
-local raceGoLedPattern = 0xF8		-- 1 - 5 = 0xF8 (248)
 local raceGoLedDelay = 75
 local raceGoLedDuration = 600
 

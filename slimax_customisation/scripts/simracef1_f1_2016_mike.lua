@@ -24,6 +24,11 @@ resetLedPattern = 56	-- 1,2,3 = 111000
 autoMixLedPattern = 128 -- LED 5, binary 10000000
 autoDiffLedPattern = 64 -- LED 4
 
+raceStartLedPatterns = {}
+raceStartLedPatterns[0] = 0x58		-- 1, 2, 4  = 01011000
+raceStartLedPatterns[1] = 0xA8		-- 1, 3, 5  = 10101000
+raceGoLedPattern = 0xF8		-- 1 - 5 = 0xF8 (248)
+
 progBlinkLedPatterns = {}
 progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
 progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5

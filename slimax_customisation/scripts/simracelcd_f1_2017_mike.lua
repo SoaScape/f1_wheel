@@ -26,8 +26,13 @@ resetLedPattern = 120	-- 1- = 111000
 autoMixLedPattern = 8 -- LED 1
 autoDiffLedPattern = 8 -- LED 1
 
+raceStartLedPatterns = {}
+raceStartLedPatterns[0] = 0x60		-- 3, 4
+raceStartLedPatterns[1] = 18		-- 1, 2
+raceGoLedPattern = 0x78		-- 1 - 4
+
 progBlinkLedPatterns = {}
-progBlinkLedPatterns[0] = 120 -- 1-4
+progBlinkLedPatterns[0] = 0x78 -- 1-4
 
 minFuel = 1
 
