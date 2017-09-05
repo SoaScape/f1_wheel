@@ -48,8 +48,8 @@ local function performReset(forceFull)
 end
 
 function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
+--print("myDevice: " .. myDevice .. " -> deviceType: " .. deviceType .. ", ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
 	if deviceType == myDevice then
---print("deviceType: " .. deviceType .. ", ctrlType: " .. ctrlType .. ", ctrlPos: " .. ctrlPos .. ", value: " .. value .. ".\n")
 		if ctrlType == switch and ctrlPos == multiFunctionSwitchId then
 			if multifunctionMap[value] ~= nil then
 				currentMultifunction = multifunctionMap[value]
