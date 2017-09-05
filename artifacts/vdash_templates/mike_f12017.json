@@ -1,0 +1,1644 @@
+{
+objs: [
+	{
+		objName: label_LAP
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 476
+		x: 716
+		width: 130
+		height: 47
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 104
+		text_Caption: LAP
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_RPM
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 136
+		width: 58
+		height: 19
+		zIndex: 1
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 105
+		text_Caption: RPM
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_POS
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			r: 1
+			a: 1
+		}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 476
+		x: 516
+		width: 137
+		height: 47
+		zIndex: 2
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 106
+		text_Caption: POS
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_FUEL
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 36
+		x: 136
+		width: 171
+		height: 47
+		zIndex: 3
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 107
+		text_Caption: FUEL
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_WATER
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 22
+		width: 94
+		height: 19
+		zIndex: 4
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 108
+		text_Caption: WATER
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_OIL
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 876
+		width: 43
+		height: 19
+		zIndex: 5
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 109
+		text_Caption: OIL
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_SECTOR
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 288
+		width: 27
+		height: 19
+		zIndex: 6
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 110
+		text_Caption: S:
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_PB
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 255
+		x: 116
+		width: 191
+		height: 19
+		zIndex: 7
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 111
+		text_Caption: Best Lap Time:
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: label_LAST
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 185
+		x: 116
+		width: 188
+		height: 19
+		zIndex: 8
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 112
+		text_Caption: Last Lap Time:
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: data_tire_temp_lf
+		objGroup: STD_GAUGE
+		objType: GAUGE_TIRE_TEMP
+		objBehavior: ALTERNATE_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {}
+		scaleX: 1
+		scaleY: 1
+		y: 260
+		x: 600
+		width: 106
+		height: 135
+		zIndex: 9
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 113
+		field_index: 65
+		field_index_max: 200
+		revLimit_maxValue: 100
+		text_Caption: FL
+		upperCaption: ""
+		text_format: ""
+		forceMaxValue: true
+		autoUnit: true
+	}
+	{
+		objName: data_tire_temp_rf
+		objGroup: STD_GAUGE
+		objType: GAUGE_TIRE_TEMP
+		objBehavior: ALTERNATE_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {}
+		scaleX: 1
+		scaleY: 1
+		y: 260
+		x: 740
+		width: 106
+		height: 135
+		zIndex: 10
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 114
+		field_index: 66
+		field_index_max: 200
+		revLimit_maxValue: 100
+		text_Caption: FR
+		upperCaption: ""
+		text_format: ""
+		forceMaxValue: true
+		autoUnit: true
+	}
+	{
+		objName: data_tire_temp_lr
+		objGroup: STD_GAUGE
+		objType: GAUGE_TIRE_TEMP
+		objBehavior: ALTERNATE_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {}
+		scaleX: 1
+		scaleY: 1
+		y: 100
+		x: 600
+		width: 106
+		height: 135
+		zIndex: 11
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 115
+		field_index: 67
+		field_index_max: 200
+		revLimit_maxValue: 100
+		text_Caption: RL
+		upperCaption: ""
+		text_format: ""
+		forceMaxValue: true
+		autoUnit: true
+	}
+	{
+		objName: data_tire_temp_rr
+		objGroup: STD_GAUGE
+		objType: GAUGE_TIRE_TEMP
+		objBehavior: ALTERNATE_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {}
+		scaleX: 1
+		scaleY: 1
+		y: 100
+		x: 740
+		width: 106
+		height: 135
+		zIndex: 12
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 116
+		field_index: 68
+		field_index_max: 200
+		revLimit_maxValue: 100
+		text_Caption: RR
+		upperCaption: ""
+		text_format: ""
+		forceMaxValue: true
+		autoUnit: true
+	}
+	{
+		objName: data_lap
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 416
+		x: 736
+		width: 72
+		height: 47
+		zIndex: 13
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 117
+		field_index: 1
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %02.0f
+		autoUnit: true
+	}
+	{
+		objName: data_total_laps
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 416
+		x: 816
+		width: 90
+		height: 47
+		zIndex: 14
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 118
+		text_Caption: "/00"
+		upperCaption: ""
+		text_format: "/%02.0f"
+		autoUnit: true
+	}
+	{
+		objName: data_rpm
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 208
+		width: 42
+		height: 19
+		zIndex: 15
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 119
+		field_index: 3
+		text_Caption: "    0"
+		upperCaption: ""
+		text_format: %5.0f
+		autoUnit: true
+	}
+	{
+		objName: data_pos
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 1
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 416
+		x: 576
+		width: 72
+		height: 47
+		zIndex: 16
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 120
+		field_index: 2
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %02.0f
+		autoUnit: true
+	}
+	{
+		objName: data_fuel
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_FUEL
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 36
+		x: 616
+		width: 131
+		height: 47
+		zIndex: 17
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 121
+		field_index: 11
+		text_Caption: F0.0
+		upperCaption: ""
+		text_format: F%3.1f
+		autoUnit: true
+	}
+	{
+		objName: data_water temp
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_TEMP
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 36
+		x: 16
+		width: 108
+		height: 47
+		zIndex: 18
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 122
+		field_index: 7
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %03.0f
+		autoUnit: true
+	}
+	{
+		objName: data_oil
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_TEMP
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			g: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 36
+		x: 842
+		width: 108
+		height: 47
+		zIndex: 19
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 123
+		field_index: 6
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %03.0f
+		autoUnit: true
+	}
+	{
+		objName: data_bbias
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.95
+		scaleY: 0.95
+		y: 376
+		x: 43
+		width: 297.35
+		height: 153.9
+		zIndex: 20
+		fntSize: FNT_XLARGE
+		fntName: FNT_ARIAL
+		controlIndex: 124
+		field_index: 13
+		text_Caption: 0.0
+		upperCaption: ""
+		text_format: %2.1f
+		autoUnit: true
+	}
+	{
+		objName: data_sector
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 320
+		width: 21
+		height: 19
+		zIndex: 21
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 125
+		field_index: 30
+		text_Caption: " 0"
+		upperCaption: ""
+		text_format: %2.0f
+		autoUnit: true
+	}
+	{
+		objName: data_best_time
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_TIME
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.64705884
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.9
+		scaleY: 0.9
+		y: 209
+		x: 109
+		width: 249.3
+		height: 42.3
+		zIndex: 22
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 126
+		field_index: 23
+		text_Caption: " 1:52.217"
+		upperCaption: ""
+		text_format: %s
+		autoUnit: true
+	}
+	{
+		objName: data_last_time
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_TIME
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.9
+		scaleY: 0.9
+		y: 135
+		x: 109
+		width: 249.3
+		height: 42.3
+		zIndex: 23
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 127
+		field_index: 24
+		text_Caption: " 1:52.217"
+		upperCaption: ""
+		text_format: %s
+		autoUnit: true
+	}
+	{
+		objName: data_press_lf
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_PRESS
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 376
+		x: 596
+		width: 42
+		height: 19
+		zIndex: 24
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 128
+		field_index: 18
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %03.0f
+		autoUnit: true
+		forcePSI: true
+	}
+	{
+		objName: data_press_rf
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_PRESS
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 376
+		x: 736
+		width: 42
+		height: 19
+		zIndex: 25
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 129
+		field_index: 19
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %03.0f
+		autoUnit: true
+		forcePSI: true
+	}
+	{
+		objName: data_press_lr
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_PRESS
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 216
+		x: 596
+		width: 42
+		height: 19
+		zIndex: 26
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 130
+		field_index: 20
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %03.0f
+		autoUnit: true
+		forcePSI: true
+	}
+	{
+		objName: data_press_rr
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_PRESS
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 216
+		x: 736
+		width: 42
+		height: 19
+		zIndex: 27
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 131
+		field_index: 21
+		text_Caption: 0
+		upperCaption: ""
+		text_format: %03.0f
+		autoUnit: true
+		forcePSI: true
+	}
+	{
+		objName: data_gear
+		objGroup: GEAR
+		objType: TYPE_UNKNOWN
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 260
+		x: 420
+		width: 128.7
+		height: 162
+		zIndex: 28
+		fntSize: FNT_XLARGE
+		fntName: FNT_7SEG
+		controlIndex: 132
+		text_Caption: 0
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: data_fuel
+		objGroup: STD_GAUGE
+		objType: GAUGE_FUEL
+		objBehavior: GAUGE_HORIZONTAL
+		objStyle: GAUGE_STYLE_CAPTION
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			a: 1
+		}
+		borderColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 40
+		x: 316
+		width: 291
+		height: 40
+		zIndex: 29
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 133
+		field_index: 11
+		field_index_max: 12
+		revLimit_maxValue: -20
+		text_Caption: ""
+		upperCaption: ""
+		text_format: ""
+		autoUnit: true
+	}
+	{
+		objName: data_oil
+		objGroup: STD_GAUGE
+		objType: GAUGE_PRESSURE
+		objBehavior: GAUGE_VERTICAL
+		objStyle: GAUGE_STYLE1
+		visible: true
+		objColor: {
+			g: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			r: 0.24705882
+			g: 0.24705882
+			b: 0.24705882
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 140
+		x: 880
+		width: 48
+		height: 260
+		zIndex: 30
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 134
+		field_index: 6
+		field_index_max: 150
+		revLimit_maxValue: 134
+		text_Caption: ""
+		upperCaption: ""
+		text_format: ""
+		forceMaxValue: true
+		autoUnit: true
+	}
+	{
+		objName: data_water
+		objGroup: STD_GAUGE
+		objType: GAUGE_PRESSURE
+		objBehavior: GAUGE_VERTICAL
+		objStyle: GAUGE_STYLE1
+		visible: true
+		objColor: {
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			r: 0.24705882
+			g: 0.24705882
+			b: 0.24705882
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 126
+		x: 40
+		width: 56
+		height: 134
+		zIndex: 31
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 135
+		field_index: 7
+		field_index_max: 150
+		revLimit_maxValue: 130
+		text_Caption: ""
+		upperCaption: ""
+		text_format: ""
+		forceMaxValue: true
+		autoUnit: true
+	}
+	{
+		objName: Left_panel
+		objGroup: DIGITS_PANEL
+		objType: LEFTPANEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.9000001
+		scaleY: 0.9000001
+		y: 295
+		x: 45
+		width: 258.0542
+		height: 81.600006
+		zIndex: 32
+		fntSize: FNT_LARGE
+		fntName: FNT_14SEG
+		controlIndex: 136
+		text_Caption: 0
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Right_panel
+		objGroup: DIGITS_PANEL
+		objType: RIGHTPANEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.79999995
+		scaleY: 0.79999995
+		y: 94
+		x: 385
+		width: 185.8163
+		height: 62.199997
+		zIndex: 33
+		fntSize: FNT_NORMAL
+		fntName: FNT_14SEG
+		controlIndex: 137
+		text_Caption: 0
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: flag_pit_limiter
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_FLAG
+		objStyle: BLINK
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		backgroundColor: {
+			r: 1
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 176
+		x: 176
+		width: 601
+		height: 85
+		zIndex: 34
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 138
+		field_index: 16
+		text_Caption: PIT LIMITER
+		upperCaption: ""
+		text_format: %s
+		autoUnit: true
+	}
+	{
+		objName: Rect212
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 172.5
+		x: 477.5
+		width: 64.32963
+		height: 26.520052
+		zIndex: 35
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 139
+		field_index: 12
+		text_Caption: RICH
+		upperCaption: "IF(FUELMIX==2,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Label213
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 176
+		x: 395.5
+		width: 46
+		height: 19
+		zIndex: 36
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 140
+		text_Caption: MIX
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Rect212_#216
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 172.5
+		x: 475
+		width: 80.82963
+		height: 26.520052
+		zIndex: 37
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 141
+		field_index: 12
+		text_Caption: QUAL
+		upperCaption: "IF(FUELMIX==3,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect212_#218
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 172.5
+		x: 479
+		width: 77.87462
+		height: 26.520052
+		zIndex: 38
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 142
+		field_index: 12
+		text_Caption: NORM
+		upperCaption: "IF(FUELMIX==1,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect212_#220
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 172.5
+		x: 476.5
+		width: 72.36962
+		height: 26.520052
+		zIndex: 39
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 143
+		field_index: 12
+		text_Caption: LEAN
+		upperCaption: "IF(FUELMIX==0,1,0)"
+		text_format: ""
+	}
+	{
+		objName: other_data214
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 236
+		x: 416
+		width: 35
+		height: 19
+		zIndex: 40
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 144
+		field_index: 81
+		text_Caption: 0.0
+		upperCaption: ""
+		text_format: %3.1f
+		autoUnit: true
+	}
+	{
+		objName: other_data214_#216
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 236
+		x: 496
+		width: 35
+		height: 19
+		zIndex: 41
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 145
+		field_index: 82
+		text_Caption: 0.0
+		upperCaption: ""
+		text_format: %3.1f
+		autoUnit: true
+	}
+	{
+		objName: other_data214_#218
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 204
+		x: 496
+		width: 35
+		height: 19
+		zIndex: 42
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 146
+		field_index: 84
+		text_Caption: 0.0
+		upperCaption: ""
+		text_format: %3.1f
+		autoUnit: true
+	}
+	{
+		objName: other_data214_#220
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 203.5
+		x: 416
+		width: 35
+		height: 19
+		zIndex: 43
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 147
+		field_index: 83
+		text_Caption: 0.0
+		upperCaption: ""
+		text_format: %3.1f
+		autoUnit: true
+	}
+	{
+		objName: Rect223
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: BLINK
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 1
+			g: 0.64705884
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 472.5
+		x: 359.5
+		width: 140.70961
+		height: 55.055046
+		zIndex: 44
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 148
+		text_Caption: DRS
+		upperCaption: "IF(DRSLEGALSTATUS==1,IF(DRS==0,1,0),0)"
+		text_format: ""
+	}
+	{
+		objName: Rect223_#222
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			g: 1
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 472.5
+		x: 359.5
+		width: 140.70961
+		height: 55.055046
+		zIndex: 45
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 149
+		text_Caption: DRS
+		upperCaption: "IF(DRS==1,1,0)"
+		text_format: ""
+	}
+]
+}
