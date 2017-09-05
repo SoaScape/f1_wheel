@@ -27,12 +27,15 @@ autoMixLedPattern = 8 -- LED 1
 autoDiffLedPattern = 8 -- LED 1
 
 raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 0x60		-- 3, 4
-raceStartLedPatterns[1] = 18		-- 1, 2
-raceGoLedPattern = 0x78		-- 1 - 4
+raceStartLedPatterns[0] = 0x67 -- All left side
+raceStartLedPatterns[1] = 0x1C18 -- All right side
+raceGoLedPattern = 0x78 -- 1 - 4
 
 progBlinkLedPatterns = {}
 progBlinkLedPatterns[0] = 0x78 -- 1-4
+
+lowFuelLedPattern = 0x2 -- Left red LED
+saveFuelLedPattern = 0x800 -- Right red LED
 
 minFuel = 1
 
