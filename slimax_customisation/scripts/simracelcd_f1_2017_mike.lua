@@ -10,8 +10,8 @@ setValueSwitchId = 1
 progButton = 6
 confirmButton = 1
 secondaryConfirmButton = 6
-upButton = 2
-downButton = 3
+upButton = 5
+downButton = 4
 upEncoder = 24
 downEncoder = 23
 overtakeButton = 13
@@ -22,7 +22,7 @@ oneSWActivated = true
 overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 8  -- LED 1
 overtakeLedPatterns[1] = 16 --LED 2
-resetLedPattern = 120	-- 1- = 111000
+resetLedPattern = 120
 autoMixLedPattern = 8 -- LED 1
 autoDiffLedPattern = 8 -- LED 1
 

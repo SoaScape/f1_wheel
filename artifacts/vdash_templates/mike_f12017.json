@@ -22,7 +22,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -54,7 +54,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -90,7 +90,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -123,7 +123,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -156,7 +156,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -189,7 +189,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -222,7 +222,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -255,7 +255,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -288,7 +288,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -317,7 +317,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 0.8042427
+			a: 1
 		}
 		limitColor: {}
 		scaleX: 1
@@ -352,7 +352,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 0.8042427
+			a: 1
 		}
 		limitColor: {}
 		scaleX: 1
@@ -387,7 +387,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 0.8042427
+			a: 1
 		}
 		limitColor: {}
 		scaleX: 1
@@ -422,7 +422,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 0.8042427
+			a: 1
 		}
 		limitColor: {}
 		scaleX: 1
@@ -463,7 +463,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -500,7 +500,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -534,7 +534,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -572,7 +572,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -606,7 +606,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -639,7 +639,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -672,7 +672,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -707,7 +707,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 0.95
 		scaleY: 0.95
@@ -742,7 +742,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -776,7 +776,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 0.9
 		scaleY: 0.9
@@ -811,7 +811,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 0.9
 		scaleY: 0.9
@@ -846,7 +846,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -882,7 +882,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -918,7 +918,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -954,7 +954,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -988,7 +988,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1150,7 +1150,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 0.9000001
 		scaleY: 0.9000001
@@ -1183,7 +1183,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 0.79999995
 		scaleY: 0.79999995
@@ -1224,14 +1224,14 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 209
 		x: 277
-		width: 376
-		height: 47
+		width: 384
+		height: 59
 		zIndex: 34
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
@@ -1263,7 +1263,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1297,7 +1297,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1334,7 +1334,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1372,7 +1372,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1410,7 +1410,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1444,7 +1444,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1479,7 +1479,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1514,7 +1514,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1549,7 +1549,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1588,7 +1588,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1624,7 +1624,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1656,11 +1656,11 @@ objs: [
 		borderColor: {}
 		backgroundColor: {
 			r: 1
-			a: 0.59952486
+			a: 0.61815375
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1671,7 +1671,7 @@ objs: [
 		zIndex: 46
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 220
+		controlIndex: 150
 		field_index: 12
 		text_Caption: SAVE FUEL
 		upperCaption: ""
@@ -1697,7 +1697,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1708,7 +1708,7 @@ objs: [
 		zIndex: 47
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 222
+		controlIndex: 151
 		field_index: 11
 		text_Caption: OVER TAKE
 		upperCaption: ""
@@ -1735,7 +1735,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 0.9000001
 		scaleY: 1
@@ -1746,7 +1746,7 @@ objs: [
 		zIndex: 48
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 223
+		controlIndex: 152
 		field_index: 10
 		text_Caption: AutoMix
 		upperCaption: ""
@@ -1773,7 +1773,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1781,10 +1781,10 @@ objs: [
 		x: 753
 		width: 86.34964
 		height: 24.350039
-		zIndex: 50
+		zIndex: 49
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 227
+		controlIndex: 153
 		field_index: 9
 		text_Caption: AutoDif
 		upperCaption: ""
@@ -1806,11 +1806,11 @@ objs: [
 		borderColor: {}
 		backgroundColor: {
 			r: 1
-			a: 0.59952486
+			a: 0.25328594
 		}
 		limitColor: {
 			r: 1
-			a: 0.59952486
+			a: 1
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1818,10 +1818,10 @@ objs: [
 		x: 258
 		width: 440.515
 		height: 54.75004
-		zIndex: 52
+		zIndex: 50
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 229
+		controlIndex: 154
 		field_index: 8
 		text_Caption: SAFETY CAR
 		upperCaption: ""
