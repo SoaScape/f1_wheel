@@ -19,6 +19,8 @@ oneSWActivated = true
 
 saveFuelMessageLedTriggered = true
 overTakeMessageLedTriggered = true
+autoMixLedTriggered = true
+autoDiffLedTriggered = true
 
 overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 0x100 -- External LED 6 (triggers message on vdash)

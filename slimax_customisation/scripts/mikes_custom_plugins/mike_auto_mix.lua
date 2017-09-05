@@ -68,14 +68,18 @@ local function toggleAutoMixSelected()
 		autoMixActive = not(autoMixActive)
 		if autoMixActive then
 			if autoMixOn() then
-				display(autoMixMultifunctionName, "ACTV", displayTimeout)
+				if autoMixLedTriggered == null then
+					display(autoMixMultifunctionName, "ACTV", displayTimeout)
+				end
 			else
 				autoMixActive = false
 				display(autoMixMultifunctionName, " ERR", displayTimeout)
 			end
 		else
 			autoMixOff()
-			display(autoMixMultifunctionName, " OFF", displayTimeout)
+			if autoMixLedTriggered == null then
+				display(autoMixMultifunctionName, " OFF", displayTimeout)
+			end
 			if(mSessionEnter == 1 and not(m_is_sim_idle)) then
 				fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
 				nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]

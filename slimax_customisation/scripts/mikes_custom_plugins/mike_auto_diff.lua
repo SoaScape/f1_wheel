@@ -66,12 +66,16 @@ function processAutoDiffButtonEvent(button)
 			else
 				if autoDiffActive then
 					autoDiffActive = false
-					display(autoDiffMultifunctionName, " OFF", displayTimeout)
+					if autoDiffLedTriggered == null then
+						display(autoDiffMultifunctionName, " OFF", displayTimeout)
+					end
 					deactivatePermanentLed(autoDiffLedPattern)
 				else
 					if loadDiffEventsForTrack(trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]]) then
-						autoDiffActive = true						
-						display(autoDiffMultifunctionName, "ACTV", displayTimeout)
+						autoDiffActive = true				
+						if autoDiffLedTriggered == null then
+							display(autoDiffMultifunctionName, "ACTV", displayTimeout)
+						end
 						activatePermanentLed(autoDiffLedPattern, 0, false)
 					else
 						display(autoDiffMultifunctionName, " ERR", displayTimeout)
