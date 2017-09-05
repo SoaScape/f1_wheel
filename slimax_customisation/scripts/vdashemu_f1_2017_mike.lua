@@ -24,8 +24,9 @@ overtakeLedPatterns = {}
 overtakeLedPatterns[0] = 0x100 -- External LED 6 (triggers message on vdash)
 overtakeLedPatterns[1] = 0x100 -- External LED 6 (triggers message on vdash)
 resetLedPattern = 120	-- 1- = 111000
-autoMixLedPattern = 8 -- LED 1
-autoDiffLedPattern = 8 -- LED 1
+autoMixLedPattern = 0x80 -- External LED 5 (triggers message on vdash)
+autoDiffLedPattern = 0x40 -- External LED 4 (triggers message on vdash)
+safetyCarLedPattern = 0x20 -- External LED 3 (triggers message on vdash)
 
 raceStartLedPatterns = {}
 raceStartLedPatterns[0] = 0x60		-- 3, 4

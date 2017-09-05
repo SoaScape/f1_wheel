@@ -22,7 +22,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -54,7 +54,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -90,7 +90,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -123,7 +123,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -156,7 +156,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -189,7 +189,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -222,7 +222,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -255,7 +255,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -288,7 +288,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -463,20 +463,20 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 416
 		x: 736
-		width: 72
+		width: 73
 		height: 47
 		zIndex: 13
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
 		controlIndex: 117
 		field_index: 1
-		text_Caption: 0
+		text_Caption: 1
 		upperCaption: ""
 		text_format: %02.0f
 		autoUnit: true
@@ -500,7 +500,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -512,7 +512,7 @@ objs: [
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
 		controlIndex: 118
-		text_Caption: "/00"
+		text_Caption: "/03"
 		upperCaption: ""
 		text_format: "/%02.0f"
 		autoUnit: true
@@ -534,20 +534,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 96
 		x: 208
-		width: 42
+		width: 65
 		height: 19
 		zIndex: 15
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
 		controlIndex: 119
 		field_index: 3
-		text_Caption: "    0"
+		text_Caption: " 4658"
 		upperCaption: ""
 		text_format: %5.0f
 		autoUnit: true
@@ -572,7 +572,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -585,7 +585,7 @@ objs: [
 		fntName: FNT_ARIAL
 		controlIndex: 120
 		field_index: 2
-		text_Caption: 0
+		text_Caption: 20
 		upperCaption: ""
 		text_format: %02.0f
 		autoUnit: true
@@ -606,7 +606,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -619,7 +619,7 @@ objs: [
 		fntName: FNT_ARIAL
 		controlIndex: 121
 		field_index: 11
-		text_Caption: F0.0
+		text_Caption: F2.4
 		upperCaption: ""
 		text_format: F%3.1f
 		autoUnit: true
@@ -639,20 +639,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 36
 		x: 16
-		width: 108
+		width: 110
 		height: 47
 		zIndex: 18
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
 		controlIndex: 122
 		field_index: 7
-		text_Caption: 0
+		text_Caption: 189
 		upperCaption: ""
 		text_format: %03.0f
 		autoUnit: true
@@ -672,20 +672,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 36
 		x: 842
-		width: 108
+		width: 110
 		height: 47
 		zIndex: 19
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
 		controlIndex: 123
 		field_index: 6
-		text_Caption: 0
+		text_Caption: 189
 		upperCaption: ""
 		text_format: %03.0f
 		autoUnit: true
@@ -707,20 +707,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 0.95
 		scaleY: 0.95
 		y: 376
 		x: 43
-		width: 297.35
+		width: 298.3
 		height: 153.9
 		zIndex: 20
 		fntSize: FNT_XLARGE
 		fntName: FNT_ARIAL
 		controlIndex: 124
 		field_index: 13
-		text_Caption: 0.0
+		text_Caption: 0.3
 		upperCaption: ""
 		text_format: %2.1f
 		autoUnit: true
@@ -742,20 +742,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 96
 		x: 320
-		width: 21
+		width: 22
 		height: 19
 		zIndex: 21
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
 		controlIndex: 125
 		field_index: 30
-		text_Caption: " 0"
+		text_Caption: " 3"
 		upperCaption: ""
 		text_format: %2.0f
 		autoUnit: true
@@ -776,7 +776,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 0.9
 		scaleY: 0.9
@@ -811,7 +811,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 0.9
 		scaleY: 0.9
@@ -846,20 +846,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 376
 		x: 596
-		width: 42
+		width: 43
 		height: 19
 		zIndex: 24
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
 		controlIndex: 128
 		field_index: 18
-		text_Caption: 0
+		text_Caption: 18
 		upperCaption: ""
 		text_format: %03.0f
 		autoUnit: true
@@ -882,20 +882,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 376
 		x: 736
-		width: 42
+		width: 43
 		height: 19
 		zIndex: 25
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
 		controlIndex: 129
 		field_index: 19
-		text_Caption: 0
+		text_Caption: 18
 		upperCaption: ""
 		text_format: %03.0f
 		autoUnit: true
@@ -918,20 +918,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 216
 		x: 596
-		width: 42
+		width: 43
 		height: 19
 		zIndex: 26
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
 		controlIndex: 130
 		field_index: 20
-		text_Caption: 0
+		text_Caption: 18
 		upperCaption: ""
 		text_format: %03.0f
 		autoUnit: true
@@ -954,20 +954,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
 		y: 216
 		x: 736
-		width: 42
+		width: 43
 		height: 19
 		zIndex: 27
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
 		controlIndex: 131
 		field_index: 21
-		text_Caption: 0
+		text_Caption: 18
 		upperCaption: ""
 		text_format: %03.0f
 		autoUnit: true
@@ -988,7 +988,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1150,7 +1150,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 0.9000001
 		scaleY: 0.9000001
@@ -1183,7 +1183,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 0.79999995
 		scaleY: 0.79999995
@@ -1224,16 +1224,16 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
-		y: 176
-		x: 176
-		width: 601
-		height: 85
+		y: 209
+		x: 277
+		width: 376
+		height: 47
 		zIndex: 34
-		fntSize: FNT_LARGE
+		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
 		controlIndex: 138
 		field_index: 16
@@ -1263,7 +1263,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1297,7 +1297,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1334,7 +1334,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1372,7 +1372,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1410,7 +1410,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1444,7 +1444,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1479,7 +1479,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1514,7 +1514,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1549,7 +1549,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1588,7 +1588,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1624,7 +1624,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1656,11 +1656,11 @@ objs: [
 		borderColor: {}
 		backgroundColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1693,11 +1693,11 @@ objs: [
 		borderColor: {}
 		backgroundColor: {
 			g: 1
-			a: 0.893395
+			a: 0.5732354
 		}
 		limitColor: {
 			r: 1
-			a: 0.7333859
+			a: 0.59952486
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1711,6 +1711,119 @@ objs: [
 		controlIndex: 222
 		field_index: 11
 		text_Caption: OVER TAKE
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Rect223
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: ALTERNATE_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 0.68
+			g: 0.089999996
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 0.59952486
+		}
+		scaleX: 0.9000001
+		scaleY: 1
+		y: 63
+		x: 753
+		width: 86.34964
+		height: 24.350039
+		zIndex: 48
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 223
+		field_index: 10
+		text_Caption: AutoMix
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Rect223_#227
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: ALTERNATE_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 1
+			g: 0.64705884
+			a: 0.5200045
+		}
+		limitColor: {
+			r: 1
+			a: 0.59952486
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 29.5
+		x: 753
+		width: 86.34964
+		height: 24.350039
+		zIndex: 50
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 227
+		field_index: 9
+		text_Caption: AutoDif
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Rect229
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: ALTERNATE_VIEW
+		objStyle: BLINK
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 1
+			a: 0.59952486
+		}
+		limitColor: {
+			r: 1
+			a: 0.59952486
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 202.5
+		x: 258
+		width: 440.515
+		height: 54.75004
+		zIndex: 52
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 229
+		field_index: 8
+		text_Caption: SAFETY CAR
 		upperCaption: ""
 		text_format: ""
 	}

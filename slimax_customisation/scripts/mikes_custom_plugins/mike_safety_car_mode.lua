@@ -26,7 +26,11 @@ local function safetyCarEnd()
 	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
 	autoDiffInhibitOff()
 	autoMixInhibitOff()
-	display("SAFE", " END", 2000)
+	if safetyCarLedPattern ~= nil then
+		deactivatePermanentLed(safetyCarLedPattern)
+	else
+		display("SAFE", " END", 2000)
+	end
 end
 
 local function safetyCarModeSelected()
@@ -49,24 +53,13 @@ end
 function safetyCarModeRegularProcessing()	
 	if safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
 		if GetContextInfo("yellow_flag") or inPits() then
-			if getTks() - lastSafetyCarMessageTime >= safetyCarActiveMessageDelay then
+			if safetyCarLedPattern ~= nil then
+				activatePermanentLed(safetyCarLedPattern, 0, false)
+			elseif getTks() - lastSafetyCarMessageTime >= safetyCarActiveMessageDelay then
 				lastSafetyCarMessageTime = getTks()
 				display("SAFE", " CAR", 1000)
 			end
 		else
--- Some debug
-local messLeft = "WTF "
-local messRight = tostring(GetInPitsState())
-if not(GetContextInfo("yellow_flag")) and not(inPits()) then
-	messLeft = "BOTH"
-elseif not(GetContextInfo("yellow_flag")) then
-	messLeft = "YELW"
-elseif not(inPits()) then
-	messLeft = "PITS"
-end
-print(messLeft .. " : " .. messRight)
-display(messLeft, messRight, 60000)
--- End
 			safetyCarEnd()
 		end
 	end
