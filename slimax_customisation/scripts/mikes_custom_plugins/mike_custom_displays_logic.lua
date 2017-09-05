@@ -1,11 +1,12 @@
 -- MIKE CUSTOM FUNCTIONS
 local fuelAtStart = 0
-local lowFuelLedPattern = 4 -- Left red LED
+
+local lowFuelLedPattern = 0x2 -- Left red LED
+local saveFuelLedPattern = 0x800 -- Right red LED
+
 local lowFuelLedBlinkDelay = 500
 local fuelResetDisplayTimeout = 1000
 local saveFuelLedBlinkDelay = 500
-local saveFuelLedPattern = 2048 -- Right red LED
-
 local timeAtSaveFuelMessage = 0
 local timeBetweenSaveFuelMessages = 30000 -- 30 seconds
 local saveFuelDisplayTime = 1000
