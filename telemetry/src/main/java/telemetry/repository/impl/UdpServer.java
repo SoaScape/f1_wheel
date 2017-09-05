@@ -29,8 +29,17 @@ public class UdpServer implements Runnable {
 	@Value("${ip}")
 	private String ip;
 
+	@Value("${test-packet}")
+	private Boolean sendTestPacket;
+
 	@Override
 	public void run() {
+		if(sendTestPacket) {
+			log.info("Sending test packets...");
+			while(true) {
+				sendTestPacket();
+			}
+		}
 	}
 
 	public void sendProxyUdpData(final byte[] data) {
