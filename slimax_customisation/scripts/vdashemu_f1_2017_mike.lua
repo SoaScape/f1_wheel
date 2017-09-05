@@ -31,12 +31,9 @@ autoDiffLedPattern = 0x40 -- External LED 4 (triggers message on vdash)
 safetyCarLedPattern = 0x20 -- External LED 3 (triggers message on vdash)
 
 raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 0x60		-- 3, 4
-raceStartLedPatterns[1] = 18		-- 1, 2
-raceGoLedPattern = 0x78		-- 1 - 4
+raceGoLedPattern = 0x0
 
 progBlinkLedPatterns = {}
-progBlinkLedPatterns[0] = 0x78 -- 1-4
 
 lowFuelLedPattern = 0x2 -- Left red LED
 saveFuelLedPattern = 0x200 -- External LED 7 (triggers message on vdash)
