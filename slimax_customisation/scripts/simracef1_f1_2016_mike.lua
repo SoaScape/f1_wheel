@@ -33,6 +33,9 @@ progBlinkLedPatterns = {}
 progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
 progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5
 
+lowFuelLedPattern = 0x2 -- Left red LED
+saveFuelLedPattern = 0x800 -- Right red LED
+
 minFuel = 1
 
 numMenus = 4

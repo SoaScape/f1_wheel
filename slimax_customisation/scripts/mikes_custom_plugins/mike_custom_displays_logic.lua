@@ -1,9 +1,6 @@
 -- MIKE CUSTOM FUNCTIONS
 local fuelAtStart = 0
 
-local lowFuelLedPattern = 0x2 -- Left red LED
-local saveFuelLedPattern = 0x800 -- Right red LED
-
 local lowFuelLedBlinkDelay = 500
 local fuelResetDisplayTimeout = 1000
 local saveFuelLedBlinkDelay = 500
@@ -278,7 +275,7 @@ local function calculateFuelTargets()
 		end
 
 		if adjustedFuelTarget < 0 and getPercentageRaceComplete() >= saveFuelMessageMinRacePercentageComplete then
-			if getTks() - timeAtSaveFuelMessage > timeBetweenSaveFuelMessages then
+			if saveFuelMessageLedTriggered == nil and getTks() - timeAtSaveFuelMessage > timeBetweenSaveFuelMessages then
 				timeAtSaveFuelMessage = getTks()
 				display("SAVE", "FUEL", saveFuelDisplayTime)
 			end

@@ -201,7 +201,11 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 		if sendButtons then
 			fuelMultiFunction["currentUpDnMode"] = fuelModeBak
 			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
-			confirmSelection("OVTK", " END", getButtonMap(fuelMultiFunction), showDisplay)			
+			local showMessage = showDisplay
+			if overTakeMessageLedTriggered ~= nil then
+				showMessage = false
+			end
+			confirmSelection("OVTK", " END", getButtonMap(fuelMultiFunction), showMessage)			
 		end
 
 		if showDisplay then
@@ -219,7 +223,11 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 		fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
 		if sendButtons then
 			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
-			confirmSelection("OVER", "TAKE", getButtonMap(fuelMultiFunction), showDisplay)
+			local showMessage = showDisplay
+			if overTakeMessageLedTriggered ~= nil then
+				showMessage = false
+			end
+			confirmSelection("OVER", "TAKE", getButtonMap(fuelMultiFunction), showMessage)
 		end
 		
 		if showDisplay then

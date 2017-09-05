@@ -17,9 +17,12 @@ overtakeButton = 13
 oneSwCtrlPos = 3
 oneSWActivated = true
 
+saveFuelMessageLedTriggered = true
+overTakeMessageLedTriggered = true
+
 overtakeLedPatterns = {}
-overtakeLedPatterns[0] = 8  -- LED 1
-overtakeLedPatterns[1] = 16 --LED 2
+overtakeLedPatterns[0] = 0x100 -- External LED 6 (triggers message on vdash)
+overtakeLedPatterns[1] = 0x100 -- External LED 6 (triggers message on vdash)
 resetLedPattern = 120	-- 1- = 111000
 autoMixLedPattern = 8 -- LED 1
 autoDiffLedPattern = 8 -- LED 1
@@ -31,6 +34,9 @@ raceGoLedPattern = 0x78		-- 1 - 4
 
 progBlinkLedPatterns = {}
 progBlinkLedPatterns[0] = 0x78 -- 1-4
+
+lowFuelLedPattern = 0x2 -- Left red LED
+saveFuelLedPattern = 0x200 -- External LED 7 (triggers message on vdash)
 
 minFuel = 1
 

@@ -22,7 +22,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -54,7 +54,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -90,7 +90,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -123,7 +123,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -156,7 +156,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -189,7 +189,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -222,7 +222,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -255,7 +255,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -288,7 +288,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -317,7 +317,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 1
+			a: 0.8042427
 		}
 		limitColor: {}
 		scaleX: 1
@@ -352,7 +352,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 1
+			a: 0.8042427
 		}
 		limitColor: {}
 		scaleX: 1
@@ -387,7 +387,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 1
+			a: 0.8042427
 		}
 		limitColor: {}
 		scaleX: 1
@@ -422,7 +422,7 @@ objs: [
 		}
 		borderColor: {}
 		backgroundColor: {
-			a: 1
+			a: 0.8042427
 		}
 		limitColor: {}
 		scaleX: 1
@@ -463,7 +463,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -500,7 +500,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -534,7 +534,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -572,7 +572,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -606,7 +606,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -639,7 +639,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -672,7 +672,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -707,7 +707,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 0.95
 		scaleY: 0.95
@@ -742,7 +742,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -776,20 +776,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 0.9
 		scaleY: 0.9
 		y: 209
 		x: 109
-		width: 249.3
+		width: 246.59998
 		height: 42.3
 		zIndex: 22
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
 		controlIndex: 126
 		field_index: 23
-		text_Caption: " 1:52.217"
+		text_Caption: " 0:00.000"
 		upperCaption: ""
 		text_format: %s
 		autoUnit: true
@@ -811,20 +811,20 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 0.9
 		scaleY: 0.9
 		y: 135
 		x: 109
-		width: 249.3
+		width: 246.59998
 		height: 42.3
 		zIndex: 23
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
 		controlIndex: 127
 		field_index: 24
-		text_Caption: " 1:52.217"
+		text_Caption: " 0:00.000"
 		upperCaption: ""
 		text_format: %s
 		autoUnit: true
@@ -846,7 +846,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -882,7 +882,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -918,7 +918,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -954,7 +954,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -988,7 +988,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1150,7 +1150,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 0.9000001
 		scaleY: 0.9000001
@@ -1183,7 +1183,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 0.79999995
 		scaleY: 0.79999995
@@ -1224,7 +1224,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1263,7 +1263,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1297,7 +1297,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1334,7 +1334,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1372,7 +1372,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1410,7 +1410,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1444,7 +1444,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1479,7 +1479,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1514,7 +1514,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1549,7 +1549,7 @@ objs: [
 		backgroundColor: {}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1571,7 +1571,7 @@ objs: [
 		objName: Rect223
 		objGroup: GROUP_LABEL
 		objType: SURFACE
-		objBehavior: STD_VIEW
+		objBehavior: ALTERNATE_VIEW
 		objStyle: BLINK
 		visible: true
 		objColor: {
@@ -1584,11 +1584,11 @@ objs: [
 		backgroundColor: {
 			r: 1
 			g: 0.64705884
-			a: 1
+			a: 0.22663802
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1608,7 +1608,7 @@ objs: [
 		objName: Rect223_#222
 		objGroup: GROUP_LABEL
 		objType: SURFACE
-		objBehavior: STD_VIEW
+		objBehavior: ALTERNATE_VIEW
 		objStyle: STYLE_UNKNOWN
 		visible: true
 		objColor: {
@@ -1624,7 +1624,7 @@ objs: [
 		}
 		limitColor: {
 			r: 1
-			a: 1
+			a: 0.7333859
 		}
 		scaleX: 1
 		scaleY: 1
@@ -1638,6 +1638,80 @@ objs: [
 		controlIndex: 149
 		text_Caption: DRS
 		upperCaption: "IF(DRS==1,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect220
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: ALTERNATE_VIEW
+		objStyle: BLINK
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 1
+			a: 0.7333859
+		}
+		limitColor: {
+			r: 1
+			a: 0.7333859
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 202.5
+		x: 384
+		width: 186.38486
+		height: 54.93002
+		zIndex: 46
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 220
+		field_index: 12
+		text_Caption: SAVE FUEL
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Rect220_#222
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: ALTERNATE_VIEW
+		objStyle: BLINK
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			g: 1
+			a: 0.893395
+		}
+		limitColor: {
+			r: 1
+			a: 0.7333859
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 202.5
+		x: 384
+		width: 186.38486
+		height: 54.93002
+		zIndex: 47
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 222
+		field_index: 11
+		text_Caption: OVER TAKE
+		upperCaption: ""
 		text_format: ""
 	}
 ]
