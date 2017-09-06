@@ -14,6 +14,8 @@ import telemetry.domain.TelemetryDataF12017Impl;
 @Repository
 @Log4j
 public class UdpRepositoryF12017Impl implements Runnable {
+	public static final Object lock = new Object();
+
 	@Autowired
 	private UdpServer udpServer;
 
@@ -50,6 +52,10 @@ public class UdpRepositoryF12017Impl implements Runnable {
 					}
 					if(forwardUdpData) {
 						udpServer.sendProxyUdpData(data);
+						synchronized(lock) {
+							notifyAll();
+						}
+						log.info("Cheese");
 					}
 		        }
 			} catch(final IOException e) {
@@ -59,4 +65,7 @@ public class UdpRepositoryF12017Impl implements Runnable {
 			}
 		}
 	}
+//	public synchronized Object getLock() {
+//		return lock;
+//	}
 }

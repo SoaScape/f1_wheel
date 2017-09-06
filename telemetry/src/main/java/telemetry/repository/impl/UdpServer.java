@@ -56,7 +56,7 @@ public class UdpServer implements Runnable {
 		}
 	}
 	
-	public void sendTestPacket() {
+	private void sendTestPacket() {
 		sendUdpData(getPcapBytes(), udpListenPort);
 	}
 	

@@ -18,6 +18,5 @@ public class MainController implements CommandLineRunner {
 	public void run(final String... args) {
 		new Thread(server).start();
 		new Thread(repo).start();
-		server.sendTestPacket();
 	}
 }
