@@ -257,20 +257,25 @@ function buildPropertyStringFromTable(tabl, numericKeySort)
 end
 
 function startProgramming()
-	progEvents = {}
-	activateAlternateBlinkingLeds(progBlinkLedId, progBlinkLedPatterns, nil, false, 0)
-	progActive = true
-	display("PROG", "STRT", progDisplayTimeout)
+	if ledOnly == nil then
+		progEvents = {}
+		activateAlternateBlinkingLeds(progBlinkLedId, progBlinkLedPatterns, nil, false, 0)	
+		progActive = true
+		display("PROG", "STRT", progDisplayTimeout)
+	end
+	activateAlternateBlinkingLeds(progBlinkLedId, progBlinkLedPatterns, nil, false, 0)	
 end
 
 function endProgramming(fileExtension)
-	local propertyText = buildPropertyStringFromTable(progEvents, true)
-	local fileName = progDataDir .. trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]] .. "." .. fileExtension
-	saveTextToFile(propertyText, fileName)
-	progEvents = nil
-	progActive = false
+	if ledOnly == nil then
+		local propertyText = buildPropertyStringFromTable(progEvents, true)
+		local fileName = progDataDir .. trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]] .. "." .. fileExtension
+		saveTextToFile(propertyText, fileName)
+		progEvents = nil
+		progActive = false
+		display("PROG", "DONE", progDisplayTimeout)
+	end
 	deactivateAlternateBlinkingLeds(progBlinkLedId)
-	display("PROG", "DONE", progDisplayTimeout)
 end
 
 function toggleProgrammingMode(fileExtension)

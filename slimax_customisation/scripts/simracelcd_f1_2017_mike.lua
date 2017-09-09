@@ -16,7 +16,7 @@ upEncoder = 24
 downEncoder = 23
 overtakeButton = 8
 
-filterClutchInputs = true
+--filterClutchInputs = true
 clutchOneId = 10
 clutchTwoId = 11
 
