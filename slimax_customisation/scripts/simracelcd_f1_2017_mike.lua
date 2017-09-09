@@ -16,6 +16,10 @@ upEncoder = 24
 downEncoder = 23
 overtakeButton = 8
 
+filterClutchInputs = true
+clutchOneId = 10
+clutchTwoId = 11
+
 oneSwCtrlPos = 3
 oneSWActivated = true
 

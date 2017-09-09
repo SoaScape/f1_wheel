@@ -8,6 +8,10 @@ require "scripts/mikes_custom_plugins/mike_race_start_mode"
 require "scripts/mikes_custom_plugins/mike_safety_car_mode"
 
 function custom_controls_Event(deviceType, ctrlType, ctrlPos, value, funcIndex, targetDevice)
+	if filterClutchInputs ~= nil and ctrlType == switch
+	  and (ctrlPos == clutchOneId or ctrlPos == clutchTwoId) then
+		return 1
+	end
 	local mult = multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 	local oneSw = oneSwitchControlEvent(ctrlType, ctrlPos, value)
 	if mult < oneSw then
