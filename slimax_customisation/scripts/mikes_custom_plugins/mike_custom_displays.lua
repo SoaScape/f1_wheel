@@ -56,13 +56,14 @@ local function displayFuelTarget(fuelTarget)
 end
 
 function customDisplayEventProcessing(swValue, side)
-	if checkFuelChange() then
-		return 1
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
+		if checkFuelChange() then
+			return 1
+		end
+		if checkBiasChange() then
+			return 1
+		end
 	end
-	if checkBiasChange() then
-		return 1
-	end
-
 	local sliPanel = ""
 	local isSlowUpdate = false
 	local customFunction = false
