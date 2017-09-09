@@ -258,11 +258,10 @@ end
 
 function startProgramming()
 	if ledOnly == nil then
-		progEvents = {}
-		activateAlternateBlinkingLeds(progBlinkLedId, progBlinkLedPatterns, nil, false, 0)	
-		progActive = true
 		display("PROG", "STRT", progDisplayTimeout)
 	end
+	progEvents = {}
+	progActive = true
 	activateAlternateBlinkingLeds(progBlinkLedId, progBlinkLedPatterns, nil, false, 0)	
 end
 
@@ -271,10 +270,10 @@ function endProgramming(fileExtension)
 		local propertyText = buildPropertyStringFromTable(progEvents, true)
 		local fileName = progDataDir .. trackMultiFunction["modes"][trackMultiFunction["currentUpDnMode"]] .. "." .. fileExtension
 		saveTextToFile(propertyText, fileName)
-		progEvents = nil
-		progActive = false
 		display("PROG", "DONE", progDisplayTimeout)
 	end
+	progEvents = nil
+	progActive = false
 	deactivateAlternateBlinkingLeds(progBlinkLedId)
 end
 
