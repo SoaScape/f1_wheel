@@ -5,14 +5,14 @@ myDevice = 15 -- VDashEmu
 
 multiFunctionSwitchId = 2
 setValueSwitchId = 1
-progButton = 6
+progButton = 4
 confirmButton = 1
-secondaryConfirmButton = 6
-upButton = 5
-downButton = 4
+secondaryConfirmButton = 5
+upButton = 2
+downButton = 3
 upEncoder = 24
 downEncoder = 23
-overtakeButton = 13
+overtakeButton = 8
 
 oneSwCtrlPos = 3
 oneSWActivated = true
