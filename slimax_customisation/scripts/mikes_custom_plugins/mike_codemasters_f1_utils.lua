@@ -21,10 +21,6 @@ function getRearBrakeBiasIndex()
 	return getKeyForValue(biasMultiFunction["modes"], getRearBrakeBias())
 end
 
-function getFuelMix()
-	return round(GetCarInfo("fuel_mix"), 0)
-end
-
 function getVoiceMenuButtons(multifunction)
 	local index = 0
 	local buttonMap = {}

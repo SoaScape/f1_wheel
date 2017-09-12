@@ -80,7 +80,6 @@ local function toggleAutoMixSelected()
 			end
 			if(mSessionEnter == 1 and not(m_is_sim_idle)) then
 				fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
-				nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 				confirmSelection(nil, nil, getButtonMap(fuelMultiFunction), false)
 			end
 		end
@@ -159,7 +158,6 @@ function autoMixRegularProcessing()
 				end
 
 				fuelMultiFunction["currentUpDnMode"] = autoMix
-				nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 				confirmSelection(autoMixMultifunctionName, fuelMultiFunction["modes"][autoMix], getButtonMap(fuelMultiFunction), displayMixEvents)
 			end			
 		end

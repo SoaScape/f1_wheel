@@ -229,7 +229,7 @@ local function trackFuelLapData()
 		elseif lapsCompleted == lastFuelLapCompleted then
 			if currentFuelLap.mixdata[distance] == nil then
 				currentFuelLap.mixdata[distance] = {}
-				currentFuelLap.mixdata[distance].mix = getActiveFuelMix()
+				currentFuelLap.mixdata[distance].mix = getFuelMix()
 				currentFuelLap.mixdata[distance].yellow = GetContextInfo("yellow_flag")
 				currentFuelLap.mixdata[distance].pits = inPits()
 			end			

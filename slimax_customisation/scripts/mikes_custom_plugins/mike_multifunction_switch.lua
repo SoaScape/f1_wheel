@@ -146,9 +146,6 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						end
 						return 1
 					elseif (ctrlPos == confirmButton or (ctrlPos == secondaryConfirmButton and mSessionEnter ~= 1 and m_is_sim_idle)) and currentMultifunction["name"] ~= "OSP" then
-						if currentMultifunction["name"] == fuelMultiFunction["name"] then
-							nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
-						end
 						confirmSelection("CONF", currentMultifunction["modes"][currentMultifunction["currentUpDnMode"]], getButtonMap(currentMultifunction), true)
 						return 1
 					end
@@ -200,7 +197,6 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 		autoMixInhibitOff()
 		if sendButtons then
 			fuelMultiFunction["currentUpDnMode"] = fuelModeBak
-			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 			local showMessage = showDisplay
 			if overTakeMessageLedTriggered ~= nil then
 				showMessage = false
@@ -222,7 +218,6 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 		fuelModeBak = fuelMultiFunction["currentUpDnMode"]
 		fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
 		if sendButtons then
-			nextActiveFuelMix = fuelMultiFunction["currentUpDnMode"]
 			local showMessage = showDisplay
 			if overTakeMessageLedTriggered ~= nil then
 				showMessage = false

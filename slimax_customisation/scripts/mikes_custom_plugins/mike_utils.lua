@@ -17,9 +17,6 @@ local keyHoldDelay = 30
 
 local keyQueue = {}
 
-local activeFuelMix = nil
-nextActiveFuelMix = nil
-
 local progActive = false
 local lastProgButtonPress = 0
 
@@ -47,7 +44,6 @@ local function processKeyPressQueue()
 	if keyQueue ~= nil and keyQueue[1] ~= nil then
 		if inPits() then
 			keyQueue = {}
-			nextActiveFuelMix = nil -- Best assumption here is that the fuel mode didn't get set
 		else
 			local nextKey = keyQueue[1]
 			if nextKey["expires"] ~= nil then
@@ -59,11 +55,6 @@ local function processKeyPressQueue()
 				nextKey["expires"] = getTks() + nextKey["delayTime"]
 	--print("DEBUG key: " .. nextKey["key"] .. ", holdDelay, " .. nextKey["holdDelay"] .. ", delay: " .. nextKey["delayTime"])
 			end
-		end
-	else
-		if nextActiveFuelMix ~= nil then
-			activeFuelMix = nextActiveFuelMix
-			nextActiveFuelMix = nil
 		end
 	end
 end
@@ -118,11 +109,8 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 	end
 end
 
-function getActiveFuelMix()
-	if activeFuelMix == nil then
-		activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
-	end
-	return activeFuelMix
+function getFuelMix()
+	return round(GetCarInfo("fuel_mix"), 0)
 end
 
 function getTks()
@@ -160,9 +148,7 @@ function getKeysSortedByValue(tbl, sortFunction)
 end
 
 function resetUtilsData()
-	activeFuelMix = fuelMultiFunction["defaultUpDnMode"]
 	keyQueue = {}
-	nextActiveFuelMix = nil
 	progEvents = nil
 	progActive = false
 	lastProgButtonPress = 0
