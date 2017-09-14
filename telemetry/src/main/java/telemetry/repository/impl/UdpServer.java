@@ -21,8 +21,8 @@ public class UdpServer implements Runnable {
 	@Value("#{${udp-proxy-ports}}")
 	private List<Integer> proxyPorts;
 
-	@Value("${udp-listen-port}")
-	private Integer udpListenPort;
+	@Value("${udp-send-port}")
+	private Integer udpSendPort;
 
 	@Value("${ip}")
 	private String ip;
@@ -55,7 +55,7 @@ public class UdpServer implements Runnable {
 	}
 	
 	private void sendTestPacket() {
-		sendUdpData(getPcapBytes(), udpListenPort);
+		sendUdpData(getPcapBytes(), udpSendPort);
 	}
 	
 	private byte[] getPcapBytes() {
