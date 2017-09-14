@@ -1,19 +1,11 @@
 package telemetry.domain;
 
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
-import java.util.Map;
-
 import org.springframework.util.ReflectionUtils;
-
-import java.beans.IntrospectionException;
-
 import lombok.Data;
 import lombok.ToString;
 
@@ -145,13 +137,14 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	}
 	
 	private <T> void mapDataItem(final String name, final Integer byteLocation, final byte[] data, final T target) {
-		final Field field = ReflectionUtils.findField(target.getClass(), name);		
+		final Field field = ReflectionUtils.findField(target.getClass(), name);
+		final Method method = ReflectionUtils.findMethod(target.getClass(),  "set" + Character.toUpperCase(name.charAt(0)) + name.substring(1), field.getType());
 		if(field.getType() == Float.TYPE || field.getType() == Float.class) {
-			ReflectionUtils.setField(field,  target,  decodeFloat(data, byteLocation));
+			ReflectionUtils.invokeMethod(method, target, decodeFloat(data, byteLocation));
 		} else if (field.getType() == Byte.TYPE || field.getType() == Byte.class) {
-			ReflectionUtils.setField(field,  target,  data[byteLocation]);
+			ReflectionUtils.invokeMethod(method, target, data[byteLocation]);
 		} else if (field.getType() == Integer.TYPE || field.getType() == Integer.class) {
-			ReflectionUtils.setField(field,  target,  Math.round(decodeFloat(data, byteLocation)));
+			ReflectionUtils.invokeMethod(method, target, Math.round(decodeFloat(data, byteLocation)));
 		}
 	}
 	
@@ -215,7 +208,7 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 		private byte penalties; // NEW: accumulated time penalties in seconds to be added
 
 		public CarData(final byte[] data) {
-			
+			codemastersLookups.getF12017CarDataMappings().forEach((key, value) -> mapDataItem(key, value, data, this));
 			setTeamName();
 			setTyreCompoundName();
 		}

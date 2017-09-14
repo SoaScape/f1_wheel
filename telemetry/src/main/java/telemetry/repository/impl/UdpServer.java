@@ -1,7 +1,5 @@
 package telemetry.repository.impl;
 
-import static org.junit.Assert.fail;
-
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

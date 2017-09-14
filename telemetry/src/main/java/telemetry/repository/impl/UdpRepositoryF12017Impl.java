@@ -33,36 +33,29 @@ public class UdpRepositoryF12017Impl implements Runnable {
 	
 	@Value("${proxy-only}")
 	private Boolean proxyOnly;
-	
-	@Value("${test-packet}")
-	private Boolean sendTestPacket;
 
 	@Override
 	public void run() {
-		if(!sendTestPacket) {
-			try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
-				final byte[] bytes = new byte[packetSize];
-				final DatagramPacket datagramPacket = new DatagramPacket(bytes, packetSize);
-				while (true) {
-					datagramSocket.receive(datagramPacket);
-					byte[] data = datagramPacket.getData();
-					if(!proxyOnly) {
-						final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data, codemastersLookups);
-						log.info("Telem: " + telem);
-					}
-					if(forwardUdpData) {
-						udpServer.sendProxyUdpData(data);
-						synchronized(lock) {
-							notifyAll();
-						}
-						log.info("Cheese");
-					}
-		        }
-			} catch(final IOException e) {
-				log.error(e);
-				e.printStackTrace();
-				return;
-			}
+		try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
+			final byte[] bytes = new byte[packetSize];
+			final DatagramPacket datagramPacket = new DatagramPacket(bytes, packetSize);
+			while (true) {
+				datagramSocket.receive(datagramPacket);
+				byte[] data = datagramPacket.getData();
+				if(!proxyOnly) {
+					final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data, codemastersLookups);
+					log.info("Telem: " + telem);
+				}
+				if(forwardUdpData) {
+					udpServer.sendProxyUdpData(data);
+					notifyAll();
+					log.info("Cheese");
+				}
+	        }
+		} catch(final IOException e) {
+			log.error(e);
+			e.printStackTrace();
+			return;
 		}
 	}
 //	public synchronized Object getLock() {
