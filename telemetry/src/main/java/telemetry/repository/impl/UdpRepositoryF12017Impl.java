@@ -45,7 +45,6 @@ public class UdpRepositoryF12017Impl implements Runnable {
 				final DatagramPacket datagramPacket = new DatagramPacket(bytes, packetSize);
 				while (true) {
 					datagramSocket.receive(datagramPacket);
-					log.info("len: " + datagramPacket.getLength());
 					byte[] data = datagramPacket.getData();
 					if(!proxyOnly) {
 						final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data, codemastersLookups);
