@@ -72,10 +72,17 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 
 		elseif currentMultifunction ~= nil and currentMultifunction["enabled"] then
 			-- Overtake Button
-			if ctrlType == pushbutton and ctrlPos == overtakeButton and value == buttonReleaseValue
+			if ctrlType == pushbutton and ctrlPos == overtakeButton and (value == buttonReleaseValue or overtakeLatch ~= nil)
 			  and currentMultifunction["enabled"] and currentMultifunction["name"] ~= resetMultiFunctionName
 			   and currentMultifunction["name"] ~= "autoMixMultifunctionName" then
 				if overtakeButtonEnabled  and mSessionEnter == 1 and not(m_is_sim_idle) then
+					if overtakeLatch ~= nil then
+						if value == buttonReleaseValue then
+							overtakeEngaged = true;
+						else
+							overtakeEngaged = false;
+						end
+					end
 					toggleOvertakeMode(true, true)
 				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
