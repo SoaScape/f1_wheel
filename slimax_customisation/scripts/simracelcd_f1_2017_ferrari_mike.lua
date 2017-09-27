@@ -21,7 +21,7 @@ overtakeLatch = true
 clutchOneId = 10
 clutchTwoId = 11
 
-oneSwCtrlPos = 3
+oneSwCtrlPos = 1
 oneSWActivated = true
 
 overtakeLedPatterns = {}

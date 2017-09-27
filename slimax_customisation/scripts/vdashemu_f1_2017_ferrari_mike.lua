@@ -15,7 +15,7 @@ downEncoder = 18
 overtakeButton = 15
 overtakeLatch = true
 
-oneSwCtrlPos = 3
+oneSwCtrlPos = 1
 oneSWActivated = true
 
 saveFuelMessageLedTriggered = true
