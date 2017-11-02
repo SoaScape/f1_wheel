@@ -42,7 +42,7 @@ progBlinkLedPatterns[0] = 0x78 -- 1-4
 lowFuelLedPattern = 0x2 -- Left red LED
 saveFuelLedPattern = 0x800 -- Right red LED
 
-minFuel = 1
+minFuel = 0
 
 numMenus = 5
 

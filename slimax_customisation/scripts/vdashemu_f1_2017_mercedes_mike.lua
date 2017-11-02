@@ -38,7 +38,7 @@ progBlinkLedPatterns = {}
 lowFuelLedPattern = 0x2 -- Left red LED
 saveFuelLedPattern = 0x200 -- External LED 7 (triggers message on vdash)
 
-minFuel = 1
+minFuel = 0
 
 numMenus = 5
 
