@@ -8,7 +8,6 @@ local function checkFuelChange()
 		if fuelMix ~= nil and fuelMix ~= lastMix then
 			lastMix = fuelMix
 			fuelMultiFunction["currentPosition"] = fuelMix
-			fuelMultiFunction["currentUpDnMode"] = fuelMix
 			display("MIX ", fuelMultiFunction["modes"][fuelMix], mDisplay_Info_Delay)
 			return true
 		end
@@ -22,7 +21,6 @@ local function checkBiasChange()
 		if rearBiasIndex ~= nil and rearBiasIndex ~= lastBias then
 			lastBias = rearBiasIndex
 			biasMultiFunction["currentPosition"] = rearBiasIndex
-			biasMultiFunction["currentUpDnMode"] = rearBiasIndex
 			display("BIAS", biasMultiFunction["modes"][rearBiasIndex], mDisplay_Info_Delay)
 			return true
 		end
