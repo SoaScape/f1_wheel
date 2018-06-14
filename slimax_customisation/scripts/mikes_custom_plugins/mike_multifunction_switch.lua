@@ -8,6 +8,7 @@ local encoderIncrement = 10
 local resetMultiFunctionName = "RSET"
 local overtakeEngaged = false
 local fuelModeBak
+local ersModeBak
 
 local function resetLedBlink()
 	activateBlinkingLed(resetLedPattern, 45, 100, false)
@@ -212,7 +213,12 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 			if overTakeMessageLedTriggered ~= nil then
 				showMessage = false
 			end
-			confirmSelection("OVTK", " END", getButtonMap(fuelMultiFunction), showMessage)			
+			confirmSelection("OVTK", " END", getButtonMap(fuelMultiFunction), showMessage)	
+
+			if(ersMultiFunction ~= nil) then
+				ersMultiFunction["currentUpDnMode"] = ersModeBak
+				confirmSelection("OVTK", " END", getButtonMap(ersMultiFunction), false)
+			end
 		end
 
 		if showDisplay then
@@ -227,13 +233,20 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 		autoMixInhibitOn()
 
 		fuelModeBak = fuelMultiFunction["currentUpDnMode"]
-		fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
+		fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]	
+		
 		if sendButtons then
 			local showMessage = showDisplay
 			if overTakeMessageLedTriggered ~= nil then
 				showMessage = false
 			end
 			confirmSelection("OVER", "TAKE", getButtonMap(fuelMultiFunction), showMessage)
+			
+			if(ersMultiFunction ~= nil) then
+				ersModeBak = ersMultiFunction["currentUpDnMode"]
+				ersMultiFunction["currentUpDnMode"] = ersMultiFunction["max"]
+				confirmSelection("OVER", "TAKE", getButtonMap(ersMultiFunction), false)
+			end
 		end
 		
 		if showDisplay then
