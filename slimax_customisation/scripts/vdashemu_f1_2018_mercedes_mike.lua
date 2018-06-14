@@ -13,6 +13,7 @@ downButton = 3
 upEncoder = 24
 downEncoder = 23
 overtakeButton = 8
+safetyCarButton = 14
 
 oneSwCtrlPos = 3
 oneSWActivated = true
@@ -261,6 +262,7 @@ diffMultiFunction = multifunctionMap[3]
 biasMultiFunction = multifunctionMap[4]
 trackMultiFunction = multifunctionMap[8]
 overtakeButtonEnabled = true
+safetyCarButtonEnabled = true
 overtakeOspOverdrive = false
 autoMixEnabled = true
 autoDiffEnabled = true

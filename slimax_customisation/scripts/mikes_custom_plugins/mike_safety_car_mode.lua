@@ -1,5 +1,4 @@
 safetyCarMultifunctionName = "SAFE"
-local lastMode = ""
 local safetyCarModeActive = false
 local safetyCarActiveMessageDelay = 10000
 local lastSafetyCarMessageTime = 0
@@ -32,9 +31,7 @@ local function safetyCarEnd()
 end
 
 local function safetyCarModeSelected()
-	if safetyCarModeActive then
-		display(safetyCarMultifunctionName, "ACTV", mDisplay_Info_Delay)
-	elseif GetContextInfo("yellow_flag") and mSessionEnter == 1 and not(m_is_sim_idle) then
+	if GetContextInfo("yellow_flag") then
 		activateSafetyCarMode()
 	else
 		currentMultifunction = nil
@@ -42,9 +39,13 @@ local function safetyCarModeSelected()
 	end	
 end
 
-function processSafetyCarButtonEvent(button)
-	if button == confirmButton and safetyCarModeActive and mSessionEnter == 1 and not(m_is_sim_idle) then
-		safetyCarEnd()
+function processSafetyCarButtonEvent()
+	if mSessionEnter == 1 and not(m_is_sim_idle) then
+		if safetyCarModeActive then
+			safetyCarEnd()
+		else
+			safetyCarModeSelected()
+		end
 	end
 end
 
@@ -60,16 +61,6 @@ function safetyCarModeRegularProcessing()
 		else
 			safetyCarEnd()
 		end
-	end
-
-	if safetyCarModeEnabled and currentMultifunction ~= nil then
-		currentMode = currentMultifunction["name"]
-		if currentMode == safetyCarMultifunctionName then
-			if currentMode ~= lastMode then
-				safetyCarModeSelected()
-			end
-		end
-		lastMode = currentMode
 	end
 end
 
