@@ -238,13 +238,13 @@ multifunctionMap[12]["enabled"] = true
 
 tracks = {}
 tracks[0] = "ASTL"
-tracks[1] = "MALY"
+tracks[1] = "FRAN"
 tracks[2] = "CHIN"
 tracks[3] = "BAHR"
 tracks[4] = "SPAN"
 tracks[5] = "MONA"
 tracks[6] = "CAND"
-tracks[7] = "BRIT"
+tracks[7] = "SILV"
 tracks[8] = "GERM"
 tracks[9] = "HUNG"
 tracks[10] = "BELG"
@@ -258,6 +258,11 @@ tracks[17] = "AUST"
 tracks[18] = "RUSS"
 tracks[19] = "MEXI"
 tracks[20] = "AZER"
+-- Short Versions Next
+tracks[21] = tracks[3]
+tracks[22] = tracks[7]
+tracks[23] = tracks[15]
+tracks[24] = tracks[13]
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
