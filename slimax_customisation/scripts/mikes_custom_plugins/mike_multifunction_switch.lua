@@ -65,7 +65,7 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 						right = string.format(" %03d  ", GetContextInfo("osp_factor"))
 					end
 				end
-				if (currentMultifunction["enabled"] and (currentMultifunction["display"] == nil or currentMultifunction["display"])) or currentMultifunction["display"] then
+				if (currentMultifunction["enabled"] and (currentMultifunction["display"] == nil or currentMultifunction["display"])) then
 					display(left, right, multiSelectDelay)
 				end
 				return 1
