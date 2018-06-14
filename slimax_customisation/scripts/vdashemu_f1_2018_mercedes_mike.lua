@@ -221,17 +221,34 @@ multifunctionMap[9]["name"] = startMultifunctionName
 multifunctionMap[9]["display"] = false
 
 multifunctionMap[10] = {}
-multifunctionMap[10]["name"] = safetyCarMultifunctionName
+multifunctionMap[10]["name"] = autoMixMultifunctionName
 multifunctionMap[10]["enabled"] = true
-multifunctionMap[10]["display"] = false
 
 multifunctionMap[11] = {}
-multifunctionMap[11]["name"] = autoMixMultifunctionName
+multifunctionMap[11]["name"] = autoDiffMultifunctionName
 multifunctionMap[11]["enabled"] = true
 
 multifunctionMap[12] = {}
-multifunctionMap[12]["name"] = autoDiffMultifunctionName
+multifunctionMap[12]["name"] = " ERS"
+multifunctionMap[12]["display"] = true
 multifunctionMap[12]["enabled"] = true
+multifunctionMap[12]["mfdShortcut"] = true
+multifunctionMap[12]["incrementKey"] = "K"
+multifunctionMap[12]["decrementKey"] = ","
+multifunctionMap[12]["row"] = 7
+multifunctionMap[12]["upDnSelectable"] = true
+multifunctionMap[12]["upDnConfirmRequired"] = true
+multifunctionMap[12]["defaultUpDnMode"] = 2
+multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[12]["defaultUpDnMode"]
+multifunctionMap[12]["min"] = 0
+multifunctionMap[12]["max"] = 5
+multifunctionMap[12]["modes"] = {}
+multifunctionMap[12]["modes"][0] = "NONE"
+multifunctionMap[12]["modes"][1] = "LOW"
+multifunctionMap[12]["modes"][2] = "MEDM"
+multifunctionMap[12]["modes"][3] = "HIGH"
+multifunctionMap[12]["modes"][4] = "OVTK"
+multifunctionMap[12]["modes"][5] = " HOT"
 
 tracks = {}
 tracks[0] = "ASTL"
