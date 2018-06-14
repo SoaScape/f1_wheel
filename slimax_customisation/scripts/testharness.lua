@@ -1,4 +1,4 @@
-require "scripts/simracelcd_f1_2018_mercedes_mike"
+require "scripts/vdashemu_f1_2018_mercedes_mike"
 
 local instructions = "b1, b2 etc. or s1p10 would be switch 1 position 10"
 
@@ -174,12 +174,12 @@ while true do
 	
 	if buttonEvent ~= nil then
 		local button = tonumber(string.sub(input, buttonEvent + 1))
-		custom_controls_Event(3, 1, button, 0, 0, 3)
+		custom_controls_Event(myDevice, 1, button, 0, 0, myDevice)
 	elseif switchEvent ~= nil then
 		local switch = tonumber(string.sub(input, switchEvent + 1, 2))
 		local position = string.find(input, "p")
 		local switchPos = tonumber(string.sub(input, position + 1))	
-		custom_controls_Event(3, 0, switch, switchPos, 0, 3)
+		custom_controls_Event(myDevice, 0, switch, switchPos, 0, myDevice)
 		
 		if switch == 1 then
 			rightDisplayPos = switchPos
