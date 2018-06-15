@@ -1,0 +1,1566 @@
+{
+objs: [
+	{
+		objName: bkgnd_img2503
+		objGroup: BASIC_IMAGE
+		objType: TYPE_UNKNOWN
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_DEFAULT_BKGND
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		width: 5
+		height: 5
+		zIndex: 35
+		fntSize: FNT_UNKNOWN
+		fntName: FNT_ARIAL
+		controlIndex: 2503
+		text_Caption: ""
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: other_data2577
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			g: 1
+			b: 0.42
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 276
+		x: 399.5
+		width: 126
+		height: 162
+		zIndex: 36
+		fntSize: FNT_XLARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2504
+		field_index: 1000
+		text_Caption: 1
+		upperCaption: ""
+		text_format: %3.1f
+		autoUnit: true
+	}
+	{
+		objName: other_data2580
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 396
+		x: 276
+		width: 91
+		height: 47.000015
+		zIndex: 37
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 2505
+		field_index: 18
+		text_Caption: " 19"
+		upperCaption: floor(DATA)
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: other_data2580_#2582
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 396
+		x: 576
+		width: 91
+		height: 47.000015
+		zIndex: 38
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 2506
+		field_index: 19
+		text_Caption: " 19"
+		upperCaption: floor(DATA)
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: other_data2580_#2584
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 316
+		x: 276
+		width: 90
+		height: 47.000015
+		zIndex: 39
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 2507
+		field_index: 20
+		text_Caption: " 20"
+		upperCaption: floor(DATA)
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: other_data2580_#2586
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 316
+		x: 576
+		width: 90
+		height: 47.000015
+		zIndex: 40
+		fntSize: FNT_NORMAL
+		fntName: FNT_ARIAL
+		controlIndex: 2508
+		field_index: 21
+		text_Caption: " 20"
+		upperCaption: floor(DATA)
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: Label2587
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			g: 1
+			b: 0.51
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 256
+		x: 456
+		width: 41
+		height: 14.000007
+		zIndex: 41
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2509
+		text_Caption: Gear
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2588
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 416
+		x: 36
+		width: 128
+		height: 19
+		zIndex: 42
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2510
+		text_Caption: Fuel Level
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: fuel_data2589
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_FUEL
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.29
+			g: 0.61
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.79999995
+		scaleY: 0.79999995
+		y: 456
+		x: 37.5
+		width: 158.4
+		height: 58.399998
+		zIndex: 43
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2511
+		field_index: 11
+		text_Caption: 54.7
+		upperCaption: ""
+		text_format: %3.1f
+		autoUnit: true
+	}
+	{
+		objName: lap_data2592
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 336
+		x: 96
+		width: 85
+		height: 73.00001
+		zIndex: 44
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2512
+		field_index: 1
+		text_Caption: " 1"
+		upperCaption: ""
+		text_format: %2.0f
+		autoUnit: true
+	}
+	{
+		objName: Label2593
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 0.53999996
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 296
+		x: 36
+		width: 66
+		height: 19
+		zIndex: 45
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2513
+		text_Caption: NLap
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: speed_data2594
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_SPEED
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.51
+			g: 0.64
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.9000001
+		scaleY: 0.9000001
+		y: 216
+		x: 96
+		width: 100.80001
+		height: 65.70001
+		zIndex: 46
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2514
+		field_index: 5
+		text_Caption: "  0"
+		upperCaption: ""
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: Label2595
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 196
+		x: 36
+		width: 51
+		height: 19
+		zIndex: 47
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2515
+		text_Caption: Kph
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: rpm_data2596
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.17
+			b: 0.42999998
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.70000005
+		scaleY: 0.70000005
+		y: 136
+		x: 76
+		width: 176.40002
+		height: 51.100006
+		zIndex: 48
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2516
+		field_index: 3
+		text_Caption: " 2950"
+		upperCaption: ""
+		text_format: %5.0f
+		autoUnit: true
+	}
+	{
+		objName: Label2597
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 116
+		x: 36
+		width: 58
+		height: 19
+		zIndex: 49
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2517
+		text_Caption: RPM
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2598
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 336
+		x: 796
+		width: 136
+		height: 19
+		zIndex: 50
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2518
+		text_Caption: Delta Time
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: time_data2600
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_TIME
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.64705884
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.70000005
+		scaleY: 0.60000014
+		y: 376
+		x: 736
+		width: 196.00003
+		height: 43.80001
+		zIndex: 51
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2519
+		field_index: 94
+		text_Caption: " 0.000"
+		upperCaption: ""
+		text_format: %s
+		autoUnit: true
+	}
+	{
+		objName: time_data2601
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_TIME
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.75
+			g: 0.75
+			b: 0.75
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.70000005
+		scaleY: 0.70000005
+		y: 250
+		x: 636
+		width: 301
+		height: 51.100006
+		zIndex: 52
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2520
+		field_index: 22
+		text_Caption: " 3:29.847"
+		upperCaption: ""
+		text_format: %s
+		autoUnit: true
+	}
+	{
+		objName: Label2602
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 216
+		x: 816
+		width: 110
+		height: 19
+		zIndex: 53
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2521
+		text_Caption: LapTime
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: SUPER_GAUGE2604
+		objGroup: LED
+		objType: LED_SLI
+		objBehavior: STD_VIEW
+		objStyle: SUPER_OTHER
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.72999996
+			b: 0.28
+			a: 1
+		}
+		borderColor: {
+			r: 1
+			g: 0.72999996
+			b: 0.28
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.5909998
+		scaleY: 0.5909998
+		y: 45
+		x: 22
+		width: 212.74373
+		height: 50.82598
+		zIndex: 54
+		fntSize: FNT_UNKNOWN
+		fntName: FNT_ARIAL
+		controlIndex: 2522
+		field_index: 27
+		field_index_max: 2000
+		revLimit_maxValue: 800000
+		text_Caption: ""
+		upperCaption: ""
+		text_format: ""
+		objParam1: 11
+		objParam2: 86
+		objParam3: 86
+		objParam6: 30
+	}
+	{
+		objName: SUPER_GAUGE2608
+		objGroup: LED
+		objType: LED_SLI
+		objBehavior: STD_VIEW
+		objStyle: SUPER_OTHER
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.45
+			b: 0.47
+			a: 1
+		}
+		borderColor: {
+			r: 1
+			g: 0.42999998
+			b: 0.48999998
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.45700085
+		scaleY: 0.45700085
+		y: 45
+		x: 814
+		width: 116.60779
+		height: 41.130077
+		zIndex: 55
+		fntSize: FNT_UNKNOWN
+		fntName: FNT_ARIAL
+		controlIndex: 2523
+		field_index: 27
+		field_index_max: 2000
+		revLimit_maxValue: 400000
+		text_Caption: ""
+		upperCaption: (DATA - 3600000.0)
+		text_format: ""
+		objParam1: 6
+		objParam2: 90
+		objParam3: 90
+		objParam6: 40
+	}
+	{
+		objName: other_data2609
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			g: 0.58
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 136
+		x: 396
+		width: 141
+		height: 73.00001
+		zIndex: 56
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2524
+		field_index: 90
+		text_Caption: " 19"
+		upperCaption: ""
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: Label2610
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.39
+			b: 0.74
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 16
+		x: 858.5
+		width: 66
+		height: 19
+		zIndex: 57
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2525
+		text_Caption: 100%
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2610_#2612
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.29999998
+			g: 0.75
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 19.5
+		x: 736
+		width: 52
+		height: 19
+		zIndex: 58
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2526
+		text_Caption: 90%
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2610_#2614
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.76
+			b: 0.51
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 16
+		x: 216
+		width: 52
+		height: 19
+		zIndex: 59
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2527
+		text_Caption: 20%
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2610_#2616
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.74
+			b: 0.45999998
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 16
+		x: 17.5
+		width: 37
+		height: 19
+		zIndex: 60
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2528
+		text_Caption: 0%
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2610_#2618
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 0.39
+			b: 0.74
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 736
+		width: 56
+		height: 19
+		zIndex: 61
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2529
+		text_Caption: SOC
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: brake_bias_data2619
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.42999998
+			g: 0.45999998
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.9000001
+		scaleY: 0.9000001
+		y: 136
+		x: 756
+		width: 177.30002
+		height: 65.70001
+		zIndex: 62
+		fntSize: FNT_LARGE
+		fntName: FNT_ARIAL
+		controlIndex: 2530
+		field_index: 13
+		text_Caption: 54.0
+		upperCaption: DATA*100
+		text_format: %2.1f
+		autoUnit: true
+	}
+	{
+		objName: SUPER_GAUGE2604_#2501
+		objGroup: LED
+		objType: LED_SLI
+		objBehavior: STD_VIEW
+		objStyle: SUPER_OTHER
+		visible: true
+		objColor: {
+			r: 0.37
+			g: 1
+			b: 0.72999996
+			a: 1
+		}
+		borderColor: {
+			r: 0.38
+			g: 1
+			b: 0.71
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.9249955
+		scaleY: 0.9249955
+		y: 45
+		x: 245.5
+		width: 559.614
+		height: 36.07484
+		zIndex: 63
+		fntSize: FNT_UNKNOWN
+		fntName: FNT_ARIAL
+		controlIndex: 2531
+		field_index: 27
+		field_index_max: 2000
+		revLimit_maxValue: 3200000
+		text_Caption: ""
+		upperCaption: "if(DATA>=3600000.0, 3200000.0, if(DATA>=800000.0, DATA-800000.0, 0))"
+		text_format: ""
+		objParam1: 42
+		objParam2: 39
+		objParam3: 39
+		objParam6: 13
+	}
+	{
+		objName: Label2505
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 105.5
+		x: 836
+		width: 82
+		height: 19
+		zIndex: 64
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 2532
+		text_Caption: BBIAS
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: other_data2245
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 358
+		width: 20
+		height: 14.000007
+		zIndex: 66
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2534
+		field_index: 36
+		text_Caption: "  5"
+		upperCaption: ""
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: other_data2245_#2247
+		objGroup: LABEL
+		objType: ACTIVE_LABEL
+		objBehavior: TELEM_OTHER
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 456
+		x: 836
+		width: 20
+		height: 14.000007
+		zIndex: 67
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2535
+		field_index: 50
+		text_Caption: "  9"
+		upperCaption: ""
+		text_format: %3.0f
+		autoUnit: true
+	}
+	{
+		objName: fuel_gauge2541
+		objGroup: STD_GAUGE
+		objType: GAUGE_FUEL
+		objBehavior: GAUGE_HORIZONTAL
+		objStyle: GAUGE_STYLE1
+		visible: true
+		objColor: {
+			r: 0.39
+			g: 1
+			b: 0.64
+			a: 1
+		}
+		borderColor: {
+			r: 0.47
+			g: 1
+			b: 0.75
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 464
+		x: 244
+		width: 520.9505
+		height: 43.060005
+		zIndex: 73
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2541
+		field_index: 11
+		field_index_max: 12
+		revLimit_maxValue: -20
+		text_Caption: ""
+		upperCaption: ""
+		text_format: ""
+		autoUnit: true
+	}
+	{
+		objName: Rect2542
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 94.5
+		x: 625
+		width: 75.21972
+		height: 19.245056
+		zIndex: 74
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2542
+		text_Caption: Motor
+		upperCaption: VOLTAGE==0
+		text_format: ""
+	}
+	{
+		objName: Rect2542_#2544
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 94
+		x: 625
+		width: 75.21972
+		height: 19.245056
+		zIndex: 75
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2544
+		text_Caption: Battery
+		upperCaption: VOLTAGE
+		text_format: ""
+	}
+	{
+		objName: Label2545
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 242.5
+		width: 110
+		height: 14.000007
+		zIndex: 76
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2545
+		text_Caption: MGU-K Reco
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2545_#2547
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 496
+		x: 796
+		width: 111
+		height: 14.000007
+		zIndex: 77
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2547
+		text_Caption: ENG. BRAKE
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Rect2542_#2549
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 93.5
+		x: 468
+		width: 75.21972
+		height: 21.660059
+		zIndex: 78
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2549
+		text_Caption: Charging
+		upperCaption: ENGINEPOWER==0
+		text_format: ""
+	}
+	{
+		objName: Label2545_#2551
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 389
+		width: 69
+		height: 14.000007
+		zIndex: 79
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2551
+		text_Caption: Delivery
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Label2545_#2553
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.49803922
+			g: 0.49803922
+			b: 0.49803922
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 96
+		x: 553
+		width: 47
+		height: 14.000007
+		zIndex: 80
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2553
+		text_Caption: Mode
+		upperCaption: ""
+		text_format: ""
+	}
+	{
+		objName: Rect2542_#2555
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 93.5
+		x: 468
+		width: 75.21972
+		height: 21.660059
+		zIndex: 81
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2555
+		text_Caption: Bal.Low
+		upperCaption: ENGINEPOWER==1
+		text_format: ""
+	}
+	{
+		objName: Rect2542_#2557
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 93.5
+		x: 468
+		width: 75.21972
+		height: 21.660059
+		zIndex: 82
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2557
+		text_Caption: Bal.High
+		upperCaption: ENGINEPOWER==2
+		text_format: ""
+	}
+	{
+		objName: Rect2542_#2559
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 93.5
+		x: 468
+		width: 75.21972
+		height: 21.660059
+		zIndex: 83
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2559
+		text_Caption: Overtake
+		upperCaption: ENGINEPOWER==3
+		text_format: ""
+	}
+	{
+		objName: Rect2542_#2561
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 93.5
+		x: 468
+		width: 75.21972
+		height: 21.660059
+		zIndex: 84
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2561
+		text_Caption: TopSpeed
+		upperCaption: ENGINEPOWER==4
+		text_format: ""
+	}
+	{
+		objName: Rect2542_#2563
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 93.5
+		x: 468
+		width: 75.21972
+		height: 21.660059
+		zIndex: 85
+		fntSize: FNT_SMALL
+		fntName: FNT_ARIAL
+		controlIndex: 2563
+		text_Caption: HotLap
+		upperCaption: ENGINEPOWER==5
+		text_format: ""
+	}
+]
+}
