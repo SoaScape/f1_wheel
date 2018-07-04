@@ -111,6 +111,8 @@ function getMfdShortcutButtons(multifunction)
 		multifunction["currentPosition"] = multifunction["currentUpDnMode"]
 		nextIndex = nextIndex + getSelectModeButtons(buttonMap, multifunction, currentSetting, multifunction["decrementKey"], multifunction["incrementKey"])
 
+		-- Ensure first button press has delay for menu to openMenuDelay
+		delayMap[1] = openMenuDelay
 		-- Close the MFD window
 		buttonMap[nextIndex] = quickMenuToggleKey
 		delayMap[nextIndex] = closeMenuDelay
