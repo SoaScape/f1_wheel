@@ -8,8 +8,8 @@ local quickMenuToggleKey = "M"
 local radioKey = "T"
 local quickMenuFirstPage = quickMenuLeft
 
-local voiceMenuDelay = 400
-local openMenuDelay = 500
+local voiceMenuDelay = 600
+local openMenuDelay = 600
 local closeMenuDelay = 600
 
 local function getRearBrakeBias()
