@@ -22,7 +22,11 @@ local function performReset(forceFull)
 			else
 				value["currentUpDnMode"] = nil
 			end
-			value["currentPosition"] = nil
+			if value["resetPosition"] == nil then
+				value["currentPosition"] = nil
+			else
+				value["currentPosition"] = value["resetPosition"]
+			end
 		end
 	end
 
