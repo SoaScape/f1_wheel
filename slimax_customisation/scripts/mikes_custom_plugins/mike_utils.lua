@@ -13,7 +13,7 @@ local customDisplayActive = false
 local customDisplayTicksTimeout = 0
 
 local keystrokeDelay = 200
-local keyHoldDelay = 60
+local keyHoldDelay = 40
 
 local keyQueue = {}
 

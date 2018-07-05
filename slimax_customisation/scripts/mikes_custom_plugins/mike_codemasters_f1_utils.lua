@@ -100,7 +100,7 @@ function getMfdShortcutButtons(multifunction)
 	if multifunction["currentSettingMethod"] ~= nil then
 		currentSetting = multifunction["currentSettingMethod"]()
 	else
-		if multifunction["currentPosition"] == nil or currentSetting == multifunction["currentUpDnMode"] then
+		if multifunction["currentPosition"] == nil then
 			nextIndex = nextIndex + setMinPosition(multifunction, buttonMap, multifunction["decrementKey"])
 			positionPreviouslyUnknown = true
 		end
