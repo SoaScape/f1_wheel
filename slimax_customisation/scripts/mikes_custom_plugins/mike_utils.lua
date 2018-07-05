@@ -89,7 +89,7 @@ function confirmSelection(leftDisp, rightDisplay, buttonMap, showDisplay)
 					local holdDelay = keyHoldDelay
 					if delayMap ~= nil and delayMap[i] ~= nil then
 						delay = delayMap[i]
-					elseif customKeystrokeDelays[buttonMap[i]] ~= nil then
+					elseif customKeystrokeDelays ~= nil and customKeystrokeDelays[buttonMap[i]] ~= nil then
 						delay = customKeystrokeDelays[buttonMap[i]]
 					end
 					
