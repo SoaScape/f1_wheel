@@ -113,6 +113,10 @@ function getFuelMix()
 	return round(GetCarInfo("fuel_mix"), 0)
 end
 
+function getErsMode()
+	return round(GetCarInfo("engine_power"), 0)
+end
+
 function getTks()
 	local ticks = GetAppInfo("ticks")
 	if ticks == nil then
