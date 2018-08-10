@@ -138,7 +138,7 @@ local function setDifferential(diffOffset)
 		end
 	end
 	diffMultiFunction["currentUpDnMode"] = key
-	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction), displayDiffEvents)
+	confirmSelection(autoDiffMultifunctionName, diffMultiFunction["modes"][key], getButtonMap(diffMultiFunction, false, false), displayDiffEvents)
 	--print("Diff: " .. diff .. " key: " .. key .. ", base: " .. baseDiff .. ", diffOffset: " .. diffOffset)
 end
 
