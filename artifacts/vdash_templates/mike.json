@@ -1939,5 +1939,266 @@ objs: [
 		forceMaxValue: true
 		autoUnit: true
 	}
+	{
+		objName: Rect212_#308
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 306.5
+		x: 276.5
+		width: 133.38974
+		height: 47.355038
+		zIndex: 55
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 308
+		field_index: 12
+		text_Caption: NONE
+		upperCaption: "IF(ENGINEPOWER==0,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect212_#310
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 306.5
+		x: 276.5
+		width: 133.38974
+		height: 47.355038
+		zIndex: 56
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 310
+		field_index: 12
+		text_Caption: LOW
+		upperCaption: "IF(ENGINEPOWER==1,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect212_#312
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 306.5
+		x: 276.5
+		width: 133.38974
+		height: 47.355038
+		zIndex: 57
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 312
+		field_index: 12
+		text_Caption: MEDIUM
+		upperCaption: "IF(ENGINEPOWER==2,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect212a_#311
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 306.5
+		x: 276.5
+		width: 133.38974
+		height: 47.355038
+		zIndex: 57
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 311
+		field_index: 12
+		text_Caption: High
+		upperCaption: "IF(ENGINEPOWER==3,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect212_#314
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 306.5
+		x: 276.5
+		width: 133.38974
+		height: 47.355038
+		zIndex: 58
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 314
+		field_index: 12
+		text_Caption: HOT LAP
+		upperCaption: "IF(ENGINEPOWER==5,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Rect212_#316
+		objGroup: GROUP_LABEL
+		objType: SURFACE
+		objBehavior: STD_VIEW
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {
+			a: 1
+		}
+		backgroundColor: {
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 306.5
+		x: 274
+		width: 133.38974
+		height: 47.355038
+		zIndex: 59
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 316
+		field_index: 12
+		text_Caption: OVERTAKE
+		upperCaption: "IF(ENGINEPOWER==4,1,0)"
+		text_format: ""
+	}
+	{
+		objName: Label317
+		objGroup: LABEL
+		objType: STATIC_LABEL
+		objBehavior: BEHAVIOR_UNKNOWN
+		objStyle: STYLE_UNKNOWN
+		visible: true
+		objColor: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 1
+		scaleY: 1
+		y: 358.5
+		x: 316
+		width: 54
+		height: 19
+		zIndex: 60
+		fntSize: FNT_MEDIUM
+		fntName: FNT_ARIAL
+		controlIndex: 317
+		text_Caption: ERS
+		upperCaption: ""
+		text_format: ""
+	}
 ]
 }
