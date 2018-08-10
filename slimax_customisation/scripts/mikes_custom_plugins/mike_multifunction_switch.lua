@@ -90,12 +90,6 @@ function multiControlsEvent(deviceType, ctrlType, ctrlPos, value)
 					end
 					toggleOvertakeMode(true, true)
 				end
-			-- Safety Car Button
-			elseif ctrlType == pushbutton and ctrlPos == safetyCarButton and value == buttonReleaseValue
-			  and currentMultifunction["name"] ~= resetMultiFunctionName then
-				if safetyCarButtonEnabled then
-					processSafetyCarButtonEvent()
-				end
 			elseif ctrlType == pushbutton and value == buttonReleaseValue and currentMultifunction["name"] ~= resetMultiFunctionName then
 				-- Multifunction Up/Dn
 				if currentMultifunction["upDnSelectable"] then
