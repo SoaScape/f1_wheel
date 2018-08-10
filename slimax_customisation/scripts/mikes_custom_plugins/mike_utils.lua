@@ -117,6 +117,10 @@ function getErsMode()
 	return round(GetCarInfo("engine_power"), 0)
 end
 
+function getSafetyCar()
+	return GetContextInfo("safety_car_flag")
+end
+
 function getTks()
 	local ticks = GetAppInfo("ticks")
 	if ticks == nil then
