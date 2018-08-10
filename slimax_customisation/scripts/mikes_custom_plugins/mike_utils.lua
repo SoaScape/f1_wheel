@@ -12,8 +12,8 @@ local progDataDir = "./auto-cfg/"
 local customDisplayActive = false
 local customDisplayTicksTimeout = 0
 
-local keystrokeDelay = 200
-local keyHoldDelay = 60
+local keystrokeDelay = 210
+local keyHoldDelay = 100
 
 local keyQueue = {}
 

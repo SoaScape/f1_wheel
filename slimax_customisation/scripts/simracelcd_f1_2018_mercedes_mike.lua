@@ -301,20 +301,6 @@ autoDiffEnabled = true
 raceStartModeEnabled = true
 safetyCarModeEnabled = true
 
-customKeystrokeDelays = {}
-customKeystrokeDelays[quickMenuLeft] = 80
-customKeystrokeDelays[quickMenuRight] = 80
-customKeystrokeDelays[quickMenuUp] = 80
-customKeystrokeDelays[quickMenuDn] = 80
-customKeystrokeDelays[fuelMultiFunction["incrementKey"]] = 80
-customKeystrokeDelays[fuelMultiFunction["decrementKey"]] = 80
-customKeystrokeDelays[diffMultiFunction["incrementKey"]] = 80
-customKeystrokeDelays[diffMultiFunction["decrementKey"]] = 80
-customKeystrokeDelays[biasMultiFunction["incrementKey"]] = 80
-customKeystrokeDelays[biasMultiFunction["decrementKey"]] = 80
-customKeystrokeDelays[ersMultiFunction["incrementKey"]] = 80
-customKeystrokeDelays[ersMultiFunction["decrementKey"]] = 80
-
 function custom_init_Event(scriptfile)
 end
 
