@@ -25,7 +25,7 @@ public class UdpRepositoryF12017Impl implements Runnable {
 	@Value("${udp-listen-port}")
 	private Integer udpListenPort;
 
-	@Value("${packet-size}")
+	@Value("${f1-2017-packet-size}")
 	private Integer packetSize;
 
 	@Value("${forward-udp-data}")
