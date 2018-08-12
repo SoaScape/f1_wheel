@@ -11,7 +11,7 @@ public class TelemetryDataF12018Impl {
 
     public static final Integer Header_Size_Bytes = 18;
     @Data
-    public class F12018Header {
+    public static class F12018Header {
         private int format;             // 2018
         private Byte version;           // Version of this packet type, all start from 1
         private Byte packetId;          // Identifier for the packet type, see below
@@ -31,9 +31,9 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    private static final Integer Car_Motion_Data_Size_Bytes = 60;
+    private static final Integer CarMotionDataSizeBytes = 60;
     @Data
-    public class CarMotionData
+    public static class CarMotionData
     {
         private float worldPositionX; // World space X position
         private float worldPositionY; // World space Y position
@@ -55,7 +55,7 @@ public class TelemetryDataF12018Impl {
         private float roll; // Roll angle in radians
 
         public CarMotionData(byte[] data, int carNum) {
-            int offset = carNum + Car_Motion_Data_Size_Bytes;
+            int offset = carNum + CarMotionDataSizeBytes;
             worldPositionX = decodeFloat(data, 0 + offset);
             worldPositionY = decodeFloat(data, 4 + offset);
             worldPositionZ = decodeFloat(data, 8 + offset);
@@ -77,9 +77,9 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    public static final Integer Motion_Packet_Size = 1341; // bytes
+    public static final Integer MotionPacketSize = 1341; // bytes
     @Data
-    public class PacketMotionData {
+    public static class PacketMotionData {
         private F12018Header header;                                    // Header
         private CarMotionData[] carMotionData = new CarMotionData[20];  // Data for all cars on track [20]
 
@@ -124,7 +124,7 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    private float[] populateFloatArr(byte[] data, int arraySize, int startByte) {
+    private static float[] populateFloatArr(byte[] data, int arraySize, int startByte) {
         float[] floats = new float[arraySize];
         for(int i = 0; i < floats.length; i++) {
             floats[i] = decodeFloat(data, startByte + (i * FLOAT_SIZE_IN_BYTES));
@@ -132,19 +132,19 @@ public class TelemetryDataF12018Impl {
         return floats;
     }
 
-    private ByteBuffer decodeBytes(byte[] data, int start, int end) {
+    private static ByteBuffer decodeBytes(byte[] data, int start, int end) {
         return ByteBuffer.wrap(Arrays.copyOfRange(data, start, end)).order(ByteOrder.LITTLE_ENDIAN);
     }
 
-    private float decodeFloat(byte[] data, int start) {
+    private static float decodeFloat(byte[] data, int start) {
         return decodeBytes(data, start, start + FLOAT_SIZE_IN_BYTES).getFloat();
     }
 
-    private int decodeInt(byte[] data, int start, int sizeInBytes) {
+    private static int decodeInt(byte[] data, int start, int sizeInBytes) {
         return decodeBytes(data, start, start + sizeInBytes).getInt();
     }
 
-    private Long decodeLong(byte[] data, int start, int sizeInBytes) {
+    private static Long decodeLong(byte[] data, int start, int sizeInBytes) {
         return decodeBytes(data, start, start + sizeInBytes).getLong();
     }
 

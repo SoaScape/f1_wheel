@@ -131,6 +131,9 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	private byte playerCarIndex;
 	private CarData[] carData = new CarData[20];
 
+	public TelemetryDataF12017Impl(){
+	}
+
 	public TelemetryDataF12017Impl(final byte[] data, final CodemastersLookups codemastersLookups) {
 		this.codemastersLookups = codemastersLookups;
 		mapFieldsFromBytes(data);
@@ -217,6 +220,10 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 		}
 		private void setTyreCompoundName() {
 			this.tyreCompoundName = codemastersLookups.getTyreCompoundLookup().get(this.tyreCompound.intValue());
+		}
+
+		public byte[] toByteArray() {
+			return this.toByteArray();
 		}
 	}
 }
