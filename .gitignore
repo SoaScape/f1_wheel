@@ -24,6 +24,6 @@ bin
 /buildSrc/build
 /build
 uwmreport/hsqldb.*
-.idea/*
 *.iml
+**/.idea/*
 src/generated/java/
