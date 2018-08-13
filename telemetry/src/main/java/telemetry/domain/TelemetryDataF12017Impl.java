@@ -17,119 +17,122 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 
 	private CodemastersLookups codemastersLookups;
 
-	private String fuelMixName;
-	private String trackName;
-	private String teamName;
-	private String tyreCompoundName;
+	public F12017Data data;
 
-	// Wheel order for all arrays: 0=rear left, 1=rear right, 2=front left, 3=front right
-	private float time;
-	private float lapTime;
-	private float lapDistance;
-	private float totalDistance;
-	private float x;
-	private float y;
-	private float z;
-	private float speed;
-	private float xv;
-	private float yv;
-	private float zv;
-	private float xr;
-	private float yr;
-	private float zr;
-	private float xd;
-	private float yd;
-	private float zd;
-	private float suspPosRL;
-	private float suspPosRR;
-	private float suspPosFL;
-	private float suspPosFR;
-	private float suspVelRL;
-	private float suspVelRR;
-	private float suspVelFL;
-	private float suspVelFR;
-	private float wheelSpeedRL;
-	private float wheelSpeedRR;
-	private float wheelSpeedFL;
-	private float wheelSpeedFR;
-	private float throttle;
-	private float steering;
-	private float brake;
-	private float clutch;
-	private float gear;
-	private float gforceLat;
-	private float gforceLon;
-	private float lap;
-	private float engineRate;
-	private float sliProNativeSupport;
-	private float carPosition;
-	private float kersLevel;
-	private float maxKersLevel;
-	private float drs;
-	private float tractionControl;
-	private float abs;
-	private float fuelInTank;
-	private float fuelCapacity;
-	private float inPits;
-	private float sector;
-	private float sector1Time;
-	private float sector2Time;
-	private float brakeTempsRL; // Celsius
-	private float brakeTempsRR;
-	private float brakeTempsFL;
-	private float brakeTempsFR;
-	private float tyrePressuresRL;
-	private float tyrePressuresRR;
-	private float tyrePressuresFL;
-	private float tyrePressuresFR;
-	private Integer teamInfo;
-	private float totalLaps;
-	private float trackSize;
-	private float lastLapTime;
-	private float maxRpm;
-	private float idleRpm;
-	private float maxGears;	
-	private float sessionType;
-	private float drsAvailable;
-	private float trackId;
-	private float fiaFlags;
-	private float era;
-	private float engineTemp;
-	private float gforceVert;
-	private float angVelX;
-	private float angVelY;
-	private float angVelZ;
-	private byte tyreTempsRL;
-	private byte tyreTempsRR;
-	private byte tyreTempsFL;
-	private byte tyreTempsFR;
-	private byte tyreWearRL;
-	private byte tyreWearRR;
-	private byte tyreWearFL;
-	private byte tyreWearFR;
-	private Byte tyreCompound;	
-	private byte frontBrakeBias;
-	private Byte fuelMix;
-	private byte currentLapInvalid;
-	private byte tyreDamageRL;
-	private byte tyreDamageRR;
-	private byte tyreDamageFL;
-	private byte tyreDamageFR;
-	private byte frontLeftWingDamage;
-	private byte frontRightWingDamage;
-	private byte rearWingDamage;
-	private byte engineDamage;
-	private byte gearBoxDamage;
-	private byte exhaustDamage;
-	private byte pitLimiterStatus;
-	private byte pitSpeedLimit;	
-	private float sessionTimeLeft;
-	private byte revLightsPercent;
-	private byte isSpectating;
-	private byte spectatorCarIndex;
-	private byte numCars;
-	private byte playerCarIndex;
-	private CarData[] carData = new CarData[20];
+	public class F12017Data {
+		// Wheel order for all arrays: 0=rear left, 1=rear right, 2=front left, 3=front right
+		public float time;
+		public float lapTime;
+		public float lapDistance;
+		public float totalDistance;
+		public float x;
+		public float y;
+		public float z;
+		public float speed;
+		public float xv;
+		public float yv;
+		public float zv;
+		public float xr;
+		public float yr;
+		public float zr;
+		public float xd;
+		public float yd;
+		public float zd;
+		public float suspPosRL;
+		public float suspPosRR;
+		public float suspPosFL;
+		public float suspPosFR;
+		public float suspVelRL;
+		public float suspVelRR;
+		public float suspVelFL;
+		public float suspVelFR;
+		public float wheelSpeedRL;
+		public float wheelSpeedRR;
+		public float wheelSpeedFL;
+		public float wheelSpeedFR;
+		public float throttle;
+		public float steering;
+		public float brake;
+		public float clutch;
+		public float gear;
+		public float gforceLat;
+		public float gforceLon;
+		public float lap;
+		public float engineRate;
+		public float sliProNativeSupport;
+		public float carPosition;
+		public float kersLevel;
+		public float maxKersLevel;
+		public float drs;
+		public float tractionControl;
+		public float abs;
+		public float fuelInTank;
+		public float fuelCapacity;
+		public float inPits;
+		public float sector;
+		public float sector1Time;
+		public float sector2Time;
+		public float brakeTempsRL; // Celsius
+		public float brakeTempsRR;
+		public float brakeTempsFL;
+		public float brakeTempsFR;
+		public float tyrePressuresRL;
+		public float tyrePressuresRR;
+		public float tyrePressuresFL;
+		public float tyrePressuresFR;
+		public float teamInfo;
+		public float totalLaps;
+		public float trackSize;
+		public float lastLapTime;
+		public float maxRpm;
+		public float idleRpm;
+		public float maxGears;
+		public float sessionType;
+		public float drsAvailable;
+		public float trackId;
+		public float fiaFlags;
+		public float era;
+		public float engineTemp;
+		public float gforceVert;
+		public float angVelX;
+		public float angVelY;
+		public float angVelZ;
+		public byte tyreTempsRL;
+		public byte tyreTempsRR;
+		public byte tyreTempsFL;
+		public byte tyreTempsFR;
+		public byte tyreWearRL;
+		public byte tyreWearRR;
+		public byte tyreWearFL;
+		public byte tyreWearFR;
+		public Byte tyreCompound;
+		public byte frontBrakeBias;
+		public Byte fuelMix;
+		public byte currentLapInvalid;
+		public byte tyreDamageRL;
+		public byte tyreDamageRR;
+		public byte tyreDamageFL;
+		public byte tyreDamageFR;
+		public byte frontLeftWingDamage;
+		public byte frontRightWingDamage;
+		public byte rearWingDamage;
+		public byte engineDamage;
+		public byte gearBoxDamage;
+		public byte exhaustDamage;
+		public byte pitLimiterStatus;
+		public byte pitSpeedLimit;
+		public float sessionTimeLeft;
+		public byte revLightsPercent;
+		public byte isSpectating;
+		public byte spectatorCarIndex;
+		public byte numCars;
+		public byte playerCarIndex;
+		public CarData[] carData = new CarData[20];
+
+		public byte[] toByteArray() {
+			return this.toByteArray();
+		}
+	}
 
 	public TelemetryDataF12017Impl(){
 	}
@@ -150,34 +153,13 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 			ReflectionUtils.invokeMethod(method, target, Math.round(decodeFloat(data, byteLocation)));
 		}
 	}
-	
-	private void setTrackName() {
-		this.trackName = codemastersLookups.getTrackLookup().get(Math.round(this.trackId));
-	}
-	
-	private void setTeamName() {
-		this.teamName = codemastersLookups.getTeamLookup().get(this.teamInfo);
-	}
-	
-	private void setFuelMixName() {
-		this.fuelMixName = codemastersLookups.getFuelMixLookup().get(this.fuelMix.intValue());
-	}
-	
-	private void setTyreCompoundName() {
-		this.tyreCompoundName = codemastersLookups.getTyreCompoundLookup().get(this.tyreCompound.intValue());
-	}
 
 	private void mapFieldsFromBytes(final byte[] data) {
-		codemastersLookups.getF12017DataMappings().forEach((key, value) -> mapDataItem(key, value, data, this));
-		
-		setFuelMixName();
-		setTrackName();
-		setTeamName();
-		setTyreCompoundName();
+		codemastersLookups.getF12017DataMappings().forEach((key, value) -> mapDataItem(key, value, data, this.data));
 
 		int carDataIndex = 337;
-		for(int i = 0; i < this.carData.length; i++) {
-			this.carData[i] = new CarData(Arrays.copyOfRange(data, carDataIndex, carDataIndex + CAR_DATA_SIZE_BYTES));
+		for(int i = 0; i < this.data.carData.length; i++) {
+			this.data.carData[i] = new CarData(Arrays.copyOfRange(data, carDataIndex, carDataIndex + CAR_DATA_SIZE_BYTES));
 			carDataIndex = carDataIndex + CAR_DATA_SIZE_BYTES;
 		}
 	}
@@ -186,44 +168,28 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 		return ByteBuffer.wrap(Arrays.copyOfRange(data, start, start + FLOAT_SIZE_IN_BYTES)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
 	}
 	
-	@Data
 	public class CarData {
-		private String teamName;
-		private String tyreCompoundName;
-
-		private float worldPositionX; // world co-ordinates of vehicle
-		private float worldPositionY;
-		private float worldPositionZ;
-		private float lastLapTime;
-		private float currentLapTime;
-		private float bestLapTime;
-		private float sector1Time;
-		private float sector2Time;
-		private float lapDistance;
-		private byte driverId;
-		private Byte teamId;		
-		private byte carPosition; // UPDATED: track positions of vehicle
-		private byte currentLapNum;
-		private Byte tyreCompound;
-		private byte inPits; // 0 = none, 1 = pitting, 2 = in pit area
-		private byte sector; // 0 = sector1, 1 = sector2, 2 = sector3
-		private byte currentLapInvalid; // current lap invalid - 0 = valid, 1 = invalid
-		private byte penalties; // NEW: accumulated time penalties in seconds to be added
+		public float worldPositionX; // world co-ordinates of vehicle
+		public float worldPositionY;
+		public float worldPositionZ;
+		public float lastLapTime;
+		public float currentLapTime;
+		public float bestLapTime;
+		public float sector1Time;
+		public float sector2Time;
+		public float lapDistance;
+		public byte driverId;
+		public Byte teamId;		
+		public byte carPosition; // UPDATED: track positions of vehicle
+		public byte currentLapNum;
+		public Byte tyreCompound;
+		public byte inPits; // 0 = none, 1 = pitting, 2 = in pit area
+		public byte sector; // 0 = sector1, 1 = sector2, 2 = sector3
+		public byte currentLapInvalid; // current lap invalid - 0 = valid, 1 = invalid
+		public byte penalties; // NEW: accumulated time penalties in seconds to be added
 
 		public CarData(final byte[] data) {
 			codemastersLookups.getF12017CarDataMappings().forEach((key, value) -> mapDataItem(key, value, data, this));
-			setTeamName();
-			setTyreCompoundName();
-		}
-		private void setTeamName() {
-			this.teamName = codemastersLookups.getTeamLookup().get(this.teamId.intValue());
-		}
-		private void setTyreCompoundName() {
-			this.tyreCompoundName = codemastersLookups.getTyreCompoundLookup().get(this.tyreCompound.intValue());
-		}
-
-		public byte[] toByteArray() {
-			return this.toByteArray();
 		}
 	}
 }
