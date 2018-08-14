@@ -48,12 +48,9 @@ public class UdpRepositoryF12017Impl implements Runnable {
 					byte[] data = datagramPacket.getData();
 					if(!proxyOnly) {
 						final TelemetryDataF12017Impl telem = new TelemetryDataF12017Impl(data, codemastersLookups);
-						log.info("Telem: " + telem);
 					}
 					if(forwardUdpData) {
 						udpServer.sendProxyUdpData(data);
-						notifyAll();
-						log.info("Cheese");
 					}
 		        }
 			} catch(final IOException e) {

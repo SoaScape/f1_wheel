@@ -79,7 +79,6 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					final byte[] out = f12017.toByteArray();
                     udpServer.sendProxyUdpData(out);
                 }
-				notifyAll();
 			}
 		} catch(final IOException e) {
 			log.error(e);
