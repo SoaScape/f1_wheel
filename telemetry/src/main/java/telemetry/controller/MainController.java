@@ -5,12 +5,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
 import telemetry.repository.impl.UdpRepositoryF12017Impl;
+import telemetry.repository.impl.UdpRepositoryF12018MotionToFR2017Impl;
 import telemetry.repository.impl.UdpServer;
 
 @Controller
 public class MainController implements CommandLineRunner {
 	@Autowired
-	private UdpRepositoryF12017Impl repo;
+	private UdpRepositoryF12018MotionToFR2017Impl repo;
 	@Autowired
 	private UdpServer server;
 
