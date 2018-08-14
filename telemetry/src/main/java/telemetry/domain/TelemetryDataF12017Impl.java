@@ -17,7 +17,7 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 
 	private CodemastersLookups codemastersLookups;
 
-	public F12017Data data;
+	public F12017Data data = new F12017Data();
 
 	public class F12017Data {
 		// Wheel order for all arrays: 0=rear left, 1=rear right, 2=front left, 3=front right
