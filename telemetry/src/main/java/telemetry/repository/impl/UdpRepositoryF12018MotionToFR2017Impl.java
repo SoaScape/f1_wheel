@@ -33,7 +33,7 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 				byte[] data = datagramPacket.getData();
                 if(0 == data[3]) { //Packetid = motion (0)
                     final PacketMotionData motion = new PacketMotionData(data);
-                    log.info("F1 2018 Motion: " + motion);
+                    //log.info("F1 2018 Motion: " + motion);
                     final TelemetryDataF12017Impl f12017 = new TelemetryDataF12017Impl();
                     f12017.data.angVelX = motion.getAngularVelocityX();
                     f12017.data.angVelY = motion.getAngularVelocityY();
@@ -72,8 +72,12 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017.data.yv = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()].getWorldVelocityY();
 					f12017.data.zv = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()].getWorldVelocityZ();
 
+					f12017.data.time = motion.getHeader().getSessionTime();
+
+
 					// RL, RR, FL, FR
-                    udpServer.sendProxyUdpData(f12017.data.toByteArray());
+					final byte[] out = f12017.toByteArray();
+                    udpServer.sendProxyUdpData(out);
                 }
 				notifyAll();
 			}

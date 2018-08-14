@@ -17,7 +17,7 @@ public class MainController implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args) {
-		new Thread(server).start();
+		//new Thread(server).start();
 		new Thread(repo).start();
 	}
 }
