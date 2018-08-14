@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class TelemetryDataF12018Impl {
     private static final Integer FLOAT_SIZE_IN_BYTES = 4;
 
-    public static final Integer Header_Size_Bytes = 18;
+    public static final Integer Header_Size_Bytes = 21;
     @Data
     public static class F12018Header {
         private int format;             // 2018
@@ -17,7 +17,7 @@ public class TelemetryDataF12018Impl {
         private Byte packetId;          // Identifier for the packet type, see below
         private Long sessionId;         // Unique identifier for the session
         private float sessionTime;      // Session timestamp
-        private Byte frameIdentifier;   // Identifier for the frame the data was retrieved on
+        private int frameIdentifier;   // Identifier for the frame the data was retrieved on
         private Byte playerCarIndex;    // Index of player's car in the array
 
         public F12018Header(byte[] data) {
@@ -26,8 +26,8 @@ public class TelemetryDataF12018Impl {
             packetId = data[3];
             sessionId = decodeLong(data, 4, 8);
             sessionTime = decodeFloat(data, 12);
-            frameIdentifier = data[16];
-            playerCarIndex = data[17];
+            frameIdentifier = decodeInt(data, 16, 4);
+            playerCarIndex = data[20];
         }
     }
 
@@ -54,8 +54,8 @@ public class TelemetryDataF12018Impl {
         private float pitch; // Pitch angle in radians
         private float roll; // Roll angle in radians
 
-        public CarMotionData(byte[] data, int carNum) {
-            int offset = carNum + CarMotionDataSizeBytes;
+        public CarMotionData(byte[] data, int carIndex) {
+            int offset = Header_Size_Bytes + (carIndex * CarMotionDataSizeBytes);
             worldPositionX = decodeFloat(data, 0 + offset);
             worldPositionY = decodeFloat(data, 4 + offset);
             worldPositionZ = decodeFloat(data, 8 + offset);
@@ -102,7 +102,7 @@ public class TelemetryDataF12018Impl {
 
         public PacketMotionData(byte[] data) {
             header = new F12018Header(data);
-            for(int i = Header_Size_Bytes; i < Header_Size_Bytes + carMotionData.length; i++) {
+            for(int i = 0; i < carMotionData.length; i++) {
                 carMotionData[i] = new CarMotionData(data, i);
             }
             suspensionPosition = populateFloatArr(data, 4, 1218);
@@ -141,7 +141,7 @@ public class TelemetryDataF12018Impl {
     }
 
     private static int decodeInt(byte[] data, int start, int sizeInBytes) {
-        return decodeBytes(data, start, start + sizeInBytes).getInt();
+        return ((data[start+sizeInBytes-1] & 0xff) << 8) + (data[start] & 0xff);
     }
 
     private static Long decodeLong(byte[] data, int start, int sizeInBytes) {

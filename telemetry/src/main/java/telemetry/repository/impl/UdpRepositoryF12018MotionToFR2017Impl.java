@@ -31,8 +31,7 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 			while (true) {
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
-                final F12018Header header = new TelemetryDataF12018Impl.F12018Header(data);
-                if(0 == header.getPacketId()) {
+                if(0 == data[3]) { //Packetid = motion (0)
                     final PacketMotionData motion = new PacketMotionData(data);
                     log.info("F1 2018 Motion: " + motion);
                     final TelemetryDataF12017Impl f12017 = new TelemetryDataF12017Impl();
