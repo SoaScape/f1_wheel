@@ -23,6 +23,13 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 	@Value("${udp-listen-port}")
 	private Integer udpListenPort;
 
+	private void addHeaderData(final TelemetryDataF12017Impl f12017, final F12018Header header) {
+		f12017.setTime(header.getSessionTime());
+		f12017.setPlayerCarIndex(header.getPlayerCarIndex());
+		f12017.setEra(2017f);
+		f12017.setMaxGears(8f);
+	}
+
 	@Override
 	public void run() {
 		try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
@@ -35,8 +42,10 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
                 if(0 == data[3]) { //Packetid = motion (0)
-                    final PacketMotionData motion = new PacketMotionData(data);
+                    final MotionDataPacket motion = new MotionDataPacket(data);
                     final CarMotionData playerCar = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()];
+
+					addHeaderData(f12017, motion.getHeader());
 
                     f12017.setAngVelX(motion.getAngularVelocityX());
                     f12017.setAngVelY(motion.getAngularVelocityY());
@@ -75,8 +84,6 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017.setYv(playerCar.getWorldVelocityY());
 					f12017.setZv(playerCar.getWorldVelocityZ());
 
-					f12017.setTime(motion.getHeader().getSessionTime());
-
 					f12017.setMYaw(playerCar.getYaw());
 					f12017.setMPitch(playerCar.getPitch());
 					f12017.setMRoll(playerCar.getRoll());
@@ -100,8 +107,11 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
                     receivedMotion = true;
                 }
                 if(6 == data[3]) { //Packetid = car telemetery
-                    final PacketCarData carsData = new PacketCarData(data);
+                    final CarDataPacket carsData = new CarDataPacket(data);
                     final IndividialCarData carData = carsData.getCarsData()[carsData.getHeader().getPlayerCarIndex()];
+
+					addHeaderData(f12017, carsData.getHeader());
+
                     f12017.setRevLightsPercent(carData.getM_revLightsPercent());
                     f12017.setSpeed(carData.getM_speed());
                     f12017.setBrake(carData.getM_brake());

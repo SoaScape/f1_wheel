@@ -76,7 +76,7 @@ public class TelemetryDataF12018Impl {
 
     public static final Integer MOTION_PACKET_SIZE = 1341; // bytes
     @Data
-    public static class PacketMotionData {
+    public static class MotionDataPacket {
         private F12018Header header;                                    // Header
         private CarMotionData[] carMotionData = new CarMotionData[20];  // Data for all cars on track [20]
 
@@ -97,7 +97,7 @@ public class TelemetryDataF12018Impl {
         private float angularAccelerationZ;                     // Angular velocity z-component
         private float frontWheelsAngle;                         // Current front wheels angle in radians (added v1.2.1)
 
-        public PacketMotionData(byte[] data) {
+        public MotionDataPacket(byte[] data) {
             header = new F12018Header(data);
             for(int i = 0; i < carMotionData.length; i++) {
                 carMotionData[i] = new CarMotionData(data, i);
@@ -124,20 +124,20 @@ public class TelemetryDataF12018Impl {
 	public static final Integer INDIVIDUAL_CAR_DATA_PACKET_SIZE = 53; // bytes
     @Data
     public static class IndividialCarData {
-        private short m_speed; //int16
-        private byte m_throttle; //int8
-        private byte m_steer; // int8                            // Steering (-100 (full lock left) to 100 (full lock right))
-        private byte m_brake; //         uint8                           // Amount of brake applied (0 to 100)
-        private byte m_clutch; //         uint8                          // Amount of clutch applied (0 to 100)
-        private byte m_gear; //         int8                             // Gear selected (1-8, N=0, R=-1)
-        private short m_engineRPM; //         uint16                      // Engine RPM
-        private byte m_drs; //         uint8                             // 0 = off, 1 = on
-        private byte m_revLightsPercent; //         uint8                // Rev lights indicator (percentage)
-        private short[] m_brakesTemperature = new short[4]; //         uint16           // Brakes temperature (celsius)
-        private short[] m_tyresSurfaceTemperature = new short[4]; //         uint16     // Tyres surface temperature (celsius)
-        private short[] m_tyresInnerTemperature = new short[4]; //         uint16       // Tyres inner temperature (celsius)
-        private short m_engineTemperature; //         uint16              // Engine temperature (celsius)
-        private float[] m_tyresPressure = new float[4];           // Tyres pressure (PSI)
+        private short m_speed;
+        private byte m_throttle;
+        private byte m_steer;
+        private byte m_brake;
+        private byte m_clutch;
+        private byte m_gear;
+        private short m_engineRPM;
+        private byte m_drs;
+        private byte m_revLightsPercent;
+        private short[] m_brakesTemperature = new short[4];
+        private short[] m_tyresSurfaceTemperature = new short[4];
+        private short[] m_tyresInnerTemperature = new short[4];
+        private short m_engineTemperature;
+        private float[] m_tyresPressure = new float[4];
 
         public IndividialCarData(byte[] data, int carIndex) {
             int offset = HEADER_SIZE_BYTES + (carIndex * INDIVIDUAL_CAR_DATA_PACKET_SIZE);
@@ -163,17 +163,74 @@ public class TelemetryDataF12018Impl {
 
 	public static final Integer CAR_DATA_PACKET_SIZE = 1085; // bytes
     @Data
-    public static class PacketCarData {
+    public static class CarDataPacket {
         private F12018Header header;
         private IndividialCarData[] carsData = new IndividialCarData[20];
         private int buttonStatus;
 
-        public PacketCarData(byte[] data) {
+        public CarDataPacket(byte[] data) {
             this.header = new F12018Header(data);
             for(int i = 0; i < carsData.length; i++) {
                 this.carsData[i] = new IndividialCarData(data, i);
             }
             this.buttonStatus = decodeInt(data, 1081);
+        }
+    }
+
+    public static final Integer INDIVIDUAL_LAP_DATA_SIZE = 41;
+    @Data
+    public static class IndividualLapData {
+        private float m_lastLapTime;
+        private float m_currentLapTime;
+        private float m_bestLapTime;
+        private float m_sector1Time;
+        private float m_sector2Time;
+        private float m_lapDistance;
+        private float m_totalDistance;
+        private float m_safetyCarDelta;
+        private byte m_carPosition;
+        private byte m_currentLapNum;
+        private byte m_pitStatus;
+        private byte m_sector;
+        private byte m_currentLapInvalid;
+        private byte m_penalties;
+        private byte m_gridPosition;
+        private byte m_driverStatus;
+        private byte m_resultStatus;
+
+        public IndividualLapData(byte[] data, int carIndex) {
+            int offset = HEADER_SIZE_BYTES + (carIndex * INDIVIDUAL_LAP_DATA_SIZE);
+            m_lastLapTime = decodeFloat(data, offset);
+            m_currentLapTime = decodeFloat(data, offset+4);
+            m_bestLapTime = decodeFloat(data, offset+8);
+            m_sector1Time = decodeFloat(data, offset+12);
+            m_sector2Time = decodeFloat(data, offset+16);
+            m_lapDistance = decodeFloat(data, offset+20);
+            m_totalDistance = decodeFloat(data, offset+24);
+            m_safetyCarDelta = decodeFloat(data, offset+28);
+            m_carPosition = data[offset+32];
+            m_currentLapNum = data[offset+33];
+            m_pitStatus = data[offset+34];
+            m_sector = data[offset+35];
+            m_currentLapInvalid = data[offset+36];
+            m_penalties = data[offset+37];
+            m_gridPosition = data[offset+38];
+            m_driverStatus = data[offset+39];
+            m_resultStatus = data[offset+40];
+        }
+    }
+
+    public static final Integer LAP_DATA_PACKET_SIZE = 841;
+    @Data
+    public static class LapDataPacket {
+        private F12018Header header;
+        private IndividualLapData[] lapData;
+
+        public LapDataPacket(byte[] data) {
+            this.header = new F12018Header(data);
+            for(int i = 0; i < lapData.length; i++) {
+                this.lapData[i] = new IndividualLapData(data, i);
+            }
         }
     }
 }
