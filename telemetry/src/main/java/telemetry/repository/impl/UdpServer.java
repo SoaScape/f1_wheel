@@ -4,9 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.net.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -30,8 +28,12 @@ public class UdpServer implements Runnable {
 	@Value("${test-packet}")
 	private Boolean sendTestPacket;
 
-	@Value("${test-packet-name}")
-	private String testPacketName;
+	@Value("${test-packet-names}")
+	private String[] testPacketNames;
+
+	private DatagramSocket datagramSocket;
+
+	private int nextTestPacketIndex = 0;
 
 	@Override
 	public void run() {
@@ -40,6 +42,14 @@ public class UdpServer implements Runnable {
 			while(true) {
 				sendTestPacket();
 			}
+		}
+	}
+
+	public UdpServer() {
+		try {
+			datagramSocket = new DatagramSocket();
+		} catch(final SocketException e) {
+			log.error("Couldn't create UDP socket.", e);
 		}
 	}
 
@@ -60,13 +70,13 @@ public class UdpServer implements Runnable {
     }
 
 	private void sendUdpData(final byte[] data, final Integer port, final Integer size) {
-		try (final DatagramSocket datagramSocket = new DatagramSocket()) {
+		try {
 			final DatagramPacket datagramPacket = new DatagramPacket(data, size, InetAddress.getByName(transmitIp), port);
 			datagramSocket.send(datagramPacket);
-			datagramSocket.close();
 			System.out.println("Tx->" + port + ": " + size);
             //printBytes(data);
 		} catch(final IOException e) {
+			datagramSocket.close();
 			log.error(e);
 		}
 	}
@@ -76,14 +86,17 @@ public class UdpServer implements Runnable {
 	}
 	
 	private void sendTestPacket() {
-		sendUdpData(getPcapBytes(), udpTestSendPort);
+		sendUdpData(getPcapBytes(testPacketNames[nextTestPacketIndex]), udpTestSendPort);
+		if(++nextTestPacketIndex >= testPacketNames.length) {
+			nextTestPacketIndex = 0;
+		}
 	}
 	
-	private byte[] getPcapBytes() {
+	private byte[] getPcapBytes(final String fileName) {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	    final DataOutputStream dos = new DataOutputStream(baos);
 	    byte[] data = new byte[4096];
-	    try (final InputStream inputStream = new ClassPathResource(testPacketName).getInputStream()) {
+	    try (final InputStream inputStream = new ClassPathResource(fileName).getInputStream()) {
 		    int count = inputStream.read(data);
 		    while(count != -1) {
 		        dos.write(data, 0, count);
