@@ -88,7 +88,7 @@ local function getSelectModeButtons(buttonMap, multifunction, currentPosition, d
 	return count
 end
 
-function getMfdShortcutButtons(multifunction, dontOpenMenu, dontCloseMenu)
+function getMfdShortcutButtons(multifunction, dontCloseMenu)
 	if inPits() then
 		return nil
 	end
@@ -111,10 +111,6 @@ function getMfdShortcutButtons(multifunction, dontOpenMenu, dontCloseMenu)
 		multifunction["currentPosition"] = multifunction["currentUpDnMode"]
 		nextIndex = nextIndex + getSelectModeButtons(buttonMap, multifunction, currentSetting, multifunction["decrementKey"], multifunction["incrementKey"])
 
-		-- Ensure first button press has delay for menu to openMenuDelay
-		if dontOpenMenu == nil or not(dontOpenMenu) then
-			delayMap[1] = openMenuDelay
-		end
 		-- Close the MFD window
 		if dontCloseMenu == nil or not(dontCloseMenu) then
 			buttonMap[nextIndex] = quickMenuToggleKey

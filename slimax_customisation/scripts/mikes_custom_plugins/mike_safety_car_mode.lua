@@ -11,9 +11,9 @@ local function activateSafetyCarMode()
 	end
 
 	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["min"]
-	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction, false, true), false)
+	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction, true), false)
 	ersMultiFunction["currentUpDnMode"] = ersMultiFunction["min"]
-	confirmSelection(nil, nil, getButtonMap(ersMultiFunction, true, false), false)
+	confirmSelection(nil, nil, getButtonMap(ersMultiFunction, false), false)
 	autoMixOff()
 	autoMixInhibitOn()
 	autoDiffInhibitOn()
@@ -22,9 +22,9 @@ end
 local function safetyCarEnd()
 	safetyCarModeActive = false
 	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
-	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction, false, true), false)
+	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction, true), false)
 	ersMultiFunction["currentUpDnMode"] = ersMultiFunction["max"]
-	confirmSelection(nil, nil, getButtonMap(ersMultiFunction, true, false), false)	
+	confirmSelection(nil, nil, getButtonMap(ersMultiFunction, false), false)	
 	autoDiffInhibitOff()
 	autoMixInhibitOff()
 	if safetyCarLedPattern ~= nil then

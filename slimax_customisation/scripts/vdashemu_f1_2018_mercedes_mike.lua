@@ -299,11 +299,11 @@ safetyCarModeEnabled = true
 function custom_init_Event(scriptfile)
 end
 
-function getButtonMap(currentMultifunction, dontOpenMenu, dontCloseMenu)
+function getButtonMap(currentMultifunction, dontCloseMenu)
 	if currentMultifunction["voiceMenuPage"] ~= nil then
 		return getVoiceMenuButtons(currentMultifunction)
 	elseif currentMultifunction["mfdShortcut"] then
-		return getMfdShortcutButtons(currentMultifunction, dontOpenMenu, dontCloseMenu)
+		return getMfdShortcutButtons(currentMultifunction, dontCloseMenu)
 	elseif currentMultifunction["menu"] ~= nil then
 		return getMfdMenuButtons(currentMultifunction)
 	else

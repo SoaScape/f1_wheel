@@ -80,7 +80,7 @@ local function toggleAutoMixSelected()
 			end
 			if(mSessionEnter == 1 and not(m_is_sim_idle)) then
 				fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["defaultUpDnMode"]
-				confirmSelection(nil, nil, getButtonMap(fuelMultiFunction, false, false), false)
+				confirmSelection(nil, nil, getButtonMap(fuelMultiFunction, false), false)
 			end
 		end
 	end
