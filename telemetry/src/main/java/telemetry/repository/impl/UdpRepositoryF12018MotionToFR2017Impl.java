@@ -106,15 +106,18 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
                     f12017.setRevLightsPercent(convertIntToByte(carData.getM_revLightsPercent()));
                     f12017.setSpeed(carData.getM_speed());
                     f12017.setBrake(carData.getM_brake());
+					f12017.setSteering(carData.getM_steer());
+					f12017.setThrottle(carData.getM_throttle());
                     f12017.setClutch(carData.getM_clutch());
                     f12017.setGear(carData.getM_gear());
+					System.out.println("gear: " + carData.getM_gear());
 
                     receivedCar = true;
                 }
 
                 if(receivedCar && receivedMotion) {
                     final byte[] out = f12017.toByteArray();
-                    log.info("s: " + out.length);
+                    log.info("len: " + out.length + ", gear: " + Float.toString(f12017.getGear()));
                     udpServer.sendProxyUdpData(out, TelemetryDataF12017Impl.F1_2017_PACKET_SIZE);
                     receivedCar = false;
                     receivedMotion = false;

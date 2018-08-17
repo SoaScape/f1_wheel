@@ -142,7 +142,6 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 	public byte[] toByteArray() {
 		try(ByteArrayOutputStream bos = new ByteArrayOutputStream()){
 			bos.write(float2ByteArray(time));
-			bos.write(float2ByteArray(time));
 			bos.write(float2ByteArray(lapTime));
 			bos.write(float2ByteArray(lapDistance));
 			bos.write(float2ByteArray(totalDistance));
@@ -254,6 +253,7 @@ public class TelemetryDataF12017Impl implements TelemetryData {
 			b[2] = spectatorCarIndex;
 			b[3] = numCars;
 			b[4] = playerCarIndex;
+			bos.write(b);
 
 			for(int i = 0; i < carData.length; i++) {
 				bos.write(float2ByteArray(carData[i].worldPositionX)); // world co-ordinates of vehicle

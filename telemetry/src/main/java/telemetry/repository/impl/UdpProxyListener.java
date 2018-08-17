@@ -51,7 +51,8 @@ public class UdpProxyListener implements Runnable {
                 datagramPacket = new DatagramPacket(new byte[largestPacketSize], largestPacketSize);
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
-                udpServer.sendProxyUdpData(data, PACKET_SIZES.get(data[3]));
+                udpServer.sendProxyUdpData(Arrays.copyOf(data, PACKET_SIZES.get(data[3])), PACKET_SIZES.get(data[3]));
+                //System.out.print("Rx<-" + datagramPacket.getPort() + " ");
 			}
 		} catch(final IOException e) {
 			log.error(e);

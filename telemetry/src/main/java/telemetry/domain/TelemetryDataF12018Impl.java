@@ -121,7 +121,7 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    public static final Integer CAR_DATA_PACKET_SIZE = 1085; // bytes
+	public static final Integer INDIVIDUAL_CAR_DATA_PACKET_SIZE = 53; // bytes
     @Data
     public static class IndividialCarData {
         private int m_speed; //int16
@@ -140,7 +140,7 @@ public class TelemetryDataF12018Impl {
         private float[] m_tyresPressure = new float[4];           // Tyres pressure (PSI)
 
         public IndividialCarData(byte[] data, int carIndex) {
-            int offset = HEADER_SIZE_BYTES + (carIndex * CAR_DATA_PACKET_SIZE);
+            int offset = HEADER_SIZE_BYTES + (carIndex * INDIVIDUAL_CAR_DATA_PACKET_SIZE);
 
             m_speed = decodeInt(data, offset, 2);
             m_throttle = decodeInt(data, offset+2, 1);
@@ -161,6 +161,7 @@ public class TelemetryDataF12018Impl {
         }
     }
 
+	public static final Integer CAR_DATA_PACKET_SIZE = 1085; // bytes
     @Data
     public static class PacketCarData {
         private F12018Header header;
