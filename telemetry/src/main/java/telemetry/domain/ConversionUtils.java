@@ -9,11 +9,11 @@ public class ConversionUtils {
     private static final Integer INT_SIZE_IN_BYTES = 4;
 
     public static byte [] long2ByteArray (long value) {
-        return ByteBuffer.allocate(8).putLong(value).array();
+        return ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN).putLong(value).array();
     }
 
     public static byte [] float2ByteArray (float value) {
-        return ByteBuffer.allocate(4).putFloat(value).array();
+        return ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putFloat(value).array();
     }
 
     public static float[] populateFloatArr(byte[] data, int arraySize, int startByte) {
@@ -22,19 +22,6 @@ public class ConversionUtils {
             floats[i] = decodeFloat(data, startByte + (i * FLOAT_SIZE_IN_BYTES));
         }
         return floats;
-    }
-
-    public static Byte convertIntToByte(int data) {
-        return getBytesForInt(data)[3];
-    }
-
-    public static byte[] getBytesForInt(int value) {
-        byte[] bytes = new byte[4];
-        bytes[0] = (byte) ((value >> 24) & 0xFF);
-        bytes[1] = (byte) ((value >> 16) & 0xFF);
-        bytes[2] = (byte) ((value >> 8) & 0xFF);
-        bytes[3] = (byte) (value & 0xFF);
-        return bytes;
     }
 
     public static short[] populateShortArr(byte[] data, int arraySize, int startByte) {
