@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
+import static telemetry.domain.ConversionUtils.*;
+
 import lombok.extern.log4j.Log4j;
 
 @Repository
@@ -61,20 +63,12 @@ public class UdpServer implements Runnable {
         proxyPorts.forEach(port -> sendUdpData(data, port, size));
     }
 
-    private void printBytes(final byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02X ", b));
-        }
-        System.out.println(sb.toString());
-    }
-
 	private void sendUdpData(final byte[] data, final Integer port, final Integer size) {
 		try {
 			final DatagramPacket datagramPacket = new DatagramPacket(data, size, InetAddress.getByName(transmitIp), port);
 			datagramSocket.send(datagramPacket);
 			System.out.println("Tx->" + port + ": " + size);
-            //printBytes(data);
+            printBytes(data);
 		} catch(final IOException e) {
 			datagramSocket.close();
 			log.error(e);

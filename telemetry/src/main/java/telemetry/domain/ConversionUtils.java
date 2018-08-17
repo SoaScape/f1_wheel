@@ -59,4 +59,12 @@ public class ConversionUtils {
     public static Long decodeLong(byte[] data, int start, int sizeInBytes) {
         return decodeBytes(data, start, start + sizeInBytes).getLong();
     }
+
+    public static void printBytes(final byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02X ", b));
+        }
+        System.out.println(sb.toString());
+    }
 }

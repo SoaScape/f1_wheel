@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import telemetry.domain.TelemetryDataF12017Impl;
 import telemetry.domain.TelemetryDataF12018Impl.*;
 import telemetry.domain.TelemetryDataF12018Impl;
-import static telemetry.domain.ConversionUtils.*;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
