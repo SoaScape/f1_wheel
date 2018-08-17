@@ -108,6 +108,7 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
                     f12017.setSpeed(carData.getM_speed());
                     f12017.setBrake(carData.getM_brake());
                     f12017.setClutch(carData.getM_clutch());
+                    f12017.setGear(carData.getM_gear());
 
                     receivedCar = true;
                 }
