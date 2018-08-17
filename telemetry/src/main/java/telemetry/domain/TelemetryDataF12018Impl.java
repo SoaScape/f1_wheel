@@ -2,14 +2,11 @@ package telemetry.domain;
 
 import lombok.Data;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Arrays;
+import static telemetry.domain.ConversionUtils.*;
 
 public class TelemetryDataF12018Impl {
-    private static final Integer FLOAT_SIZE_IN_BYTES = 4;
+    private static final Integer HEADER_SIZE_BYTES = 21;
 
-    public static final Integer Header_Size_Bytes = 21;
     @Data
     public static class F12018Header {
         private int format;             // 2018
@@ -17,7 +14,7 @@ public class TelemetryDataF12018Impl {
         private Byte packetId;          // Identifier for the packet type, see below
         private Long sessionId;         // Unique identifier for the session
         private float sessionTime;      // Session timestamp
-        private int frameIdentifier;   // Identifier for the frame the data was retrieved on
+        private int frameIdentifier;    // Identifier for the frame the data was retrieved on
         private Byte playerCarIndex;    // Index of player's car in the array
 
         public F12018Header(byte[] data) {
@@ -31,7 +28,7 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    private static final Integer CarMotionDataSizeBytes = 60;
+    private static final Integer CAR_MOTION_DATA_SIZE_BYTES = 60;
     @Data
     public static class CarMotionData
     {
@@ -55,7 +52,7 @@ public class TelemetryDataF12018Impl {
         private float roll; // Roll angle in radians
 
         public CarMotionData(byte[] data, int carIndex) {
-            int offset = Header_Size_Bytes + (carIndex * CarMotionDataSizeBytes);
+            int offset = HEADER_SIZE_BYTES + (carIndex * CAR_MOTION_DATA_SIZE_BYTES);
             worldPositionX = decodeFloat(data, 0 + offset);
             worldPositionY = decodeFloat(data, 4 + offset);
             worldPositionZ = decodeFloat(data, 8 + offset);
@@ -77,7 +74,7 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    public static final Integer MotionPacketSize = 1341; // bytes
+    public static final Integer MOTION_PACKET_SIZE = 1341; // bytes
     @Data
     public static class PacketMotionData {
         private F12018Header header;                                    // Header
@@ -123,29 +120,4 @@ public class TelemetryDataF12018Impl {
             frontWheelsAngle = decodeFloat(data, 1334);
         }
     }
-
-    private static float[] populateFloatArr(byte[] data, int arraySize, int startByte) {
-        float[] floats = new float[arraySize];
-        for(int i = 0; i < floats.length; i++) {
-            floats[i] = decodeFloat(data, startByte + (i * FLOAT_SIZE_IN_BYTES));
-        }
-        return floats;
-    }
-
-    private static ByteBuffer decodeBytes(byte[] data, int start, int end) {
-        return ByteBuffer.wrap(Arrays.copyOfRange(data, start, end)).order(ByteOrder.LITTLE_ENDIAN);
-    }
-
-    private static float decodeFloat(byte[] data, int start) {
-        return decodeBytes(data, start, start + FLOAT_SIZE_IN_BYTES).getFloat();
-    }
-
-    private static int decodeInt(byte[] data, int start, int sizeInBytes) {
-        return ((data[start+sizeInBytes-1] & 0xff) << 8) + (data[start] & 0xff);
-    }
-
-    private static Long decodeLong(byte[] data, int start, int sizeInBytes) {
-        return decodeBytes(data, start, start + sizeInBytes).getLong();
-    }
-
 }

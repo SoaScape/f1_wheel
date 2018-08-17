@@ -21,11 +21,11 @@ public class UdpServer implements Runnable {
 	@Value("#{${udp-proxy-ports}}")
 	private List<Integer> proxyPorts;
 
-	@Value("${udp-send-port}")
-	private Integer udpSendPort;
+	@Value("${udp-test-send-port}")
+	private Integer udpTestSendPort;
 
-	@Value("${ip}")
-	private String ip;
+	@Value("${transmit-ip}")
+	private String transmitIp;
 
 	@Value("${test-packet}")
 	private Boolean sendTestPacket;
@@ -46,7 +46,7 @@ public class UdpServer implements Runnable {
 
 	private void sendUdpData(final byte[] data, final Integer port) {
 		try (final DatagramSocket datagramSocket = new DatagramSocket()) {
-			final DatagramPacket datagramPacket = new DatagramPacket(data, data.length, InetAddress.getByName(ip), port);
+			final DatagramPacket datagramPacket = new DatagramPacket(data, data.length, InetAddress.getByName(transmitIp), port);
 			datagramSocket.send(datagramPacket);
 			datagramSocket.close();
 		} catch(final IOException e) {
@@ -55,7 +55,7 @@ public class UdpServer implements Runnable {
 	}
 	
 	private void sendTestPacket() {
-		sendUdpData(getPcapBytes(), udpSendPort);
+		sendUdpData(getPcapBytes(), udpTestSendPort);
 	}
 	
 	private byte[] getPcapBytes() {
