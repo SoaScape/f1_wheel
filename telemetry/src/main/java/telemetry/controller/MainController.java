@@ -11,22 +11,24 @@ import telemetry.repository.impl.UdpServer;
 @Controller
 public class MainController implements CommandLineRunner {
 	@Autowired
-	private UdpRepositoryF12018MotionToFR2017Impl repo;
+	private UdpRepositoryF12018MotionToFR2017Impl conversionService;
 	@Autowired
-	private UdpProxyListener proxy;
+	private UdpProxyListener simpleProxy;
 	@Autowired
 	private UdpServer server;
 	@Value("${simple-proxy}")
-	private Boolean simpleProxy;
+	private Boolean runSimpleProxy;
 	@Value("${conversion-service}")
-	private Boolean conversionService;
+	private Boolean runConversionService;
 
 	@Override
 	public void run(final String... args) {
 		new Thread(server).start();
-		new Thread(repo).start();
-		if(simpleProxy) {
-			new Thread(proxy).start();
+		if(runConversionService) {
+			new Thread(conversionService).start();
+		}
+		if(runSimpleProxy) {
+			new Thread(simpleProxy).start();
 		}
 	}
 }
