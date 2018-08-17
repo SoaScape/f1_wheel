@@ -23,6 +23,27 @@ public class ConversionUtils {
         return floats;
     }
 
+    public static Byte convertIntToByte(int data) {
+        return getBytesForInt(data)[3];
+    }
+
+    public static byte[] getBytesForInt(int value) {
+        byte[] bytes = new byte[4];
+        bytes[0] = (byte) ((value >> 24) & 0xFF);
+        bytes[1] = (byte) ((value >> 16) & 0xFF);
+        bytes[2] = (byte) ((value >> 8) & 0xFF);
+        bytes[3] = (byte) (value & 0xFF);
+        return bytes;
+    }
+
+    public static int[] populateIntArr(byte[] data, int arraySize, int numBytesPerInt, int startByte) {
+        int[] ints = new int[arraySize];
+        for(int i = 0; i < ints.length; i++) {
+            ints[i] = decodeInt(data, startByte + (i * numBytesPerInt), numBytesPerInt);
+        }
+        return ints;
+    }
+
     public static ByteBuffer decodeBytes(byte[] data, int start, int end) {
         return ByteBuffer.wrap(Arrays.copyOfRange(data, start, end)).order(ByteOrder.LITTLE_ENDIAN);
     }

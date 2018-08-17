@@ -120,4 +120,59 @@ public class TelemetryDataF12018Impl {
             frontWheelsAngle = decodeFloat(data, 1334);
         }
     }
+
+    public static final Integer CAR_DATA_PACKET_SIZE = 1085; // bytes
+    @Data
+    public static class IndividialCarData {
+        private int m_speed; //int16
+        private int m_throttle; //int8
+        private int m_steer; // int8                            // Steering (-100 (full lock left) to 100 (full lock right))
+        private int m_brake; //         uint8                           // Amount of brake applied (0 to 100)
+        private int m_clutch; //         uint8                          // Amount of clutch applied (0 to 100)
+        private int m_gear; //         int8                             // Gear selected (1-8, N=0, R=-1)
+        private int m_engineRPM; //         uint16                      // Engine RPM
+        private int m_drs; //         uint8                             // 0 = off, 1 = on
+        private int m_revLightsPercent; //         uint8                // Rev lights indicator (percentage)
+        private int[] m_brakesTemperature = new int[4]; //         uint16           // Brakes temperature (celsius)
+        private int[] m_tyresSurfaceTemperature = new int[4]; //         uint16     // Tyres surface temperature (celsius)
+        private int[] m_tyresInnerTemperature = new int[4]; //         uint16       // Tyres inner temperature (celsius)
+        private int m_engineTemperature; //         uint16              // Engine temperature (celsius)
+        private float[] m_tyresPressure = new float[4];           // Tyres pressure (PSI)
+
+        public IndividialCarData(byte[] data, int carIndex) {
+            int offset = HEADER_SIZE_BYTES + (carIndex * CAR_DATA_PACKET_SIZE);
+
+            m_speed = decodeInt(data, offset, 2);
+            m_throttle = decodeInt(data, offset+2, 1);
+            m_steer = decodeInt(data, offset+3, 1);
+            m_brake = decodeInt(data, offset+4, 1);
+            m_clutch = decodeInt(data, offset+5, 1);
+            m_gear = decodeInt(data, offset+6,1 );
+            m_engineRPM = decodeInt(data, offset+7, 2);
+            m_drs = decodeInt(data, offset+9, 1);
+            m_revLightsPercent = decodeInt(data, offset+10, 1);
+
+            m_brakesTemperature = populateIntArr(data, 4, 2, offset+11);
+            m_tyresSurfaceTemperature = populateIntArr(data, 4, 2, offset+19);
+            m_tyresInnerTemperature = populateIntArr(data, 4, 2, offset+27);
+
+            m_engineTemperature = decodeInt(data, offset+35, 2);
+            m_tyresPressure = populateFloatArr(data, 4, offset+37);
+        }
+    }
+
+    @Data
+    public static class PacketCarData {
+        private F12018Header header;
+        private IndividialCarData[] carsData = new IndividialCarData[20];
+        private int buttonStatus;
+
+        public PacketCarData(byte[] data) {
+            this.header = new F12018Header(data);
+            for(int i = 0; i < carsData.length; i++) {
+                this.carsData[i] = new IndividialCarData(data, i);
+            }
+            this.buttonStatus = decodeInt(data, 1081, 4);
+        }
+    }
 }

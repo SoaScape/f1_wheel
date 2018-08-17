@@ -28,17 +28,17 @@ public class UdpProxyListener implements Runnable {
 	@Value("${udp-listen-port}")
 	private Integer udpListenPort;
 
-	private static final Map<Integer, Integer> PACKET_SIZES;
+	private static final Map<Byte, Integer> PACKET_SIZES;
 	static {
-		final Map<Integer, Integer> sizeMap = new HashMap<>();
-		sizeMap.put(0, 1341);
-		sizeMap.put(1, 147);
-		sizeMap.put(2, 841);
-		sizeMap.put(3, 25);
-		sizeMap.put(4, 1082);
-		sizeMap.put(5, 841);
-		sizeMap.put(6, 1085);
-		sizeMap.put(7, 1061);
+		final Map<Byte, Integer> sizeMap = new HashMap<>();
+		sizeMap.put((byte)0, 1341);
+		sizeMap.put((byte)1, 147);
+		sizeMap.put((byte)2, 841);
+		sizeMap.put((byte)3, 25);
+		sizeMap.put((byte)4, 1082);
+		sizeMap.put((byte)5, 841);
+		sizeMap.put((byte)6, 1085);
+		sizeMap.put((byte)7, 1061);
 		PACKET_SIZES = Collections.unmodifiableMap(sizeMap);
 	}
 

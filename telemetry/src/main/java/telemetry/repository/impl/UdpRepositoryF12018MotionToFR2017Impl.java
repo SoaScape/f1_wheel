@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import telemetry.domain.TelemetryDataF12017Impl;
 import telemetry.domain.TelemetryDataF12018Impl.*;
 import telemetry.domain.TelemetryDataF12018Impl;
+import static telemetry.domain.ConversionUtils.*;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -28,14 +29,17 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 		try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
 			final byte[] bytes = new byte[TelemetryDataF12018Impl.MOTION_PACKET_SIZE];
 			final DatagramPacket datagramPacket = new DatagramPacket(bytes, TelemetryDataF12018Impl.MOTION_PACKET_SIZE);
+
+            boolean receivedMotion = false;
+            boolean receivedCar = false;
+            TelemetryDataF12017Impl f12017 = new TelemetryDataF12017Impl();
 			while (true) {
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
                 if(0 == data[3]) { //Packetid = motion (0)
                     final PacketMotionData motion = new PacketMotionData(data);
-                    CarMotionData playerCar = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()];
+                    final CarMotionData playerCar = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()];
 
-                    final TelemetryDataF12017Impl f12017 = new TelemetryDataF12017Impl();
                     f12017.setAngVelX(motion.getAngularVelocityX());
                     f12017.setAngVelY(motion.getAngularVelocityY());
                     f12017.setAngVelZ(motion.getAngularVelocityZ());
@@ -95,10 +99,26 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017PlayerCar.setWorldPositionZ(playerCar.getWorldPositionZ());
 					f12017PlayerCar.setCarPosition((byte) 1);
 
-					// RL, RR, FL, FR
-					final byte[] out = f12017.toByteArray();
-					log.info("s: " + out.length);
+                    receivedMotion = true;
+                }
+                if(6 == data[3]) { //Packetid = car telemetery
+                    final PacketCarData carsData = new PacketCarData(data);
+                    final IndividialCarData carData = carsData.getCarsData()[carsData.getHeader().getPlayerCarIndex()];
+                    f12017.setRevLightsPercent(convertIntToByte(carData.getM_revLightsPercent()));
+                    f12017.setSpeed(carData.getM_speed());
+                    f12017.setBrake(carData.getM_brake());
+                    f12017.setClutch(carData.getM_clutch());
+
+                    receivedCar = true;
+                }
+
+                if(receivedCar && receivedMotion) {
+                    final byte[] out = f12017.toByteArray();
+                    log.info("s: " + out.length);
                     udpServer.sendProxyUdpData(out, TelemetryDataF12017Impl.F1_2017_PACKET_SIZE);
+                    receivedCar = false;
+                    receivedMotion = false;
+                    f12017 = new TelemetryDataF12017Impl();
                 }
 			}
 		} catch(final IOException e) {
