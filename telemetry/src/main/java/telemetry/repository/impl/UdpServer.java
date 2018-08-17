@@ -30,6 +30,9 @@ public class UdpServer implements Runnable {
 	@Value("${test-packet}")
 	private Boolean sendTestPacket;
 
+	@Value("${test-packet-name}")
+	private String testPacketName;
+
 	@Override
 	public void run() {
 		if(sendTestPacket) {
@@ -61,7 +64,7 @@ public class UdpServer implements Runnable {
 			final DatagramPacket datagramPacket = new DatagramPacket(data, size, InetAddress.getByName(transmitIp), port);
 			datagramSocket.send(datagramPacket);
 			datagramSocket.close();
-			System.out.println("Tx->" + port + ": " + size);
+			//System.out.println("Tx->" + port + ": " + size);
             //printBytes(data);
 		} catch(final IOException e) {
 			log.error(e);
@@ -80,7 +83,7 @@ public class UdpServer implements Runnable {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	    final DataOutputStream dos = new DataOutputStream(baos);
 	    byte[] data = new byte[4096];
-	    try (final InputStream inputStream = new ClassPathResource("sample-packet.bin").getInputStream()) {
+	    try (final InputStream inputStream = new ClassPathResource(testPacketName).getInputStream()) {
 		    int count = inputStream.read(data);
 		    while(count != -1) {
 		        dos.write(data, 0, count);

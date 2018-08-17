@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class ConversionUtils {
     private static final Integer FLOAT_SIZE_IN_BYTES = 4;
+    private static final Integer INT_SIZE_IN_BYTES = 4;
 
     public static byte [] long2ByteArray (long value) {
         return ByteBuffer.allocate(8).putLong(value).array();
@@ -36,10 +37,18 @@ public class ConversionUtils {
         return bytes;
     }
 
+    public static short[] populateShortArr(byte[] data, int arraySize, int startByte) {
+        short[] shorts = new short[arraySize];
+        for(int i = 0; i < shorts.length; i++) {
+            shorts[i] = decodeShort(data, startByte + (i * INT_SIZE_IN_BYTES));
+        }
+        return shorts;
+    }
+
     public static int[] populateIntArr(byte[] data, int arraySize, int numBytesPerInt, int startByte) {
         int[] ints = new int[arraySize];
         for(int i = 0; i < ints.length; i++) {
-            ints[i] = decodeInt(data, startByte + (i * numBytesPerInt), numBytesPerInt);
+            ints[i] = decodeInt(data, startByte + (i * numBytesPerInt));
         }
         return ints;
     }
@@ -52,8 +61,12 @@ public class ConversionUtils {
         return decodeBytes(data, start, start + FLOAT_SIZE_IN_BYTES).getFloat();
     }
 
-    public static int decodeInt(byte[] data, int start, int sizeInBytes) {
-        return ((data[start+sizeInBytes-1] & 0xff) << 8) + (data[start] & 0xff);
+    public static short decodeShort(byte[] data, int start) {
+        return (short)(((data[start+1] & 0xff) << 8) + (data[start] & 0xff));
+    }
+
+    public static int decodeInt(byte[] data, int start) {
+        return decodeBytes(data, start, start + INT_SIZE_IN_BYTES).getInt();
     }
 
     public static Long decodeLong(byte[] data, int start, int sizeInBytes) {
