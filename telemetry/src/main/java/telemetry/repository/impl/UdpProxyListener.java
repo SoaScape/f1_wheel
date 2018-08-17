@@ -50,7 +50,7 @@ public class UdpProxyListener implements Runnable {
 			final DatagramPacket datagramPacket = new DatagramPacket(bytes, largestPacketSize);
 			while (true) {
 				datagramSocket.receive(datagramPacket);
-				byte[] data = datagramPacket.getData()
+				byte[] data = datagramPacket.getData();
                 udpServer.sendProxyUdpData(data, PACKET_SIZES.get(data[3]));
 			}
 		} catch(final IOException e) {
