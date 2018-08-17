@@ -46,9 +46,9 @@ public class UdpProxyListener implements Runnable {
 	public void run() {
 		final int largestPacketSize = PACKET_SIZES.values().stream().reduce((x, y) -> x > y ? x : y).get();
 		try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
-			final byte[] bytes = new byte[largestPacketSize];
-			final DatagramPacket datagramPacket = new DatagramPacket(bytes, largestPacketSize);
+			DatagramPacket datagramPacket;
 			while (true) {
+                datagramPacket = new DatagramPacket(new byte[largestPacketSize], largestPacketSize);
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
                 udpServer.sendProxyUdpData(data, PACKET_SIZES.get(data[3]));

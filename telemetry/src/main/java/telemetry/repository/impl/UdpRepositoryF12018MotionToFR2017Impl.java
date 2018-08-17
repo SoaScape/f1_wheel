@@ -27,13 +27,12 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 	@Override
 	public void run() {
 		try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
-			final byte[] bytes = new byte[TelemetryDataF12018Impl.MOTION_PACKET_SIZE];
-			final DatagramPacket datagramPacket = new DatagramPacket(bytes, TelemetryDataF12018Impl.MOTION_PACKET_SIZE);
-
+			DatagramPacket datagramPacket;
             boolean receivedMotion = false;
             boolean receivedCar = false;
             TelemetryDataF12017Impl f12017 = new TelemetryDataF12017Impl();
 			while (true) {
+                datagramPacket = new DatagramPacket(new byte[TelemetryDataF12018Impl.MOTION_PACKET_SIZE], TelemetryDataF12018Impl.MOTION_PACKET_SIZE);
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
                 if(0 == data[3]) { //Packetid = motion (0)
