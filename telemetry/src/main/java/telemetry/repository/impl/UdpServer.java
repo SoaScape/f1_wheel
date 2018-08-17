@@ -41,10 +41,14 @@ public class UdpServer implements Runnable {
 	}
 
 	public void sendProxyUdpData(final byte[] data) {
-		proxyPorts.forEach(port -> sendUdpData(data, port));
+        sendProxyUdpData(data, data.length);
 	}
 
-	private void sendUdpData(final byte[] data, final Integer port) {
+    public void sendProxyUdpData(final byte[] data, final int size) {
+        proxyPorts.forEach(port -> sendUdpData(data, port, size));
+    }
+
+	private void sendUdpData(final byte[] data, final Integer port, final Integer size) {
 		try (final DatagramSocket datagramSocket = new DatagramSocket()) {
 			final DatagramPacket datagramPacket = new DatagramPacket(data, data.length, InetAddress.getByName(transmitIp), port);
 			datagramSocket.send(datagramPacket);
@@ -52,6 +56,10 @@ public class UdpServer implements Runnable {
 		} catch(final IOException e) {
 			log.error(e);
 		}
+	}
+
+	private void sendUdpData(final byte[] data, final Integer port) {
+		sendUdpData(data, port, data.length);
 	}
 	
 	private void sendTestPacket() {
