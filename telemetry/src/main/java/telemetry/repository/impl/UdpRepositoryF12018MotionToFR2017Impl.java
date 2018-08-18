@@ -34,26 +34,27 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 	public void run() {
 		try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
 			DatagramPacket datagramPacket;
-            boolean receivedMotion = false;
-            boolean receivedCar = false;
+            boolean receivedMotionData = false;
+            boolean receivedCarData = false;
+            boolean recievedLapData = false;
             TelemetryDataF12017Impl f12017 = new TelemetryDataF12017Impl();
 			while (true) {
                 datagramPacket = new DatagramPacket(new byte[TelemetryDataF12018Impl.MOTION_PACKET_SIZE], TelemetryDataF12018Impl.MOTION_PACKET_SIZE);
 				datagramSocket.receive(datagramPacket);
 				byte[] data = datagramPacket.getData();
                 if(0 == data[3]) { //Packetid = motion (0)
-                    final MotionDataPacket motion = new MotionDataPacket(data);
-                    final CarMotionData playerCar = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()];
+					final MotionDataPacket motion = new MotionDataPacket(data);
+					final CarMotionData playerCar = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()];
 
 					addHeaderData(f12017, motion.getHeader());
 
-                    f12017.setAngVelX(motion.getAngularVelocityX());
-                    f12017.setAngVelY(motion.getAngularVelocityY());
-                    f12017.setAngVelZ(motion.getAngularVelocityZ());
-                    f12017.setGforceLat(playerCar.getGForceLateral());
-                    f12017.setGforceLon(playerCar.getGForceLongitudinal());
-                    f12017.setGforceVert(playerCar.getGForceVertical());
-                    f12017.setSuspPosFL(motion.getSuspensionPosition()[2]);
+					f12017.setAngVelX(motion.getAngularVelocityX());
+					f12017.setAngVelY(motion.getAngularVelocityY());
+					f12017.setAngVelZ(motion.getAngularVelocityZ());
+					f12017.setGforceLat(playerCar.getGForceLateral());
+					f12017.setGforceLon(playerCar.getGForceLongitudinal());
+					f12017.setGforceVert(playerCar.getGForceVertical());
+					f12017.setSuspPosFL(motion.getSuspensionPosition()[2]);
 					f12017.setSuspPosFR(motion.getSuspensionPosition()[3]);
 					f12017.setSuspPosRL(motion.getSuspensionPosition()[0]);
 					f12017.setSuspPosRR(motion.getSuspensionPosition()[1]);
@@ -104,9 +105,40 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017PlayerCar.setWorldPositionZ(playerCar.getWorldPositionZ());
 					f12017PlayerCar.setCarPosition((byte) 1);
 
-                    receivedMotion = true;
-                }
-                if(6 == data[3]) { //Packetid = car telemetery
+					receivedMotionData = true;
+				} else if (2 == data[3]) { //Lapdata packet
+					final LapDataPacket allCarsLapData = new LapDataPacket(data);
+					final IndividualLapData lapData = allCarsLapData.getLapData()[allCarsLapData.getHeader().getPlayerCarIndex()];
+					addHeaderData(f12017, allCarsLapData.getHeader());
+
+					f12017.setLapDistance(lapData.getM_lapDistance());
+					f12017.setLap(lapData.getM_currentLapNum());
+					f12017.setLapTime(lapData.getM_currentLapTime());
+					f12017.setLastLapTime(lapData.getM_lastLapTime());
+					f12017.setSector1Time(lapData.getM_sector1Time());
+					f12017.setSector2Time(lapData.getM_sector2Time());
+					f12017.setTotalDistance(lapData.getM_totalDistance());
+					f12017.setCarPosition(lapData.getM_carPosition());
+					f12017.setTotalLaps(70); // Only available in session packet twice a second
+
+					final TelemetryDataF12017Impl.CarData[] carData = f12017.getCarData();
+					for(int i = 0; i < carData.length; i++) {
+						carData[i].setCarPosition(allCarsLapData.getLapData()[i].getM_carPosition());
+						carData[i].setBestLapTime(allCarsLapData.getLapData()[i].getM_bestLapTime());
+						carData[i].setCurrentLapNum(allCarsLapData.getLapData()[i].getM_currentLapNum());
+						carData[i].setCurrentLapInvalid(allCarsLapData.getLapData()[i].getM_currentLapInvalid());
+						carData[i].setCurrentLapTime(allCarsLapData.getLapData()[i].getM_currentLapTime());
+						carData[i].setLapDistance(allCarsLapData.getLapData()[i].getM_lapDistance());
+						carData[i].setLastLapTime(allCarsLapData.getLapData()[i].getM_lastLapTime());
+						carData[i].setPenalties(allCarsLapData.getLapData()[i].getM_penalties());
+						carData[i].setInPits(allCarsLapData.getLapData()[i].getM_pitStatus());
+						carData[i].setDriverId(allCarsLapData.getLapData()[i].getM_driverStatus());
+						carData[i].setSector(allCarsLapData.getLapData()[i].getM_sector());
+						carData[i].setSector1Time(allCarsLapData.getLapData()[i].getM_sector1Time());
+						carData[i].setSector2Time(allCarsLapData.getLapData()[i].getM_sector2Time());
+					}
+					recievedLapData = true;
+                } else if(6 == data[3]) { //Packetid = car telemetery
                     final CarDataPacket carsData = new CarDataPacket(data);
                     final IndividialCarData carData = carsData.getCarsData()[carsData.getHeader().getPlayerCarIndex()];
 
@@ -125,15 +157,16 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017.setTyrePressuresFL(carData.getM_tyresPressure()[2]);
 					f12017.setTyrePressuresFR(carData.getM_tyresPressure()[3]);
 
-                    receivedCar = true;
+                    receivedCarData = true;
                 }
 
-                if(receivedCar && receivedMotion) {
+                if(receivedCarData && receivedMotionData && recievedLapData) {
                     final byte[] out = f12017.toByteArray();
                     System.out.println("len: " + out.length + ", gear: " + Float.toString(f12017.getGear()));
                     udpServer.sendProxyUdpData(out, TelemetryDataF12017Impl.F1_2017_PACKET_SIZE);
-                    receivedCar = false;
-                    receivedMotion = false;
+                    receivedCarData = false;
+                    receivedMotionData = false;
+					recievedLapData = false;
                     f12017 = new TelemetryDataF12017Impl();
                 }
 			}
