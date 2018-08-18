@@ -224,7 +224,7 @@ public class TelemetryDataF12018Impl {
     @Data
     public static class LapDataPacket {
         private F12018Header header;
-        private IndividualLapData[] lapData;
+        private IndividualLapData[] lapData = new IndividualLapData[20];
 
         public LapDataPacket(byte[] data) {
             this.header = new F12018Header(data);
