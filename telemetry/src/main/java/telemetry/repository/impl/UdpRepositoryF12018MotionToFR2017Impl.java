@@ -28,8 +28,8 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 	private void addHeaderData(final TelemetryDataF12017Impl f12017, final F12018Header header) {
 		f12017.setTime(header.getSessionTime());
 		f12017.setPlayerCarIndex(header.getPlayerCarIndex());
-		f12017.setEra(2017f);
-		f12017.setMaxGears(8f);
+		f12017.setEra(2017.0f);
+		f12017.setMaxGears(8.0f);
 	}
 
 	@Override
@@ -105,11 +105,13 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017.setMAngAccY(motion.getAngularAccelerationY());
 					f12017.setMAngAccZ(motion.getAngularAccelerationZ());
 
-					TelemetryDataF12017Impl.CarData f12017PlayerCar = f12017.getCarData()[motion.getHeader().getPlayerCarIndex()];
-					f12017PlayerCar.setWorldPositionX(playerCar.getWorldPositionX());
-					f12017PlayerCar.setWorldPositionY(playerCar.getWorldPositionY());
-					f12017PlayerCar.setWorldPositionZ(playerCar.getWorldPositionZ());
-					f12017PlayerCar.setCarPosition((byte) 1);
+					CarMotionData[] carMotionData = motion.getCarMotionData();
+					TelemetryDataF12017Impl.CarData[] f12017CarData = f12017.getCarData();
+					for(int i = 0; i < f12017CarData.length; i++) {
+						f12017CarData[i].setWorldPositionX(carMotionData[i].getWorldPositionX());
+						f12017CarData[i].setWorldPositionY(carMotionData[i].getWorldPositionY());
+						f12017CarData[i].setWorldPositionZ(carMotionData[i].getWorldPositionZ());
+					}
 
 					receivedMotionData = true;
 				} else if (2 == data[3]) { //Lapdata packet
@@ -125,7 +127,6 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017.setSector2Time(lapData.getM_sector2Time());
 					f12017.setTotalDistance(lapData.getM_totalDistance());
 					f12017.setCarPosition(lapData.getM_carPosition());
-					f12017.setTotalLaps(70); // Only available in session packet twice a second
 
 					final TelemetryDataF12017Impl.CarData[] carData = f12017.getCarData();
 					for(int i = 0; i < carData.length; i++) {
