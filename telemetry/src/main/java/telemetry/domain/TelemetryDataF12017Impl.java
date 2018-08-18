@@ -71,7 +71,7 @@ public class TelemetryDataF12017Impl implements TelemetryData {
     private float tyrePressuresRR = 0f;
     private float tyrePressuresFL = 0f;
     private float tyrePressuresFR = 0f;
-    private float teamInfo = 1f;
+    private float teamInfo = 4.0f;
     private float totalLaps = 70f;
     private float trackSize = 0f;
     private float lastLapTime = 0f;

@@ -126,11 +126,13 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017.setSector1Time(lapData.getM_sector1Time());
 					f12017.setSector2Time(lapData.getM_sector2Time());
 					f12017.setTotalDistance(lapData.getM_totalDistance());
-					f12017.setCarPosition(lapData.getM_carPosition());
+					f12017.setCarPosition(lapData.getM_carPosition()+1);
 
 					final TelemetryDataF12017Impl.CarData[] carData = f12017.getCarData();
 					for(int i = 0; i < carData.length; i++) {
-						carData[i].setCarPosition(allCarsLapData.getLapData()[i].getM_carPosition());
+						byte pos = allCarsLapData.getLapData()[i].getM_carPosition();
+						pos += 1;
+						carData[i].setCarPosition(pos);
 						carData[i].setBestLapTime(allCarsLapData.getLapData()[i].getM_bestLapTime());
 						carData[i].setCurrentLapNum(allCarsLapData.getLapData()[i].getM_currentLapNum());
 						carData[i].setCurrentLapInvalid(allCarsLapData.getLapData()[i].getM_currentLapInvalid());
