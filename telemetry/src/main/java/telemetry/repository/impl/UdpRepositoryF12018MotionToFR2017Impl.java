@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+import static telemetry.domain.ConversionUtils.convertNormalised16BitVectorToFloat;
+
 @Repository
 @Log4j
 public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
@@ -73,13 +75,17 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 					f12017.setY(playerCar.getWorldPositionY());
 					f12017.setZ(playerCar.getWorldPositionZ());
 
-					f12017.setXd(playerCar.getWorldForwardDirX());
-					f12017.setYd(playerCar.getWorldForwardDirY());
-					f12017.setZd(playerCar.getWorldForwardDirZ());
-
-					f12017.setXr(playerCar.getWorldRightDirX());
-					f12017.setYr(playerCar.getWorldRightDirY());
-					f12017.setZr(playerCar.getWorldRightDirZ());
+					/*
+					N.B. For the normalised vectors below, to convert to float values divide by 32767.0f.
+					16-bit signed values are used to pack the data and on the assumption that direction
+					values are always between -1.0f and 1.0f.
+					 */
+					f12017.setXd(convertNormalised16BitVectorToFloat(playerCar.getWorldForwardDirX()));
+					f12017.setYd(convertNormalised16BitVectorToFloat(playerCar.getWorldForwardDirY()));
+					f12017.setZd(convertNormalised16BitVectorToFloat(playerCar.getWorldForwardDirZ()));
+					f12017.setXr(convertNormalised16BitVectorToFloat(playerCar.getWorldRightDirX()));
+					f12017.setYr(convertNormalised16BitVectorToFloat(playerCar.getWorldRightDirY()));
+					f12017.setZr(convertNormalised16BitVectorToFloat(playerCar.getWorldRightDirZ()));
 
 					f12017.setXv(playerCar.getWorldVelocityX());
 					f12017.setYv(playerCar.getWorldVelocityY());

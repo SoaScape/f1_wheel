@@ -68,7 +68,7 @@ public class UdpServer implements Runnable {
 			final DatagramPacket datagramPacket = new DatagramPacket(data, size, InetAddress.getByName(transmitIp), port);
 			datagramSocket.send(datagramPacket);
 			System.out.println("Tx->" + port + ": " + size);
-            printBytes(data);
+            //printBytes(data);
 		} catch(final IOException e) {
 			datagramSocket.close();
 			log.error(e);
