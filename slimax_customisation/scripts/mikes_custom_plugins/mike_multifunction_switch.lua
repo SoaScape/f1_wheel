@@ -244,7 +244,7 @@ function toggleOvertakeMode(showDisplay, sendButtons)
 			if(ersMultiFunction ~= nil) then
 				confirmSelection("OVER", "TAKE", getButtonMap(fuelMultiFunction, true), showMessage)
 				ersModeBak = ersMultiFunction["currentUpDnMode"]
-				ersMultiFunction["currentUpDnMode"] = ersMultiFunction["max"]
+				ersMultiFunction["currentUpDnMode"] = ersMultiFunction["fastest"]
 				confirmSelection("OVER", "TAKE", getButtonMap(ersMultiFunction, false), false)
 			else
 				confirmSelection("OVER", "TAKE", getButtonMap(fuelMultiFunction, false), showMessage)

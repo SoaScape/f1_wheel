@@ -246,6 +246,7 @@ multifunctionMap[12]["defaultUpDnMode"] = 2
 multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[12]["defaultUpDnMode"]
 multifunctionMap[12]["min"] = 0
 multifunctionMap[12]["max"] = 5
+multifunctionMap[12]["fastest"] = 4
 multifunctionMap[12]["modes"] = {}
 multifunctionMap[12]["modes"][0] = "NONE"
 multifunctionMap[12]["modes"][1] = "LOW"

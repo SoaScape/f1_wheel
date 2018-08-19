@@ -23,7 +23,7 @@ local function safetyCarEnd()
 	safetyCarModeActive = false
 	fuelMultiFunction["currentUpDnMode"] = fuelMultiFunction["max"]
 	confirmSelection(nil, nil, getButtonMap(fuelMultiFunction, true), false)
-	ersMultiFunction["currentUpDnMode"] = ersMultiFunction["max"]
+	ersMultiFunction["currentUpDnMode"] = ersMultiFunction["fastest"]
 	confirmSelection(nil, nil, getButtonMap(ersMultiFunction, false), false)	
 	autoDiffInhibitOff()
 	autoMixInhibitOff()
