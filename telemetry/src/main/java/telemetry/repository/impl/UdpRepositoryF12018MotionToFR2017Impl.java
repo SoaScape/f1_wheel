@@ -172,7 +172,7 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 
                 if(receivedCarData && receivedMotionData && recievedLapData) {
                     final byte[] out = f12017.toByteArray();
-                    System.out.println(f12017);
+                    //System.out.println(f12017);
                     udpServer.sendProxyUdpData(out, TelemetryDataF12017Impl.F1_2017_PACKET_SIZE);
                     receivedCarData = false;
                     receivedMotionData = false;
