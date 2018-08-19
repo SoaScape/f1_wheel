@@ -102,22 +102,22 @@ public class TelemetryDataF12018Impl {
             for(int i = 0; i < carMotionData.length; i++) {
                 carMotionData[i] = new CarMotionData(data, i);
             }
-            suspensionPosition = populateFloatArr(data, 4, 1218);
-            suspensionVelocity = populateFloatArr(data, 4, 1234);
-            suspensionAcceleration = populateFloatArr(data, 4, 1250);
-            wheelSpeed = populateFloatArr(data, 4, 1266);
-            wheelSlip = populateFloatArr(data, 4, 1282);
+            suspensionPosition = populateFloatArr(data, 4, 1221);
+            suspensionVelocity = populateFloatArr(data, 4, 1237);
+            suspensionAcceleration = populateFloatArr(data, 4, 1253);
+            wheelSpeed = populateFloatArr(data, 4, 1269);
+            wheelSlip = populateFloatArr(data, 4, 1285);
 
-            localVelocityX = decodeFloat(data, 1298);
-            localVelocityY = decodeFloat(data, 1302);
-            localVelocityZ = decodeFloat(data, 1306);
-            angularVelocityX = decodeFloat(data, 1310);
-            angularVelocityY = decodeFloat(data, 1314);
-            angularVelocityZ = decodeFloat(data, 1318);
-            angularAccelerationX = decodeFloat(data, 1322);
-            angularAccelerationY = decodeFloat(data, 1326);
-            angularAccelerationZ = decodeFloat(data, 1330);
-            frontWheelsAngle = decodeFloat(data, 1334);
+            localVelocityX = decodeFloat(data, 1301);
+            localVelocityY = decodeFloat(data, 1305);
+            localVelocityZ = decodeFloat(data, 1309);
+            angularVelocityX = decodeFloat(data, 1313);
+            angularVelocityY = decodeFloat(data, 1317);
+            angularVelocityZ = decodeFloat(data, 1321);
+            angularAccelerationX = decodeFloat(data, 1325);
+            angularAccelerationY = decodeFloat(data, 1329);
+            angularAccelerationZ = decodeFloat(data, 1333);
+            frontWheelsAngle = decodeFloat(data, 1337);
         }
     }
 
