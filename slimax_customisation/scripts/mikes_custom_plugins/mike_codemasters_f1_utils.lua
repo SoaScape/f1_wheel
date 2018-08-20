@@ -179,10 +179,10 @@ end
 
 customFunctionNamesTable = {}
 customFunctionNamesTable[1] = {}
-customFunctionNamesTable[1][0] = "POS"
-customFunctionNamesTable[1][1] = "LAPS"
+customFunctionNamesTable[1][0] = "DENT"
+customFunctionNamesTable[1][1] = "DMID"
 customFunctionNamesTable[2] = {}
-customFunctionNamesTable[2][0] = "LAPS"
+customFunctionNamesTable[2][0] = "DEXT"
 customFunctionNamesTable[2][1] = "COMP"
 customFunctionNamesTable[3] = {}
 customFunctionNamesTable[3][0] = "SPED"
