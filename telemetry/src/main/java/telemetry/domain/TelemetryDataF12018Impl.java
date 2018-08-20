@@ -1,14 +1,42 @@
 package telemetry.domain;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import static telemetry.domain.ConversionUtils.*;
 
+@Component
 public class TelemetryDataF12018Impl {
     private static final Integer HEADER_SIZE_BYTES = 21;
+    private static final Integer CAR_MOTION_DATA_SIZE_BYTES = 60;
+    private static final Integer INDIVIDUAL_CAR_DATA_PACKET_SIZE = 53;
+    private static final Integer MOTION_PACKET_SIZE = 1341;
+    private static final Integer CAR_DATA_PACKET_SIZE = 1085;
+    private static final Integer INDIVIDUAL_LAP_DATA_SIZE = 41;
+    private static final Integer LAP_DATA_PACKET_SIZE = 841;
+
+    private static final Integer PACKET_ID_LOCATION = 3;
+
+    public static final Integer LARGEST_PACKET_SIZE = MOTION_PACKET_SIZE;
+
+    public byte getPacketId(final byte[] data) {
+        return data[PACKET_ID_LOCATION];
+    }
+
+    public MotionDataPacket getMotionData(final byte[] data) {
+        return new MotionDataPacket(data);
+    }
+
+    public LapDataPacket getLapData(final byte[] data) {
+        return new LapDataPacket(data);
+    }
+
+    public CarDataPacket getCarData(final byte[] data) {
+        return new CarDataPacket(data);
+    }
 
     @Data
-    public static class F12018Header {
+    public class F12018Header {
         private short format;             // 2018
         private Byte version;           // Version of this packet type, all start from 1
         private Byte packetId;          // Identifier for the packet type, see below
@@ -17,7 +45,7 @@ public class TelemetryDataF12018Impl {
         private int frameIdentifier;    // Identifier for the frame the data was retrieved on
         private Byte playerCarIndex;    // Index of player's car in the array
 
-        public F12018Header(byte[] data) {
+        private F12018Header(final byte[] data) {
             format = decodeShort(data, 0);
             version = data[2];
             packetId = data[3];
@@ -28,9 +56,8 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    private static final Integer CAR_MOTION_DATA_SIZE_BYTES = 60;
     @Data
-    public static class CarMotionData
+    public class CarMotionData
     {
         private float worldPositionX; // World space X position
         private float worldPositionY; // World space Y position
@@ -51,7 +78,7 @@ public class TelemetryDataF12018Impl {
         private float pitch; // Pitch angle in radians
         private float roll; // Roll angle in radians
 
-        public CarMotionData(byte[] data, int carIndex) {
+        private CarMotionData(final byte[] data, final int carIndex) {
             int offset = HEADER_SIZE_BYTES + (carIndex * CAR_MOTION_DATA_SIZE_BYTES);
             worldPositionX = decodeFloat(data, 0 + offset);
             worldPositionY = decodeFloat(data, 4 + offset);
@@ -74,9 +101,8 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    public static final Integer MOTION_PACKET_SIZE = 1341; // bytes
     @Data
-    public static class MotionDataPacket {
+    public class MotionDataPacket {
         private F12018Header header;                                    // Header
         private CarMotionData[] carMotionData = new CarMotionData[20];  // Data for all cars on track [20]
 
@@ -97,7 +123,7 @@ public class TelemetryDataF12018Impl {
         private float angularAccelerationZ;                     // Angular velocity z-component
         private float frontWheelsAngle;                         // Current front wheels angle in radians (added v1.2.1)
 
-        public MotionDataPacket(byte[] data) {
+        private MotionDataPacket(final byte[] data) {
             header = new F12018Header(data);
             for(int i = 0; i < carMotionData.length; i++) {
                 carMotionData[i] = new CarMotionData(data, i);
@@ -121,9 +147,8 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-	public static final Integer INDIVIDUAL_CAR_DATA_PACKET_SIZE = 53; // bytes
     @Data
-    public static class IndividialCarData {
+    public class IndividialCarData {
         private short m_speed;
         private byte m_throttle;
         private byte m_steer;
@@ -139,7 +164,7 @@ public class TelemetryDataF12018Impl {
         private short m_engineTemperature;
         private float[] m_tyresPressure = new float[4];
 
-        public IndividialCarData(byte[] data, int carIndex) {
+        private IndividialCarData(final byte[] data, final int carIndex) {
             int offset = HEADER_SIZE_BYTES + (carIndex * INDIVIDUAL_CAR_DATA_PACKET_SIZE);
 
             m_speed = decodeShort(data, offset);
@@ -161,14 +186,13 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-	public static final Integer CAR_DATA_PACKET_SIZE = 1085; // bytes
     @Data
-    public static class CarDataPacket {
+    public class CarDataPacket {
         private F12018Header header;
         private IndividialCarData[] carsData = new IndividialCarData[20];
         private int buttonStatus;
 
-        public CarDataPacket(byte[] data) {
+        private CarDataPacket(final byte[] data) {
             this.header = new F12018Header(data);
             for(int i = 0; i < carsData.length; i++) {
                 this.carsData[i] = new IndividialCarData(data, i);
@@ -177,9 +201,8 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    public static final Integer INDIVIDUAL_LAP_DATA_SIZE = 41;
     @Data
-    public static class IndividualLapData {
+    public class IndividualLapData {
         private float m_lastLapTime;
         private float m_currentLapTime;
         private float m_bestLapTime;
@@ -198,7 +221,7 @@ public class TelemetryDataF12018Impl {
         private byte m_driverStatus;
         private byte m_resultStatus;
 
-        public IndividualLapData(byte[] data, int carIndex) {
+        private IndividualLapData(final byte[] data, final int carIndex) {
             int offset = HEADER_SIZE_BYTES + (carIndex * INDIVIDUAL_LAP_DATA_SIZE);
             m_lastLapTime = decodeFloat(data, offset);
             m_currentLapTime = decodeFloat(data, offset+4);
@@ -220,13 +243,12 @@ public class TelemetryDataF12018Impl {
         }
     }
 
-    public static final Integer LAP_DATA_PACKET_SIZE = 841;
     @Data
-    public static class LapDataPacket {
+    public class LapDataPacket {
         private F12018Header header;
         private IndividualLapData[] lapData = new IndividualLapData[20];
 
-        public LapDataPacket(byte[] data) {
+        private LapDataPacket(final byte[] data) {
             this.header = new F12018Header(data);
             for(int i = 0; i < lapData.length; i++) {
                 this.lapData[i] = new IndividualLapData(data, i);

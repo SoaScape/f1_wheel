@@ -19,10 +19,10 @@ import static telemetry.domain.ConversionUtils.convertNormalised16BitVectorToFlo
 @Repository
 @Log4j
 public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
-	public static final Object lock = new Object();
-
 	@Autowired
 	private UdpServer udpServer;
+	@Autowired
+    private TelemetryDataF12018Impl f12018;
 
 	@Value("${udp-listen-port}")
 	private Integer udpListenPort;
@@ -48,13 +48,13 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 		TelemetryDataF12017Impl f12017 = new TelemetryDataF12017Impl();
 		while (true) {
 			try (final DatagramSocket datagramSocket = new DatagramSocket(udpListenPort)) {
-                datagramPacket = new DatagramPacket(new byte[TelemetryDataF12018Impl.MOTION_PACKET_SIZE], TelemetryDataF12018Impl.MOTION_PACKET_SIZE);
+                datagramPacket = new DatagramPacket(new byte[TelemetryDataF12018Impl.LARGEST_PACKET_SIZE], TelemetryDataF12018Impl.LARGEST_PACKET_SIZE);
                 datagramSocket.setSoTimeout(5000);
                 datagramSocket.receive(datagramPacket);
                 waiting = false;
                 byte[] data = datagramPacket.getData();
-                if (0 == data[3]) { //Packetid = motion (0)
-                    final MotionDataPacket motion = new MotionDataPacket(data);
+                if (0 == f12018.getPacketId(data)) { //Packetid = motion (0)
+                    final MotionDataPacket motion = f12018.getMotionData(data);
                     final CarMotionData playerCar = motion.getCarMotionData()[motion.getHeader().getPlayerCarIndex()];
 
                     addHeaderData(f12017, motion.getHeader());
@@ -123,8 +123,8 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
                     }
 
                     receivedMotionData = true;
-                } else if (2 == data[3]) { //Lapdata packet
-                    final LapDataPacket allCarsLapData = new LapDataPacket(data);
+                } else if (2 == f12018.getPacketId(data)) { //Lapdata packet
+                    final LapDataPacket allCarsLapData = f12018.getLapData(data);
                     final IndividualLapData lapData = allCarsLapData.getLapData()[allCarsLapData.getHeader().getPlayerCarIndex()];
                     addHeaderData(f12017, allCarsLapData.getHeader());
 
@@ -156,8 +156,8 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
                         carData[i].setSector2Time(allCarsLapData.getLapData()[i].getM_sector2Time());
                     }
                     recievedLapData = true;
-                } else if (6 == data[3]) { //Packetid = car telemetery
-                    final CarDataPacket carsData = new CarDataPacket(data);
+                } else if (6 == f12018.getPacketId(data)) { //Packetid = car telemetery
+                    final CarDataPacket carsData = f12018.getCarData(data);
                     final IndividialCarData carData = carsData.getCarsData()[carsData.getHeader().getPlayerCarIndex()];
 
                     addHeaderData(f12017, carsData.getHeader());
@@ -185,9 +185,8 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 
                     if (!processingData) {
                         processingData = true;
-                        System.out.println("Receiving F12018 UDP data on port " + udpListenPort + ", transmitting F12017 converted format to ports: " + proxyPorts);
+                        System.out.println("Receiving F12018 UDP data on port " + udpListenPort + ", transmitting converted F12017 data to ports: " + proxyPorts);
                     }
-
                     receivedCarData = false;
                     receivedMotionData = false;
                     recievedLapData = false;
