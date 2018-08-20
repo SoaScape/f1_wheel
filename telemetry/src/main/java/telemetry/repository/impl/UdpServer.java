@@ -53,10 +53,6 @@ public class UdpServer implements Runnable {
 		}
 	}
 
-	public void sendProxyUdpData(final byte[] data) {
-        sendProxyUdpData(data, data.length);
-	}
-
     public void sendProxyUdpData(final byte[] data, final int size) {
         proxyPorts.forEach(port -> sendUdpData(data, port, size));
     }

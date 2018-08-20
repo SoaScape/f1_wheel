@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketTimeoutException;
+import java.util.List;
 
 import static telemetry.domain.ConversionUtils.convertNormalised16BitVectorToFloat;
 
@@ -25,6 +26,9 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 
 	@Value("${udp-listen-port}")
 	private Integer udpListenPort;
+
+    @Value("#{${udp-proxy-ports}}")
+    private List<Integer> proxyPorts;
 
 	private void addHeaderData(final TelemetryDataF12017Impl f12017, final F12018Header header) {
 		f12017.setTime(header.getSessionTime());
@@ -176,13 +180,12 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
                 }
 
                 if (receivedCarData && receivedMotionData && recievedLapData) {
-                    final byte[] out = f12017.toByteArray();
                     //System.out.println(f12017);
-                    udpServer.sendProxyUdpData(out, TelemetryDataF12017Impl.F1_2017_PACKET_SIZE);
+                    udpServer.sendProxyUdpData(f12017.toByteArray(), TelemetryDataF12017Impl.F1_2017_PACKET_SIZE);
 
                     if (!processingData) {
                         processingData = true;
-                        System.out.println("Receiving and transmitting F12018 -> F12017 converted UDP data");
+                        System.out.println("Receiving F12018 UDP data on port " + udpListenPort + ", transmitting F12017 converted format to ports: " + proxyPorts);
                     }
 
                     receivedCarData = false;
@@ -193,7 +196,7 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
             } catch(final SocketTimeoutException e) {
                 processingData = false;
                 if(!waiting) {
-                    System.out.print("\nWaiting to receive F1 2018 UDP data");
+                    System.out.print("\nWaiting to receive F1 2018 UDP data on port " + udpListenPort);
                     waiting = true;
                 } else {
                     System.out.print(".");
