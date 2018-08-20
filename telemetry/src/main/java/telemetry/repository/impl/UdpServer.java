@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
-import static telemetry.domain.ConversionUtils.*;
-
 import lombok.extern.log4j.Log4j;
 
 @Repository
