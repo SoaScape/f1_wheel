@@ -27,3 +27,4 @@ uwmreport/hsqldb.*
 *.iml
 **/.idea/*
 src/generated/java/
+**/out/*
