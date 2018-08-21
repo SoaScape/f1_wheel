@@ -188,7 +188,7 @@ trackLookupBySize[6] = "CAND"
 trackLookupBySize[7] = "SILV"
 trackLookupBySize[8] = "GERM"
 trackLookupBySize[9] = "HUNG"
-trackLookupBySize[10] = "BELG"
+trackLookupBySize[7003] = "BELG"
 trackLookupBySize[11] = "ITLY"
 trackLookupBySize[12] = "SING"
 trackLookupBySize[13] = "JAPN"
@@ -203,8 +203,8 @@ local lastSize = 0;
 function getTrack()
 	--round(GetCarInfo("track_size"), 0)
 	local size = GetContextInfo("track_size")
-	if size <> lastSize then
-		print("Track Size: " + size)
+	if size ~= lastSize then
+		print("Track Size: " .. size)
 		lastSize = size
 	end
 	return trackLookupBySize[size]

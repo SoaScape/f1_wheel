@@ -185,7 +185,7 @@ public class UdpRepositoryF12018MotionToFR2017Impl implements Runnable {
 
                     if (!processingData) {
                         processingData = true;
-                        System.out.println("Receiving F12018 UDP data on port " + udpListenPort + ", transmitting converted F12017 data to ports: " + proxyPorts);
+                        System.out.println("\nReceiving F12018 UDP data on port " + udpListenPort + ", transmitting converted F12017 data to ports: " + proxyPorts);
                     }
                     receivedCarData = false;
                     receivedMotionData = false;
