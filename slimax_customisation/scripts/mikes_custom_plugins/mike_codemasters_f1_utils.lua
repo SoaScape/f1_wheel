@@ -177,6 +177,39 @@ function exitRaceStart()
 	autoMixInhibitOff()
 end
 
+local trackLookupBySize = {}
+trackLookupBySize[0] = "ASTL"
+trackLookupBySize[1] = "FRAN"
+trackLookupBySize[2] = "CHIN"
+trackLookupBySize[3] = "BAHR"
+trackLookupBySize[4] = "SPAN"
+trackLookupBySize[5] = "MONA"
+trackLookupBySize[6] = "CAND"
+trackLookupBySize[7] = "SILV"
+trackLookupBySize[8] = "GERM"
+trackLookupBySize[9] = "HUNG"
+trackLookupBySize[10] = "BELG"
+trackLookupBySize[11] = "ITLY"
+trackLookupBySize[12] = "SING"
+trackLookupBySize[13] = "JAPN"
+trackLookupBySize[14] = " ABU"
+trackLookupBySize[15] = "COTA"
+trackLookupBySize[16] = "BRAZ"
+trackLookupBySize[17] = "AUST"
+trackLookupBySize[18] = "RUSS"
+trackLookupBySize[19] = "MEXI"
+trackLookupBySize[20] = "AZER"
+local lastSize = 0;
+function getTrack()
+	--round(GetCarInfo("track_size"), 0)
+	local size = GetContextInfo("track_size")
+	if size <> lastSize then
+		print("Track Size: " + size)
+		lastSize = size
+	end
+	return trackLookupBySize[size]
+end
+
 customFunctionNamesTable = {}
 customFunctionNamesTable[1] = {}
 customFunctionNamesTable[1][0] = "DENT"

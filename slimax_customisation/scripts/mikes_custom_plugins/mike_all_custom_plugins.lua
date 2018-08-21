@@ -29,6 +29,7 @@ local function performRegularProcessing()
 	safetyCarModeRegularProcessing()
 	utilsRegularProcessing()
 	updateLeds()
+	getTrack()
 end
 
 local function dispEvent(side, swPosition)	
