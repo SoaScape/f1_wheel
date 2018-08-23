@@ -81,6 +81,7 @@ multifunctionMap[3]["enabled"] = true
 multifunctionMap[3]["mfdShortcut"] = true
 multifunctionMap[3]["incrementKey"] = "G"
 multifunctionMap[3]["decrementKey"] = "B"
+multifunctionMap[3]["currentSettingMethod"] = getDiffIndex
 multifunctionMap[3]["row"] = 3
 multifunctionMap[3]["upDnSelectable"] = true
 multifunctionMap[3]["upDnConfirmRequired"] = true

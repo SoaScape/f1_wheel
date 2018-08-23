@@ -21,6 +21,10 @@ function getRearBrakeBiasIndex()
 	return getKeyForValue(biasMultiFunction["modes"], getRearBrakeBias())
 end
 
+function getDiffIndex()
+	return getKeyForValue(diffMultiFunction["modes"], getDiff())
+end
+
 function getVoiceMenuButtons(multifunction)
 	local index = 0
 	local buttonMap = {}

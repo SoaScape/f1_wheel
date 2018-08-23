@@ -117,6 +117,10 @@ function getErsMode()
 	return round(GetCarInfo("engine_power"), 0)
 end
 
+function getDiff()
+	return round(GetCarInfo("diff_exit"), 0)
+end
+
 function getSafetyCar()
 	return GetContextInfo("safety_car_flag")
 end
