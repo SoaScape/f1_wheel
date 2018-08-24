@@ -182,7 +182,7 @@ function exitRaceStart()
 end
 
 local trackLookupBySize = {}
-trackLookupBySize[0] = "ASTL"
+trackLookupBySize[5301] = "ASTL"
 trackLookupBySize[1] = "FRAN"
 trackLookupBySize[2] = "CHIN"
 trackLookupBySize[3] = "BAHR"
