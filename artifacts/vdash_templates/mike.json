@@ -32,7 +32,7 @@ objs: [
 		height: 47
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 202
+		controlIndex: 95
 		text_Caption: LAP
 		upperCaption: ""
 		text_format: ""
@@ -65,7 +65,7 @@ objs: [
 		zIndex: 1
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 203
+		controlIndex: 96
 		text_Caption: RPM
 		upperCaption: ""
 		text_format: ""
@@ -101,7 +101,7 @@ objs: [
 		zIndex: 2
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 204
+		controlIndex: 97
 		text_Caption: POS
 		upperCaption: ""
 		text_format: ""
@@ -134,7 +134,7 @@ objs: [
 		zIndex: 3
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 205
+		controlIndex: 98
 		text_Caption: ERS
 		upperCaption: ""
 		text_format: ""
@@ -167,7 +167,7 @@ objs: [
 		zIndex: 4
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 206
+		controlIndex: 99
 		text_Caption: FUEL
 		upperCaption: ""
 		text_format: ""
@@ -200,7 +200,7 @@ objs: [
 		zIndex: 5
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 207
+		controlIndex: 100
 		text_Caption: OIL
 		upperCaption: ""
 		text_format: ""
@@ -233,7 +233,7 @@ objs: [
 		zIndex: 6
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 208
+		controlIndex: 101
 		text_Caption: S:
 		upperCaption: ""
 		text_format: ""
@@ -266,7 +266,7 @@ objs: [
 		zIndex: 7
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 209
+		controlIndex: 102
 		text_Caption: Best Lap Time:
 		upperCaption: ""
 		text_format: ""
@@ -299,7 +299,7 @@ objs: [
 		zIndex: 8
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 210
+		controlIndex: 103
 		text_Caption: Last Lap Time:
 		upperCaption: ""
 		text_format: ""
@@ -329,7 +329,7 @@ objs: [
 		zIndex: 9
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 211
+		controlIndex: 104
 		field_index: 65
 		field_index_max: 200
 		revLimit_maxValue: 100
@@ -364,7 +364,7 @@ objs: [
 		zIndex: 10
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 212
+		controlIndex: 105
 		field_index: 66
 		field_index_max: 200
 		revLimit_maxValue: 100
@@ -399,7 +399,7 @@ objs: [
 		zIndex: 11
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 213
+		controlIndex: 106
 		field_index: 67
 		field_index_max: 200
 		revLimit_maxValue: 100
@@ -434,7 +434,7 @@ objs: [
 		zIndex: 12
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 214
+		controlIndex: 107
 		field_index: 68
 		field_index_max: 200
 		revLimit_maxValue: 100
@@ -474,7 +474,7 @@ objs: [
 		zIndex: 13
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 215
+		controlIndex: 108
 		field_index: 1
 		text_Caption: 0
 		upperCaption: ""
@@ -511,7 +511,7 @@ objs: [
 		zIndex: 14
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 216
+		controlIndex: 109
 		text_Caption: "/00"
 		upperCaption: ""
 		text_format: "/%02.0f"
@@ -545,7 +545,7 @@ objs: [
 		zIndex: 15
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 217
+		controlIndex: 110
 		field_index: 3
 		text_Caption: "    0"
 		upperCaption: ""
@@ -583,7 +583,7 @@ objs: [
 		zIndex: 16
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 218
+		controlIndex: 111
 		field_index: 2
 		text_Caption: 0
 		upperCaption: ""
@@ -617,7 +617,7 @@ objs: [
 		zIndex: 17
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 219
+		controlIndex: 112
 		field_index: 11
 		text_Caption: F0.0
 		upperCaption: ""
@@ -650,7 +650,7 @@ objs: [
 		zIndex: 18
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 220
+		controlIndex: 113
 		field_index: 6
 		text_Caption: 0
 		upperCaption: ""
@@ -685,7 +685,7 @@ objs: [
 		zIndex: 19
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 221
+		controlIndex: 114
 		field_index: 13
 		text_Caption: 100
 		upperCaption: 100-(DATA * 100)
@@ -720,7 +720,7 @@ objs: [
 		zIndex: 20
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 222
+		controlIndex: 115
 		field_index: 30
 		text_Caption: " 0"
 		upperCaption: ""
@@ -754,7 +754,7 @@ objs: [
 		zIndex: 21
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 223
+		controlIndex: 116
 		field_index: 23
 		text_Caption: " 0:00.000"
 		upperCaption: ""
@@ -789,7 +789,7 @@ objs: [
 		zIndex: 22
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 224
+		controlIndex: 117
 		field_index: 24
 		text_Caption: " 0:00.000"
 		upperCaption: ""
@@ -824,7 +824,7 @@ objs: [
 		zIndex: 23
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 225
+		controlIndex: 118
 		field_index: 18
 		text_Caption: 0
 		upperCaption: ""
@@ -860,7 +860,7 @@ objs: [
 		zIndex: 24
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 226
+		controlIndex: 119
 		field_index: 19
 		text_Caption: 0
 		upperCaption: ""
@@ -896,7 +896,7 @@ objs: [
 		zIndex: 25
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 227
+		controlIndex: 120
 		field_index: 20
 		text_Caption: 0
 		upperCaption: ""
@@ -932,7 +932,7 @@ objs: [
 		zIndex: 26
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 228
+		controlIndex: 121
 		field_index: 21
 		text_Caption: 0
 		upperCaption: ""
@@ -966,7 +966,7 @@ objs: [
 		zIndex: 27
 		fntSize: FNT_XLARGE
 		fntName: FNT_7SEG
-		controlIndex: 229
+		controlIndex: 122
 		text_Caption: 0
 		upperCaption: ""
 		text_format: ""
@@ -1004,7 +1004,7 @@ objs: [
 		zIndex: 28
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 230
+		controlIndex: 123
 		field_index: 6
 		field_index_max: 150
 		revLimit_maxValue: 134
@@ -1042,7 +1042,7 @@ objs: [
 		zIndex: 29
 		fntSize: FNT_LARGE
 		fntName: FNT_14SEG
-		controlIndex: 231
+		controlIndex: 124
 		text_Caption: 0
 		upperCaption: ""
 		text_format: ""
@@ -1075,7 +1075,7 @@ objs: [
 		zIndex: 30
 		fntSize: FNT_LARGE
 		fntName: FNT_14SEG
-		controlIndex: 232
+		controlIndex: 125
 		text_Caption: 0
 		upperCaption: ""
 		text_format: ""
@@ -1116,7 +1116,7 @@ objs: [
 		zIndex: 31
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 233
+		controlIndex: 126
 		field_index: 16
 		text_Caption: PIT LIMITER
 		upperCaption: ""
@@ -1153,7 +1153,7 @@ objs: [
 		zIndex: 32
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 234
+		controlIndex: 127
 		field_index: 12
 		text_Caption: RICH
 		upperCaption: "IF(FUELMIX==2,1,0)"
@@ -1187,7 +1187,7 @@ objs: [
 		zIndex: 33
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 235
+		controlIndex: 128
 		text_Caption: MIX
 		upperCaption: ""
 		text_format: ""
@@ -1224,7 +1224,7 @@ objs: [
 		zIndex: 34
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 236
+		controlIndex: 129
 		field_index: 12
 		text_Caption: QUAL
 		upperCaption: "IF(FUELMIX==3,1,0)"
@@ -1261,7 +1261,7 @@ objs: [
 		zIndex: 35
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 237
+		controlIndex: 130
 		field_index: 12
 		text_Caption: NORM
 		upperCaption: "IF(FUELMIX==1,1,0)"
@@ -1298,7 +1298,7 @@ objs: [
 		zIndex: 36
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 238
+		controlIndex: 131
 		field_index: 12
 		text_Caption: LEAN
 		upperCaption: "IF(FUELMIX==0,1,0)"
@@ -1332,7 +1332,7 @@ objs: [
 		zIndex: 37
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 239
+		controlIndex: 132
 		field_index: 81
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1367,7 +1367,7 @@ objs: [
 		zIndex: 38
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 240
+		controlIndex: 133
 		field_index: 82
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1402,7 +1402,7 @@ objs: [
 		zIndex: 39
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 241
+		controlIndex: 134
 		field_index: 84
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1437,7 +1437,7 @@ objs: [
 		zIndex: 40
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 242
+		controlIndex: 135
 		field_index: 83
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1476,7 +1476,7 @@ objs: [
 		zIndex: 41
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 243
+		controlIndex: 136
 		text_Caption: DRS
 		upperCaption: "IF(DRSLEGALSTATUS==1,IF(DRS==0,1,0),0)"
 		text_format: ""
@@ -1512,7 +1512,7 @@ objs: [
 		zIndex: 42
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 244
+		controlIndex: 137
 		text_Caption: DRS
 		upperCaption: "IF(DRS==1,1,0)"
 		text_format: ""
@@ -1548,7 +1548,7 @@ objs: [
 		zIndex: 43
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 245
+		controlIndex: 138
 		field_index: 12
 		text_Caption: SAVE FUEL
 		upperCaption: ""
@@ -1585,7 +1585,7 @@ objs: [
 		zIndex: 44
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 246
+		controlIndex: 139
 		field_index: 11
 		text_Caption: OVER TAKE
 		upperCaption: ""
@@ -1623,7 +1623,7 @@ objs: [
 		zIndex: 45
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 247
+		controlIndex: 140
 		field_index: 10
 		text_Caption: AutoMix
 		upperCaption: ""
@@ -1661,7 +1661,7 @@ objs: [
 		zIndex: 46
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 248
+		controlIndex: 141
 		field_index: 9
 		text_Caption: AutoDif
 		upperCaption: ""
@@ -1698,7 +1698,7 @@ objs: [
 		zIndex: 47
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 249
+		controlIndex: 142
 		field_index: 8
 		text_Caption: SAFETY CAR
 		upperCaption: ""
@@ -1732,7 +1732,7 @@ objs: [
 		zIndex: 48
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 250
+		controlIndex: 143
 		text_Caption: BBIAS
 		upperCaption: ""
 		text_format: ""
@@ -1765,7 +1765,7 @@ objs: [
 		zIndex: 49
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 251
+		controlIndex: 144
 		field_index: 5
 		text_Caption: "  0"
 		upperCaption: ""
@@ -1806,7 +1806,7 @@ objs: [
 		zIndex: 50
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 252
+		controlIndex: 145
 		field_index: 38
 		field_index_max: 1
 		revLimit_maxValue: 100
@@ -1848,14 +1848,14 @@ objs: [
 		zIndex: 51
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 253
+		controlIndex: 146
 		field_index: 12
 		text_Caption: OVER
 		upperCaption: "IF(ENGINEPOWER==4,1,0)"
 		text_format: ""
 	}
 	{
-		objName: bkgnd_img254
+		objName: bkgnd_img147
 		objGroup: BASIC_IMAGE
 		objType: TYPE_UNKNOWN
 		objBehavior: BEHAVIOR_UNKNOWN
@@ -1880,7 +1880,7 @@ objs: [
 		zIndex: 52
 		fntSize: FNT_UNKNOWN
 		fntName: FNT_ARIAL
-		controlIndex: 254
+		controlIndex: 147
 		text_Caption: ""
 		upperCaption: ""
 		text_format: ""
@@ -1918,7 +1918,7 @@ objs: [
 		zIndex: 53
 		fntSize: FNT_UNKNOWN
 		fntName: FNT_ARIAL
-		controlIndex: 255
+		controlIndex: 148
 		field_index: 28
 		field_index_max: 2000
 		revLimit_maxValue: 4000000
@@ -1962,7 +1962,7 @@ objs: [
 		zIndex: 54
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 256
+		controlIndex: 149
 		field_index: 12
 		text_Caption: TAKE
 		upperCaption: "IF(ENGINEPOWER==4,1,0)"
@@ -1998,7 +1998,7 @@ objs: [
 		zIndex: 55
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 257
+		controlIndex: 150
 		field_index: 12
 		text_Caption: LAP
 		upperCaption: "IF(ENGINEPOWER==5,1,0)"
@@ -2034,7 +2034,7 @@ objs: [
 		zIndex: 56
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 258
+		controlIndex: 151
 		field_index: 12
 		text_Caption: HOT
 		upperCaption: "IF(ENGINEPOWER==5,1,0)"
@@ -2071,7 +2071,7 @@ objs: [
 		zIndex: 57
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 259
+		controlIndex: 152
 		field_index: 12
 		text_Caption: HIGH
 		upperCaption: "IF(ENGINEPOWER==3,1,0)"
@@ -2108,7 +2108,7 @@ objs: [
 		zIndex: 58
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 260
+		controlIndex: 153
 		field_index: 12
 		text_Caption: MEDIUM
 		upperCaption: "IF(ENGINEPOWER==2,1,0)"
@@ -2145,7 +2145,7 @@ objs: [
 		zIndex: 59
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 261
+		controlIndex: 154
 		field_index: 12
 		text_Caption: LOW
 		upperCaption: "IF(ENGINEPOWER==1,1,0)"
@@ -2181,58 +2181,54 @@ objs: [
 		zIndex: 60
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 262
+		controlIndex: 155
 		field_index: 12
 		text_Caption: NONE
 		upperCaption: "IF(ENGINEPOWER==0,1,0)"
 		text_format: ""
 	}
 	{
-		objName: SUPER_GAUGE314_#386
-		objGroup: LED
-		objType: LED_SLI
-		objBehavior: STD_VIEW
-		objStyle: SUPER_OTHER
+		objName: fuel_gauge406
+		objGroup: STD_GAUGE
+		objType: GAUGE_FUEL
+		objBehavior: GAUGE_VERTICAL
+		objStyle: GAUGE_STYLE1
 		visible: true
 		objColor: {
-			r: 0.627451
-			g: 0.1254902
-			b: 0.9411765
+			r: 1
+			g: 1
 			a: 1
 		}
-		borderColor: {}
+		borderColor: {
+			r: 0.7490196
+			g: 0.7490196
+			b: 0.7490196
+			a: 1
+		}
 		backgroundColor: {
-			r: 0.24705882
-			g: 0.24705882
-			b: 0.24705882
 			a: 1
 		}
 		limitColor: {
 			r: 1
 			a: 1
 		}
-		scaleX: 0.65499896
-		scaleY: 0.65499896
-		y: 134
-		x: 51
-		width: 50.479984
-		height: 152.19617
-		zIndex: 61
-		fntSize: FNT_UNKNOWN
+		scaleX: 1
+		scaleY: 1
+		y: 130
+		x: 47
+		width: 30
+		height: 153.01495
+		zIndex: 62
+		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 263
+		controlIndex: 406
 		field_index: 11
 		field_index_max: 12
-		revLimit_maxValue: 4000000
+		revLimit_maxValue: -20
 		text_Caption: ""
 		upperCaption: ""
 		text_format: ""
-		objParam1: 12
-		objParam2: 16
-		objParam3: 16
-		objParam4: 90
-		objParam6: 40
-		objParam7: 1
+		autoUnit: true
 	}
 ]
 }
