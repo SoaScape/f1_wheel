@@ -161,14 +161,14 @@ objs: [
 		scaleX: 1
 		scaleY: 1
 		y: 96
-		x: 22
-		width: 94
+		x: 28.5
+		width: 68
 		height: 19
 		zIndex: 4
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
 		controlIndex: 206
-		text_Caption: WATER
+		text_Caption: FUEL
 		upperCaption: ""
 		text_format: ""
 	}
@@ -1015,49 +1015,6 @@ objs: [
 		autoUnit: true
 	}
 	{
-		objName: data_water
-		objGroup: STD_GAUGE
-		objType: GAUGE_PRESSURE
-		objBehavior: GAUGE_VERTICAL
-		objStyle: GAUGE_STYLE1
-		visible: true
-		objColor: {
-			b: 1
-			a: 1
-		}
-		borderColor: {
-			a: 1
-		}
-		backgroundColor: {
-			r: 0.24705882
-			g: 0.24705882
-			b: 0.24705882
-			a: 1
-		}
-		limitColor: {
-			r: 1
-			a: 1
-		}
-		scaleX: 1
-		scaleY: 1
-		y: 126
-		x: 40
-		width: 56
-		height: 134
-		zIndex: 29
-		fntSize: FNT_SMALL
-		fntName: FNT_ARIAL
-		controlIndex: 231
-		field_index: 7
-		field_index_max: 150
-		revLimit_maxValue: 130
-		text_Caption: ""
-		upperCaption: ""
-		text_format: ""
-		forceMaxValue: true
-		autoUnit: true
-	}
-	{
 		objName: Left_panel
 		objGroup: DIGITS_PANEL
 		objType: LEFTPANEL
@@ -1082,10 +1039,10 @@ objs: [
 		x: 41.5
 		width: 258.0542
 		height: 81.600006
-		zIndex: 30
+		zIndex: 29
 		fntSize: FNT_LARGE
 		fntName: FNT_14SEG
-		controlIndex: 232
+		controlIndex: 231
 		text_Caption: 0
 		upperCaption: ""
 		text_format: ""
@@ -1115,10 +1072,10 @@ objs: [
 		x: 40.5
 		width: 230.27039
 		height: 74.2
-		zIndex: 31
+		zIndex: 30
 		fntSize: FNT_LARGE
 		fntName: FNT_14SEG
-		controlIndex: 233
+		controlIndex: 232
 		text_Caption: 0
 		upperCaption: ""
 		text_format: ""
@@ -1154,12 +1111,12 @@ objs: [
 		scaleY: 1
 		y: 211
 		x: 277
-		width: 376
-		height: 47
-		zIndex: 32
+		width: 384
+		height: 59
+		zIndex: 31
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 234
+		controlIndex: 233
 		field_index: 16
 		text_Caption: PIT LIMITER
 		upperCaption: ""
@@ -1193,10 +1150,10 @@ objs: [
 		x: 160
 		width: 144.2647
 		height: 50.46005
-		zIndex: 33
+		zIndex: 32
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 235
+		controlIndex: 234
 		field_index: 12
 		text_Caption: RICH
 		upperCaption: "IF(FUELMIX==2,1,0)"
@@ -1227,10 +1184,10 @@ objs: [
 		x: 16
 		width: 115
 		height: 47
-		zIndex: 34
+		zIndex: 33
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 236
+		controlIndex: 235
 		text_Caption: MIX
 		upperCaption: ""
 		text_format: ""
@@ -1264,10 +1221,10 @@ objs: [
 		x: 160
 		width: 189.23468
 		height: 47.82004
-		zIndex: 35
+		zIndex: 34
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 237
+		controlIndex: 236
 		field_index: 12
 		text_Caption: QUAL
 		upperCaption: "IF(FUELMIX==3,1,0)"
@@ -1301,10 +1258,10 @@ objs: [
 		x: 160
 		width: 187.85458
 		height: 49.130047
-		zIndex: 36
+		zIndex: 35
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 238
+		controlIndex: 237
 		field_index: 12
 		text_Caption: NORM
 		upperCaption: "IF(FUELMIX==1,1,0)"
@@ -1338,10 +1295,10 @@ objs: [
 		x: 160
 		width: 170.1547
 		height: 46.18504
-		zIndex: 37
+		zIndex: 36
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 239
+		controlIndex: 238
 		field_index: 12
 		text_Caption: LEAN
 		upperCaption: "IF(FUELMIX==0,1,0)"
@@ -1372,10 +1329,10 @@ objs: [
 		x: 607.5
 		width: 28
 		height: 19
-		zIndex: 38
+		zIndex: 37
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 240
+		controlIndex: 239
 		field_index: 81
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1407,10 +1364,10 @@ objs: [
 		x: 748
 		width: 28
 		height: 19
-		zIndex: 39
+		zIndex: 38
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 241
+		controlIndex: 240
 		field_index: 82
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1442,10 +1399,10 @@ objs: [
 		x: 748
 		width: 28
 		height: 19
-		zIndex: 40
+		zIndex: 39
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 242
+		controlIndex: 241
 		field_index: 84
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1477,10 +1434,10 @@ objs: [
 		x: 606.5
 		width: 28
 		height: 19
-		zIndex: 41
+		zIndex: 40
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 243
+		controlIndex: 242
 		field_index: 83
 		text_Caption: "  0"
 		upperCaption: DATA * 100
@@ -1516,10 +1473,10 @@ objs: [
 		x: 359.5
 		width: 140.70961
 		height: 55.055046
-		zIndex: 42
+		zIndex: 41
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 244
+		controlIndex: 243
 		text_Caption: DRS
 		upperCaption: "IF(DRSLEGALSTATUS==1,IF(DRS==0,1,0),0)"
 		text_format: ""
@@ -1552,10 +1509,10 @@ objs: [
 		x: 359.5
 		width: 140.70961
 		height: 55.055046
-		zIndex: 43
+		zIndex: 42
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 245
+		controlIndex: 244
 		text_Caption: DRS
 		upperCaption: "IF(DRS==1,1,0)"
 		text_format: ""
@@ -1588,10 +1545,10 @@ objs: [
 		x: 384
 		width: 186.38486
 		height: 54.93002
-		zIndex: 44
+		zIndex: 43
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 246
+		controlIndex: 245
 		field_index: 12
 		text_Caption: SAVE FUEL
 		upperCaption: ""
@@ -1625,10 +1582,10 @@ objs: [
 		x: 384
 		width: 186.38486
 		height: 54.93002
-		zIndex: 45
+		zIndex: 44
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 247
+		controlIndex: 246
 		field_index: 11
 		text_Caption: OVER TAKE
 		upperCaption: ""
@@ -1663,10 +1620,10 @@ objs: [
 		x: 753
 		width: 86.34964
 		height: 24.350039
-		zIndex: 46
+		zIndex: 45
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 248
+		controlIndex: 247
 		field_index: 10
 		text_Caption: AutoMix
 		upperCaption: ""
@@ -1701,10 +1658,10 @@ objs: [
 		x: 753
 		width: 86.34964
 		height: 24.350039
-		zIndex: 47
+		zIndex: 46
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 249
+		controlIndex: 248
 		field_index: 9
 		text_Caption: AutoDif
 		upperCaption: ""
@@ -1738,10 +1695,10 @@ objs: [
 		x: 258
 		width: 440.515
 		height: 54.75004
-		zIndex: 48
+		zIndex: 47
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 250
+		controlIndex: 249
 		field_index: 8
 		text_Caption: SAFETY CAR
 		upperCaption: ""
@@ -1772,10 +1729,10 @@ objs: [
 		x: 396
 		width: 82
 		height: 19
-		zIndex: 49
+		zIndex: 48
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 251
+		controlIndex: 250
 		text_Caption: BBIAS
 		upperCaption: ""
 		text_format: ""
@@ -1805,10 +1762,10 @@ objs: [
 		x: 376
 		width: 72
 		height: 47
-		zIndex: 50
+		zIndex: 49
 		fntSize: FNT_NORMAL
 		fntName: FNT_ARIAL
-		controlIndex: 252
+		controlIndex: 251
 		field_index: 5
 		text_Caption: "  0"
 		upperCaption: ""
@@ -1846,10 +1803,10 @@ objs: [
 		x: 505.5
 		width: 55
 		height: 80
-		zIndex: 51
+		zIndex: 50
 		fntSize: FNT_SMALL
 		fntName: FNT_ARIAL
-		controlIndex: 253
+		controlIndex: 252
 		field_index: 38
 		field_index_max: 1
 		revLimit_maxValue: 100
@@ -1888,17 +1845,17 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 22.180037
-		zIndex: 52
+		zIndex: 51
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 254
+		controlIndex: 253
 		field_index: 12
 		text_Caption: OVER
 		upperCaption: "IF(ENGINEPOWER==4,1,0)"
 		text_format: ""
 	}
 	{
-		objName: bkgnd_img255
+		objName: bkgnd_img254
 		objGroup: BASIC_IMAGE
 		objType: TYPE_UNKNOWN
 		objBehavior: BEHAVIOR_UNKNOWN
@@ -1920,10 +1877,10 @@ objs: [
 		scaleY: 1
 		width: 5
 		height: 5
-		zIndex: 53
+		zIndex: 52
 		fntSize: FNT_UNKNOWN
 		fntName: FNT_ARIAL
-		controlIndex: 255
+		controlIndex: 254
 		text_Caption: ""
 		upperCaption: ""
 		text_format: ""
@@ -1958,10 +1915,10 @@ objs: [
 		x: 283.5
 		width: 322.37085
 		height: 47.904884
-		zIndex: 54
+		zIndex: 53
 		fntSize: FNT_UNKNOWN
 		fntName: FNT_ARIAL
-		controlIndex: 256
+		controlIndex: 255
 		field_index: 28
 		field_index_max: 2000
 		revLimit_maxValue: 4000000
@@ -2002,10 +1959,10 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 22.180037
-		zIndex: 55
+		zIndex: 54
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 257
+		controlIndex: 256
 		field_index: 12
 		text_Caption: TAKE
 		upperCaption: "IF(ENGINEPOWER==4,1,0)"
@@ -2038,10 +1995,10 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 22.180037
-		zIndex: 56
+		zIndex: 55
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 258
+		controlIndex: 257
 		field_index: 12
 		text_Caption: LAP
 		upperCaption: "IF(ENGINEPOWER==5,1,0)"
@@ -2074,10 +2031,10 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 22.180037
-		zIndex: 57
+		zIndex: 56
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 259
+		controlIndex: 258
 		field_index: 12
 		text_Caption: HOT
 		upperCaption: "IF(ENGINEPOWER==5,1,0)"
@@ -2111,10 +2068,10 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 51.475025
-		zIndex: 58
+		zIndex: 57
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 260
+		controlIndex: 259
 		field_index: 12
 		text_Caption: HIGH
 		upperCaption: "IF(ENGINEPOWER==3,1,0)"
@@ -2148,10 +2105,10 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 51.475025
-		zIndex: 59
+		zIndex: 58
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 261
+		controlIndex: 260
 		field_index: 12
 		text_Caption: MEDIUM
 		upperCaption: "IF(ENGINEPOWER==2,1,0)"
@@ -2185,10 +2142,10 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 51.475025
-		zIndex: 60
+		zIndex: 59
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 262
+		controlIndex: 261
 		field_index: 12
 		text_Caption: LOW
 		upperCaption: "IF(ENGINEPOWER==1,1,0)"
@@ -2221,14 +2178,61 @@ objs: [
 		x: -1.5
 		width: 133.38974
 		height: 51.475025
-		zIndex: 61
+		zIndex: 60
 		fntSize: FNT_MEDIUM
 		fntName: FNT_ARIAL
-		controlIndex: 263
+		controlIndex: 262
 		field_index: 12
 		text_Caption: NONE
 		upperCaption: "IF(ENGINEPOWER==0,1,0)"
 		text_format: ""
+	}
+	{
+		objName: SUPER_GAUGE314_#386
+		objGroup: LED
+		objType: LED_SLI
+		objBehavior: STD_VIEW
+		objStyle: SUPER_OTHER
+		visible: true
+		objColor: {
+			r: 0.627451
+			g: 0.1254902
+			b: 0.9411765
+			a: 1
+		}
+		borderColor: {}
+		backgroundColor: {
+			r: 0.24705882
+			g: 0.24705882
+			b: 0.24705882
+			a: 1
+		}
+		limitColor: {
+			r: 1
+			a: 1
+		}
+		scaleX: 0.65499896
+		scaleY: 0.65499896
+		y: 134
+		x: 51
+		width: 50.479984
+		height: 152.19617
+		zIndex: 61
+		fntSize: FNT_UNKNOWN
+		fntName: FNT_ARIAL
+		controlIndex: 263
+		field_index: 11
+		field_index_max: 12
+		revLimit_maxValue: 4000000
+		text_Caption: ""
+		upperCaption: ""
+		text_format: ""
+		objParam1: 12
+		objParam2: 16
+		objParam3: 16
+		objParam4: 90
+		objParam6: 40
+		objParam7: 1
 	}
 ]
 }
