@@ -57,14 +57,14 @@ local function getPercentageLapComplete()
 end
 
 function getLapsCompleteIncludingCurrent()
-	local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2015 reports current lap as completed, so subtract 1					
+	local lapsCompleted = GetContextInfo("laps") - 2 -- F1 2018 reports current lap as completed, plus another, so subtract 2
 	local percentLapComplete = getPercentageLapComplete() / 100
 	return lapsCompleted + percentLapComplete -- Add on % current lap complete
 end
 
 function firstLapCompleted()
 	-- Returns true once the first lap has been completed.
-	local lapsCompleted = GetContextInfo("laps") - 1
+	local lapsCompleted = GetContextInfo("laps") - 2 -- F1 2018 reports current lap as completed, plus another, so subtract 2
 	if lapsCompleted ~= nil and lapsCompleted > 0 then
 		return true
 	else
@@ -74,7 +74,7 @@ end
 
 function getLapsRemaining()
 	-- Returns remaining laps including current (decimal format)
-	local lapsCompleted = GetContextInfo("laps")
+	local lapsCompleted = GetContextInfo("laps") - 1 -- F1 2018 reports current lap as completed, plus another, so subtract 1
 	local totalLaps = GetContextInfo("laps_count")
 	local lapsRemaining = totalLaps - lapsCompleted
 
