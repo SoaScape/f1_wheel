@@ -40,6 +40,14 @@ public class ConversionUtils {
         return ints;
     }
 
+    public static byte[] populateByteArr(byte[] data, int arraySize, int startByte) {
+        byte[] bytes = new byte[arraySize];
+        for(int i = 0; i < bytes.length; i++) {
+            bytes[i] = data[startByte + i];
+        }
+        return bytes;
+    }
+
     public static ByteBuffer decodeBytes(byte[] data, int start, int end) {
         return ByteBuffer.wrap(Arrays.copyOfRange(data, start, end)).order(ByteOrder.LITTLE_ENDIAN);
     }
@@ -54,6 +62,10 @@ public class ConversionUtils {
 
     public static int decodeInt(byte[] data, int start) {
         return decodeBytes(data, start, start + INT_SIZE_IN_BYTES).getInt();
+    }
+
+    public static byte decodeByte(byte[] data, int start) {
+        return decodeBytes(data, start, start + 1).get();
     }
 
     public static Long decodeLong(byte[] data, int start, int sizeInBytes) {

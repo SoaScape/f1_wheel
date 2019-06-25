@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 import telemetry.repository.impl.UdpProxyListener;
-import telemetry.repository.impl.UdpRepositoryF12018MotionToFR2017Impl;
+import telemetry.repository.impl.UdpRepositoryF12019MotionToFR2017Impl;
 import telemetry.repository.impl.UdpServer;
 
 @Controller
 public class MainController implements CommandLineRunner {
 	@Autowired
-	private UdpRepositoryF12018MotionToFR2017Impl conversionService;
+	private UdpRepositoryF12019MotionToFR2017Impl conversionService;
 	@Autowired
 	private UdpProxyListener simpleProxy;
 	@Autowired
