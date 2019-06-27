@@ -1,6 +1,6 @@
 @echo off
 SET script_location="C:\Program Files\SLIMax Manager Pro\scripts"
-SET cfg_location="C:\Users\mike\Documents\SLIMax Manager Pro\cfg"
+SET cfg_location="M:\Documents\My Documents\SLIMax Manager Pro\cfg"
 SET autocfg_location="C:\Program Files\SLIMax Manager Pro\auto-cfg"
 
 echo Copying into %script_location%.
