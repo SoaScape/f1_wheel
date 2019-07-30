@@ -7,20 +7,20 @@ import static telemetry.domain.ConversionUtils.*;
 
 @Component
 public class TelemetryDataF12019Impl {
-    private static final Integer HEADER_SIZE_BYTES = 23;
+    private static final byte HEADER_SIZE_BYTES = 23;
+    private static final byte NUM_CARS = 20;
 
-    private static final Integer CAR_MOTION_DATA_SIZE_BYTES = 60;
-    private static final Integer MOTION_PACKET_SIZE = 1343;
+    private static final byte CAR_MOTION_DATA_SIZE_BYTES = 60;
+    private static final byte INDIVIDUAL_CAR_DATA_PACKET_SIZE = 66;
+	private static final short MOTION_PACKET_SIZE = 1343;
+    private static final short CAR_DATA_PACKET_SIZE = 1347;
 
-    private static final Integer INDIVIDUAL_CAR_DATA_PACKET_SIZE = 66;
-    private static final Integer CAR_DATA_PACKET_SIZE = 1347;
+    private static final byte INDIVIDUAL_LAP_DATA_SIZE = 41;
+    private static final short LAP_DATA_PACKET_SIZE = 843;
 
-    private static final Integer INDIVIDUAL_LAP_DATA_SIZE = 41;
-    private static final Integer LAP_DATA_PACKET_SIZE = 843;
+    private static final byte PACKET_ID_LOCATION = 5;
 
-    private static final Integer PACKET_ID_LOCATION = 5;
-
-    public static final Integer LARGEST_PACKET_SIZE = CAR_DATA_PACKET_SIZE;
+    public static final short LARGEST_PACKET_SIZE = CAR_DATA_PACKET_SIZE;
 
     public byte getPacketId(final byte[] data) {
         return data[PACKET_ID_LOCATION];
@@ -114,11 +114,11 @@ public class TelemetryDataF12019Impl {
         private CarMotionData[] carMotionData = new CarMotionData[20];  // Data for all cars on track [20]
 
         // Extra player car ONLY data
-        private float[] suspensionPosition = new float[4];      // Note: All wheel arrays have the following order:
-        private float[] suspensionVelocity = new float[4];      // RL, RR, FL, FR
-        private float[] suspensionAcceleration = new float[4];  // RL, RR, FL, FR
-        private float[] wheelSpeed = new float[4];              // Speed of each wheel
-        private float[] wheelSlip = new float[4];               // Slip ratio for each wheel (added v1.2.1)
+        private float[] suspensionPosition;      // Note: All wheel arrays have the following order:
+        private float[] suspensionVelocity;      // RL, RR, FL, FR
+        private float[] suspensionAcceleration;  // RL, RR, FL, FR
+        private float[] wheelSpeed;              // Speed of each wheel
+        private float[] wheelSlip;               // Slip ratio for each wheel (added v1.2.1)
         private float localVelocityX;                           // Velocity in local space
         private float localVelocityY;                           // Velocity in local space
         private float localVelocityZ;                           // Velocity in local space
@@ -135,22 +135,24 @@ public class TelemetryDataF12019Impl {
             for(int i = 0; i < carMotionData.length; i++) {
                 carMotionData[i] = new CarMotionData(data, i);
             }
-            suspensionPosition = populateFloatArr(data, 4, 1221);
-            suspensionVelocity = populateFloatArr(data, 4, 1237);
-            suspensionAcceleration = populateFloatArr(data, 4, 1253);
-            wheelSpeed = populateFloatArr(data, 4, 1269);
-            wheelSlip = populateFloatArr(data, 4, 1285);
 
-            localVelocityX = decodeFloat(data, 1301);
-            localVelocityY = decodeFloat(data, 1305);
-            localVelocityZ = decodeFloat(data, 1309);
-            angularVelocityX = decodeFloat(data, 1313);
-            angularVelocityY = decodeFloat(data, 1317);
-            angularVelocityZ = decodeFloat(data, 1321);
-            angularAccelerationX = decodeFloat(data, 1325);
-            angularAccelerationY = decodeFloat(data, 1329);
-            angularAccelerationZ = decodeFloat(data, 1333);
-            frontWheelsAngle = decodeFloat(data, 1337);
+            final int offset = HEADER_SIZE_BYTES + (NUM_CARS * CAR_MOTION_DATA_SIZE_BYTES);
+            suspensionPosition = populateFloatArr(data, 4, offset);
+            suspensionVelocity = populateFloatArr(data, 4, offset + 16);
+            suspensionAcceleration = populateFloatArr(data, 4, offset + 32);
+            wheelSpeed = populateFloatArr(data, 4, offset + 48);
+            wheelSlip = populateFloatArr(data, 4, offset + 64);
+
+            localVelocityX = decodeFloat(data, offset + 80);
+            localVelocityY = decodeFloat(data, offset + 84);
+            localVelocityZ = decodeFloat(data, offset + 88);
+            angularVelocityX = decodeFloat(data, offset + 92);
+            angularVelocityY = decodeFloat(data, offset + 96);
+            angularVelocityZ = decodeFloat(data, offset + 100);
+            angularAccelerationX = decodeFloat(data, offset + 104);
+            angularAccelerationY = decodeFloat(data, offset + 108);
+            angularAccelerationZ = decodeFloat(data, offset + 112);
+            frontWheelsAngle = decodeFloat(data, offset + 116);
         }
     }
 
