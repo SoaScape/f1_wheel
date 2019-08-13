@@ -26,11 +26,10 @@ function getDiffIndex()
 end
 
 function getVoiceMenuButtons(multifunction)
-	local index = 0
+	local index = 1
 	local buttonMap = {}
-
 	delayMap = {}
-	delayMap[0] = voiceMenuDelay
+	delayMap[index] = voiceMenuDelay
 	
 	buttonMap[index] = radioKey
 	index = index + 1
