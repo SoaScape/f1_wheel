@@ -287,10 +287,10 @@ tracks[24] = tracks[13]
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
-ersMultiFunction = multifunctionMap[12]
-diffMultiFunction = multifunctionMap[3]
-biasMultiFunction = multifunctionMap[4]
+biasMultiFunction = multifunctionMap[3]
+diffMultiFunction = multifunctionMap[4]
 trackMultiFunction = multifunctionMap[8]
+ersMultiFunction = multifunctionMap[12]
 overtakeButtonEnabled = true
 overtakeOspOverdrive = false
 autoMixEnabled = true
