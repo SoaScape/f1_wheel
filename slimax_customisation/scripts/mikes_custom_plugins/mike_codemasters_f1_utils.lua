@@ -135,10 +135,16 @@ function getMfdMenuButtons(multifunction)
 	local buttonMap = {}
 
 	delayMap = {}
-	delayMap[1] = openMenuDelay
+	delayMap[index] = openMenuDelay
 
 	buttonMap[index] = quickMenuFirstPage
 	index = index + 1
+	
+	for i = 1, multifunction["menu"] - 1 do
+		buttonMap[index] = quickMenuToggleKey
+		delayMap[index] = 50
+		index = index + 1
+	end
 
 	-- Scroll down to the required row.
 	local selectRowButtons = getSelectRowButtons(multifunction["row"] - 1)
