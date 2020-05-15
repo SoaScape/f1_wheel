@@ -5,7 +5,7 @@ myDevice = 16 -- SIMR-LCD
 
 ledOnly = true -- Don't process keypress, display events etc. Usefull if running >1 device using the scripts.
 
-multiFunctionSwitchId = 3
+multiFunctionSwitchId = 4
 setValueSwitchId = 2
 progButton = 10
 confirmButton = 22

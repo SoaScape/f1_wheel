@@ -3,7 +3,7 @@ require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
 myDevice = 15 -- VDashEmu
 
-multiFunctionSwitchId = 3
+multiFunctionSwitchId = 4
 setValueSwitchId = 2
 progButton = 10
 confirmButton = 22

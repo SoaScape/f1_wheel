@@ -1,48 +1,43 @@
 require "scripts/mikes_custom_plugins/mike_codemasters_f1_utils"
 require "scripts/mikes_custom_plugins/mike_all_custom_plugins"
 
-myDevice = 16 -- SIMR-LCD
+myDevice = 3 -- SIMR-F1
 
-ledOnly = true -- Don't process keypress, display events etc. Usefull if running >1 device using the scripts.
+ledOnly = false
+multiFunctionSwitchId = 3
+setValueSwitchId = 1
+progButton = 3
+confirmButton = 14
+secondaryConfirmButton = 2
+upButton = 26
+downButton = 27
+upEncoder = 23
+downEncoder = 24
+overtakeButton = 10
 
-multiFunctionSwitchId = 4
-setValueSwitchId = 2
-progButton = 10
-confirmButton = 22
-secondaryConfirmButton = 10
-upButton = 1
-downButton = 2
-upEncoder = 17
-downEncoder = 18
-overtakeButton = 15
-overtakeLatch = true
-
---filterClutchInputs = true
-clutchOneId = 10
-clutchTwoId = 11
-
-oneSwCtrlPos = 1
+oneSwCtrlPos = 2
 oneSWActivated = true
 
 overtakeLedPatterns = {}
-overtakeLedPatterns[0] = 8  -- LED 1
-overtakeLedPatterns[1] = 16 --LED 2
-resetLedPattern = 120
-autoMixLedPattern = 8 -- LED 1
-autoDiffLedPattern = 8 -- LED 1
+overtakeLedPatterns[0] = 128
+overtakeLedPatterns[1] = 64
+resetLedPattern = 56	-- 1,2,3 = 111000
+autoMixLedPattern = 128 -- LED 5, binary 10000000
+autoDiffLedPattern = 64 -- LED 4
 
 raceStartLedPatterns = {}
-raceStartLedPatterns[0] = 0x67 -- All left side
-raceStartLedPatterns[1] = 0x1C18 -- All right side
-raceGoLedPattern = 0x78 -- 1 - 4
+raceStartLedPatterns[0] = 0x58		-- 1, 2, 4  = 01011000
+raceStartLedPatterns[1] = 0xA8		-- 1, 3, 5  = 10101000
+raceGoLedPattern = 0xF8		-- 1 - 5 = 0xF8 (248)
 
 progBlinkLedPatterns = {}
-progBlinkLedPatterns[0] = 0x78 -- 1-4
+progBlinkLedPatterns[0] = 0xD8 -- 1,2,4,5
+progBlinkLedPatterns[1] = 0xE8 -- 1,2,3,5
 
 lowFuelLedPattern = 0x2 -- Left red LED
 saveFuelLedPattern = 0x800 -- Right red LED
 
-minFuel = 0
+minFuel = 1
 
 numMenus = 5
 
@@ -85,14 +80,11 @@ multifunctionMap[3]["enabled"] = true
 multifunctionMap[3]["mfdShortcut"] = true
 multifunctionMap[3]["incrementKey"] = "G"
 multifunctionMap[3]["decrementKey"] = "B"
-multifunctionMap[3]["currentSettingMethod"] = getDiffIndex
 multifunctionMap[3]["row"] = 3
 multifunctionMap[3]["upDnSelectable"] = true
 multifunctionMap[3]["upDnConfirmRequired"] = true
 multifunctionMap[3]["defaultUpDnMode"] = 7
-multifunctionMap[3]["resetPosition"] = multifunctionMap[3]["defaultUpDnMode"]
-multifunctionMap[3]["currentUpDnMode"] = multifunctionMap[3]["resetPosition"]
-multifunctionMap[3]["currentPosition"] = multifunctionMap[3]["resetPosition"]
+multifunctionMap[3]["currentUpDnMode"] = multifunctionMap[3]["defaultUpDnMode"]
 multifunctionMap[3]["min"] = 0
 multifunctionMap[3]["max"] = 10
 multifunctionMap[3]["modes"] = {}
@@ -143,9 +135,7 @@ multifunctionMap[5]["row"] = 4
 multifunctionMap[5]["upDnSelectable"] = true
 multifunctionMap[5]["upDnConfirmRequired"] = true
 multifunctionMap[5]["defaultUpDnMode"] = 4
-multifunctionMap[5]["resetPosition"] = multifunctionMap[5]["defaultUpDnMode"]
-multifunctionMap[5]["currentUpDnMode"] = multifunctionMap[5]["resetPosition"]
-multifunctionMap[5]["currentPosition"] = multifunctionMap[5]["resetPosition"]
+multifunctionMap[5]["currentUpDnMode"] = multifunctionMap[5]["defaultUpDnMode"]
 multifunctionMap[5]["min"] = 0
 multifunctionMap[5]["max"] = 10
 multifunctionMap[5]["modes"] = {}
@@ -229,46 +219,30 @@ multifunctionMap[9]["name"] = startMultifunctionName
 multifunctionMap[9]["display"] = false
 
 multifunctionMap[10] = {}
-multifunctionMap[10]["name"] = autoMixMultifunctionName
+multifunctionMap[10]["name"] = safetyCarMultifunctionName
 multifunctionMap[10]["enabled"] = true
+multifunctionMap[10]["display"] = false
 
 multifunctionMap[11] = {}
-multifunctionMap[11]["name"] = autoDiffMultifunctionName
+multifunctionMap[11]["name"] = autoMixMultifunctionName
 multifunctionMap[11]["enabled"] = true
 
 multifunctionMap[12] = {}
-multifunctionMap[12]["name"] = " ERS"
-multifunctionMap[12]["display"] = true
+multifunctionMap[12]["name"] = autoDiffMultifunctionName
 multifunctionMap[12]["enabled"] = true
-multifunctionMap[12]["mfdShortcut"] = true
-multifunctionMap[12]["incrementKey"] = "K"
-multifunctionMap[12]["decrementKey"] = ","
-multifunctionMap[12]["currentSettingMethod"] = getErsMode
-multifunctionMap[12]["row"] = 7
-multifunctionMap[12]["upDnSelectable"] = true
-multifunctionMap[12]["upDnConfirmRequired"] = true
-multifunctionMap[12]["defaultUpDnMode"] = 2
-multifunctionMap[12]["currentUpDnMode"] = multifunctionMap[12]["defaultUpDnMode"]
-multifunctionMap[12]["min"] = 0
-multifunctionMap[12]["max"] = 5
-multifunctionMap[12]["fastest"] = 4
-multifunctionMap[12]["modes"] = {}
-multifunctionMap[12]["modes"][0] = "NONE"
-multifunctionMap[12]["modes"][1] = "LOW"
-multifunctionMap[12]["modes"][2] = "MEDM"
-multifunctionMap[12]["modes"][3] = "HIGH"
-multifunctionMap[12]["modes"][4] = "OVTK"
-multifunctionMap[12]["modes"][5] = " HOT"
+
+lastMix = -1
+lastBias = -1
 
 tracks = {}
 tracks[0] = "ASTL"
-tracks[1] = "FRAN"
+tracks[1] = "MALY"
 tracks[2] = "CHIN"
 tracks[3] = "BAHR"
 tracks[4] = "SPAN"
 tracks[5] = "MONA"
 tracks[6] = "CAND"
-tracks[7] = "SILV"
+tracks[7] = "BRIT"
 tracks[8] = "GERM"
 tracks[9] = "HUNG"
 tracks[10] = "BELG"
@@ -282,15 +256,9 @@ tracks[17] = "AUST"
 tracks[18] = "RUSS"
 tracks[19] = "MEXI"
 tracks[20] = "AZER"
--- Short Versions Next
-tracks[21] = tracks[3]
-tracks[22] = tracks[7]
-tracks[23] = tracks[15]
-tracks[24] = tracks[13]
 
 -- Used by the overtake button
 fuelMultiFunction = multifunctionMap[2]
-ersMultiFunction = multifunctionMap[12]
 diffMultiFunction = multifunctionMap[3]
 biasMultiFunction = multifunctionMap[4]
 trackMultiFunction = multifunctionMap[8]
@@ -301,14 +269,26 @@ autoDiffEnabled = true
 raceStartModeEnabled = true
 safetyCarModeEnabled = true
 
+customKeystrokeDelays = {}
+customKeystrokeDelays[quickMenuLeft] = 40
+customKeystrokeDelays[quickMenuRight] = 40
+customKeystrokeDelays[quickMenuUp] = 40
+customKeystrokeDelays[quickMenuDn] = 40
+customKeystrokeDelays[fuelMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[fuelMultiFunction["decrementKey"]] = 40
+customKeystrokeDelays[diffMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[diffMultiFunction["decrementKey"]] = 40
+customKeystrokeDelays[biasMultiFunction["incrementKey"]] = 40
+customKeystrokeDelays[biasMultiFunction["decrementKey"]] = 40
+
 function custom_init_Event(scriptfile)
 end
 
-function getButtonMap(currentMultifunction, dontCloseMenu)
+function getButtonMap(currentMultifunction)
 	if currentMultifunction["voiceMenuPage"] ~= nil then
 		return getVoiceMenuButtons(currentMultifunction)
 	elseif currentMultifunction["mfdShortcut"] then
-		return getMfdShortcutButtons(currentMultifunction, dontCloseMenu)
+		return getMfdShortcutButtons(currentMultifunction)
 	elseif currentMultifunction["menu"] ~= nil then
 		return getMfdMenuButtons(currentMultifunction)
 	else
